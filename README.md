@@ -1,0 +1,3 @@
+###Arvbot Plus
+This is just a small java application which can do customized polls, and contains an inventory system for rpg gamebooks. <br>
+This is just a small side project of mine...
