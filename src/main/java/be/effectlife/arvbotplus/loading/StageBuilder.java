@@ -18,11 +18,11 @@ public class StageBuilder {
     private boolean ignoreSize;
     private EventHandler<WindowEvent> onCloseHandler;
     private ArrayList<String> stylesheets;
-
+    private int minWidth;
 
     private static final Map<Stages, Stage> stageMap;
     private static final ClassLoader classLoader = StageBuilder.class.getClassLoader();
-    private static final Logger LOGGER = LoggerFactory.getLogger(StageBuilder.class);
+    private static final Logger LOG = LoggerFactory.getLogger(StageBuilder.class);
     private static AESceneLoader aeSceneLoader;
 
     static {
@@ -53,11 +53,12 @@ public class StageBuilder {
     }
 
     public Stage build() {
+        LOG.info("Building Stage " + this.stageIdentifier);
         Stage stage = getStage(this.stageIdentifier);
         Scene scene = aeSceneLoader.getScene(this.sceneIdentifier);
 
         if (scene == null) {
-            LOGGER.error("Scene could not be found");
+            LOG.error("Scene could not be found");
             return null;
         }
 
@@ -65,10 +66,10 @@ public class StageBuilder {
             try {
                 scene.getStylesheets().add(classLoader.getResource(stylesheet).toExternalForm());
             } catch (NullPointerException e) {
-                LOGGER.warn("Could not find stylesheet '{}'", stylesheet);
+                LOG.warn("Could not find stylesheet '{}'", stylesheet);
             }
         }
-
+        stage.setMinWidth(minWidth);
         stage.setTitle(this.title);
         stage.setScene(scene);
         stage.setOnCloseRequest(this.onCloseHandler);
@@ -99,6 +100,11 @@ public class StageBuilder {
 
     public StageBuilder addStyleSheet(String stylesheet) {
         this.stylesheets.add(stylesheet);
+        return this;
+    }
+
+    public StageBuilder setMinWidth(int minWidth) {
+        this.minWidth = minWidth;
         return this;
     }
 }

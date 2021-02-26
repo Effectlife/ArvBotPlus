@@ -29,6 +29,7 @@ public class Main extends Application {
     private void prepareStages() {
         buildStage(Stages.POLL, Scenes.S_POLL, false, CloseHandlers.SHUTDOWN).setOnShowing((e) -> {
             AESceneLoader.getInstance().getController(Scenes.S_POLL).onShow();
+            ((Stage)e.getSource()).setMinWidth(Scenes.S_POLL.getMinWidth());
         });
 
         buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, false, CloseHandlers.SHUTDOWN).setOnShowing((e) -> {

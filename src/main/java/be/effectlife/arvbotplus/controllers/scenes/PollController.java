@@ -5,19 +5,18 @@ import be.effectlife.arvbotplus.loading.SceneContainer;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.layout.GridPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class PollController implements IController {
-
+private static Logger LOG = LoggerFactory.getLogger(PollController.class);
     @FXML
     private GridPane base;
     public void add(Scene sceneContainer){
-        base.add(sceneContainer.getRoot(), 0,0);
-        System.out.println(sceneContainer.getRoot());
     }
 
     @Override
     public void doInit() {
-
     }
 
     @Override

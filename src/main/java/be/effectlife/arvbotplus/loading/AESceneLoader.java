@@ -1,7 +1,6 @@
 package be.effectlife.arvbotplus.loading;
 
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.loading.SceneContainer;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import org.slf4j.Logger;
@@ -14,7 +13,7 @@ import java.util.Map;
 
 public class AESceneLoader {
     private static final Map<String, SceneContainer> scenes = new HashMap<>();
-    private static final Logger LOGGER = LoggerFactory.getLogger(AESceneLoader.class);
+    private static final Logger LOG = LoggerFactory.getLogger(AESceneLoader.class);
 
     private static AESceneLoader instance;
 
@@ -37,7 +36,7 @@ public class AESceneLoader {
         try {
             return loadScene(scene.toString(), suffix).getScene();
         } catch (SceneNotFoundException e) {
-            LOGGER.error("Tried to load a Scene that does not exist", e);
+            LOG.error("Tried to load a Scene that does not exist", e);
         }
         return null;
     }
@@ -53,7 +52,7 @@ public class AESceneLoader {
         try {
             return loadScene(scene.toString(), suffix).getController();
         } catch (SceneNotFoundException e) {
-            LOGGER.error("Tried to load a Controller that does not exist", e);
+            LOG.error("Tried to load a Controller that does not exist", e);
         }
         return null;
     }
@@ -69,7 +68,7 @@ public class AESceneLoader {
         try {
             return loadScene(scene.toString(), suffix);
         } catch (SceneNotFoundException e) {
-            LOGGER.error("Tried to load a Controller that does not exist", e);
+            LOG.error("Tried to load a Controller that does not exist", e);
         }
         return null;
     }
@@ -95,6 +94,7 @@ public class AESceneLoader {
         } catch (IOException e) {
             throw new SceneNotFoundException(e);
         }
+        LOG.info("Initializing "+container.getController().getClass().getSimpleName());
         container.getController().doInit();
         return container;
     }

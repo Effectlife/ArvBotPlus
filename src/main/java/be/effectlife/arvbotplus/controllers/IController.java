@@ -6,7 +6,7 @@ import org.slf4j.LoggerFactory;
 
 public interface IController {
     default void add(Scene sceneContainer){
-        LoggerFactory.getLogger(IController.class).warn("Calling add on ");
+        LoggerFactory.getLogger(IController.class).warn("Calling 'add' on "+this.getClass().getSimpleName()+". This should not happen.");
     }
 
     void doInit();

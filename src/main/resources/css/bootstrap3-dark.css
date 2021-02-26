@@ -12,13 +12,14 @@
 }
 
 .text, .justText{
-    -fx-font-size: 13pt;
+    -fx-font-size: 12pt;
 }
 .button .text{
     -fx-padding: -10 -10 -10 -10;
-
 }
-
+.text-area .scroll-pane .viewport .content {
+    -fx-padding: 0 .25em;
+}
 .root,.scroll-pane, .scroll-pane>*.viewport{
     -fx-body-color : #222222;
     -fx-outer-border : #222222;
@@ -184,7 +185,7 @@ VBox > .split-menu-button.last > .arrow-button {
 .button,.menu-button,.toggle-button,.number-button,.left-arrow-button,.right-arrow-button,
 .font-menu-button,
 .split-menu-button > .label,.split-menu-button > .arrow-button,.increment-arrow-button, .decrement-arrow-button {
-    -fx-border-color: #465656;
+    -fx-border-color: #565656;
     -fx-text-fill: #ffffff;
 }
 /*just for the special split menu button*/
@@ -513,7 +514,8 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .scroll-bar {
-    -fx-background-color: #fafafa;
+    -fx-background-color: #565656;
+    -fx-border-color: #2e3939;
     -fx-background-radius: 0;
     -fx-block-increment: 50;
 }
@@ -535,11 +537,11 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .scroll-bar:vertical {
-    -fx-pref-width: 10;
+    -fx-pref-width: 8;
 }
 
 .scroll-bar:horizontal {
-    -fx-pref-height: 10;
+    -fx-pref-height: 8;
 }
 
 .scroll-bar:horizontal .track,
