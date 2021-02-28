@@ -26,10 +26,6 @@ public class PollWidgetController implements IController {
     @FXML
     private Text text;
 
-    public void add(Scene scene){
-
-    }
-
     @Override
     public void doInit() {
 
@@ -37,6 +33,11 @@ public class PollWidgetController implements IController {
 
     @Override
     public void onShow() {
+
+    }
+
+    @Override
+    public void reloadView() {
 
     }
 }

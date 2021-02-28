@@ -46,4 +46,13 @@ public abstract class SimplePopup {
         }
         return ConfirmationType.NO;
     }
+
+    public static void showPopupError(String content) {
+        Alert alert = prepareAlert("Oops", "Error" , content);
+
+        ButtonType buttonOK = new ButtonType("OK");
+        alert.getButtonTypes().setAll(buttonOK);
+
+        alert.showAndWait();
+    }
 }

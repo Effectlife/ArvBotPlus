@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.conversions.data;
+package be.effectlife.arvbotplus.twirk.conversions.data;
 
 public enum Weight {//weight (g, kg, lbs, pounds, oz, ounce)
     G(0.001F), KG(1F), LBS(2.20462F),

@@ -1,11 +1,11 @@
-package be.effectlife.arvbotplus.conversions.commands;
+package be.effectlife.arvbotplus.twirk.commands;
 
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import be.effectlife.arvbotplus.conversions.data.*;
+import be.effectlife.arvbotplus.twirk.conversions.data.*;
 
 import java.util.Arrays;
 

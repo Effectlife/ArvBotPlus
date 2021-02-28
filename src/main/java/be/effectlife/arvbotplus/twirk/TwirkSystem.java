@@ -1,38 +1,43 @@
-package be.effectlife.arvbotplus.conversions;//
-// Source code recreated from a .class file by IntelliJ IDEA
-// (powered by FernFlower decompiler)
-//
+package be.effectlife.arvbotplus.twirk;
 
+import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
+import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
 import com.gikk.twirk.events.TwirkListener;
-import be.effectlife.arvbotplus.conversions.commands.ConvCommand;
 
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
 
-public class ConversionBot {
-    public ConversionBot() {
-    }
+import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
 
-
-    public static void main(String[] args) throws IOException, InterruptedException {
+public class TwirkSystem {
+    public void initializeSystem() throws IOException, InterruptedException {
         Properties properties = new Properties();
         String propFileName = "./config.properties";
-        InputStream inputStream = new FileInputStream(propFileName);
+        InputStream inputStream = null;
+        try {
+            inputStream = new FileInputStream(propFileName);
+        } catch (FileNotFoundException e) {
+            SimplePopup.showPopupError("Cannot find Twirk properties file " + propFileName + "; exiting program.");
+            System.exit(1);
+        }
         properties.load(inputStream);
         String channel = properties.getProperty("twitch.channel");
         Twirk twirk = (new TwirkBuilder(channel, "HARDCODED", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
         twirk.addIrcListener(new ConvCommand(twirk));
+        twirk.addIrcListener(new VoteCommand(twirk));
+        twirk.addIrcListener(new ChangeVoteCommand(twirk));
         System.out.println("Conversionbot is loading");
         Thread.sleep(2000L);
         twirk.connect();
 
         twirk.channelMessage("Conversionbot has successfully loaded. Use !conv to print help");
-
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {

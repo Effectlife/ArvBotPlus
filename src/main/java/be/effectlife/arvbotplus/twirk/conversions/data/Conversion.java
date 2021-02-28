@@ -1,6 +1,6 @@
-package be.effectlife.arvbotplus.conversions.data;
+package be.effectlife.arvbotplus.twirk.conversions.data;
 
-import static be.effectlife.arvbotplus.conversions.data.Temperature.*;
+import static be.effectlife.arvbotplus.twirk.conversions.data.Temperature.*;
 
 public abstract class Conversion {
     /*

@@ -1,15 +1,18 @@
 package be.effectlife.arvbotplus.controllers;
 
-import be.effectlife.arvbotplus.loading.SceneContainer;
-import javafx.scene.Scene;
-import org.slf4j.LoggerFactory;
+import javafx.scene.layout.Region;
 
 public interface IController {
-    default void add(Scene sceneContainer){
-        LoggerFactory.getLogger(IController.class).warn("Calling 'add' on "+this.getClass().getSimpleName()+". This should not happen.");
-    }
 
     void doInit();
 
     void onShow();
+
+    void reloadView();
+
+    default void setDefaultSize(Region region) {
+        region.setMinSize(Region.USE_PREF_SIZE, Region.USE_PREF_SIZE);
+        region.setPrefSize(Region.USE_COMPUTED_SIZE, Region.USE_COMPUTED_SIZE);
+        region.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
+    }
 }
