@@ -14,9 +14,16 @@ import java.io.InputStream;
 import java.util.Properties;
 
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class TwirkSystem {
-    public void initializeSystem() throws IOException, InterruptedException {
+    private static final Logger LOG = LoggerFactory.getLogger(TwirkSystem.class);
+    public void initializeSystem(boolean disable) throws IOException, InterruptedException {
+        if(disable){
+            LOG.debug("Disabled twirk system");
+            return;
+        }
         Properties properties = new Properties();
         String propFileName = "./config.properties";
         InputStream inputStream = null;

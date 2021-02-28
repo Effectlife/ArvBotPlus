@@ -79,6 +79,7 @@ public class PollController implements IController {
                 }
         );
         tfOptions.setText(options + "");
+        setPollType(PollType.NONE);
     }
 
     public PollType getPollType() {
@@ -86,7 +87,30 @@ public class PollController implements IController {
     }
 
     public void setPollType(PollType pollType) {
+        switch (pollType) {
+            case NONE:
+            case QP_CLEAR:
+                updateButtons(false, true, false, true, false);
+                break;
+            case QUICK:
+                updateButtons(false, false, true, true, true);
+                break;
+            case STANDARD:
+                updateButtons(true, true, false, false, true);
+                break;
+            default:
+                updateButtons(false, false, false, false, false);
+                LOG.error("Unknown polltype was set: " + pollType);
+        }
         this.pollType = pollType;
+    }
+
+    private void updateButtons(boolean btnQPOpenClose, boolean btnQPLastCall, boolean openClose, boolean lastCall, boolean clearAll) {
+        quickPollWidget.disableBtnQPOpenClose(btnQPOpenClose);
+        quickPollWidget.disableBtnQPLastCall(btnQPLastCall);
+        this.btnOpenClosePoll.setDisable(openClose);
+        this.btnLastCall.setDisable(lastCall);
+        this.btnClearAll.setDisable(clearAll);
     }
 
     @Override
@@ -97,13 +121,5 @@ public class PollController implements IController {
     @Override
     public void reloadView() {
 
-    }
-
-    public void startStopQuickPoll() {
-        if (this.pollType == PollType.QUICK) {
-            this.pollType = PollType.NONE;
-        }else{
-            this.pollType = PollType.QUICK;
-        }
     }
 }

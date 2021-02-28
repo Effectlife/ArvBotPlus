@@ -19,7 +19,7 @@
     <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
   </rowConstraints>
    <children>
-      <Button fx:id="btnQP" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQP_clicked" text="Open QuickPoll" textAlignment="CENTER" wrapText="true" GridPane.rowSpan="2">
+      <Button fx:id="btnQPOpenClose" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPOpenClose_clicked" text="Open" textAlignment="CENTER" wrapText="true">
          <GridPane.margin>
             <Insets />
          </GridPane.margin>
@@ -50,6 +50,11 @@
             <Text fx:id="textCount2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="justText" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
+      <Button fx:id="btnQPLastCall" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPLastCall_clicked" text="Last Call" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+         <padding>
+            <Insets left="-6.0" right="-6.0" />
+         </padding>
+      </Button>
    </children>
    <padding>
       <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

@@ -19,7 +19,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception {
         prepareStages();
         TwirkSystem twirkSystem = new TwirkSystem();
-        twirkSystem.initializeSystem();
+        twirkSystem.initializeSystem(true);
         primaryStage = StageBuilder.getStage(Stages.POLL);
         primaryStage.show();
     }

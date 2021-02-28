@@ -4,18 +4,25 @@ import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.utilities.PollType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.HashSet;
 import java.util.Set;
 
 public class QuickPollWidgetController implements IController {
+    private final Logger LOG = LoggerFactory.getLogger(QuickPollWidgetController.class);
     @FXML
-    private Button buttonQP;
+    private Button btnQPOpenClose;
+
+    @FXML
+    private Button btnQPLastCall;
 
     @FXML
     private ProgressBar pBar1;
@@ -33,6 +40,8 @@ public class QuickPollWidgetController implements IController {
     private Set<String> usernamesVoted1;
     private Set<String> usernamesVoted2;
 
+    private PollController pollController;
+
     @Override
     public void doInit() {
         textCount1.setText("0");
@@ -41,16 +50,46 @@ public class QuickPollWidgetController implements IController {
         pBar2.setProgress(0);
         usernamesVoted1 = new HashSet<>();
         usernamesVoted2 = new HashSet<>();
+        pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
+        btnQPOpenClose.setText("Open");
     }
 
     @Override
     public void onShow() {
+    }
+
+    @FXML
+    void btnQPOpenClose_clicked(ActionEvent event) {
+        if (pollController.getPollType() == PollType.NONE) {
+            //Starting the poll
+            btnQPOpenClose.setText("Close");
+            pollController.setPollType(PollType.QUICK);
+        } else if (pollController.getPollType() == PollType.QUICK) {
+            //Stopping the poll
+            btnQPOpenClose.setText("Clear");
+            pollController.setPollType(PollType.QP_CLEAR);
+        } else if (pollController.getPollType() == PollType.QP_CLEAR) {
+            //Clearing data
+            btnQPOpenClose.setText("Open");
+            pollController.setPollType(PollType.NONE);
+        } else {
+            LOG.warn("Trying to change quickpoll state, while the polltype is " + pollController.getPollType() + "... Which is strange, since the button should be disabled");
+        }
 
     }
 
     @FXML
-    void btnQP_clicked(ActionEvent event) {
-        ((PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL)).startStopQuickPoll();
+    void btnQPLastCall_clicked(ActionEvent event) {
+
+
+    }
+
+    public void disableBtnQPOpenClose(boolean disabled) {
+        btnQPOpenClose.setDisable(disabled);
+    }
+
+    public void disableBtnQPLastCall(boolean disabled) {
+        btnQPLastCall.setDisable(disabled);
     }
 
     @Override
