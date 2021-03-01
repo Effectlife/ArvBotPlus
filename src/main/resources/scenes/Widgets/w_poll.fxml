@@ -21,16 +21,16 @@
         <RowConstraints maxHeight="1.7976931348623157E308" prefHeight="25.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
-        <ProgressBar fx:id="progressBar" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" progress="0.7" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-        <Spinner fx:id="spinner" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" GridPane.columnIndex="2">
+        <ProgressBar fx:id="pBarVotes" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" progress="0.7" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+        <Spinner fx:id="spinnerVotes" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" GridPane.columnIndex="2">
             <GridPane.margin>
                 <Insets />
             </GridPane.margin></Spinner>
-        <Button fx:id="button" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" prefHeight="25.0" prefWidth="45.0" text="Clear" textAlignment="CENTER">
+        <Button fx:id="btnClear" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnClear_Clicked" prefHeight="25.0" prefWidth="45.0" text="Clear" textAlignment="CENTER">
          <padding>
             <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
          </padding></Button>
-        <TextArea fx:id="textArea" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" text="This is the option message This is the option message This is the option message This is the option message " wrapText="true" GridPane.columnIndex="1">
+        <TextArea fx:id="taOption" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="25.0" wrapText="true" GridPane.columnIndex="1">
             <font>
                 <Font size="14.0" />
             </font>

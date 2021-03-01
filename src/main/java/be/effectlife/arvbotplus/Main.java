@@ -3,25 +3,48 @@ package be.effectlife.arvbotplus;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
+
 public class Main extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;
+    public static TwirkSystem twirkSystem;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        prepareStages();
-        TwirkSystem twirkSystem = new TwirkSystem();
-        twirkSystem.initializeSystem(true);
-        primaryStage = StageBuilder.getStage(Stages.POLL);
+
+
+        primaryStage.setScene(AESceneLoader.getInstance().getScene(Scenes.S_LOADING));
         primaryStage.show();
+        prepareStages();
+        Stage loadingStage = primaryStage;
+        primaryStage = StageBuilder.getStage(Stages.POLL);
+        Stage finalPrimaryStage = primaryStage;
+        new Thread(() -> {
+            twirkSystem = new TwirkSystem();
+            try {
+                twirkSystem.initializeSystem(true);
+                Platform.runLater(() -> {
+                    loadingStage.hide();
+                    finalPrimaryStage.show();
+                });
+            } catch (IOException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
+
+        //primaryStage.show();
     }
 
     private void prepareStages() {
@@ -31,7 +54,6 @@ public class Main extends Application {
         });
 
         buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, CloseHandlers.SHUTDOWN).setOnShowing((e) -> {
-
         });
         LOG.info("Prepared {} stages", preparedStageCount);
     }

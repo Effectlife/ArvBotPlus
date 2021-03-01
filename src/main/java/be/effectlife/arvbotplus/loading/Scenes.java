@@ -7,7 +7,7 @@ public enum Scenes {
     S_POLL("s_poll", "Polls", 350),
     S_INVENTORY("s_inventory", "Inventory"),
     W_POLL("widgets/w_poll"),
-    W_QUICKPOLL("widgets/w_quickPoll");
+    W_QUICKPOLL("widgets/w_quickPoll"), S_LOADING("s_loading", "Loading");
 
     private final String title;
     private final String file;

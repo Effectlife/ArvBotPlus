@@ -94,7 +94,7 @@ public class AESceneLoader {
         } catch (IOException e) {
             throw new SceneNotFoundException(e);
         }
-        LOG.info("Initializing "+container.getController().getClass().getSimpleName());
+        LOG.info("Initializing "+sceneName + addon);
         container.getController().doInit();
         return container;
     }
