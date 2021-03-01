@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="gpBase" hgap="4.0" maxHeight="1.7976931348623157E308" maxWidth="400.0" prefWidth="330.0" vgap="4.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8.0.171" fx:controller="be.effectlife.arvbotplus.controllers.scenes.PollController">
+<GridPane fx:id="gpBase" hgap="4.0" maxHeight="1.7976931348623157E308" maxWidth="400.0" prefWidth="330.0" vgap="4.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.PollController">
   <columnConstraints>
     <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" minWidth="10.0" />
   </columnConstraints>
@@ -80,7 +80,7 @@
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
          </padding>
       </GridPane>
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" prefHeight="200.0" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
+      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
          <content>
             <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
          </content>

@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
@@ -80,7 +81,7 @@ public class QuickPollWidgetController implements IController {
 
     @FXML
     void btnQPLastCall_clicked(ActionEvent event) {
-
+        Main.twirkSystem.channelMessage("Last Call!");
 
     }
 

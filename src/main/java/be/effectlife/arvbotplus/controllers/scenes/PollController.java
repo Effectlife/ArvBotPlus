@@ -1,6 +1,8 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
+import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.SceneContainer;
@@ -18,10 +20,15 @@ import javafx.scene.layout.VBox;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PollController implements IController {
     Logger LOG = LoggerFactory.getLogger(PollController.class);
     private PollType pollType = PollType.NONE;
     private QuickPollWidgetController quickPollWidget;
+    private int options;
+    private List<PollWidgetController> pollWidgetControllerList;
 
     @FXML
     private GridPane gpBase;
@@ -46,12 +53,14 @@ public class PollController implements IController {
 
     @FXML
     void btnClearAll_Clicked(ActionEvent event) {
-
+        for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
+            pollWidgetController.clear();
+        }
     }
 
     @FXML
     void btnLastCall_Clicked(ActionEvent event) {
-
+        Main.twirkSystem.channelMessage("Last Call!");
     }
 
     @FXML
@@ -61,7 +70,9 @@ public class PollController implements IController {
 
     @FXML
     void tfOptions_Action(ActionEvent event) {
-        LOG.info(tfOptions.getText());
+        LOG.info("Re-initializing options list");
+        options = Integer.parseInt(tfOptions.getText());
+        initializePollWidgets();
     }
 
     @Override
@@ -72,7 +83,7 @@ public class PollController implements IController {
         gpBase.add(region, 0, 0);
         this.quickPollWidget = (QuickPollWidgetController) quickPollContainer.getController();
         //TODO: Add loading from save
-        int options = 4;
+        options = 8;
         tfOptions.setTextFormatter(Formatters.NumbersOnly);
         tfOptions.focusedProperty().addListener((obs, oldVal, newVal) -> {
                     if (!newVal) PollController.this.tfOptions_Action(null);
@@ -80,6 +91,19 @@ public class PollController implements IController {
         );
         tfOptions.setText(options + "");
         setPollType(PollType.NONE);
+        pollWidgetControllerList = new ArrayList<>();
+        initializePollWidgets();
+    }
+
+    private void initializePollWidgets() {
+        pollWidgetControllerList.clear();
+        vboxPollOptions.getChildren().clear();
+        for (int i = 0; i < options; i++) {
+            SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_POLL, "_" + i);
+            vboxPollOptions.getChildren().add(sceneContainer.getScene().getRoot());
+            setDefaultSize((Region) sceneContainer.getScene().getRoot());
+            pollWidgetControllerList.add((PollWidgetController) sceneContainer.getController());
+        }
     }
 
     public PollType getPollType() {
@@ -90,27 +114,28 @@ public class PollController implements IController {
         switch (pollType) {
             case NONE:
             case QP_CLEAR:
-                updateButtons(false, true, false, true, false);
+                updateButtons(false, true, false, true, false, false);
                 break;
             case QUICK:
-                updateButtons(false, false, true, true, true);
+                updateButtons(false, false, true, true, true, false);
                 break;
             case STANDARD:
-                updateButtons(true, true, false, false, true);
+                updateButtons(true, true, false, false, true, true);
                 break;
             default:
-                updateButtons(false, false, false, false, false);
+                updateButtons(false, false, false, false, false, false);
                 LOG.error("Unknown polltype was set: " + pollType);
         }
         this.pollType = pollType;
     }
 
-    private void updateButtons(boolean btnQPOpenClose, boolean btnQPLastCall, boolean openClose, boolean lastCall, boolean clearAll) {
+    private void updateButtons(boolean btnQPOpenClose, boolean btnQPLastCall, boolean openClose, boolean lastCall, boolean clearAll, boolean options) {
         quickPollWidget.disableBtnQPOpenClose(btnQPOpenClose);
         quickPollWidget.disableBtnQPLastCall(btnQPLastCall);
         this.btnOpenClosePoll.setDisable(openClose);
         this.btnLastCall.setDisable(lastCall);
         this.btnClearAll.setDisable(clearAll);
+        this.tfOptions.setDisable(options);
     }
 
     @Override

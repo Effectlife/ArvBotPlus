@@ -19,8 +19,12 @@ import org.slf4j.LoggerFactory;
 
 public class TwirkSystem {
     private static final Logger LOG = LoggerFactory.getLogger(TwirkSystem.class);
+    private Twirk twirk;
+    private boolean disable;
+
     public void initializeSystem(boolean disable) throws IOException, InterruptedException {
-        if(disable){
+        this.disable = disable;
+        if (this.disable) {
             LOG.debug("Disabled twirk system");
             return;
         }
@@ -35,15 +39,20 @@ public class TwirkSystem {
         }
         properties.load(inputStream);
         String channel = properties.getProperty("twitch.channel");
-        Twirk twirk = (new TwirkBuilder(channel, "HARDCODED", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
+        twirk = (new TwirkBuilder(channel, "HARDCODED", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
         twirk.addIrcListener(new ConvCommand(twirk));
         twirk.addIrcListener(new VoteCommand(twirk));
         twirk.addIrcListener(new ChangeVoteCommand(twirk));
         System.out.println("Conversionbot is loading");
         Thread.sleep(2000L);
-        twirk.connect();
-
+        int retries = 5;
+        boolean connection = twirk.connect();
+        while (!connection && retries > 0) {
+            LOG.warn("Twirk failed to connect");
+            retries--;
+            connection = twirk.connect();
+        }
         twirk.channelMessage("Conversionbot has successfully loaded. Use !conv to print help");
     }
 
@@ -62,4 +71,13 @@ public class TwirkSystem {
             }
         };
     }
+
+    public void channelMessage(String message) {
+        if (this.disable) {
+            LOG.trace(message);
+        } else {
+            twirk.channelMessage(message);
+        }
+    }
+
 }

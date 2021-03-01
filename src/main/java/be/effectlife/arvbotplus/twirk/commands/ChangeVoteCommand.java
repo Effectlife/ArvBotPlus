@@ -62,6 +62,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
                 handleQuickPollCommand(split, sender.getDisplayName());
                 break;
             case NONE:
+            case QP_CLEAR:
                 handleNonePollCommand();
                 break;
             default:
