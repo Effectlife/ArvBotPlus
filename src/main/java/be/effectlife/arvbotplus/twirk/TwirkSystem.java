@@ -51,6 +51,7 @@ public class TwirkSystem {
         while (!connection && retries > 0) {
             LOG.warn("Twirk failed to connect");
             retries--;
+            Thread.sleep(1000);
             connection = twirk.connect();
         }
         twirk.channelMessage("Conversionbot has successfully loaded. Use !conv to print help");

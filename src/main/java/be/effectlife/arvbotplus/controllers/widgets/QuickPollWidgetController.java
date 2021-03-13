@@ -37,7 +37,7 @@ public class QuickPollWidgetController implements IController {
     @FXML
     private Text textCount2;
 
-    private int totalVotes = 0, votes1 = 0, votes2 = 0;
+    private int totalVotes, votes1, votes2;
     private Set<String> usernamesVoted1;
     private Set<String> usernamesVoted2;
 
@@ -51,8 +51,11 @@ public class QuickPollWidgetController implements IController {
         pBar2.setProgress(0);
         usernamesVoted1 = new HashSet<>();
         usernamesVoted2 = new HashSet<>();
-        pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
         btnQPOpenClose.setText("Open");
+        totalVotes = votes1 = votes2 = 0;
+        if (pollController == null) {
+            pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
+        }
     }
 
     @Override
@@ -71,8 +74,8 @@ public class QuickPollWidgetController implements IController {
             pollController.setPollType(PollType.QP_CLEAR);
         } else if (pollController.getPollType() == PollType.QP_CLEAR) {
             //Clearing data
-            btnQPOpenClose.setText("Open");
             pollController.setPollType(PollType.NONE);
+            doInit();
         } else {
             LOG.warn("Trying to change quickpoll state, while the polltype is " + pollController.getPollType() + "... Which is strange, since the button should be disabled");
         }

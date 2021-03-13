@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public abstract class SimplePopup {
 
-    private static Alert prepareAlert(String title, String header, String content){
-        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+    private static Alert prepareAlert(Alert.AlertType alertType, String title, String header, String content) {
+        Alert alert = new Alert(alertType);
         alert.setTitle(title);
         alert.setHeaderText(header);
         alert.setContentText(content);
@@ -16,7 +16,7 @@ public abstract class SimplePopup {
     }
 
     public static ConfirmationType showPopupYesNoCancel(String title, String header, String content) {
-        Alert alert = prepareAlert(title, header, content);
+        Alert alert = prepareAlert(Alert.AlertType.CONFIRMATION, title, header, content);
 
         ButtonType buttonYes = new ButtonType("Yes");
         ButtonType buttonNo = new ButtonType("No");
@@ -33,8 +33,9 @@ public abstract class SimplePopup {
         }
         return ConfirmationType.CANCEL;
     }
+
     public static ConfirmationType showPopupYesNo(String title, String header, String content) {
-        Alert alert = prepareAlert(title, header, content);
+        Alert alert = prepareAlert(Alert.AlertType.CONFIRMATION, title, header, content);
 
         ButtonType buttonYes = new ButtonType("Yes");
         ButtonType buttonNo = new ButtonType("No");
@@ -42,13 +43,22 @@ public abstract class SimplePopup {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.isPresent() && result.get() == buttonYes) {
-                return ConfirmationType.YES;
+            return ConfirmationType.YES;
         }
         return ConfirmationType.NO;
     }
 
     public static void showPopupError(String content) {
-        Alert alert = prepareAlert("Oops", "Error" , content);
+        Alert alert = prepareAlert(Alert.AlertType.ERROR, "Oops", "Error", content);
+
+        ButtonType buttonOK = new ButtonType("OK");
+        alert.getButtonTypes().setAll(buttonOK);
+
+        alert.showAndWait();
+    }
+
+    public static void showPopupWarn(String content) {
+        Alert alert = prepareAlert(Alert.AlertType.WARNING, "Oops", "Warn", content);
 
         ButtonType buttonOK = new ButtonType("OK");
         alert.getButtonTypes().setAll(buttonOK);

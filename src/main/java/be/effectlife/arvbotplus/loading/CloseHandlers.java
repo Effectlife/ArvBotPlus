@@ -24,11 +24,13 @@ public abstract class CloseHandlers {
                 System.exit(0);
                 break;
             case NO:
+                t.consume();
                 break;
             default:
                 LOG.error("Illegal Confirmationtype was given: {}", result.name());
         }
     };
+
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> {
         ((Stage) t.getSource()).hide();
     };

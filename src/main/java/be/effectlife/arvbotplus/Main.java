@@ -32,7 +32,7 @@ public class Main extends Application {
         new Thread(() -> {
             twirkSystem = new TwirkSystem();
             try {
-                twirkSystem.initializeSystem(true);
+                twirkSystem.initializeSystem(false);
                 Platform.runLater(() -> {
                     loadingStage.hide();
                     finalPrimaryStage.show();

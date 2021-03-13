@@ -14,7 +14,7 @@ import org.slf4j.LoggerFactory;
 
 public class VoteCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
-    private static final String PATTERN = "&vote";
+    public static final String PATTERN = "&vote";
     private final Twirk twirk;
     private static final AESceneLoader sceneloader;
 
@@ -55,15 +55,16 @@ public class VoteCommand extends CommandExampleBase {
         //try to parse the command
 
         switch (pollController.getPollType()) {
+            case NONE:
+                handleNonePollCommand();
+                break;
             case STANDARD:
-                //handleStandardPollCommand(split);
+                handleStandardPollCommand(split, sender.getDisplayName());
                 break;
             case QUICK:
                 handleQuickPollCommand(split, sender.getDisplayName());
                 break;
-            case NONE:
-                handleNonePollCommand();
-                break;
+
             default:
                 LOG.error("An unknown PollType has been given... This should never happen...");
         }
@@ -73,25 +74,43 @@ public class VoteCommand extends CommandExampleBase {
         channelMessage("There is currently no poll active.");
     }
 
+    private void handleStandardPollCommand(String[] split, String sender) {
+        try {
+            int option = Integer.parseInt(split[1]) - 1;//-1 to offset lists starting with 0
+            PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
+            int voteResult = pollController.castVote(option, sender);
+            handleVoteResult(split, sender, voteResult);
+        } catch (NumberFormatException nfe) {
+            channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
+        }
+    }
+
     private void handleQuickPollCommand(String[] split, String sender) {
         QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
         try {
             int option = Integer.parseInt(split[1]);
-            int addOptionResult = quickPollWidgetController.castVote(option, sender);
-            if (addOptionResult == 0) {
-                //Succesfull added. //TODO: Add username to delayed channelmessage
-                channelMessage("Thanks for voting for {" + split[1] + "}, " + sender);
-            } else if (addOptionResult == 1) {
-                channelMessage("Sorry " + sender + ", you have already voted. If you wish to change your vote, use &changevote {option}");
-            } else if (addOptionResult == 2) {
-                channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
-            } else LOG.error("Unknown addOptionResult recieved: " + addOptionResult);
+            int voteResult = quickPollWidgetController.castVote(option, sender);
+            handleVoteResult(split, sender, voteResult);
         } catch (NumberFormatException nfe) {
             channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
         }
     }
 
 
+    private void handleVoteResult(String[] split, String sender, int voteResult) {
+        if (voteResult == 0) {
+            //Succesfull added. //TODO: Add username to delayed channelmessage
+            channelMessage("Thanks for voting for {" + split[1] + "}, " + sender);
+        } else if (voteResult == 1) {
+            channelMessage("Sorry " + sender + ", you have already voted. If you wish to change your vote, use &changevote {option}");
+        } else if (voteResult == 2) {
+            channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
+        } else LOG.error("Unknown voteResult recieved: " + voteResult);
+        reloadView();
+    }
+    public void reloadView() {
+        (sceneloader.getController(Scenes.S_POLL)).reloadView();
+    }
     private void channelMessage(String message) {
         twirk.channelMessage(message);
     }
