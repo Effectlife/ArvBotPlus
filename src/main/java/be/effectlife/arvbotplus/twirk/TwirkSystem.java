@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.twirk;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
 import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
@@ -54,7 +55,7 @@ public class TwirkSystem {
             Thread.sleep(1000);
             connection = twirk.connect();
         }
-        twirk.channelMessage("Conversionbot has successfully loaded. Use !conv to print help");
+        twirk.channelMessage("ArvBotPlus has loaded. Use "+ Main.PREFIX+"abp ");
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {

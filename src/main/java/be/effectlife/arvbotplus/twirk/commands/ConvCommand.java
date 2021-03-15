@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.Main;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -10,7 +11,7 @@ import be.effectlife.arvbotplus.twirk.conversions.data.*;
 import java.util.Arrays;
 
 public class ConvCommand extends CommandExampleBase {
-    private static final String PATTERN = "!conv";
+    private static final String PATTERN = Main.PREFIX + "conv";
     private final Twirk twirk;
 
     public ConvCommand(Twirk twirk) {

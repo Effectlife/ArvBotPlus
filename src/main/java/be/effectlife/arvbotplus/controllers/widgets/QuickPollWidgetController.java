@@ -70,6 +70,14 @@ public class QuickPollWidgetController implements IController {
             pollController.setPollType(PollType.QUICK);
         } else if (pollController.getPollType() == PollType.QUICK) {
             //Stopping the poll
+            if (votes1 == votes2) {
+                //draw
+                Main.twirkSystem.channelMessage("Poll closed; A draw has occurred with " + votes1 + " votes.");
+            } else if (votes1 > votes2) {
+                Main.twirkSystem.channelMessage("Poll closed; Option A has won with " + votes1 + " votes");
+            } else {
+                Main.twirkSystem.channelMessage("Poll closed; Option B has won with " + votes2 + " votes");
+            }
             btnQPOpenClose.setText("Clear");
             pollController.setPollType(PollType.QP_CLEAR);
         } else if (pollController.getPollType() == PollType.QP_CLEAR) {

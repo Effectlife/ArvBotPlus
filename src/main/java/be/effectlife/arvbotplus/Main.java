@@ -14,6 +14,7 @@ import java.io.IOException;
 
 public class Main extends Application {
 
+    public static final String PREFIX = "&";
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;

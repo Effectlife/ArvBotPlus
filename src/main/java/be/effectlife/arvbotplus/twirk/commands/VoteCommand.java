@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class VoteCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
-    public static final String PATTERN = "&vote";
+    public static final String PATTERN = Main.PREFIX + "vote";
     private final Twirk twirk;
     private static final AESceneLoader sceneloader;
 
@@ -48,7 +49,7 @@ public class VoteCommand extends CommandExampleBase {
         ) {
             //No additional params, help, option or options as param given. Print out instructions
             channelMessage("Hi " + sender.getDisplayName() + ", &vote uses the following syntax: " +
-                    "\"&vote {option}\"; To change your vote, use \"&changevote {option}\"");
+                    Main.PREFIX + "\"vote {option}\"; To change your vote, use " + Main.PREFIX + "\"changevote {option}\"");
             return;
         }
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
@@ -108,9 +109,11 @@ public class VoteCommand extends CommandExampleBase {
         } else LOG.error("Unknown voteResult recieved: " + voteResult);
         reloadView();
     }
+
     public void reloadView() {
         (sceneloader.getController(Scenes.S_POLL)).reloadView();
     }
+
     private void channelMessage(String message) {
         twirk.channelMessage(message);
     }

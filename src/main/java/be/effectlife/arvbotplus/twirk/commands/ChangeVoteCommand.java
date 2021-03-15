@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
@@ -14,7 +15,7 @@ import org.slf4j.LoggerFactory;
 
 public class ChangeVoteCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
-    private static final String PATTERN = "&changevote";
+    private static final String PATTERN = Main.PREFIX + "changevote";
     private final Twirk twirk;
     private static final AESceneLoader sceneloader;
 

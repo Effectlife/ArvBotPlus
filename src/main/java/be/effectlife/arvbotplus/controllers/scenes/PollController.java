@@ -19,6 +19,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -93,14 +94,28 @@ public class PollController implements IController {
             if (taQuestion.getText().trim().isEmpty()) {
                 stringBuilder.append("What should we do/say? | ");
             } else {
-                stringBuilder.append(taQuestion.getText().trim() + " | ");
+                stringBuilder.append(taQuestion.getText().trim()).append(" | ");
             }
             stringBuilder.append("Vote using " + VoteCommand.PATTERN + " {option} for: ");
             validOptions.forEach((key, value) -> {
-                stringBuilder.append((key + 1) + ":{" + value + "}; ");
+                stringBuilder.append(key + 1).append(":{").append(value).append("}; ");
             });
             Main.twirkSystem.channelMessage(stringBuilder.toString());
         } else if (getPollType() == PollType.STANDARD) {
+            List<PollWidgetController> pollWidgetWithHighestVotes = getPollWidgetWithHighestVotes();
+            if (pollWidgetWithHighestVotes.size() > 1) {
+                //draw
+                StringBuilder sb = new StringBuilder();
+                sb.append("Poll closed; There was a draw with ").append(pollWidgetWithHighestVotes.get(0).getVoters().size()).append(" votes between the following options: ");
+                for (int i = 0; i < pollWidgetWithHighestVotes.size(); i++) {
+                    PollWidgetController pwc = pollWidgetWithHighestVotes.get(i);
+                    sb.append("'").append(pwc.getOptionText()).append("'");
+                    if (i != pollWidgetWithHighestVotes.size() - 1) sb.append(", ");
+                }
+                Main.twirkSystem.channelMessage(sb.toString());
+            } else {
+                Main.twirkSystem.channelMessage(String.format("Poll closed; the following option has won with %d votes: %d: %s", pollWidgetWithHighestVotes.get(0).getVoters().size(), pollWidgetWithHighestVotes.get(0).getOptionId(), pollWidgetWithHighestVotes.get(0).getOptionText()));
+            }
             btnOpenClosePoll.setText("Open");
             setPollType(PollType.NONE);
         } else {
@@ -220,12 +235,22 @@ public class PollController implements IController {
     }
 
     public int getHighestAmountOfVotes() {
+        return getPollWidgetWithHighestVotes().get(0).getVoters().size();
+    }
+
+    private List<PollWidgetController> getPollWidgetWithHighestVotes() {
+        List<PollWidgetController> highests = new ArrayList<>();
         int highest = 0;
         for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
+            if (StringUtils.isBlank(pollWidgetController.getOptionText())) continue;
             if (pollWidgetController.getVoters().size() > highest) {
                 highest = pollWidgetController.getVoters().size();
+                highests.clear();
+                highests.add(pollWidgetController);
+            } else if (pollWidgetController.getVoters().size() == highest) {
+                highests.add(pollWidgetController);
             }
         }
-        return highest;
+        return highests;
     }
 }
