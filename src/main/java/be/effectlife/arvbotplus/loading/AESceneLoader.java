@@ -81,7 +81,7 @@ public class AESceneLoader {
 //        URL url = AESceneLoader.class.getClassLoader().getResource("Scenes/" + fileName);
 
         if (url == null) {
-            throw new SceneNotFoundException("File Scenes/" + fileName + " does not exist");
+            throw new SceneNotFoundException("File scenes/" + fileName + " does not exist");
         }
 
         FXMLLoader loader = new FXMLLoader(url);

@@ -8,13 +8,11 @@ import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
 import com.gikk.twirk.events.TwirkListener;
 
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
+import java.io.*;
 import java.util.Properties;
 
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
+import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,27 +33,37 @@ public class TwirkSystem {
         try {
             inputStream = new FileInputStream(propFileName);
         } catch (FileNotFoundException e) {
-            SimplePopup.showPopupError("Cannot find Twirk properties file " + propFileName + "; exiting program.");
-            System.exit(1);
+            Platform.runLater(() -> {
+                SimplePopup.showPopupError("Cannot find Twirk properties file " + propFileName + "; Generating empty file and exiting program.");
+                try {
+                    BufferedWriter bw = new BufferedWriter(new FileWriter(propFileName));
+                    bw.write("twitch.channel=<insert channel name (eg. gogcom)>\n" +
+                            "twitch.bot.oauthtoken=<insert oauth token (eg. abc123abc123abc123abc123abc123)>");
+                    bw.flush();
+                    bw.close();
+                } catch (IOException ioException) {
+                    ioException.printStackTrace();
+                }
+                System.exit(1);
+            });
         }
         properties.load(inputStream);
         String channel = properties.getProperty("twitch.channel");
-        twirk = (new TwirkBuilder(channel, "HARDCODED", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
+        twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
         twirk.addIrcListener(new ConvCommand(twirk));
         twirk.addIrcListener(new VoteCommand(twirk));
         twirk.addIrcListener(new ChangeVoteCommand(twirk));
-        System.out.println("Conversionbot is loading");
-        Thread.sleep(2000L);
-        int retries = 5;
+        LOG.info("ArvBotPlus is loading");
+        Thread.sleep(500L);
         boolean connection = twirk.connect();
-        while (!connection && retries > 0) {
-            LOG.warn("Twirk failed to connect");
-            retries--;
-            Thread.sleep(1000);
-            connection = twirk.connect();
+        if (!connection) {
+            Platform.runLater(() -> {
+                SimplePopup.showPopupWarn("Connection to twitch failed. Please check your configuration and try again.");
+                System.exit(1);
+            });
         }
-        twirk.channelMessage("ArvBotPlus has loaded. Use "+ Main.PREFIX+"abp ");
+        twirk.channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp ");
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {
