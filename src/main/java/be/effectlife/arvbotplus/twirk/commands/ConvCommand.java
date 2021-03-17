@@ -7,16 +7,21 @@ import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
 import be.effectlife.arvbotplus.twirk.conversions.data.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Arrays;
 
 public class ConvCommand extends CommandExampleBase {
+    private static final Logger LOG = LoggerFactory.getLogger(ConvCommand.class);
     private static final String PATTERN = Main.PREFIX + "conv";
     private final Twirk twirk;
+    private final boolean disable;
 
-    public ConvCommand(Twirk twirk) {
+    public ConvCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND);
         this.twirk = twirk;
+        this.disable = disable;
     }
 
     protected String getCommandWords() {
@@ -29,7 +34,7 @@ public class ConvCommand extends CommandExampleBase {
 
     protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
         String content = message.getContent().trim();
-        if(!content.startsWith(PATTERN))return;
+        if (!content.startsWith(PATTERN)) return;
         String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
         String[] split = messagecontent.split(" ");
 
@@ -110,7 +115,11 @@ public class ConvCommand extends CommandExampleBase {
     }
 
     private void channelMessage(String message) {
-        twirk.channelMessage(message);
+        if (this.disable) {
+            LOG.trace(message);
+        } else {
+            twirk.channelMessage(message);
+        }
     }
 
     private void sendOptions() {

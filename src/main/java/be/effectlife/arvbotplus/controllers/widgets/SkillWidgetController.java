@@ -2,9 +2,12 @@ package be.effectlife.arvbotplus.controllers.widgets;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
+import be.effectlife.arvbotplus.utilities.SkillType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -22,10 +25,18 @@ public class SkillWidgetController implements IController {
     private TextField tfSkillname;
 
     @FXML
-    private Spinner<?> spinnerCurrentValue;
+    private Spinner<Integer> spinnerCurrentValue;
 
     @FXML
-    private Spinner<?> spinnerMaxValue;
+    private Spinner<Integer> spinnerMaxValue;
+
+    @FXML
+    private CheckBox cbHasMax;
+
+    @FXML
+    void cbHasMax_Switched(ActionEvent event) {
+        spinnerMaxValue.setVisible(cbHasMax.isSelected());
+    }
 
     @FXML
     void paneSkillname_Clicked(MouseEvent event) {
@@ -50,7 +61,18 @@ public class SkillWidgetController implements IController {
 
     @Override
     public void doInit() {
+        spinnerCurrentValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+        spinnerMaxValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+    }
 
+    public void setType(SkillType skillType) {
+        switch (skillType) {
+            case MAX:
+                spinnerMaxValue.setVisible(true);
+                break;
+            case SIMPLE:
+                spinnerMaxValue.setVisible(false);
+        }
     }
 
     @Override

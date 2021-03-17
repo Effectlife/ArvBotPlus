@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="base" hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="657.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.InventoryController">
+<GridPane fx:id="base" hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="500.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.InventoryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="3.0" minWidth="3.0" prefWidth="3.0" />
@@ -47,7 +47,10 @@
       <Button fx:id="btnSave" mnemonicParsing="false" onAction="#btnSave_Clicked" text="Save" GridPane.columnIndex="3" />
       <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" prefWidth="152.0" vbarPolicy="ALWAYS" GridPane.rowIndex="3" GridPane.rowSpan="3">
          <content>
-            <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" />
+            <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+               <children>
+                  <fx:include source="widgets/w_skill.fxml" />
+               </children></VBox>
          </content>
          <opaqueInsets>
             <Insets />
@@ -56,7 +59,7 @@
       <Pane styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
       <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="2">
         <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="47.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
@@ -65,9 +68,7 @@
         </rowConstraints>
          <children>
             <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAddSimple_Clicked" styleClass="skill-button" text="+" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemoveSimple_Clicked" styleClass="skill-button" text="-" GridPane.rowIndex="1" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAddMax_Clicked" styleClass="skill-button" text="Max +" GridPane.columnIndex="1" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemoveMax_Clicked" styleClass="skill-button" text="Max -" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemoveSimple_Clicked" styleClass="skill-button" text="-" GridPane.columnIndex="1" />
          </children>
          <padding>
             <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />

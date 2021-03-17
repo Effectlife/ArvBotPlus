@@ -1,6 +1,8 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
+import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
+import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -14,12 +16,16 @@ import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 //TODO: Implement the complete inventory experience
 public class InventoryController implements IController {
     private static final Logger LOGGER = LoggerFactory.getLogger(InventoryController.class);
+    private List<SkillWidgetController> skillWidgetControllerLists;
 
-
+    //region FXML Definitions
     @FXML
     private GridPane base;
     @FXML
@@ -36,20 +42,11 @@ public class InventoryController implements IController {
 
     @FXML
     private TextField tfName;
+    //endregion
 
-    @FXML
-    void btnAddMax_Clicked(ActionEvent event) {
-
-    }
 
     @FXML
     void btnAddSimple_Clicked(ActionEvent event) {
-
-    }
-
-
-    @FXML
-    void btnRemoveMax_Clicked(ActionEvent event) {
 
     }
 
@@ -58,14 +55,15 @@ public class InventoryController implements IController {
 
     }
 
+
     @FXML
     void btnSave_Clicked(ActionEvent event) {
-
+        SaveManager.saveGame();
     }
 
     @FXML
     void btnLoad_Clicked(ActionEvent event) {
-
+        SaveManager.loadGame();
     }
 
     @FXML
@@ -92,7 +90,7 @@ public class InventoryController implements IController {
 
     @Override
     public void doInit() {
-
+        skillWidgetControllerLists = new ArrayList<>();
     }
 
     @Override

@@ -18,14 +18,16 @@ public class ChangeVoteCommand extends CommandExampleBase {
     private static final String PATTERN = Main.PREFIX + "changevote";
     private final Twirk twirk;
     private static final AESceneLoader sceneloader;
+    private final boolean disable;
 
     static {
         sceneloader = AESceneLoader.getInstance();
     }
 
-    public ChangeVoteCommand(Twirk twirk) {
+    public ChangeVoteCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND);
         this.twirk = twirk;
+        this.disable = disable;
     }
 
     protected String getCommandWords() {
@@ -123,8 +125,11 @@ public class ChangeVoteCommand extends CommandExampleBase {
         }
     }
 
-
     private void channelMessage(String message) {
-        twirk.channelMessage(message);
+        if (this.disable) {
+            LOG.trace(message);
+        } else {
+            twirk.channelMessage(message);
+        }
     }
 }

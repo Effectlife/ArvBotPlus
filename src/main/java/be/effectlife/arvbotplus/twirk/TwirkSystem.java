@@ -52,10 +52,10 @@ public class TwirkSystem {
         String channel = properties.getProperty("twitch.channel");
         twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
-        twirk.addIrcListener(new ConvCommand(twirk));
-        twirk.addIrcListener(new VoteCommand(twirk));
-        twirk.addIrcListener(new ChangeVoteCommand(twirk));
-        twirk.addIrcListener(new ABPCommand(twirk));
+        twirk.addIrcListener(new ConvCommand(twirk, disable));
+        twirk.addIrcListener(new VoteCommand(twirk, disable));
+        twirk.addIrcListener(new ChangeVoteCommand(twirk, disable));
+        twirk.addIrcListener(new ABPCommand(twirk, disable));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
         boolean connection = twirk.connect();
@@ -65,7 +65,7 @@ public class TwirkSystem {
                 System.exit(1);
             });
         }
-        twirk.channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
+        channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {

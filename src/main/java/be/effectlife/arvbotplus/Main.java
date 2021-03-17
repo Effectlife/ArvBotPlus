@@ -1,6 +1,7 @@
 package be.effectlife.arvbotplus;
 
 import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -21,7 +22,7 @@ public class Main extends Application {
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;
     public static TwirkSystem twirkSystem;
-    private Map<Stages, Stage> stageMap = new HashMap<>();
+    private final Map<Stages, Stage> stageMap = new HashMap<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -36,14 +37,12 @@ public class Main extends Application {
         new Thread(() -> {
             twirkSystem = new TwirkSystem();
             try {
-                twirkSystem.initializeSystem(false);
+                twirkSystem.initializeSystem(true);
                 Platform.runLater(() -> {
                     loadingStage.hide();
                     finalPrimaryStage.show();
                 });
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (InterruptedException e) {
+            } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
             }
         }).start();
@@ -64,6 +63,7 @@ public class Main extends Application {
             ((Stage) e.getSource()).setMinWidth(Scenes.S_INVENTORY.getMinWidth());
         });
         stageMap.put(Stages.INVENTORY, inventoryStage);
+        SaveManager.setInventoryStage(inventoryStage);
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 
