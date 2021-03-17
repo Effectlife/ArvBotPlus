@@ -48,7 +48,7 @@ public class VoteCommand extends CommandExampleBase {
                 (split.length > 1 && split[1].equals("help"))
         ) {
             //No additional params, help, option or options as param given. Print out instructions
-            channelMessage("Hi " + sender.getDisplayName() + ", &vote uses the following syntax: " +
+            channelMessage("Hi " + sender.getDisplayName() + ", " + Main.PREFIX + "vote uses the following syntax: " +
                     Main.PREFIX + "\"vote {option}\"; To change your vote, use " + Main.PREFIX + "\"changevote {option}\"");
             return;
         }
@@ -79,7 +79,7 @@ public class VoteCommand extends CommandExampleBase {
         try {
             int option = Integer.parseInt(split[1]) - 1;//-1 to offset lists starting with 0
             PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
-            int voteResult = pollController.castVote(option, sender);
+            VoteActionResult voteResult = pollController.castVote(option, sender);
             handleVoteResult(split, sender, voteResult);
         } catch (NumberFormatException nfe) {
             channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
@@ -90,7 +90,7 @@ public class VoteCommand extends CommandExampleBase {
         QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
         try {
             int option = Integer.parseInt(split[1]);
-            int voteResult = quickPollWidgetController.castVote(option, sender);
+            VoteActionResult voteResult = quickPollWidgetController.castVote(option, sender);
             handleVoteResult(split, sender, voteResult);
         } catch (NumberFormatException nfe) {
             channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
@@ -98,13 +98,13 @@ public class VoteCommand extends CommandExampleBase {
     }
 
 
-    private void handleVoteResult(String[] split, String sender, int voteResult) {
-        if (voteResult == 0) {
+    private void handleVoteResult(String[] split, String sender, VoteActionResult voteResult) {
+        if (voteResult == VoteActionResult.ADDED) {
             //Succesfull added. //TODO: Add username to delayed channelmessage
             channelMessage("Thanks for voting for {" + split[1] + "}, " + sender);
-        } else if (voteResult == 1) {
-            channelMessage("Sorry " + sender + ", you have already voted. If you wish to change your vote, use &changevote {option}");
-        } else if (voteResult == 2) {
+        } else if (voteResult == VoteActionResult.ALREADY_VOTED) {
+            channelMessage("Sorry " + sender + ", you have already voted. If you wish to change your vote, use " + Main.PREFIX + "changevote {option}");
+        } else if (voteResult == VoteActionResult.INVALID_VOTE) {
             channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
         } else LOG.error("Unknown voteResult recieved: " + voteResult);
         reloadView();

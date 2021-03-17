@@ -24,7 +24,6 @@ public class AESceneLoader {
         return instance;
     }
 
-
     public Scene getScene(Scenes scene) {
         return getScene(scene, "");
     }

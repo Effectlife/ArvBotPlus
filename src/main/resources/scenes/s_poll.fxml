@@ -74,7 +74,7 @@
                   </Button>
                </children>
             </GridPane>
-            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="justText" text="Options" textAlignment="CENTER" wrappingWidth="60.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Options" textAlignment="CENTER" wrappingWidth="60.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
          </children>
          <padding>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />

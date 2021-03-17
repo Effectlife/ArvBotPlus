@@ -48,8 +48,8 @@ public class ChangeVoteCommand extends CommandExampleBase {
                 (split.length > 1 && split[1].equals("help"))
         ) {
             //No additional params, help, option or options as param given. Print out instructions
-            channelMessage("Hi " + sender.getDisplayName() + ", &changevote uses the following syntax: " +
-                    "\"&changevote {option}\"; If you haven't yet voted, use \"&vote {option}\" to cast your vote");
+            channelMessage("Hi " + sender.getDisplayName() + ", " + Main.PREFIX + "changevote uses the following syntax: " +
+                    "\"" + Main.PREFIX + "changevote {option}\"; If you haven't yet voted, use \"" + Main.PREFIX + "vote {option}\" to cast your vote");
             return;
         }
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
@@ -57,7 +57,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
 
         switch (pollController.getPollType()) {
             case STANDARD:
-                //handleStandardPollCommand(split);
+                handleStandardPollCommand(split, sender.getDisplayName());
                 break;
             case QUICK:
                 handleQuickPollCommand(split, sender.getDisplayName());
@@ -71,6 +71,29 @@ public class ChangeVoteCommand extends CommandExampleBase {
         }
     }
 
+    private void handleStandardPollCommand(String[] split, String sender) {
+        PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
+        try {
+            int option = Integer.parseInt(split[1]) - 1;
+            VoteActionResult addOptionResult = pollController.changeVote(option, sender);
+            switch (addOptionResult) {
+                case SAME_VOTE:
+                    channelMessage("You already voted for " + split[1] + ", " + sender);
+                    return;
+                case ADDED:
+                    channelMessage("Thanks for changing your vote to {" + split[1] + "}, " + sender);
+                    return;
+                case NO_VOTE_YET:
+                    channelMessage("You haven't yet voted, " + sender + ", please vote with " + Main.PREFIX + "vote");
+                    return;
+                case INVALID_VOTE:
+                    channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
+            }
+        } catch (NumberFormatException nfe) {
+            channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
+        }
+    }
+
     private void handleNonePollCommand() {
         channelMessage("There is currently no poll active.");
     }
@@ -79,13 +102,22 @@ public class ChangeVoteCommand extends CommandExampleBase {
         QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
         try {
             int option = Integer.parseInt(split[1]);
-            int addOptionResult = quickPollWidgetController.changeVote(option, sender);
-            if (addOptionResult == 0) {
-                //Succesfull added. //TODO: Add username to delayed channelmessage
-                channelMessage("Thanks for changing your vote to {" + split[1] + "}, " + sender);
-            } else if (addOptionResult == 3) {
-                channelMessage("You already voted for " + split[1] + ", " + sender);
-            } else LOG.error("Unknown addOptionResult recieved: " + addOptionResult);
+            VoteActionResult addOptionResult = quickPollWidgetController.changeVote(option, sender);
+            switch (addOptionResult) {
+                case ADDED:
+                    //Succesfull added. //TODO: Add username to delayed channelmessage
+                    channelMessage("Thanks for changing your vote to {" + split[1] + "}, " + sender);
+                    break;
+                case ALREADY_VOTED:
+                    channelMessage("You already voted for " + split[1] + ", " + sender);
+                    break;
+                case SAME_VOTE:
+                    channelMessage("You haven't yet voted, " + sender + ", please vote with " + Main.PREFIX + "vote");
+                    break;
+                default:
+                    LOG.error("Unknown addOptionResult recieved: " + addOptionResult);
+                    break;
+            }
         } catch (NumberFormatException nfe) {
             channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
         }

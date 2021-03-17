@@ -1,6 +1,7 @@
 package be.effectlife.arvbotplus.twirk;
 
 import be.effectlife.arvbotplus.Main;
+import be.effectlife.arvbotplus.twirk.commands.ABPCommand;
 import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
 import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
@@ -49,11 +50,12 @@ public class TwirkSystem {
         }
         properties.load(inputStream);
         String channel = properties.getProperty("twitch.channel");
-        twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(true).build();
+        twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
         twirk.addIrcListener(new ConvCommand(twirk));
         twirk.addIrcListener(new VoteCommand(twirk));
         twirk.addIrcListener(new ChangeVoteCommand(twirk));
+        twirk.addIrcListener(new ABPCommand(twirk));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
         boolean connection = twirk.connect();
@@ -63,7 +65,7 @@ public class TwirkSystem {
                 System.exit(1);
             });
         }
-        twirk.channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp ");
+        twirk.channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {

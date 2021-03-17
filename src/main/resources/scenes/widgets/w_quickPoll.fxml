@@ -36,7 +36,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text fx:id="textCount1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="justText" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text fx:id="textCount1" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <GridPane styleClass="textBorder" GridPane.columnIndex="2" GridPane.rowIndex="1">
@@ -47,7 +47,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
          </rowConstraints>
          <children>
-            <Text fx:id="textCount2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="justText" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Text fx:id="textCount2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
          </children>
       </GridPane>
       <Button fx:id="btnQPLastCall" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPLastCall_clicked" text="Last Call" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">

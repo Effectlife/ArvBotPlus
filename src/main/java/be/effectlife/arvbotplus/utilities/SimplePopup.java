@@ -56,6 +56,14 @@ public abstract class SimplePopup {
 
         alert.showAndWait();
     }
+    public static void showPopupInfo(String content) {
+        Alert alert = prepareAlert(Alert.AlertType.INFORMATION, "Info", "Info", content);
+
+        ButtonType buttonOK = new ButtonType("OK");
+        alert.getButtonTypes().setAll(buttonOK);
+
+        alert.showAndWait();
+    }
 
     public static void showPopupWarn(String content) {
         Alert alert = prepareAlert(Alert.AlertType.WARNING, "Oops", "Warn", content);

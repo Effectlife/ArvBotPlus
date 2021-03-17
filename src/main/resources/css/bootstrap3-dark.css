@@ -1,5 +1,9 @@
-.justText {
+.white-text {
     -fx-fill: #ffffff;
+}
+
+.text-bold {
+    -fx-font-weight: bold;
 }
 
 .scroll-pane:disabled, .text-area:disabled {
@@ -17,7 +21,7 @@
     -fx-border-width: 0.8px;
 }
 
-.text, .justText {
+.text, .white-text {
     -fx-font-size: 12pt;
 }
 
@@ -47,7 +51,7 @@
 }
 
 .button, .menu-button, .toggle-button, .split-menu-button {
-    -fx-font-size: 12;
+    -fx-font-size: 10;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
     /*-fx-pref-height: 30;
@@ -186,8 +190,12 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .increment-arrow-button, .decrement-arrow-button {
-
+    -fx-padding: 0.3em 0.3em;
 }
+.skill-button{
+    -fx-padding: 0em;
+}
+
 
 /*bgcolor setting*/
 .color-picker, .date-picker > .arrow-button,
@@ -883,14 +891,14 @@ VBox > .split-menu-button.last > .arrow-button {
 
 /*split pane*/
 .split-pane > .split-pane-divider {
-    -fx-background-color: #222222;
-    -fx-border-color: #eeeeee;
-    -fx-pref-width: 8;
+    -fx-background-color: #464545;
+    -fx-border-color: #565656;
+    -fx-pref-width: 6;
 }
 
 .split-pane:horizontal > .split-pane-divider {
     -fx-background-insets: 0, 0 1 0 1;
-    -fx-border-width: 0 1 0 1;
+    -fx-border-width: 1;
 }
 
 /* vertical the two nodes are placed on top of each other. */
@@ -900,7 +908,11 @@ VBox > .split-menu-button.last > .arrow-button {
 }
 
 .split-pane > .split-pane-divider:hover {
-    -fx-background-color: #E0E0E0;
+    -fx-background-color: #333333;
+}
+
+.split-pane {
+    -fx-background-color: #222222;
 }
 
 /*******************************************************************************

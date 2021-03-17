@@ -5,12 +5,14 @@ import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.PollType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
+import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,6 +68,7 @@ public class QuickPollWidgetController implements IController {
     void btnQPOpenClose_clicked(ActionEvent event) {
         if (pollController.getPollType() == PollType.NONE) {
             //Starting the poll
+            Main.twirkSystem.channelMessage("QuickPoll started: Vote with '$vote 1' or '$vote 2'");
             btnQPOpenClose.setText("Close");
             pollController.setPollType(PollType.QUICK);
         } else if (pollController.getPollType() == PollType.QUICK) {
@@ -120,30 +123,30 @@ public class QuickPollWidgetController implements IController {
         }
     }
 
-    public int castVote(int option, String sender) {
+    public VoteActionResult castVote(int option, String sender) {
 
         if (option == 1) {
             if (hasUsernameVoted(sender)) {
-                return 1;
+                return VoteActionResult.ALREADY_VOTED;
             }
             usernamesVoted1.add(sender);
             totalVotes++;
             votes1++;
         } else if (option == 2) {
             if (hasUsernameVoted(sender)) {
-                return 1;
+                return VoteActionResult.ALREADY_VOTED;
             }
             usernamesVoted2.add(sender);
             totalVotes++;
             votes2++;
         } else {
-            return 2;
+            return VoteActionResult.INVALID_VOTE;
         }
         reloadView();
-        return 0;
+        return VoteActionResult.ADDED;
     }
 
-    public int changeVote(int option, String sender) {
+    public VoteActionResult changeVote(int option, String sender) {
         if (option == 2 && usernamesVoted1.contains(sender)) {
             votes1--;
             totalVotes--;
@@ -156,7 +159,7 @@ public class QuickPollWidgetController implements IController {
             usernamesVoted2.remove(sender);
             return castVote(option, sender);
         }
-        return 3;
+        return VoteActionResult.SAME_VOTE;
     }
 
     private boolean hasUsernameVoted(String sender) {
@@ -164,4 +167,8 @@ public class QuickPollWidgetController implements IController {
     }
 
 
+    public void clear() {
+        pollController.setPollType(PollType.NONE);
+        doInit();
+    }
 }

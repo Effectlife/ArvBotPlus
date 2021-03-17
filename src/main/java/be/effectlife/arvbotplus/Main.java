@@ -11,14 +11,17 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main extends Application {
 
-    public static final String PREFIX = "&";
+    public static final String PREFIX = "$";
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;
     public static TwirkSystem twirkSystem;
+    private Map<Stages, Stage> stageMap = new HashMap<>();
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -45,17 +48,22 @@ public class Main extends Application {
             }
         }).start();
 
-        //primaryStage.show();
+        stageMap.get(Stages.INVENTORY).show();
+
     }
 
     private void prepareStages() {
-        buildStage(Stages.POLL, Scenes.S_POLL, CloseHandlers.SHUTDOWN).setOnShowing((e) -> {
+        Stage pollStage = buildStage(Stages.POLL, Scenes.S_POLL, CloseHandlers.SHUTDOWN);
+        pollStage.setOnShowing((e) -> {
             AESceneLoader.getInstance().getController(Scenes.S_POLL).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_POLL.getMinWidth());
         });
-
-        buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, CloseHandlers.SHUTDOWN).setOnShowing((e) -> {
+        stageMap.put(Stages.POLL, pollStage);
+        Stage inventoryStage = buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, CloseHandlers.SHUTDOWN);
+        inventoryStage.setOnShowing((e) -> {AESceneLoader.getInstance().getController(Scenes.S_INVENTORY).onShow();
+            ((Stage) e.getSource()).setMinWidth(Scenes.S_INVENTORY.getMinWidth());
         });
+        stageMap.put(Stages.INVENTORY, inventoryStage);
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 
