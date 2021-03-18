@@ -6,6 +6,7 @@ public class Skill {
     private String name;
     private SkillType skillType;
     private int value, maxValue;
+    private boolean usesColor;
 
     public String getName() {
         return name;
@@ -39,13 +40,22 @@ public class Skill {
         this.maxValue = maxValue;
     }
 
+    public boolean isUsesColor() {
+        return usesColor;
+    }
+
+    public void setUsesColor(boolean usesColor) {
+        this.usesColor = usesColor;
+    }
+
     public Skill() {
     }
 
-    public Skill(String name, SkillType skillType, int value, int maxValue) {
+    public Skill(String name, SkillType skillType, int value, int maxValue, boolean usesColor) {
         this.name = name;
         this.skillType = skillType;
         this.value = value;
         this.maxValue = maxValue;
+        this.usesColor = usesColor;
     }
 }

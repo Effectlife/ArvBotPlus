@@ -2,28 +2,37 @@ package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
+import be.effectlife.arvbotplus.loading.AESceneLoader;
+import be.effectlife.arvbotplus.loading.SceneContainer;
+import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.saves.SaveManager;
+import be.effectlife.arvbotplus.saves.models.Save;
+import be.effectlife.arvbotplus.saves.models.Skill;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
+import be.effectlife.arvbotplus.utilities.SkillType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
+import javafx.scene.Node;
+import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.InputEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
 
 
 //TODO: Implement the complete inventory experience
 public class InventoryController implements IController {
-    private static final Logger LOGGER = LoggerFactory.getLogger(InventoryController.class);
-    private List<SkillWidgetController> skillWidgetControllerLists;
+    private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
+    private List<SkillWidgetController> skillWidgetControllerList;
 
     //region FXML Definitions
     @FXML
@@ -35,26 +44,126 @@ public class InventoryController implements IController {
     private Text textName;
 
     @FXML
-    private Button btnLoad;
-
-    @FXML
-    private Button btnSave;
-
-    @FXML
     private TextField tfName;
+
+    @FXML
+    private VBox vboxSkillOptions;
+    @FXML
+    private TextArea taItemsArtifacts;
+
+    @FXML
+    private TextArea taCluesNotes;
+
+    private Properties properties;
     //endregion
 
 
     @FXML
-    void btnAddSimple_Clicked(ActionEvent event) {
+    void btnAdd_Clicked(ActionEvent event) {
+        createWidget(skillWidgetControllerList.size());
+        reloadView();
+    }
+
+    @FXML
+    void btnClose_Clicked(ActionEvent event) {
 
     }
 
     @FXML
-    void btnRemoveSimple_Clicked(ActionEvent event) {
+    void btnPolls_Clicked(ActionEvent event) {
 
     }
 
+    @FXML
+    void btnDice_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnBattle_Clicked(ActionEvent event) {
+
+    }
+
+    @FXML
+    void btnRemove_Clicked(ActionEvent event) {
+        if (skillWidgetControllerList.size() == 0) return;
+        SkillWidgetController controllerToRemove = skillWidgetControllerList.get(skillWidgetControllerList.size() - 1);
+        for (Node child : vboxSkillOptions.getChildren()) {
+            if (Integer.parseInt(child.getUserData().toString()) == controllerToRemove.getId()) {
+                vboxSkillOptions.getChildren().remove(child);
+                skillWidgetControllerList.remove(controllerToRemove);
+                break;
+            }
+        }
+        reloadView();
+    }
+
+    /*
+    inv.skill.default.2.name=Gold
+    inv.skill.default.2.value=20
+    inv.skill.default.2.maxValue=20
+    inv.skill.default.2.hasmaxvalue=false
+    */
+    public void initializeSkillWidgets() {
+        int counter = 0;
+        String keyTemplate = "inv.skill.default.%d.%s";
+
+        while (true) {
+            String name = properties.getProperty(String.format(keyTemplate, counter, "name"));
+            String valueString = properties.getProperty(String.format(keyTemplate, counter, "value"));
+            String maxValueString = properties.getProperty(String.format(keyTemplate, counter, "maxValue"));
+            boolean hasMaxValue = Boolean.parseBoolean(properties.getProperty(String.format(keyTemplate, counter, "hasmaxvalue")));
+            if (name == null) {
+                break;
+            }
+            int value = StringUtils.isNumeric(valueString) ? Integer.parseInt(valueString) : 0;
+            int maxValue = StringUtils.isNumeric(maxValueString) ? Integer.parseInt(maxValueString) : 0;
+            createWidget(counter, name, value, maxValue, hasMaxValue);
+            counter++;
+
+        }
+    }
+
+    private void createWidget(int id) {
+        createWidget(id, null, 0, 0, false);
+    }
+
+    private void createWidget(int id, String name, int value, int maxValue, boolean skillType) {
+        createWidget(id, name, value, maxValue, skillType ? SkillType.MAX : SkillType.SIMPLE, false);
+    }
+
+    private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
+        SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
+        SkillWidgetController skillWidgetController = (SkillWidgetController) sceneContainer.getController();
+        skillWidgetControllerList.add(skillWidgetController);
+        vboxSkillOptions.getChildren().add(sceneContainer.getScene().getRoot());
+        sceneContainer.getScene().getRoot().setUserData(id);
+        skillWidgetController.setId(id);
+        String thresholdWarn = properties.getProperty("inv.skill.threshold.warn");
+        String thresholdCrit = properties.getProperty("inv.skill.threshold.crit");
+        double dThresholdWarn;
+        try {
+            dThresholdWarn = Double.parseDouble(thresholdWarn);
+        } catch (NumberFormatException e) {
+            dThresholdWarn = 0;
+        }
+        double dThresholdCrit;
+        try {
+            dThresholdCrit = Double.parseDouble(thresholdCrit);
+        } catch (NumberFormatException e) {
+            dThresholdCrit = 0;
+        }
+
+        skillWidgetController.setThresholds(dThresholdWarn, dThresholdCrit);
+        if (name != null) {
+            skillWidgetController.setName(name);
+            skillWidgetController.setValue(value);
+            skillWidgetController.setMaxValue(maxValue);
+            skillWidgetController.setType(skillType);
+            skillWidgetController.setUseColors(useColors);
+        }
+        skillWidgetController.reloadView();
+    }
 
     @FXML
     void btnSave_Clicked(ActionEvent event) {
@@ -90,7 +199,20 @@ public class InventoryController implements IController {
 
     @Override
     public void doInit() {
-        skillWidgetControllerLists = new ArrayList<>();
+        skillWidgetControllerList = new ArrayList<>();
+        tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                tfName_Clicked(null);
+            }
+        }));
+    }
+
+    public void hardReset() {
+        vboxSkillOptions.getChildren().clear();
+        skillWidgetControllerList.clear();
+        tfName.setText("");
+        taCluesNotes.setText("");
+        taItemsArtifacts.setText("");
     }
 
     @Override
@@ -100,8 +222,40 @@ public class InventoryController implements IController {
 
     @Override
     public void reloadView() {
-
+        vboxSkillOptions.getChildren().clear();
+        skillWidgetControllerList.forEach(skillWidgetController -> vboxSkillOptions.getChildren().add(AESceneLoader.getInstance().getScene(Scenes.W_SKILL, "_" + skillWidgetController.getId()).getRoot()));
     }
 
 
+    public String getName() {
+        return textName.getText();
+    }
+
+    public String getItemsArtifacts() {
+        return taItemsArtifacts.getText();
+    }
+
+    public String getCluesNotes() {
+        return taCluesNotes.getText();
+    }
+
+    public List<SkillWidgetController> getSkills() {
+        return skillWidgetControllerList;
+    }
+
+    public void load(Save save) {
+        textName.setText(save.getName());
+        taItemsArtifacts.setText(save.getItemsArtifacts());
+        taCluesNotes.setText(save.getCluesNotes());
+        List<Skill> skills = save.getSkills();
+        for (int i = 0, skillsSize = skills.size(); i < skillsSize; i++) {
+            Skill skill = skills.get(i);
+            createWidget(i, skill.getName(), skill.getValue(), skill.getMaxValue(), skill.getSkillType(), skill.isUsesColor());
+        }
+        reloadView();
+    }
+
+    public void setProperties(Properties properties) {
+        this.properties = properties;
+    }
 }

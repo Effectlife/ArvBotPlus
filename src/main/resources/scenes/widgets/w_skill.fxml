@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.CheckBox?>
 <?import javafx.scene.control.Spinner?>
@@ -14,18 +15,23 @@
 <GridPane hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="4.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="46.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="31.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="18.0" vgrow="SOMETIMES" />
-        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="16.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
       <RowConstraints maxHeight="3.0" minHeight="3.0" prefHeight="3.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <children>
       <Pane fx:id="paneSkillname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneSkillname_Clicked" GridPane.columnSpan="2" />
-      <Text fx:id="textSkillname" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="SomeSkillName" GridPane.columnSpan="2" />
-        <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillname_Clicked" prefHeight="25.0" visible="false" GridPane.columnSpan="2">
+      <Text fx:id="textSkillname" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="SomeSkillName" GridPane.columnSpan="2">
+         <styleClass>
+            <String fx:value="white-text" />
+            <String fx:value="smaller-text" />
+         </styleClass></Text>
+        <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillname_Clicked" prefHeight="25.0" styleClass="smaller-text" visible="false" GridPane.columnSpan="2">
             <font>
                 <Font size="14.0" />
             </font>
@@ -35,9 +41,10 @@
                 <Insets />
             </GridPane.margin>
         </Spinner>
-      <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="22.0" visible="false" GridPane.columnIndex="1" GridPane.columnSpan="2" GridPane.rowIndex="1" />
+      <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="22.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
-      <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" GridPane.columnIndex="2" />
+      <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" GridPane.columnIndex="3" />
+      <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColor_Switched" visible="false" GridPane.columnIndex="2" />
     </children>
     <padding>
         <Insets bottom="4.0" left="4.0" right="4.0" />

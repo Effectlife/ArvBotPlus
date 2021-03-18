@@ -3,17 +3,17 @@ package be.effectlife.arvbotplus.saves.models;
 import java.util.List;
 
 public class Save {
-    private String saveName;
+    private String name;
     private String itemsArtifacts;
     private String cluesNotes;
     private List<Skill> skills;
 
-    public String getSaveName() {
-        return saveName;
+    public String getName() {
+        return name;
     }
 
-    public void setSaveName(String saveName) {
-        this.saveName = saveName;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getItemsArtifacts() {
@@ -43,8 +43,8 @@ public class Save {
     public Save() {
     }
 
-    public Save(String saveName, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
-        this.saveName = saveName;
+    public Save(String name, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
+        this.name = name;
         this.itemsArtifacts = itemsArtifacts;
         this.cluesNotes = cluesNotes;
         this.skills = skills;

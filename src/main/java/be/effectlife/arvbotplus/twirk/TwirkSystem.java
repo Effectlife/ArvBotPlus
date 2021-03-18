@@ -22,33 +22,12 @@ public class TwirkSystem {
     private Twirk twirk;
     private boolean disable;
 
-    public void initializeSystem(boolean disable) throws IOException, InterruptedException {
+    public void initializeSystem(Properties properties, boolean disable) throws IOException, InterruptedException {
         this.disable = disable;
         if (this.disable) {
             LOG.debug("Disabled twirk system");
             return;
         }
-        Properties properties = new Properties();
-        String propFileName = "./config.properties";
-        InputStream inputStream = null;
-        try {
-            inputStream = new FileInputStream(propFileName);
-        } catch (FileNotFoundException e) {
-            Platform.runLater(() -> {
-                SimplePopup.showPopupError("Cannot find Twirk properties file " + propFileName + "; Generating empty file and exiting program.");
-                try {
-                    BufferedWriter bw = new BufferedWriter(new FileWriter(propFileName));
-                    bw.write("twitch.channel=<insert channel name (eg. gogcom)>\n" +
-                            "twitch.bot.oauthtoken=<insert oauth token (eg. abc123abc123abc123abc123abc123)>");
-                    bw.flush();
-                    bw.close();
-                } catch (IOException ioException) {
-                    ioException.printStackTrace();
-                }
-                System.exit(1);
-            });
-        }
-        properties.load(inputStream);
         String channel = properties.getProperty("twitch.channel");
         twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));

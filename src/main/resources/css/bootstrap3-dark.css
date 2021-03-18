@@ -3,6 +3,9 @@
     -color-pBar:#00bc64;
     -color-pBar-border:#018134;
 
+    -color-warn: #ff8c00;
+    -color-crit: #ff0000;
+
     -color-transparent: transparent;
     -color-f: #ffffff;
     -color-e: #eeeeee;
@@ -23,6 +26,15 @@
 }
 
 
+.warn-text.text-field.text {
+    -fx-fill: -color-warn;
+}
+.crit-text {
+    -fx-fill: -color-crit;
+}
+.smaller-text{
+    -fx-font-size: 10pt !important;
+}
 .white-text {
     -fx-fill: -color-f;
 }
@@ -68,7 +80,7 @@
     -fx-effect: none;
 }
 
-.button, .menu-button, .toggle-button, .split-menu-button {
+.button, .toggle-button, .split-menu-button {
     -fx-font-size: 10;
     -fx-background-radius: 0;
     -fx-border-radius: 0;
@@ -77,14 +89,7 @@
 }
 
 /*.button,*/
-.menu-button, .split-menu-button, .toggle-button, .number-button {
-    -fx-background-insets: 0, 0, -1, 0;
-}
 
-.split-menu-button > .label {
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-}
 
 .split-menu-button > .arrow-button {
     -fx-border-radius: 0;
@@ -130,7 +135,7 @@
 
 /*positions*/
 /*first*/
-.button.first, .menu-button.first, .toggle-button.first, .text-field.first, .text-area.first {
+.button.first, .toggle-button.first, .text-field.first, .text-area.first {
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
@@ -141,7 +146,6 @@
 }
 
 VBox > .button.first,
-VBox > .menu-button.first,
 VBox > .toggle-button.first,
 VBox > .split-menu-button.first,
 VBox > .text-field.first,
@@ -182,13 +186,12 @@ VBox > .split-menu-button.first > .arrow-button {
     -fx-background-radius: 0;
 }
 
-.button.last, .text-field.last, .text-area.last, .split-menu-button.last, .toggle-button.last, .menu-button.last {
+.button.last, .text-field.last, .text-area.last, .split-menu-button.last, .toggle-button.last {
     -fx-border-radius: 0;
     -fx-background-radius: 0;
 }
 
 VBox > .button.last,
-VBox > .menu-button.last,
 VBox > .toggle-button.last,
 VBox > .split-menu-button.last,
 VBox > .text-field.last,
@@ -219,13 +222,13 @@ VBox > .split-menu-button.last > .arrow-button {
 /*bgcolor setting*/
 .color-picker, .date-picker > .arrow-button,
 .number-button, .left-arrow-button, .right-arrow-button,
-.button, .split-menu-button, .toggle-button, .menu-button,
+.button, .split-menu-button, .toggle-button,
 .font-menu-button, .split-menu-button > .label, .split-menu-button > .arrow-button, .increment-arrow-button, .decrement-arrow-button {
     -fx-background-color: -color-4;
 }
 
 .color-picker, .date-picker > .arrow-button,
-.button, .menu-button, .toggle-button, .number-button, .left-arrow-button, .right-arrow-button,
+.button,  .toggle-button, .number-button, .left-arrow-button, .right-arrow-button,
 .font-menu-button,
 .split-menu-button > .label, .split-menu-button > .arrow-button, .increment-arrow-button, .decrement-arrow-button {
     -fx-border-color: -color-5;
@@ -251,7 +254,7 @@ VBox > .split-menu-button.last > .arrow-button {
 .date-picker:hover > .arrow-button,
 .combo-box:hover, .choice-box:hover,
 .number-button:hover, .left-arrow-button:hover, .right-arrow-button:hover,
-.button:hover, .menu-button:hover, .toggle-button:hover,
+.button:hover, .toggle-button:hover,
 .font-menu-button:hover,
 .split-menu-button > .label:hover, .split-menu-button > .arrow-button:hover, .increment-arrow-button:hover, .decrement-arrow-button:hover {
     -fx-background-color: -color-3;
@@ -267,10 +270,18 @@ VBox > .split-menu-button.last > .arrow-button {
 .font-menu-button:pressed, .font-menu-button:selected,
 .left-arrow-button:pressed, .left-arrow-button:selected,
 .right-arrow-button:pressed, .right-arrow-button:selected,
-.button:pressed, .button:selected, .menu-button:pressed, .menu-button:selected, .toggle-button:pressed, .toggle-button:selected,
+.button:pressed, .button:selected, .toggle-button:pressed, .toggle-button:selected,
 .split-menu-button:pressed > .label, .split-menu-button > .arrow-button:pressed, .increment-arrow-button:pressed, .decrement-arrow-button:pressed {
     -fx-background-color: -color-2;
     -fx-border-color: -color-0;
+}
+
+.warn-text .text-field, .warn-text .text-area{
+    -fx-text-fill: -color-warn;
+}
+
+.crit-text .text-field, .crit-text .text-area{
+    -fx-text-fill: -color-crit;
 }
 
 .text-field, .text-area {
@@ -413,7 +424,7 @@ VBox > .split-menu-button.last > .arrow-button {
     -fx-background-radius: 0;
     /*-fx-padding: 0.166667em 0.166667em 0.25em 0.25em; !* 2 2 3 3 *!*/
     -fx-padding: 0;
-    -fx-border-color: #434545;
+    -fx-border-color: -color-4;
     -fx-border-radius: 0;
     -fx-background-color: -color-2;
 }
@@ -432,4 +443,41 @@ VBox > .split-menu-button.last > .arrow-button {
 
 .check-box:selected > .box > .mark {
     -fx-background-color: -color-5;
+}
+
+.menu-bar{
+    -fx-background-color: -color-2;
+    -fx-border-color: -color-4;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0;
+}
+
+.menu:hover{
+    -fx-background-color: red;
+}
+
+.menu{
+    -fx-padding: 1 5;
+}
+
+.menu .label{
+    -fx-text-fill: -color-f;
+}
+
+.menu-item{
+    -fx-background-color: -color-2;
+    -fx-padding: 3 6;
+}
+.menu-item:hover{
+    -fx-background-color: -color-4;
+}
+
+.context-menu{
+    -fx-background-color: -color-2;
+    -fx-effect: dropshadow(gaussian, -color-4,10, 0, 0, 0);
+
+}
+
+.menu-bar > .container > .menu-button:hover, .menu-bar > .container > .menu-button:focused, .menu-bar > .container > .menu-button:showing {
+     -fx-background-color: -color-4;
 }
