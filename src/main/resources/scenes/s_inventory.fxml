@@ -22,134 +22,134 @@
 <GridPane fx:id="base" hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="500.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.InventoryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="3.0" minWidth="3.0" prefWidth="3.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="3.0" minWidth="3.0" prefWidth="3.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="0.0" prefWidth="423.0" />
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
     </columnConstraints>
     <rowConstraints>
-      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
         <RowConstraints maxHeight="3.0" minHeight="3.0" prefHeight="3.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="19.0" prefHeight="24.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
-      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="19.0" prefHeight="24.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
+        <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="432.0" vgrow="SOMETIMES" />
     </rowConstraints>
     <padding>
         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
     </padding>
-   <children>
-      <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Character's name: " GridPane.rowIndex="1" />
-      <Pane fx:id="paneName" onMouseClicked="#paneName_Clicked" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <Text fx:id="textName" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" GridPane.columnIndex="2" GridPane.rowIndex="1">
-         <styleClass>
-            <String fx:value="white-text" />
-            <String fx:value="text-bold" />
-         </styleClass>
-      </Text>
-      <TextField fx:id="tfName" disable="true" onAction="#tfName_Clicked" text="PLACEHOLDER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-      <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" prefWidth="152.0" vbarPolicy="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="3">
-         <content>
-            <VBox fx:id="vboxSkillOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
-               <padding>
-                  <Insets top="2.0" />
-               </padding>
-            </VBox>
-         </content>
-         <opaqueInsets>
-            <Insets />
-         </opaqueInsets>
-         <GridPane.margin>
-            <Insets />
-         </GridPane.margin>
-      </ScrollPane>
-      <Pane styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
-      <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="3">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints vgrow="SOMETIMES" />
-          <RowConstraints vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAdd_Clicked" styleClass="skill-button" text="+" />
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemove_Clicked" styleClass="skill-button" text="-" GridPane.columnIndex="1" />
-         </children>
-         <padding>
-            <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-         </padding>
-      </GridPane>
-      <Pane styleClass="seperator-pane" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
-      <SplitPane dividerPositions="0.7" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="4">
-        <items>
-            <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
-              <columnConstraints>
-                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-              </columnConstraints>
-              <rowConstraints>
-                <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-              </rowConstraints>
-               <children>
-                  <TextArea fx:id="taItemsArtifacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Items and Artifacts">
-                     <GridPane.margin>
-                        <Insets left="4.0" />
-                     </GridPane.margin>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets top="4.0" />
-               </padding>
-            </GridPane>
-            <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
-               <columnConstraints>
-                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
-               </columnConstraints>
-               <rowConstraints>
-                  <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
-                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-               </rowConstraints>
-               <children>
-                  <TextArea fx:id="taCluesNotes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Clues and Notes">
-                     <GridPane.margin>
-                        <Insets left="4.0" />
-                     </GridPane.margin>
-                  </Text>
-               </children>
-               <padding>
-                  <Insets top="4.0" />
-               </padding>
-            </GridPane>
-        </items>
-      </SplitPane>
-      <MenuBar GridPane.columnSpan="2147483647">
-        <menus>
-          <Menu text="File">
+    <children>
+        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Character's name: " GridPane.rowIndex="1" />
+        <Pane fx:id="paneName" onMouseClicked="#paneName_Clicked" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <Text fx:id="textName" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+            <styleClass>
+                <String fx:value="white-text" />
+                <String fx:value="text-bold" />
+            </styleClass>
+        </Text>
+        <TextField fx:id="tfName" disable="true" onAction="#tfName_Clicked" text="PLACEHOLDER" visible="false" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+        <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" prefWidth="152.0" vbarPolicy="ALWAYS" GridPane.rowIndex="4" GridPane.rowSpan="3">
+            <content>
+                <VBox fx:id="vboxSkillOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308">
+                    <padding>
+                        <Insets top="2.0" />
+                    </padding>
+                </VBox>
+            </content>
+            <opaqueInsets>
+                <Insets />
+            </opaqueInsets>
+            <GridPane.margin>
+                <Insets />
+            </GridPane.margin>
+        </ScrollPane>
+        <Pane styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+        <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="3">
+            <columnConstraints>
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
+                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                <RowConstraints vgrow="SOMETIMES" />
+            </rowConstraints>
+            <children>
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAdd_Clicked" styleClass="skill-button" text="+" />
+                <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemove_Clicked" styleClass="skill-button" text="-" GridPane.columnIndex="1" />
+            </children>
+            <padding>
+                <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+            </padding>
+        </GridPane>
+        <Pane styleClass="seperator-pane" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
+        <SplitPane dividerPositions="0.7" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="4">
             <items>
-                  <MenuItem fx:id="btnSave" onAction="#btnSave_Clicked" text="Save" />
-                  <MenuItem fx:id="btnLoad" onAction="#btnLoad_Clicked" text="Load" />
-                  <SeparatorMenuItem mnemonicParsing="false" />
-              <MenuItem fx:id="btnClose" onAction="#btnClose_Clicked" text="Close" />
+                <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextArea fx:id="taItemsArtifacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Items and Artifacts">
+                            <GridPane.margin>
+                                <Insets left="4.0" />
+                            </GridPane.margin>
+                        </Text>
+                    </children>
+                    <padding>
+                        <Insets top="4.0" />
+                    </padding>
+                </GridPane>
+                <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
+                    <columnConstraints>
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints maxHeight="-Infinity" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <TextArea fx:id="taCluesNotes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Clues and Notes">
+                            <GridPane.margin>
+                                <Insets left="4.0" />
+                            </GridPane.margin>
+                        </Text>
+                    </children>
+                    <padding>
+                        <Insets top="4.0" />
+                    </padding>
+                </GridPane>
             </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Edit">
-            <items>
-              <MenuItem mnemonicParsing="false" text="Polls" />
-                  <MenuItem mnemonicParsing="false" text="Dice Roller" />
-                  <MenuItem mnemonicParsing="false" text="Battle Manager" />
-            </items>
-          </Menu>
-          <Menu mnemonicParsing="false" text="Help">
-            <items>
-              <MenuItem mnemonicParsing="false" text="About" />
-            </items>
-          </Menu>
-        </menus>
-      </MenuBar>
-   </children>
+        </SplitPane>
+        <MenuBar GridPane.columnSpan="2147483647">
+            <menus>
+                <Menu text="File">
+                    <items>
+                        <MenuItem onAction="#btnSave_Clicked" text="Save" />
+                        <MenuItem onAction="#btnLoad_Clicked" text="Load" />
+                        <SeparatorMenuItem mnemonicParsing="false" />
+                        <MenuItem onAction="#btnClose_Clicked" text="Close" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Tools">
+                    <items>
+                        <MenuItem mnemonicParsing="false" onAction="#btnPolls_Clicked" text="Polls" />
+                        <MenuItem mnemonicParsing="false" onAction="#btnDice_Clicked" text="Dice Roller" />
+                        <MenuItem mnemonicParsing="false" onAction="#btnBattle_Clicked" text="Battle Manager" />
+                    </items>
+                </Menu>
+                <Menu mnemonicParsing="false" text="Help">
+                    <items>
+                        <MenuItem mnemonicParsing="false" text="About" />
+                    </items>
+                </Menu>
+            </menus>
+        </MenuBar>
+    </children>
 </GridPane>
