@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
 import be.effectlife.arvbotplus.loading.*;
@@ -21,6 +22,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -70,7 +72,11 @@ public class InventoryController implements IController {
 
     @FXML
     void btnClose_Clicked(ActionEvent event) {
-
+        Stage invStage = Main.getStage(Stages.INVENTORY);
+        invStage.fireEvent(new WindowEvent(
+                invStage,
+                WindowEvent.WINDOW_CLOSE_REQUEST
+        ));
     }
 
     @FXML

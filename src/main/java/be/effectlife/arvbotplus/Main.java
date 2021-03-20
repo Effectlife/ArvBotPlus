@@ -30,37 +30,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        //Starting loading scene
-        primaryStage.setScene(AESceneLoader.getInstance().getScene(Scenes.S_LOADING));
-        primaryStage.show();
         prepareStages();
-        Stage loadingStage = primaryStage;
-
-
         Properties properties = loadProperties();
         InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
         controller.setProperties(properties);
         controller.initializeSkillWidgets();
         stageMap.get(Stages.INVENTORY).show();
-        loadingStage.hide();
-
-
-        //primaryStage = StageBuilder.getStage(Stages.POLL);
-        //Stage finalPrimaryStage = primaryStage;
-        //new Thread(() -> {
-        //    twirkSystem = new TwirkSystem();
-        //    try {
-        //        twirkSystem.initializeSystem(properties, true);
-        //        Platform.runLater(() -> {
-        //            loadingStage.hide();
-        //            finalPrimaryStage.show();
-        //        });
-        //    } catch (IOException | InterruptedException e) {
-        //        e.printStackTrace();
-        //    }
-        //}).start();
-
-
     }
 
     private Properties loadProperties() throws IOException {
@@ -134,7 +109,7 @@ public class Main extends Application {
         stageMap.put(Stages.DICE, diceStage);
         diceStage.widthProperty().addListener((observable, oldValue, newValue) -> {
             DiceController diceController = (DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE);
-            diceController.reloadWidth((double)newValue*.8);
+            diceController.reloadWidth((double) newValue * .8);
         });
         LOG.info("Prepared {} stages", preparedStageCount);
     }

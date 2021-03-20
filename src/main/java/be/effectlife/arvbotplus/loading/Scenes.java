@@ -9,7 +9,6 @@ public enum Scenes {
     W_POLL("widgets/w_poll"),
     W_QUICKPOLL("widgets/w_quickPoll"),
     W_SKILL("widgets/w_skill"),
-    S_LOADING("s_loading", "Loading"),
     S_DICE("s_dice", "Dice Roller", 250),
     W_DICERESULT("widgets/w_diceResult");
 
