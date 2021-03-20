@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.web.WebView?>
+
+<VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../css/bootstrap3-dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.DiceResultController">
+   <children>
+      <Pane fx:id="paneSep" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="3.0" styleClass="seperator-pane" />
+      <Text fx:id="textResult" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER">
+         <styleClass>
+            <String fx:value="white-text" />
+            <String fx:value="lg" />
+            <String fx:value="text-bold" />
+         </styleClass>
+      </Text>
+      <WebView fx:id="webView" focusTraversable="false" mouseTransparent="true" prefHeight="55.0" prefWidth="50.0" VBox.vgrow="ALWAYS" />
+      <Text fx:id="textTemplate" strokeType="OUTSIDE" strokeWidth="0.0" text="2d5 + 2" textAlignment="CENTER">
+         <styleClass>
+            <String fx:value="white-text" />
+            <String fx:value="italics" />
+         </styleClass>
+      </Text>
+   </children>
+</VBox>

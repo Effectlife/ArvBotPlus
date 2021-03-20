@@ -15,8 +15,8 @@
 <GridPane hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" vgap="4.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0" />
-        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="31.0" />
-      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="22.0" />
+      <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="20.0" />
       <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
     </columnConstraints>
     <rowConstraints>
@@ -43,8 +43,11 @@
         </Spinner>
       <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="22.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
       <Pane prefHeight="200.0" prefWidth="200.0" styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
-      <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" GridPane.columnIndex="3" />
-      <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColor_Switched" visible="false" GridPane.columnIndex="2" />
+      <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" selected="true" GridPane.columnIndex="3" />
+      <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColor_Switched" GridPane.columnIndex="2">
+         <GridPane.margin>
+            <Insets />
+         </GridPane.margin></CheckBox>
     </children>
     <padding>
         <Insets bottom="4.0" left="4.0" right="4.0" />

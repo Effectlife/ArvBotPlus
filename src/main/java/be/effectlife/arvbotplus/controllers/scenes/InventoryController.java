@@ -2,14 +2,14 @@ package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.SceneContainer;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.Save;
 import be.effectlife.arvbotplus.saves.models.Skill;
+import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.SkillType;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -20,13 +20,17 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import javafx.stage.Stage;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
+
+import static be.effectlife.arvbotplus.Main.twirkSystem;
 
 
 //TODO: Implement the complete inventory experience
@@ -71,12 +75,21 @@ public class InventoryController implements IController {
 
     @FXML
     void btnPolls_Clicked(ActionEvent event) {
-
+        final Stage pollStage = StageBuilder.getStage(Stages.POLL);
+        new Thread(() -> {
+            twirkSystem = new TwirkSystem();
+            try {
+                twirkSystem.initializeSystem(properties, false);
+                Platform.runLater(pollStage::show);
+            } catch (IOException | InterruptedException e) {
+                e.printStackTrace();
+            }
+        }).start();
     }
 
     @FXML
     void btnDice_Clicked(ActionEvent event) {
-
+        StageBuilder.getStage(Stages.DICE).show();
     }
 
     @FXML
@@ -113,24 +126,22 @@ public class InventoryController implements IController {
             String valueString = properties.getProperty(String.format(keyTemplate, counter, "value"));
             String maxValueString = properties.getProperty(String.format(keyTemplate, counter, "maxValue"));
             boolean hasMaxValue = Boolean.parseBoolean(properties.getProperty(String.format(keyTemplate, counter, "hasmaxvalue")));
+            boolean usesColor = Boolean.parseBoolean(properties.getProperty(String.format(keyTemplate, counter, "usescolor")));
             if (name == null) {
                 break;
             }
             int value = StringUtils.isNumeric(valueString) ? Integer.parseInt(valueString) : 0;
             int maxValue = StringUtils.isNumeric(maxValueString) ? Integer.parseInt(maxValueString) : 0;
-            createWidget(counter, name, value, maxValue, hasMaxValue);
+            createWidget(counter, name, value, maxValue, hasMaxValue ? SkillType.MAX : SkillType.SIMPLE, usesColor);
             counter++;
 
         }
     }
 
     private void createWidget(int id) {
-        createWidget(id, null, 0, 0, false);
+        createWidget(id, null, 0, 0, SkillType.SIMPLE, false);
     }
 
-    private void createWidget(int id, String name, int value, int maxValue, boolean skillType) {
-        createWidget(id, name, value, maxValue, skillType ? SkillType.MAX : SkillType.SIMPLE, false);
-    }
 
     private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);

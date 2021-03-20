@@ -2,6 +2,7 @@ package be.effectlife.arvbotplus.loading;
 
 public enum Stages {
     POLL,
+    DICE,
     INVENTORY;
 
     @Override

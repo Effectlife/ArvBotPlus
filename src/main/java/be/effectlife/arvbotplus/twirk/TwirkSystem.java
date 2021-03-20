@@ -71,4 +71,9 @@ public class TwirkSystem {
         }
     }
 
+    public void disconnect() {
+        if(!this.disable || (this.twirk != null && this.twirk.isConnected())){
+            twirk.disconnect();
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.loading;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.utilities.ConfirmationType;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import javafx.application.Platform;
@@ -33,6 +34,10 @@ public abstract class CloseHandlers {
 
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> {
         ((Stage) t.getSource()).hide();
+    };
+    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
+        ((Stage) t.getSource()).hide();
+        Main.twirkSystem.disconnect();
     };
 
     public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {
