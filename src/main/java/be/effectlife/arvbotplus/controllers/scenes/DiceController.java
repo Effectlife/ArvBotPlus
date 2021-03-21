@@ -14,7 +14,6 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.LinearGradient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -83,9 +82,14 @@ public class DiceController implements IController {
             e.printStackTrace();
         }
         vboxHistory.getChildren().clear();
-        for (int i = 0; i < diceResultControllers.size(); i++) {
-            diceResultControllers.get(i).reloadView();
-            vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
+
+        int limit = 50;
+        for (int i = diceResultControllers.size() - limit; i < diceResultControllers.size(); i++) {
+            try {
+                diceResultControllers.get(i).reloadView();
+                vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
+            } catch (ArrayIndexOutOfBoundsException ignored) {
+            }
         }
     }
 
@@ -190,7 +194,7 @@ public class DiceController implements IController {
     }
 
     public void reloadWidth(double newValue) {
-        vboxHistory.setPrefWidth( newValue);
+        vboxHistory.setPrefWidth(newValue);
         for (DiceResultController diceResultController : diceResultControllers) {
             diceResultController.reloadWidth(newValue);
         }
