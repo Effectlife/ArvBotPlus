@@ -23,12 +23,12 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class PollController implements IController {
     Logger LOG = LoggerFactory.getLogger(PollController.class);
@@ -57,6 +57,9 @@ public class PollController implements IController {
 
     @FXML
     private VBox vboxPollOptions;
+
+    @FXML
+    private Text textConnection;
 
     @FXML
     void btnClearAll_Clicked(ActionEvent event) {
@@ -151,9 +154,8 @@ public class PollController implements IController {
         SceneContainer quickPollContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUICKPOLL);
         Region region = (Region) quickPollContainer.getScene().getRoot();
         setDefaultSize(region);
-        gpBase.add(region, 0, 0);
+        gpBase.add(region, 0, 2);
         this.quickPollWidget = (QuickPollWidgetController) quickPollContainer.getController();
-        //TODO: Add loading from save
         options = 8;
         tfOptions.setTextFormatter(Formatters.NumbersOnly);
         tfOptions.focusedProperty().addListener((obs, oldVal, newVal) -> {
@@ -219,7 +221,7 @@ public class PollController implements IController {
 
     @Override
     public void onShow() {
-
+        textConnection.setText(Main.twirkSystem.getConnectedChannel());
     }
 
     @Override

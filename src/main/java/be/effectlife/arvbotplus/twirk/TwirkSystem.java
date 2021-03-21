@@ -11,6 +11,7 @@ import com.gikk.twirk.events.TwirkListener;
 
 import java.io.*;
 import java.net.SocketException;
+import java.util.Locale;
 import java.util.Properties;
 
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
@@ -30,7 +31,9 @@ public class TwirkSystem {
             return;
         }
         String channel = properties.getProperty("twitch.channel");
-        twirk = (new TwirkBuilder(channel, "ArvBotPlus", "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
+
+        String channelFormatted = channel.substring(0, 1).toUpperCase() + channel.substring(1);
+        twirk = (new TwirkBuilder(channel, channelFormatted, "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
         twirk.addIrcListener(new ConvCommand(twirk, disable));
         twirk.addIrcListener(new VoteCommand(twirk, disable));
@@ -39,7 +42,7 @@ public class TwirkSystem {
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
 
-        try{
+        try {
             boolean connection = twirk.connect();
             if (!connection) {
                 Platform.runLater(() -> {
@@ -48,8 +51,8 @@ public class TwirkSystem {
                 });
             }
             channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
-        }catch (SocketException e){
-            Platform.runLater(()->SimplePopup.showPopupError("Could not connect to twitch, please try again. If this happens more than 3 times in sequence, please report this as an issue. "));
+        } catch (SocketException e) {
+            Platform.runLater(() -> SimplePopup.showPopupError("Could not connect to twitch, please try again. If this happens more than 3 times in sequence, please report this as an issue. "));
             LOG.error("Socket exception: ", e);
         }
     }
@@ -79,8 +82,15 @@ public class TwirkSystem {
     }
 
     public void disconnect() {
-        if(!this.disable || (this.twirk != null && this.twirk.isConnected())){
+        if (!this.disable || (this.twirk != null && this.twirk.isConnected())) {
             twirk.disconnect();
         }
+    }
+
+    public String getConnectedChannel() {
+        if (!this.disable || (this.twirk != null && this.twirk.isConnected())) {
+            return this.twirk.getNick();
+        }
+        return "Not Connected";
     }
 }
