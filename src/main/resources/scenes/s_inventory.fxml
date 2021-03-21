@@ -64,7 +64,7 @@
                 <Insets />
             </GridPane.margin>
         </ScrollPane>
-        <Pane styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+        <Pane styleClass="separator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
         <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="3">
             <columnConstraints>
                 <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" percentWidth="50.0" />
@@ -82,7 +82,7 @@
                 <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
             </padding>
         </GridPane>
-        <Pane styleClass="seperator-pane" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
+        <Pane styleClass="separator-pane" GridPane.columnIndex="1" GridPane.rowIndex="2" GridPane.rowSpan="2147483647" />
         <SplitPane dividerPositions="0.7" GridPane.columnIndex="2" GridPane.columnSpan="3" GridPane.rowIndex="3" GridPane.rowSpan="4">
             <items>
                 <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
@@ -146,7 +146,7 @@
                 </Menu>
                 <Menu mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" text="About" />
+                        <MenuItem mnemonicParsing="false" onAction="#btnHelp_Clicked" text="About" />
                     </items>
                 </Menu>
             </menus>

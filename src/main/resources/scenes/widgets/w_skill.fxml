@@ -42,7 +42,7 @@
             </GridPane.margin>
         </Spinner>
       <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="22.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="seperator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
+      <Pane prefHeight="200.0" prefWidth="200.0" styleClass="separator-pane" GridPane.columnSpan="2147483647" GridPane.rowIndex="2" />
       <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" selected="true" GridPane.columnIndex="3" />
       <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColor_Switched" GridPane.columnIndex="2">
          <GridPane.margin>

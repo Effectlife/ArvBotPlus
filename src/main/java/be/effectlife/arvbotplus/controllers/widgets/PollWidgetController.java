@@ -37,7 +37,7 @@ public class PollWidgetController implements IController {
     void pBarVotes_Clicked(MouseEvent event) {
         if (voters.size() > 0) {
             String reduce = voters.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
-            Platform.runLater(() -> SimplePopup.showPopupInfo(reduce));
+            Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option "+(optionId+1), reduce));
         }
 
     }
@@ -59,9 +59,7 @@ public class PollWidgetController implements IController {
         voters = new HashSet<>();
         btnClear_Clicked(null);
         taOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
-        spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> {
-            pollController.reloadView();
-        }));
+        spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> pollController.reloadView()));
     }
 
     @Override

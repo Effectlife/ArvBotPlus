@@ -10,6 +10,7 @@ import com.gikk.twirk.TwirkBuilder;
 import com.gikk.twirk.events.TwirkListener;
 
 import java.io.*;
+import java.net.SocketException;
 import java.util.Properties;
 
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
@@ -37,14 +38,20 @@ public class TwirkSystem {
         twirk.addIrcListener(new ABPCommand(twirk, disable));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
-        boolean connection = twirk.connect();
-        if (!connection) {
-            Platform.runLater(() -> {
-                SimplePopup.showPopupWarn("Connection to twitch failed. Please check your configuration and try again.");
-                System.exit(1);
-            });
+
+        try{
+            boolean connection = twirk.connect();
+            if (!connection) {
+                Platform.runLater(() -> {
+                    SimplePopup.showPopupWarn("Connection to twitch failed. Please check your configuration and try again.");
+                    System.exit(1);
+                });
+            }
+            channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
+        }catch (SocketException e){
+            Platform.runLater(()->SimplePopup.showPopupError("Could not connect to twitch, please try again. If this happens more than 3 times in sequence, please report this as an issue. "));
+            LOG.error("Socket exception: ", e);
         }
-        channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
     }
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {

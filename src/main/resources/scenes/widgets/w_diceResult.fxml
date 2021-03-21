@@ -8,7 +8,7 @@
 
 <VBox fx:id="vbox" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" stylesheets="@../../css/bootstrap3-dark.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.DiceResultController">
    <children>
-      <Pane fx:id="paneSep" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="3.0" styleClass="seperator-pane" />
+      <Pane fx:id="paneSep" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="3.0" styleClass="separator-pane" />
       <Text fx:id="textResult" strokeType="OUTSIDE" strokeWidth="0.0" text="10" textAlignment="CENTER">
          <styleClass>
             <String fx:value="white-text" />

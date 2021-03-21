@@ -79,8 +79,8 @@ public class SkillWidgetController implements IController {
 
     @Override
     public void doInit() {
-        spinnerCurrentValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
-        spinnerMaxValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+        spinnerCurrentValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0));
+        spinnerMaxValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0));
         tfSkillname.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
                 tfSkillname_Clicked(null);

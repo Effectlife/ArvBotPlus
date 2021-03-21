@@ -55,7 +55,7 @@
             <Spinner fx:id="spinnerModifier" editable="true" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="50.0" GridPane.columnIndex="5" />
          </children>
       </GridPane>
-      <Pane fx:id="paneBackgroundCrit" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" styleClass="background-crit" visible="false" />
+      <Pane fx:id="paneBackgroundCrit" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" styleClass="background-fail" visible="false" />
       <Pane fx:id="paneBackgroundSuccess" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="0.0" prefWidth="0.0" styleClass="background-success" visible="false" />
    </children>
 </GridPane>

@@ -9,6 +9,7 @@ import be.effectlife.arvbotplus.saves.models.Save;
 import be.effectlife.arvbotplus.saves.models.Skill;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
 import be.effectlife.arvbotplus.utilities.SkillType;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
@@ -103,6 +104,19 @@ public class InventoryController implements IController {
 
     }
 
+    public void btnHelp_Clicked(ActionEvent event) {
+        Platform.runLater(()-> SimplePopup.showPopupInfo("About ArvBot Plus","This is ArvBot Plus, a twitchbot and Gamebook manager created by me, Effectlife, mainly for fun, and to help Arvan Eleron to have some redundancy in his twitchbots. \n" +
+                "This application contains 4 independant tools.\n" +
+                "1. Inventory: This is the main screen. This window is used to manage all stats concerning playing gamebooks. On the left, there is a list of fully customizable skills and stats. Each skill/stat can have its own name, and can have any value between "+Integer.MIN_VALUE+" and "+Integer.MAX_VALUE+".\n" +
+                " Additionally the second value can be toggled by the checkbox, and the second checkbox enables or disables colors. Under 'File' you can also save and load everything.\n" +
+                "2. Polls: This is used to create polls in twitch chat. There are 2 separate poll systems. The first one is the QuickPoll system: This one only has 2 buttons, and you don't even have to use one of them. It is a simple poll of 2 options, started, closed and data cleared by clicking a single button.\n" +
+                " The normal polls are in the section below. You enter a poll question (or leave it blank for 'What should we do/say?') and at least 2 options. Once you start the poll, the chat can start voting. When closed, a result will be sent to the chat, and the poll doesn't accept new votes.\n" +
+                " The poll can then be edited, and started again. The clearing button will first remove all votes, but leave the question/options alone, and when there are no votes anymore, clicking 'clear' again will clear the question and options as well. Also, you can have the modest maximum of "+Integer.MAX_VALUE+" options in a poll (although I would not recommend it :P )\n" +
+                "3. Dice Roller: This is a simple 'xDy + z' style dice roller, slightly based on the interface of Roll20. In the top row, you enter the amount of dice, the value of each die, and a modifier. When you click on 'Roll', the specified dice will roll, and the result, the calculation and the formula will be shown in the roll history.\n" +
+                " This history will contain all rolls from the starting of the program, until it is closed (closing and reopening the Dice Roller will not clear the history, only fully exiting will)\n"+
+                "4. Battle Manager: This is not yet implemented"));
+    }
+
     @FXML
     void btnRemove_Clicked(ActionEvent event) {
         if (skillWidgetControllerList.size() == 0) return;
@@ -116,13 +130,13 @@ public class InventoryController implements IController {
         }
         reloadView();
     }
-
     /*
     inv.skill.default.2.name=Gold
     inv.skill.default.2.value=20
     inv.skill.default.2.maxValue=20
     inv.skill.default.2.hasmaxvalue=false
     */
+
     public void initializeSkillWidgets() {
         int counter = 0;
         String keyTemplate = "inv.skill.default.%d.%s";
