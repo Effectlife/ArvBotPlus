@@ -88,7 +88,7 @@ public class DiceController implements IController {
             try {
                 diceResultControllers.get(i).reloadView();
                 vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
-            } catch (ArrayIndexOutOfBoundsException ignored) {
+            } catch (IndexOutOfBoundsException ignored) {
             }
         }
     }

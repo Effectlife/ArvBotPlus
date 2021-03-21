@@ -5,6 +5,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
+import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
 
 public class EnemyController implements IController {
@@ -24,8 +25,19 @@ public class EnemyController implements IController {
 
     @Override
     public void doInit() {
-        spinnerSkill.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0));
-        spinnerStamina.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0));
+        setupSpinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0, spinnerSkill);
+        setupSpinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0, spinnerStamina);
+    }
+
+    private void setupSpinner(int minValue, int maxValue, int initialValue, Spinner<Integer> spinnerModifier) {
+        SpinnerValueFactory<Integer> spinnerModifierFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(minValue, maxValue, initialValue);
+        spinnerModifier.setValueFactory(spinnerModifierFactory);
+        spinnerModifier.setEditable(true);
+        // hook in a formatter with the same properties as the factory
+        TextFormatter<Integer> modifierFormatter = new TextFormatter<>(spinnerModifierFactory.getConverter(), spinnerModifierFactory.getValue());
+        spinnerModifier.getEditor().setTextFormatter(modifierFormatter);
+        // bidi-bind the values
+        spinnerModifierFactory.valueProperty().bindBidirectional(modifierFormatter.valueProperty());
     }
 
     @Override

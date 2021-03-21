@@ -21,8 +21,8 @@
    </rowConstraints>
    <children>
       <TextField fx:id="tfDescription" GridPane.columnSpan="3" GridPane.rowIndex="1" />
-      <Spinner fx:id="spinnerSkill" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-      <Spinner fx:id="spinnerStamina" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+      <Spinner fx:id="spinnerSkill" editable="true" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+      <Spinner fx:id="spinnerStamina" editable="true" GridPane.columnIndex="4" GridPane.rowIndex="1" />
    </children>
    <padding>
       <Insets right="4.0" />
