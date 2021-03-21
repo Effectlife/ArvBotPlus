@@ -111,6 +111,12 @@ public class Main extends Application {
             DiceController diceController = (DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE);
             diceController.reloadWidth((double) newValue * .8);
         });
+        Stage battleStage = buildStage(Stages.BATTLE, Scenes.S_BATTLE, CloseHandlers.HIDE_ON_CLOSE);
+        battleStage.setOnShowing((e) -> {
+            AESceneLoader.getInstance().getController(Scenes.S_BATTLE).onShow();
+            ((Stage) e.getSource()).setMinWidth(Scenes.S_BATTLE.getMinWidth());
+        });
+        stageMap.put(Stages.BATTLE, battleStage);
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 

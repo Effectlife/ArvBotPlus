@@ -101,7 +101,7 @@ public class InventoryController implements IController {
 
     @FXML
     void btnBattle_Clicked(ActionEvent event) {
-
+        StageBuilder.getStage(Stages.BATTLE).show();
     }
 
     public void btnHelp_Clicked(ActionEvent event) {

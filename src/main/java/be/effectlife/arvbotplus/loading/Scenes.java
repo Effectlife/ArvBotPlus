@@ -6,11 +6,13 @@ public enum Scenes {
 
     S_POLL("s_poll", "Polls", 350),
     S_INVENTORY("s_inventory", "Inventory", 500),
+    S_DICE("s_dice", "Dice Roller", 250),
+    S_BATTLE("s_battle", "Battle Manager", 380),
     W_POLL("widgets/w_poll"),
     W_QUICKPOLL("widgets/w_quickPoll"),
     W_SKILL("widgets/w_skill"),
-    S_DICE("s_dice", "Dice Roller", 250),
-    W_DICERESULT("widgets/w_diceResult");
+    W_DICERESULT("widgets/w_diceResult"),
+    W_ENEMY("widgets/w_enemy");
 
     private final String title;
     private final String file;
