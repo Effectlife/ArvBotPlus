@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.Main;
-import be.effectlife.arvbotplus.twirk.conversions.data.*;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -10,11 +10,14 @@ import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class ABPCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(ABPCommand.class);
-    private static final String PATTERN = Main.PREFIX + "abp";
+    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX)+MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP);
     private final Twirk twirk;
     private final boolean disable;
 
@@ -33,8 +36,17 @@ public class ABPCommand extends CommandExampleBase {
     }
 
     protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
-        LOG.info("Recieved: " + sender.getDisplayName() + ": " + message.getContent() + "");
-        twirk.channelMessage("Available commands are: $conv, $vote, $changevote, $abp; Use each command without additional parameters to see more information about the command.");
+        LOG.info("Received: " + sender.getDisplayName() + ": " + message.getContent() + "");
+        Map<String,String> params = new HashMap<>();
+        params.put("commands", getCommands());
+        channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_ABP_HELP, params));
+    }
+
+    private String getCommands() {
+        List<String> allSiblings = MessageProperties.getAllSiblings(MessageKey.TWIRK_PATTERN_COMMAND_ABP);
+        StringBuilder stringBuilder = new StringBuilder();
+        allSiblings.forEach(s -> stringBuilder.append(MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX)).append(MessageProperties.getString(s)).append("; "));
+        return stringBuilder.toString();
     }
 
     private void channelMessage(String message) {

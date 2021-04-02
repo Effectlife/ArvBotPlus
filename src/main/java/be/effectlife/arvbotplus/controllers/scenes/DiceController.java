@@ -2,9 +2,7 @@ package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.DiceResultController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.SceneContainer;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.loading.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -14,6 +12,7 @@ import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -25,7 +24,11 @@ import java.util.Random;
 public class DiceController implements IController {
     private static Logger LOG = LoggerFactory.getLogger(DiceController.class);
     private static Random random;
+    @FXML
+    private Text textRoll;
 
+    @FXML
+    private Text textD;
 
     @FXML
     private Spinner<Integer> spinnerDiceCount;
@@ -41,6 +44,7 @@ public class DiceController implements IController {
 
     @FXML
     private Pane paneBackgroundCrit;
+
     @FXML
     private Pane paneBackgroundSuccess;
 
@@ -59,6 +63,9 @@ public class DiceController implements IController {
 
         setupSpinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0, spinnerModifier);
 
+        textD.setText(MessageProperties.getString(MessageKey.SCENE_DICE_TEXT_D));
+        textRoll.setText(MessageProperties.getString(MessageKey.SCENE_DICE_TEXT_ROLL));
+        btnRoll.setText(MessageProperties.getString(MessageKey.SCENE_DICE_BUTTON_ROLL));
 
         random = new SecureRandom();
         diceResultControllers = new ArrayList<>();

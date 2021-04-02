@@ -1,6 +1,7 @@
 package be.effectlife.arvbotplus.twirk;
 
-import be.effectlife.arvbotplus.Main;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.twirk.commands.ABPCommand;
 import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
 import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
@@ -11,7 +12,9 @@ import com.gikk.twirk.events.TwirkListener;
 
 import java.io.*;
 import java.net.SocketException;
-import java.util.Locale;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
@@ -50,7 +53,9 @@ public class TwirkSystem {
                     System.exit(1);
                 });
             }
-            channelMessage("ArvBotPlus has loaded. Use " + Main.PREFIX + "abp to see available commands");
+            Map<String,String> params = new HashMap<>();
+            params.put("patternabp", MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP));
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_STARTUP, params));
         } catch (SocketException e) {
             Platform.runLater(() -> SimplePopup.showPopupError("Could not connect to twitch, please try again. If this happens more than 3 times in sequence, please report this as an issue. "));
             LOG.error("Socket exception: ", e);

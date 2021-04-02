@@ -15,6 +15,8 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
@@ -36,14 +38,15 @@ import java.util.Properties;
 import static be.effectlife.arvbotplus.Main.twirkSystem;
 
 
-//TODO: Implement the complete inventory experience
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
+
     private List<SkillWidgetController> skillWidgetControllerList;
 
     //region FXML Definitions
     @FXML
     private GridPane base;
+
     @FXML
     private Pane paneName;
 
@@ -55,15 +58,82 @@ public class InventoryController implements IController {
 
     @FXML
     private VBox vboxSkillOptions;
+
     @FXML
     private TextArea taItemsArtifacts;
 
     @FXML
     private TextArea taCluesNotes;
 
+    @FXML
+    private Text textCharName;
+
+    @FXML
+    private Text textItems;
+
+    @FXML
+    private Text textClues;
+
+    @FXML
+    private Menu menuFile;
+
+    @FXML
+    private MenuItem menuSave;
+
+    @FXML
+    private MenuItem menuLoad;
+
+    @FXML
+    private MenuItem menuClose;
+
+    @FXML
+    private Menu menuTools;
+
+    @FXML
+    private MenuItem menuPolls;
+
+    @FXML
+    private MenuItem menuDice;
+
+    @FXML
+    private MenuItem menuBattle;
+
+    @FXML
+    private Menu menuHelp;
+
+    @FXML
+    private MenuItem menuAbout;
+
     private Properties properties;
     //endregion
 
+
+    @Override
+    public void doInit() {
+
+        menuFile.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_FILE));
+        menuLoad.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_FILE_LOAD));
+        menuSave.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_FILE_SAVE));
+        menuClose.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_FILE_CLOSE));
+        menuTools.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS));
+        menuPolls.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_POLLS));
+        menuDice.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_DICE));
+        menuBattle.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_BATTLE));
+        menuHelp.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_HELP));
+        menuAbout.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_HELP_ABOUT));
+        textCharName.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_CHARNAME));
+        textName.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_PLACEHOLDER));
+        tfName.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_PLACEHOLDER));
+        textClues.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_CLUESANDNOTES));
+        textItems.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_ITEMSANDARTIFACTS));
+
+        skillWidgetControllerList = new ArrayList<>();
+        tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
+            if (!newValue) {
+                tfName_Clicked(null);
+            }
+        }));
+    }
 
     @FXML
     void btnAdd_Clicked(ActionEvent event) {
@@ -104,17 +174,18 @@ public class InventoryController implements IController {
         StageBuilder.getStage(Stages.BATTLE).show();
     }
 
-    public void btnHelp_Clicked(ActionEvent event) {
-        Platform.runLater(()-> SimplePopup.showPopupInfo("About ArvBot Plus","This is ArvBot Plus, a twitchbot and Gamebook manager created by me, Effectlife, mainly for fun, and to help Arvan Eleron to have some redundancy in his twitchbots. \n" +
+    @FXML
+    void btnHelp_Clicked(ActionEvent event) {
+        Platform.runLater(() -> SimplePopup.showPopupInfo("About ArvBot Plus", "This is ArvBot Plus, a twitchbot and Gamebook manager created by me, Effectlife, mainly for fun, and to help Arvan Eleron to have some redundancy in his twitchbots. \n" +
                 "This application contains 4 independant tools.\n" +
-                "1. Inventory: This is the main screen. This window is used to manage all stats concerning playing gamebooks. On the left, there is a list of fully customizable skills and stats. Each skill/stat can have its own name, and can have any value between "+Integer.MIN_VALUE+" and "+Integer.MAX_VALUE+".\n" +
-                " Additionally the second value can be toggled by the checkbox, and the second checkbox enables or disables colors. Under 'File' you can also save and load everything.\n" +
-                "2. Polls: This is used to create polls in twitch chat. There are 2 separate poll systems. The first one is the QuickPoll system: This one only has 2 buttons, and you don't even have to use one of them. It is a simple poll of 2 options, started, closed and data cleared by clicking a single button.\n" +
-                " The normal polls are in the section below. You enter a poll question (or leave it blank for 'What should we do/say?') and at least 2 options. Once you start the poll, the chat can start voting. When closed, a result will be sent to the chat, and the poll doesn't accept new votes.\n" +
-                " The poll can then be edited, and started again. The clearing button will first remove all votes, but leave the question/options alone, and when there are no votes anymore, clicking 'clear' again will clear the question and options as well. Also, you can have the modest maximum of "+Integer.MAX_VALUE+" options in a poll (although I would not recommend it :P )\n" +
-                "3. Dice Roller: This is a simple 'xDy + z' style dice roller, slightly based on the interface of Roll20. In the top row, you enter the amount of dice, the value of each die, and a modifier. When you click on 'Roll', the specified dice will roll, and the result, the calculation and the formula will be shown in the roll history.\n" +
-                " This history will contain all rolls from the starting of the program, until it is closed (closing and reopening the Dice Roller will not clear the history, only fully exiting will)\n"+
-                "4. Battle Manager: This is not yet implemented"));
+                "\t1. Inventory: This is the main screen. This window is used to manage all stats concerning playing gamebooks. On the left, there is a list of fully customizable skills and stats. Each skill/stat can have its own name, and can have any value between " + Integer.MIN_VALUE + " and " + Integer.MAX_VALUE + ".\n" +
+                " Additionally the second value can be toggled by the checkbox, and the second checkbox enables or disables colors. Under '" + MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_FILE) + "' you can also save and load everything.\n" +
+                "\t2. Polls: This is used to create polls in twitch chat. There are 2 separate poll systems. The first one is the QuickPoll system: This one only has 2 buttons, and you don't even have to use one of them. It is a simple poll of 2 options, started, closed and data cleared by clicking a single button.\n" +
+                " The normal polls are in the section below. You enter a poll question (or leave it blank for '" + MessageProperties.getString(MessageKey.SCENE_POLLS_DEFAULTQUESTION) + "') and at least 2 options. Once you start the poll, the chat can start voting. When closed, a result will be sent to the chat, and the poll doesn't accept new votes.\n" +
+                " The poll can then be edited, and started again. The clearing button will first remove all votes, but leave the question/options alone, and when there are no votes anymore, clicking 'clear' again will clear the question and options as well. Also, you can have the modest maximum of " + Integer.MAX_VALUE + " options in a poll (although I would not recommend it :P )\n" +
+                "\t3. Dice Roller: This is a simple 'xDy + z' style dice roller, slightly based on the interface of Roll20. In the top row, you enter the amount of dice, the value of each die, and a modifier. When you click on '" + MessageProperties.getString(MessageKey.SCENE_DICE_BUTTON_ROLL) + "', the specified dice will roll, and the result, the calculation and the formula will be shown in the roll history.\n" +
+                " This history will contain all rolls from the starting of the program, until it is closed (closing and reopening the Dice Roller will not clear the history, only fully exiting will)\n" +
+                "\t4. Battle Manager: This contains a list of enemies with 2 parameters: " + MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_1) + " and " + MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_2) + ". There is no more to it than this."));
     }
 
     @FXML
@@ -225,17 +296,6 @@ public class InventoryController implements IController {
         tfName.setVisible(false);
         paneName.setDisable(false);
         textName.setText(tfName.getText());
-    }
-
-
-    @Override
-    public void doInit() {
-        skillWidgetControllerList = new ArrayList<>();
-        tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
-            if (!newValue) {
-                tfName_Clicked(null);
-            }
-        }));
     }
 
     public void hardReset() {

@@ -1,9 +1,10 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
@@ -13,12 +14,16 @@ import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class VoteCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
-    public static final String PATTERN = Main.PREFIX + "vote";
+    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_VOTE);
     private final Twirk twirk;
     private static final AESceneLoader sceneloader;
     private final boolean disable;
+    private Map<String, String> params;
 
     static {
         sceneloader = AESceneLoader.getInstance();
@@ -28,6 +33,8 @@ public class VoteCommand extends CommandExampleBase {
         super(CommandType.CONTENT_COMMAND);
         this.twirk = twirk;
         this.disable = disable;
+        params = new HashMap<>();
+        params.put("pattern", PATTERN);
     }
 
     protected String getCommandWords() {
@@ -43,6 +50,7 @@ public class VoteCommand extends CommandExampleBase {
         if (!content.startsWith(PATTERN)) return;
         String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
         String[] split = messagecontent.split(" ");
+        params.put("sender", sender.getDisplayName());
 
         if (content.equals(PATTERN) ||
                 (split.length > 1 && split[1].equals("options")) ||
@@ -50,13 +58,13 @@ public class VoteCommand extends CommandExampleBase {
                 (split.length > 1 && split[1].equals("help"))
         ) {
             //No additional params, help, option or options as param given. Print out instructions
-            channelMessage("Hi " + sender.getDisplayName() + ", " + Main.PREFIX + "vote uses the following syntax: " +
-                    Main.PREFIX + "\"vote {option}\"; To change your vote, use " + Main.PREFIX + "\"changevote {option}\"");
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_HELP, params));
             return;
         }
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
         //try to parse the command
-
+        params.put("sender", sender.getDisplayName());
+        params.put("votevalue", split[1]);
         switch (pollController.getPollType()) {
             case NONE:
                 handleNonePollCommand();
@@ -67,14 +75,13 @@ public class VoteCommand extends CommandExampleBase {
             case QUICK:
                 handleQuickPollCommand(split, sender.getDisplayName());
                 break;
-
             default:
                 LOG.error("An unknown PollType has been given... This should never happen...");
         }
     }
 
     private void handleNonePollCommand() {
-        channelMessage("There is currently no poll active.");
+        channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_NOPOLLACTIVE, params));
     }
 
     private void handleStandardPollCommand(String[] split, String sender) {
@@ -82,9 +89,10 @@ public class VoteCommand extends CommandExampleBase {
             int option = Integer.parseInt(split[1]) - 1;//-1 to offset lists starting with 0
             PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
             VoteActionResult voteResult = pollController.castVote(option, sender);
-            handleVoteResult(split, sender, voteResult);
+            handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
-            channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
+
         }
     }
 
@@ -93,21 +101,20 @@ public class VoteCommand extends CommandExampleBase {
         try {
             int option = Integer.parseInt(split[1]);
             VoteActionResult voteResult = quickPollWidgetController.castVote(option, sender);
-            handleVoteResult(split, sender, voteResult);
+            handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
-            channelMessage("Sorry " + sender + ", {" + split[1] + "} is not a valid option. Please try again.");
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
         }
     }
 
 
-    private void handleVoteResult(String[] split, String sender, VoteActionResult voteResult) {
-        if (voteResult == VoteActionResult.ADDED) {
-            //Succesfull added. //TODO: Add username to delayed channelmessage
-            channelMessage("Thanks for voting for {" + split[1] + "}, " + sender);
-        } else if (voteResult == VoteActionResult.ALREADY_VOTED) {
-            channelMessage("Sorry " + sender + ", you have already voted. If you wish to change your vote, use " + Main.PREFIX + "changevote {option}");
+    private void handleVoteResult(VoteActionResult voteResult) {
+        if (voteResult == VoteActionResult.SUCCESSFULLY_VOTED_OR_CHANGED) {
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_ADDEDVOTE, params));
+        } else if (voteResult == VoteActionResult.VOTE_ALREADY_CAST) {
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_ALREADYVOTED, params));
         } else if (voteResult == VoteActionResult.INVALID_VOTE) {
-            channelMessage("Sorry " + sender + ", '" + split[1] + "' is not a valid option. Please try again.");
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
         } else LOG.error("Unknown voteResult recieved: " + voteResult);
         reloadView();
     }

@@ -2,15 +2,14 @@ package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.EnemyController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.SceneContainer;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.loading.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +27,11 @@ public class BattleController implements IController {
 
     @FXML
     private Button btnClear;
+    @FXML
+    private Text textVal1;
 
+    @FXML
+    private Text textVal2;
     @FXML
     private VBox vboxEnemies;
 
@@ -61,6 +64,12 @@ public class BattleController implements IController {
 
     @Override
     public void doInit() {
+        btnAdd.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_BUTTON_ADD));
+        btnClear.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_BUTTON_CLEAR));
+        btnRemove.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_BUTTON_REMOVE));
+        textVal1.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_1));
+        textVal2.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_2));
+
         enemyControllerList = new ArrayList<>();
         btnAdd_Clicked(null);
     }

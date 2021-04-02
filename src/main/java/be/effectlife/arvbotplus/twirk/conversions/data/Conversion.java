@@ -3,10 +3,6 @@ package be.effectlife.arvbotplus.twirk.conversions.data;
 import static be.effectlife.arvbotplus.twirk.conversions.data.Temperature.*;
 
 public abstract class Conversion {
-    /*
-    M(1f), CM(100f),
-    FT(3.28084f), YARD(1.09361f), MILE(0.000621371f);
-    */
     public static float convertLinear(float value, float conversionSource, float conversionTarget) throws ArithmeticException {
         return value / conversionSource * conversionTarget;
     }

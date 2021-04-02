@@ -3,6 +3,8 @@ package be.effectlife.arvbotplus.controllers.widgets;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
@@ -57,6 +59,7 @@ public class PollWidgetController implements IController {
         pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
         spinnerVotes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
         voters = new HashSet<>();
+        btnClear.setText(MessageProperties.getString(MessageKey.WIDGET_POLLS_BUTTON_CLEAR));
         btnClear_Clicked(null);
         taOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
         spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> pollController.reloadView()));

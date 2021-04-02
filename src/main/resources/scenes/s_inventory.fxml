@@ -18,7 +18,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-
 <GridPane fx:id="base" hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="468.0" prefWidth="500.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.InventoryController">
     <columnConstraints>
         <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" />
@@ -40,7 +39,7 @@
         <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
     </padding>
     <children>
-        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Character's name: " GridPane.rowIndex="1" />
+        <Text fx:id="textCharName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Character's name: " GridPane.rowIndex="1" />
         <Pane fx:id="paneName" onMouseClicked="#paneName_Clicked" GridPane.columnIndex="2" GridPane.rowIndex="1" />
         <Text fx:id="textName" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <styleClass>
@@ -95,7 +94,7 @@
                     </rowConstraints>
                     <children>
                         <TextArea fx:id="taItemsArtifacts" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Items and Artifacts">
+                        <Text fx:id="textItems" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Items and Artifacts">
                             <GridPane.margin>
                                 <Insets left="4.0" />
                             </GridPane.margin>
@@ -115,7 +114,7 @@
                     </rowConstraints>
                     <children>
                         <TextArea fx:id="taCluesNotes" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" wrapText="true" GridPane.rowIndex="1" />
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Clues and Notes">
+                        <Text fx:id="textClues" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Clues and Notes">
                             <GridPane.margin>
                                 <Insets left="4.0" />
                             </GridPane.margin>
@@ -129,24 +128,24 @@
         </SplitPane>
         <MenuBar GridPane.columnSpan="2147483647">
             <menus>
-                <Menu text="File">
+                <Menu fx:id="menuFile" text="File">
                     <items>
-                        <MenuItem onAction="#btnSave_Clicked" text="Save" />
-                        <MenuItem onAction="#btnLoad_Clicked" text="Load" />
+                        <MenuItem fx:id="menuSave" onAction="#btnSave_Clicked" text="Save" />
+                        <MenuItem fx:id="menuLoad" onAction="#btnLoad_Clicked" text="Load" />
                         <SeparatorMenuItem mnemonicParsing="false" />
-                        <MenuItem onAction="#btnClose_Clicked" text="Close" />
+                        <MenuItem fx:id="menuClose" onAction="#btnClose_Clicked" text="Close" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Tools">
+                <Menu fx:id="menuTools" mnemonicParsing="false" text="Tools">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#btnPolls_Clicked" text="Polls" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnDice_Clicked" text="Dice Roller" />
-                        <MenuItem mnemonicParsing="false" onAction="#btnBattle_Clicked" text="Battle Manager" />
+                        <MenuItem fx:id="menuPolls" mnemonicParsing="false" onAction="#btnPolls_Clicked" text="Polls" />
+                        <MenuItem fx:id="menuDice" mnemonicParsing="false" onAction="#btnDice_Clicked" text="Dice Roller" />
+                        <MenuItem fx:id="menuBattle" mnemonicParsing="false" onAction="#btnBattle_Clicked" text="Battle Manager" />
                     </items>
                 </Menu>
-                <Menu mnemonicParsing="false" text="Help">
+                <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
                     <items>
-                        <MenuItem mnemonicParsing="false" onAction="#btnHelp_Clicked" text="About" />
+                        <MenuItem fx:id="menuAbout" mnemonicParsing="false" onAction="#btnHelp_Clicked" text="About" />
                     </items>
                 </Menu>
             </menus>

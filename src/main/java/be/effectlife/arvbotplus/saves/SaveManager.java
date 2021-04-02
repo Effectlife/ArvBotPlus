@@ -65,7 +65,6 @@ public abstract class SaveManager {
         if (file != null) {
             //File has been chosen
             //Compile all information about the inventory
-            //TODO: add this functionality.
             try {
                 Save save = new Gson().fromJson(new FileReader(file), Save.class);
                 InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);

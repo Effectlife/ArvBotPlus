@@ -21,6 +21,8 @@ public abstract class CloseHandlers {
         ConfirmationType result = SimplePopup.showPopupYesNo("Close?", "Close?", "Are you sure you want to close the application?");
         switch (result) {
             case YES:
+                if (Main.twirkSystem != null)
+                    Main.twirkSystem.disconnect();
                 Platform.exit();
                 System.exit(0);
                 break;

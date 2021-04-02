@@ -4,6 +4,8 @@ import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.PollType;
@@ -12,11 +14,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
 import javafx.scene.text.Text;
-import org.omg.PortableInterceptor.SUCCESSFUL;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 public class QuickPollWidgetController implements IController {
@@ -53,7 +56,8 @@ public class QuickPollWidgetController implements IController {
         pBar2.setProgress(0);
         usernamesVoted1 = new HashSet<>();
         usernamesVoted2 = new HashSet<>();
-        btnQPOpenClose.setText("Open");
+        btnQPOpenClose.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_OPEN));
+        btnQPLastCall.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_LASTCALL));
         totalVotes = votes1 = votes2 = 0;
         if (pollController == null) {
             pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
@@ -68,20 +72,24 @@ public class QuickPollWidgetController implements IController {
     void btnQPOpenClose_clicked(ActionEvent event) {
         if (pollController.getPollType() == PollType.NONE) {
             //Starting the poll
-            Main.twirkSystem.channelMessage("QuickPoll started: Vote with '$vote 1' or '$vote 2'");
-            btnQPOpenClose.setText("Close");
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_QUESTION, new HashMap<>()));
+            btnQPOpenClose.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_CLOSE));
             pollController.setPollType(PollType.QUICK);
         } else if (pollController.getPollType() == PollType.QUICK) {
+            Map<String, String> params = new HashMap<>();
+            params.put("votecount", (Math.max(votes1, votes2)) + "");
             //Stopping the poll
             if (votes1 == votes2) {
                 //draw
-                Main.twirkSystem.channelMessage("Poll closed; A draw has occurred with " + votes1 + " votes.");
+                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_DRAW, params));
             } else if (votes1 > votes2) {
-                Main.twirkSystem.channelMessage("Poll closed; Option A has won with " + votes1 + " votes");
+                params.put("option", "1");
+                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_WIN, params));
             } else {
-                Main.twirkSystem.channelMessage("Poll closed; Option B has won with " + votes2 + " votes");
+                params.put("option", "2");
+                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_WIN, params));
             }
-            btnQPOpenClose.setText("Clear");
+            btnQPOpenClose.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_CLEAR));
             pollController.setPollType(PollType.QP_CLEAR);
         } else if (pollController.getPollType() == PollType.QP_CLEAR) {
             //Clearing data
@@ -95,7 +103,7 @@ public class QuickPollWidgetController implements IController {
 
     @FXML
     void btnQPLastCall_clicked(ActionEvent event) {
-        Main.twirkSystem.channelMessage("Last Call!");
+        channelMessage(MessageProperties.getString(MessageKey.TWIRK_MESSAGE_POLL_LASTCALL));
 
     }
 
@@ -127,14 +135,14 @@ public class QuickPollWidgetController implements IController {
 
         if (option == 1) {
             if (hasUsernameVoted(sender)) {
-                return VoteActionResult.ALREADY_VOTED;
+                return VoteActionResult.VOTE_ALREADY_CAST;
             }
             usernamesVoted1.add(sender);
             totalVotes++;
             votes1++;
         } else if (option == 2) {
             if (hasUsernameVoted(sender)) {
-                return VoteActionResult.ALREADY_VOTED;
+                return VoteActionResult.VOTE_ALREADY_CAST;
             }
             usernamesVoted2.add(sender);
             totalVotes++;
@@ -143,7 +151,7 @@ public class QuickPollWidgetController implements IController {
             return VoteActionResult.INVALID_VOTE;
         }
         reloadView();
-        return VoteActionResult.ADDED;
+        return VoteActionResult.SUCCESSFULLY_VOTED_OR_CHANGED;
     }
 
     public VoteActionResult changeVote(int option, String sender) {
@@ -159,7 +167,7 @@ public class QuickPollWidgetController implements IController {
             usernamesVoted2.remove(sender);
             return castVote(option, sender);
         }
-        return VoteActionResult.SAME_VOTE;
+        return VoteActionResult.ALREADY_VOTED_FOR_OPTION;
     }
 
     private boolean hasUsernameVoted(String sender) {
@@ -170,5 +178,13 @@ public class QuickPollWidgetController implements IController {
     public void clear() {
         pollController.setPollType(PollType.NONE);
         doInit();
+    }
+
+    private void channelMessage(String message) {
+        if (Main.twirkSystem == null) {
+            LOG.trace(message);
+        } else {
+            Main.twirkSystem.channelMessage(message);
+        }
     }
 }

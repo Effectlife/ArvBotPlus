@@ -1,6 +1,5 @@
 package be.effectlife.arvbotplus;
 
-import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.DiceController;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
 import be.effectlife.arvbotplus.loading.*;
@@ -20,7 +19,6 @@ import java.util.Properties;
 
 public class Main extends Application {
 
-    public static final String PREFIX = "$";
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;
@@ -50,9 +48,8 @@ public class Main extends Application {
                 writePropertiesFile(propFileName);
             } catch (IOException ioException) {
                 ioException.printStackTrace();
-            } finally {
-                System.exit(1);
             }
+            System.exit(1);
         }
         properties.load(inputStream);
         return properties;
