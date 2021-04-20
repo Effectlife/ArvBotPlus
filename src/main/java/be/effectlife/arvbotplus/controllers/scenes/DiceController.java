@@ -164,41 +164,9 @@ public class DiceController implements IController {
     }
 
 
-    public Color getCritColor() {
-        try {
-            return (Color) paneBackgroundCrit.backgroundProperty().get().getFills().get(0).getFill();
-        } catch (NullPointerException e) {
-            LOG.warn("captured null");
-        }
-        return null;
-    }
 
-    public Color getSuccessColor() {
-        try {
-            return (Color) paneBackgroundSuccess.backgroundProperty().get().getFills().get(0).getFill();
-        } catch (NullPointerException e) {
-            LOG.warn("captured null");
-        }
-        return null;
-    }
 
-    public Color getBackgroundColor() {
-        try {
-            return (Color) spinnerDiceCount.getEditor().backgroundProperty().get().getFills().get(0).getFill();
-        } catch (NullPointerException e) {
-            LOG.warn("captured null");
-        }
-        return null;
-    }
 
-    public Color getTextColor() {
-        try {
-            return (Color) btnRoll.getTextFill();
-        } catch (NullPointerException e) {
-            LOG.warn("captured null");
-        }
-        return null;
-    }
 
     public void reloadWidth(double newValue) {
         vboxHistory.setPrefWidth(newValue);

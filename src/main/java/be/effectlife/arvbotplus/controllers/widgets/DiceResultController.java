@@ -1,10 +1,8 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.controllers.scenes.DiceController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.utilities.ColorEnum;
+import be.effectlife.arvbotplus.utilities.ColorHelper;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Worker;
@@ -82,8 +80,8 @@ public class DiceResultController implements IController {
             webView.setPrefHeight(18);
             webView.getEngine().getLoadWorker().stateProperty().addListener((observable, oldState, newState) -> {
                 if (newState == Worker.State.SUCCEEDED) {
-                    double height = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px",""));
-                    double height2 = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px","")); //Sometimes the height is retrieved way too high
+                    double height = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px", ""));
+                    double height2 = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px", "")); //Sometimes the height is retrieved way too high
 //((HTMLDivElementImpl) webView.getEngine().getDocument().getElementById("mydiv")).getClientHeight();
                     Platform.runLater(() -> webView.setPrefHeight(Math.min(height, height2) + 18));
                 }
@@ -99,18 +97,17 @@ public class DiceResultController implements IController {
     }
 
     private Color retrieveColor(ColorEnum color) {
-        DiceController diceController = (DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE);
         switch (color) {
             case CRIT:
-                return diceController.getCritColor();
+                return ColorHelper.getColorForName("crit");
             case SUCCESS:
-                return diceController.getSuccessColor();
+                return ColorHelper.getColorForName("success");
             case BACKGROUND:
-                return diceController.getBackgroundColor();
+                return ColorHelper.getColorForName("background");
             case TEXT:
-                return diceController.getTextColor();
+                return ColorHelper.getColorForName("text-main");
         }
-        return null;
+        return Color.PURPLE;
     }
 
     public void reloadWidth(double newValue) {

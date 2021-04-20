@@ -1,6 +1,8 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
+import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
@@ -64,7 +66,6 @@ public class VoteCommand extends CommandExampleBase {
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
         //try to parse the command
         params.put("sender", sender.getDisplayName());
-        params.put("votevalue", split[1]);
         switch (pollController.getPollType()) {
             case NONE:
                 handleNonePollCommand();
@@ -89,6 +90,8 @@ public class VoteCommand extends CommandExampleBase {
             int option = Integer.parseInt(split[1]) - 1;//-1 to offset lists starting with 0
             PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
             VoteActionResult voteResult = pollController.castVote(option, sender);
+            params.put("votevalue", pollController.getOptionText(option));
+
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
@@ -96,11 +99,13 @@ public class VoteCommand extends CommandExampleBase {
         }
     }
 
+
     private void handleQuickPollCommand(String[] split, String sender) {
         QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
         try {
             int option = Integer.parseInt(split[1]);
             VoteActionResult voteResult = quickPollWidgetController.castVote(option, sender);
+            params.put("votevalue", split[1]);
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
@@ -109,6 +114,7 @@ public class VoteCommand extends CommandExampleBase {
 
 
     private void handleVoteResult(VoteActionResult voteResult) {
+
         if (voteResult == VoteActionResult.SUCCESSFULLY_VOTED_OR_CHANGED) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_ADDEDVOTE, params));
         } else if (voteResult == VoteActionResult.VOTE_ALREADY_CAST) {

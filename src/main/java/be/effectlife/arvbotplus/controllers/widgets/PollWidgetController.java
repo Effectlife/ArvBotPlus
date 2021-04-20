@@ -14,6 +14,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
@@ -30,7 +31,9 @@ public class PollWidgetController implements IController {
     private Button btnClear;
 
     @FXML
-    private TextArea taOption;
+    private TextField tfOption;
+    @FXML
+    private Text textId;
     private PollController pollController;
     private Set<String> voters;
     private int optionId;
@@ -39,7 +42,7 @@ public class PollWidgetController implements IController {
     void pBarVotes_Clicked(MouseEvent event) {
         if (voters.size() > 0) {
             String reduce = voters.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
-            Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option "+(optionId+1), reduce));
+            Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option " + (optionId + 1), reduce));
         }
 
     }
@@ -47,7 +50,7 @@ public class PollWidgetController implements IController {
     @FXML
     void btnClear_Clicked(ActionEvent event) {
         if (event != null && isCleared()) {
-            taOption.setText("");
+            tfOption.setText("");
         }
         spinnerVotes.getValueFactory().setValue(0);
         pBarVotes.setProgress(0);
@@ -61,7 +64,7 @@ public class PollWidgetController implements IController {
         voters = new HashSet<>();
         btnClear.setText(MessageProperties.getString(MessageKey.WIDGET_POLLS_BUTTON_CLEAR));
         btnClear_Clicked(null);
-        taOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
+        tfOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
         spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> pollController.reloadView()));
     }
 
@@ -82,21 +85,25 @@ public class PollWidgetController implements IController {
 
     public void clear(boolean votesCleared) {
         if (votesCleared) {
-            taOption.setText("");
+            tfOption.setText("");
         }
         btnClear_Clicked(null);
     }
 
     public String getOptionText() {
-        return taOption.getText();
+        return tfOption.getText();
     }
 
     public void disableButtons(boolean disabled) {
-        taOption.setDisable(disabled);
+
         btnClear.setDisable(disabled);
-        if (StringUtils.isBlank(taOption.getText())) {
+        if (StringUtils.isBlank(tfOption.getText())) {
             spinnerVotes.setDisable(disabled);
-        } else spinnerVotes.setDisable(false);
+            tfOption.setDisable(disabled);
+        } else {
+            spinnerVotes.setDisable(false);
+            tfOption.setDisable(false);
+        }
     }
 
     public int getOptionId() {
@@ -105,6 +112,7 @@ public class PollWidgetController implements IController {
 
     public void setOptionId(int optionId) {
         this.optionId = optionId;
+        textId.setText(optionId+1+"");
     }
 
     public Set<String> getVoters() {

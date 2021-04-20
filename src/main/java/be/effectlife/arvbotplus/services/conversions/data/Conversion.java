@@ -1,6 +1,6 @@
-package be.effectlife.arvbotplus.twirk.conversions.data;
+package be.effectlife.arvbotplus.services.conversions.data;
 
-import static be.effectlife.arvbotplus.twirk.conversions.data.Temperature.*;
+import static be.effectlife.arvbotplus.services.conversions.data.Temperature.*;
 
 public abstract class Conversion {
     public static float convertLinear(float value, float conversionSource, float conversionTarget) throws ArithmeticException {

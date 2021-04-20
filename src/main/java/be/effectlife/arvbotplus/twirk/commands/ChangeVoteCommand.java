@@ -83,12 +83,11 @@ public class ChangeVoteCommand extends CommandExampleBase {
     private void handleStandardPollCommand(String[] split, String sender) {
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
         Map<String, String> params = new HashMap<>();
-        params.put("votevalue", split[1]);
         params.put("sender", sender);
         try {
             int option = Integer.parseInt(split[1]) - 1;
             VoteActionResult addOptionResult = pollController.changeVote(option, sender);
-
+            params.put("votevalue", pollController.getOptionText(option));
             switch (addOptionResult) {
                 case ALREADY_VOTED_FOR_OPTION:
                     channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ALREADYVOTED, params));

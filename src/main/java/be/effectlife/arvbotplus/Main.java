@@ -114,6 +114,11 @@ public class Main extends Application {
             ((Stage) e.getSource()).setMinWidth(Scenes.S_BATTLE.getMinWidth());
         });
         stageMap.put(Stages.BATTLE, battleStage);
+        Stage conversionStage = buildStage(Stages.CONVERSION, Scenes.S_CONV, CloseHandlers.HIDE_ON_CLOSE);
+        conversionStage.setOnShowing((e) -> {
+            AESceneLoader.getInstance().getController(Scenes.S_CONV).onShow();
+            ((Stage) e.getSource()).setMinWidth(Scenes.S_CONV.getMinWidth());
+        });
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 

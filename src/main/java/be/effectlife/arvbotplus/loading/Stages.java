@@ -4,7 +4,8 @@ public enum Stages {
     POLL,
     DICE,
     INVENTORY,
-    BATTLE;
+    BATTLE,
+    CONVERSION;
 
     @Override
     public String toString() {

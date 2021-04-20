@@ -1,19 +1,20 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.arvbotplus.services.ConversionResult;
+import be.effectlife.arvbotplus.services.ConversionService;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import be.effectlife.arvbotplus.twirk.conversions.data.*;
+import be.effectlife.arvbotplus.services.conversions.data.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class ConvCommand extends CommandExampleBase {
@@ -21,11 +22,13 @@ public class ConvCommand extends CommandExampleBase {
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CONVERSION);
     private final Twirk twirk;
     private final boolean disable;
+    private final ConversionService conversionService;
 
     public ConvCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND);
         this.twirk = twirk;
         this.disable = disable;
+        conversionService = new ConversionService();
     }
 
     protected String getCommandWords() {
@@ -44,7 +47,7 @@ public class ConvCommand extends CommandExampleBase {
         Map<String, String> params = new HashMap<>();
         params.put("sender", sender.getDisplayName());
         params.put("pattern", PATTERN);
-        params.put("count", split.length + "");
+        params.put("count", split.length - 1 + ""); //-1 to remove pattern
         if (content.equals(PATTERN) ||
                 (split.length > 1 && split[1].equals("options")) ||
                 (split.length > 1 && split[1].equals("option")) ||
@@ -59,80 +62,46 @@ public class ConvCommand extends CommandExampleBase {
 
         //try to parse the command
 
-        if (split.length != 5) {
+        if (split.length != 4) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_INVALIDARGUMENTAMOUNT, params));
             return;
         }
-        if (split[3].equals(split[4])) {
+        if (split[2].equals(split[3])) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_SAMETYPES, params));
             return;
         }
-        try {
-            float sourceValue = Float.parseFloat(split[2].replaceAll(",", "."));
+        handleConversion(split, params);
+    }
 
-            switch (split[1]) {
-                case "l":
-                case "length":
-                    Length lengthSource = Length.valueOf(split[3].toUpperCase());
-                    Length lengthTarget = Length.valueOf(split[4].toUpperCase());
-                    float lengthTargetValue = Conversion.convertLinear(sourceValue, lengthSource.getConversionToBase(), lengthTarget.getConversionToBase());
-                    params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
-                    params.put("sourcetype", lengthSource.toString().toLowerCase());
-                    params.put("targetvalue", (((int) (lengthTargetValue * 100f)) / 100f) + "");
-                    params.put("targettype", lengthTarget.toString().toLowerCase());
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
-                    break;
-                case "t":
-                case "temp":
-                case "temperature":
-                    Temperature temperatureSource = Temperature.valueOf(split[3].toUpperCase());
-                    Temperature temperatureTarget = Temperature.valueOf(split[4].toUpperCase());
-                    float temperatureTargetValue = Conversion.convertTemp(sourceValue, temperatureSource, temperatureTarget);
-                    params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
-                    params.put("sourcetype", temperatureSource.toString().toLowerCase());
-                    params.put("targetvalue", (((int) (temperatureTargetValue * 100f)) / 100f) + "");
-                    params.put("targettype", temperatureTarget.toString().toLowerCase());
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
-                    break;
-                case "w":
-                case "weight":
-                    Weight weightSource = Weight.valueOf(split[3].toUpperCase());
-                    Weight weightTarget = Weight.valueOf(split[4].toUpperCase());
-                    float weightTargetValue = Conversion.convertLinear(sourceValue, weightSource.getConversionToBase(), weightTarget.getConversionToBase());
-                    params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
-                    params.put("sourcetype", weightSource.toString().toLowerCase());
-                    params.put("targetvalue", (((int) (weightTargetValue * 100f)) / 100f) + "");
-                    params.put("targettype", weightTarget.toString().toLowerCase());
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
-                    break;
-                case "v":
-                case "volume":
-                    Volume volumeSource = Volume.valueOf(split[3].toUpperCase());
-                    Volume volumeTarget = Volume.valueOf(split[4].toUpperCase());
-                    float volumeTargetValue = Conversion.convertLinear(sourceValue, volumeSource.getConversionToBase(), volumeTarget.getConversionToBase());
-                    params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
-                    params.put("sourcetype", volumeSource.toString().toLowerCase());
-                    params.put("targetvalue", (((int) (volumeTargetValue * 100f)) / 100f) + "");
-                    params.put("targettype", volumeTarget.toString().toLowerCase());
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
-                    break;
-                default:
-                    params.put("category", split[1]);
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_UNKNOWNCATEGORY, params));
-                    sendOptions(params);
-                    break;
+    private void handleConversion(String[] split, Map<String, String> params) {
+        try {
+            float sourceValue = Float.parseFloat(split[1].replaceAll(",", "."));
+            CType sourceUnitType = conversionService.getCTypeFromString(split[2]);
+            CType targetUnitType = conversionService.getCTypeFromString(split[3]);
+
+            if (sourceUnitType == null) {
+                channelMessage(split[2] + " cannot be parsed into a valid unit.");
+                return;
             }
+
+            if (targetUnitType == null) {
+                channelMessage(split[3] + " cannot be parsed into a valid unit.");
+                return;
+            }
+
+            ConversionResult convert = conversionService.convert(sourceValue, sourceUnitType, targetUnitType);
+            if (convert == null) {
+                channelMessage("Cannot convert, source type " + sourceUnitType.getUnit() + "(" + sourceUnitType.getClass().getSimpleName() + ") and target type " + targetUnitType.getUnit() + "(" + targetUnitType.getClass().getSimpleName() + ") are not of the same unit type"); //TODO: Move to MessageProperties
+                return;
+            }
+            params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
+            params.put("sourcetype", sourceUnitType.getUnit().toLowerCase());
+            params.put("targetvalue", (((int) (convert.getTargetValue() * 100f)) / 100f) + "");
+            params.put("targettype", targetUnitType.getUnit().toLowerCase());
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
         } catch (NumberFormatException e) {
-            params.put("value", split[2]);
+            params.put("value", split[1]);
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_NOTANUMBER, params));
-        } catch (IllegalArgumentException e) {
-            if (e.getMessage().contains("No enum constant")) {
-                String[] exceptionMessage = e.getMessage().split("\\.");
-                params.put("category", exceptionMessage[1]);
-                params.put("type", exceptionMessage[2]);
-                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_INVALIDTYPE, params));
-                sendOptions(params);
-            }
         } catch (Exception e) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_GENERALERROR, params));
             e.printStackTrace();
@@ -150,46 +119,28 @@ public class ConvCommand extends CommandExampleBase {
     private void sendOptions(Map<String, String> params) {
 
         StringBuilder options = new StringBuilder();
-        options.append("l/length (");
-        Length[] lengthValues = Length.values();
-        for (int i = 0; i < lengthValues.length; i++) {
-            Length value = lengthValues[i];
-            options.append(value.toString().toLowerCase());
-            if (i != lengthValues.length - 1) {
-                options.append(", ");
-            }
-        }
-        options.append("); t/temp/temperature (");
-        Temperature[] temperatureValue = Temperature.values();
-        for (int i = 0; i < temperatureValue.length; i++) {
-            Temperature value = temperatureValue[i];
-            options.append(value.toString().toLowerCase());
-            if (i != temperatureValue.length - 1) {
-                options.append(", ");
-            }
-        }
-        options.append("); w/weight (");
-        Weight[] weightValue = Weight.values();
-        for (int i = 0; i < weightValue.length; i++) {
-            Weight value = weightValue[i];
-            options.append(value.toString().toLowerCase());
-            if (i != weightValue.length - 1) {
-                options.append(", ");
-            }
-        }
-        options.append("); v/volume (");
-        Volume[] volumeValue = Volume.values();
-        for (int i = 0; i < volumeValue.length; i++) {
-            Volume value = volumeValue[i];
-            options.append(value.toString().toLowerCase());
-            if (i != volumeValue.length - 1) {
-                options.append(", ");
-            }
-        }
+        options.append("Length/Distance (");
+        formatCType(options, Length.getAllValues());
+        options.append("); Temperature (");
+        formatCType(options, Temperature.getAllValues());
+        options.append("); Weight (");
+        formatCType(options, Weight.getAllValues());
+        options.append("); Volume (");
+        formatCType(options, Volume.getAllValues());
         options.append("); ");
 
         params.put("options", options.toString());
         channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_OPTIONS, params));
 
+    }
+
+    private void formatCType(StringBuilder options, List<CType> weightValue) {
+        for (int i = 0; i < weightValue.size(); i++) {
+            CType value = weightValue.get(i);
+            options.append(value.toString().toLowerCase());
+            if (i != weightValue.size() - 1) {
+                options.append(", ");
+            }
+        }
     }
 }

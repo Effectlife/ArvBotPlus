@@ -15,6 +15,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
@@ -99,6 +100,9 @@ public class InventoryController implements IController {
     private MenuItem menuBattle;
 
     @FXML
+    private MenuItem menuConversion;
+
+    @FXML
     private Menu menuHelp;
 
     @FXML
@@ -119,6 +123,7 @@ public class InventoryController implements IController {
         menuPolls.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_POLLS));
         menuDice.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_DICE));
         menuBattle.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_BATTLE));
+        menuConversion.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_TOOLS_CONVERSION));
         menuHelp.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_HELP));
         menuAbout.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_MENU_HELP_ABOUT));
         textCharName.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_CHARNAME));
@@ -157,6 +162,7 @@ public class InventoryController implements IController {
             twirkSystem = new TwirkSystem();
             try {
                 twirkSystem.initializeSystem(properties, false);
+                ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
                 Platform.runLater(pollStage::show);
             } catch (IOException | InterruptedException e) {
                 e.printStackTrace();
@@ -172,6 +178,11 @@ public class InventoryController implements IController {
     @FXML
     void btnBattle_Clicked(ActionEvent event) {
         StageBuilder.getStage(Stages.BATTLE).show();
+    }
+
+    @FXML
+    void btnConversion_Clicked(ActionEvent event) {
+        StageBuilder.getStage(Stages.CONVERSION).show();
     }
 
     @FXML
@@ -238,8 +249,10 @@ public class InventoryController implements IController {
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
         SkillWidgetController skillWidgetController = (SkillWidgetController) sceneContainer.getController();
         skillWidgetControllerList.add(skillWidgetController);
-        vboxSkillOptions.getChildren().add(sceneContainer.getScene().getRoot());
-        sceneContainer.getScene().getRoot().setUserData(id);
+        Parent root = sceneContainer.getScene().getRoot();
+        vboxSkillOptions.getChildren().add(root);
+        root.setUserData(id);
+        root.toFront();
         skillWidgetController.setId(id);
         String thresholdWarn = properties.getProperty("inv.skill.threshold.warn");
         String thresholdCrit = properties.getProperty("inv.skill.threshold.crit");
@@ -285,6 +298,7 @@ public class InventoryController implements IController {
             tfName.setDisable(false);
             tfName.setVisible(true);
             paneName.setDisable(true);
+            tfName.requestFocus();
         }
     }
 

@@ -14,6 +14,7 @@ import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -41,7 +42,7 @@ public class PollController implements IController {
     private Button btnClearAll;
 
     @FXML
-    private TextArea taQuestion;
+    private TextField taQuestion;
 
     @FXML
     private TextField tfOptions;
@@ -62,6 +63,18 @@ public class PollController implements IController {
     private Text textConnectedTo;
     @FXML
     private Text textOptions;
+
+    @FXML
+    private Text textUseMulti;
+
+    @FXML
+    private CheckBox cbUseMulti;
+
+    @FXML
+    private TextField tfMaxVotes;
+
+    @FXML
+    private Text textMaxVotes;
 
     @FXML
     void btnClearAll_Clicked(ActionEvent event) {
@@ -171,9 +184,9 @@ public class PollController implements IController {
     @Override
     public void doInit() {
         SceneContainer quickPollContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUICKPOLL);
-        Region region = (Region) quickPollContainer.getScene().getRoot();
-        setDefaultSize(region);
-        gpBase.add(region, 0, 2);
+        Region quickPollRegion = (Region) quickPollContainer.getScene().getRoot();
+        setDefaultSize(quickPollRegion);
+        gpBase.add(quickPollRegion, 0, 1, 2, 1);
         this.quickPollWidget = (QuickPollWidgetController) quickPollContainer.getController();
         options = 8;
         tfOptions.setTextFormatter(Formatters.NumbersOnly);
@@ -339,5 +352,13 @@ public class PollController implements IController {
         } else {
             Main.twirkSystem.channelMessage(message);
         }
+    }
+
+    public String getOptionText(int option) {
+        for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
+            if (pollWidgetController.getOptionId() == option)
+                return (pollWidgetController.getOptionId() + 1) + ": {" + pollWidgetController.getOptionText() + "}";
+        }
+        return null;
     }
 }

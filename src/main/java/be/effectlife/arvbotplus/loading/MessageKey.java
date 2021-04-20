@@ -75,13 +75,10 @@ public enum MessageKey {
     TWIRK_MESSAGE_CONVERSION_INVALIDARGUMENTAMOUNT("twirk.message.conversion.invalidargumentamount"),
     TWIRK_MESSAGE_CONVERSION_SAMETYPES("twirk.message.conversion.sametypes"),
     TWIRK_MESSAGE_CONVERSION_RESULT("twirk.message.conversion.result"),
-    TWIRK_MESSAGE_CONVERSION_UNKNOWNCATEGORY("twirk.message.conversion.unknowncategory"),
     TWIRK_MESSAGE_CONVERSION_NOTANUMBER("twirk.message.conversion.notanumber"),
-    TWIRK_MESSAGE_CONVERSION_INVALIDTYPE("twirk.message.conversion.invalidtype"),
     TWIRK_MESSAGE_CONVERSION_GENERALERROR("twirk.message.conversion.generalerror"),
-    TWIRK_MESSAGE_CONVERSION_OPTIONS("twirk.message.conversion.options");
-
-
+    TWIRK_MESSAGE_CONVERSION_OPTIONS("twirk.message.conversion.options"),
+    SCENE_INVENTORY_MENU_TOOLS_CONVERSION("scene.inventory.menu.tools.conversion");
     private final String key;
 
     MessageKey(String key) {

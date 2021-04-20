@@ -1,7 +1,10 @@
 package be.effectlife.arvbotplus.twirk;
 
+import be.effectlife.arvbotplus.controllers.scenes.ConversionController;
+import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.twirk.commands.ABPCommand;
 import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
 import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
@@ -53,7 +56,7 @@ public class TwirkSystem {
                     System.exit(1);
                 });
             }
-            Map<String,String> params = new HashMap<>();
+            Map<String, String> params = new HashMap<>();
             params.put("patternabp", MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP));
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_STARTUP, params));
         } catch (SocketException e) {
@@ -87,9 +90,11 @@ public class TwirkSystem {
     }
 
     public void disconnect() {
-        if (!this.disable || (this.twirk != null && this.twirk.isConnected())) {
+        if (twirk != null && (!this.disable || this.twirk.isConnected())) {
             twirk.disconnect();
+            twirk = null;
         }
+        ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
     }
 
     public String getConnectedChannel() {
@@ -97,5 +102,9 @@ public class TwirkSystem {
             return this.twirk.getNick();
         }
         return "Not Connected";
+    }
+
+    public boolean isLoaded() {
+        return twirk != null && twirk.isConnected();
     }
 }

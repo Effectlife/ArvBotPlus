@@ -64,6 +64,7 @@ public class SkillWidgetController implements IController {
             tfSkillname.setDisable(false);
             tfSkillname.setVisible(true);
             paneSkillname.setDisable(true);
+            tfSkillname.requestFocus();
         }
     }
 

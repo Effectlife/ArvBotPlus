@@ -1,44 +1,51 @@
 * {
     /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
-    -color-off-white: #b1b6c4; /*Color used for text in poll options when a poll is active*/
-    -color-pBar: #00bc64; /*Color of the progress bar in the polls window*/
-    -color-pBar-border: #018134; /*Color of the progress bar border*/
+    -color-pBartop: #6DA656; /*Color of the progress bar in the polls window (top gradient color)*/
+    -color-pBarbottom: #3D861F; /*Color of the progress bar in the polls window (bottom gradient color)*/
+    -color-pBar-border: #274B15; /*Color of the progress bar border*/
 
     -color-warn: #ff8c00; /*Warning color of the first counter in the skills/stats window (less than half of max)*/
     -color-crit: #ff0000; /*Critical color of the first counter in the skills/stats window (less than 1/5 of max) */
     -color-fail: #ff0000; /*Color used for crit fails in the Dice Roller*/
     -color-success: #00bc64; /*Color used for crit successes in the Dice Roller*/
 
+    -color-topbutton: #2B99D2; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton: #07609a; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border: #204080; /*Color of the buttons border*/
+
+    -color-topbutton-hover: #39bbf5; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-hover: #2184b7; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-hover: #204b80; /*Color of the buttons border*/
+
+    -color-topbutton-pressed: #2998ec; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-pressed: #0d60b5; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-pressed: #2e4dbc; /*Color of the buttons border*/
+    
     -color-text-main: -color-f; /*The main color for text on buttons, menus, etc...*/
     -color-text-textfield: -color-d; /*The color of text in editable areas*/
 
-    -color-background: -color-2; /*The main background color*/
-    -color-border: -color-6; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-background: -color-25; /*The main background color*/
+    -color-textfield-background: -color-1; /*The main background color*/
+    -color-combobox-background-hover: -color-2; /*The main background color*/
+    -color-combobox-background-pressed: -color-0; /*The main background color*/
+    -color-border: -color-3e; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
     -color-border-selected: -color-a; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
 
-    -color-button-main: -color-4; /*The color of unpressed buttons*/
-    -color-button-border-main: -color-5; /*The color of the border of unpressed buttons*/
-    -color-button-hover: -color-3; /*The color of the buttons when hovered over*/
-    -color-button-border-hover: -color-4; /*The color of the border of buttons when hovered over*/
-    -color-button-pressed: #2a2a2a; /*The colors of buttons when pressed*/
-    -color-button-border-pressed: #3a3a3a; /*And the color of their borders when pressed*/
-
-    -color-checkmark: -color-6; /*The color of the '✓' of the checkbox*/
+    -color-checkmark: -color-9; /*The color of the '✓' of the checkbox*/
     -color-checkbox-hover: -color-f; /*The color of the checkbox when hovered over*/
-    -color-checkbox-pressed: -color-3; /*The color of the checkbox when pressed*/
+    -color-checkbox-pressed: -color-6; /*The color of the checkbox when pressed*/
 
     -color-menuitem-hover: -color-5; /*The color of the items in the toolbar menu when hovered over*/
 
     -color-scrollbar-background: -color-5; /*The color of the background of the scrollbars*/
     -color-scrollbar-background-hover: -color-4; /*The color of the background of the scrollbars when hovered*/
     -color-scrollbar-background-pressed: -color-4; /*The color of the background of the scrollbars when pressed*/
-    -color-scrollbar-foreground: -color-a; /*The color of the foreground of the scrollbars*/
+    -color-scrollbar-foreground: -color-3e; /*The color of the foreground of the scrollbars*/
     -color-scrollbar-foreground-hover: -color-9; /*The color of the foreground of the scrollbars when hovered*/
     -color-scrollbar-foreground-pressed: -color-8; /*The color of the foreground of the scrollbars when pressed*/
 
-    -color-separator: -color-0; /*The color of the separators between sections*/
-
-
+    -color-border-alt: -color-0; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
+    
     -color-transparent: transparent; /*Transparent is used in some effects in the application*/
     /*These are basic grayscale colors*/
     -color-f: #ffffff;
@@ -57,6 +64,13 @@
     -color-2: #222222;
     -color-1: #111111;
     -color-0: #000000;
+
+    -color-25: #252525;
+    -color-3e: #3e3e3e;
+}
+
+* {
+    -fx-font-family: Helvetica Arial sans-serif;
 }
 
 .background-fail {
@@ -88,38 +102,43 @@
 }
 
 .text-bold {
-    -fx-font-weight: bold;
+    -fx-font-weight: bolder !important;
 }
 
 .scroll-pane:disabled, .text-area:disabled {
-    -fx-text-fill: -color-off-white;
     -fx-opacity: 1;
 }
 
+.container-pane {
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+    -fx-border-width: 1px;
+}
+
 .separator-pane {
-    -fx-background-color: -color-separator;
+    -fx-background-color: -color-border-alt;
 }
 
 .textBorder {
     -fx-border-color: -color-border;
     -fx-border-radius: 0;
-    -fx-border-width: 0.8px;
+    -fx-border-width: 1px;
 }
 
 .text, .white-text {
     -fx-font-size: 12pt;
 }
 
-.button .text {
-    -fx-padding: -10 -10 -10 -10;
-}
-
 .text-area .scroll-pane .viewport .content {
     -fx-padding: 0 .25em;
 }
 
-.root, .scroll-pane, .scroll-pane > *.viewport {
-    -fx-background-color: -color-background;
+.root {
+    -fx-background-color: -color-0;
+}
+
+.scroll-pane > *.viewport, .scroll-pane {
+    -fx-background-color: transparent;
 }
 
 .increment-arrow-button, .decrement-arrow-button {
@@ -136,8 +155,9 @@
 .number-button, .left-arrow-button, .right-arrow-button,
 .button, .split-menu-button, .toggle-button,
 .font-menu-button, .split-menu-button > .label, .split-menu-button > .arrow-button, .increment-arrow-button, .decrement-arrow-button {
-    -fx-background-color: -color-button-main;
-    -fx-border-color: -color-button-border-main;
+    -fx-background-color: linear-gradient(-color-topbutton, -color-bottombutton);
+    -fx-border-color: -color-button-border;
+    -fx-border-insets: 0px 0px -1px 0px;
     -fx-text-fill: -color-text-main;
 }
 
@@ -146,34 +166,40 @@
     -fx-border-radius: 0;
 }
 
-.combo-box > .arrow-button, .choice-box > .arrow-button {
-    -fx-border-width: 0;
-}
 
 /*hover state*/
 .color-picker:hover,
 .date-picker:hover > .arrow-button,
-.combo-box:hover, .choice-box:hover,
 .number-button:hover, .left-arrow-button:hover, .right-arrow-button:hover,
 .button:hover, .toggle-button:hover,
 .font-menu-button:hover,
 .split-menu-button > .label:hover, .split-menu-button > .arrow-button:hover, .increment-arrow-button:hover, .decrement-arrow-button:hover {
-    -fx-background-color: -color-button-hover;
+    -fx-background-color: linear-gradient(-color-topbutton-hover, -color-bottombutton-hover);
     -fx-border-color: -color-button-border-hover;
 }
+
+.combo-box-base{
+    -fx-padding: -5 2;
+}
+
+.combo-box:hover, .choice-box:hover{
+    -fx-background-color: -color-combobox-background-hover;
+}
+.combo-box:pressed, .choice-box:pressed{
+    -fx-background-color: -color-combobox-background-pressed;
+}
+
 
 /*pressed selected*/
 .color-picker:pressed, .color-picker:selected,
 .number-button:pressed, .number-button:selected,
 .date-picker:pressed > .arrow-button,
-.combo-box:pressed > .arrow-button, .combo-box:selected > .arrow-button,
-.choice-box:pressed > .arrow-button, .choice-box:selected > .arrow-button,
 .font-menu-button:pressed, .font-menu-button:selected,
 .left-arrow-button:pressed, .left-arrow-button:selected,
 .right-arrow-button:pressed, .right-arrow-button:selected,
 .button:pressed, .button:selected, .toggle-button:pressed, .toggle-button:selected,
 .split-menu-button:pressed > .label, .split-menu-button > .arrow-button:pressed, .increment-arrow-button:pressed, .decrement-arrow-button:pressed {
-    -fx-background-color: -color-button-pressed;
+    -fx-background-color: linear-gradient(-color-topbutton-pressed, -color-bottombutton-pressed);
     -fx-border-color: -color-button-border-pressed;
 }
 
@@ -185,22 +211,47 @@
     -fx-text-fill: -color-crit;
 }
 
-.text-field, .text-area {
-    -fx-border-color: -color-border;
-    -fx-text-fill: -color-text-textfield;
-    -fx-background-color: -color-background;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
-    -fx-effect: innershadow(gaussian, -color-transparent, 0, 0, 0, 0);
+.text-input, .combo-box .list-cell, .combo-box .arrow-button{
+    -fx-padding: 0.1em 0.16em 0.16em 0.16em;
+}
+.combo-box .list-cell .text{
+    -fx-fill: -color-text-main;
 }
 
-.text-field:focused, .text-area:focused {
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: black ;
+    -fx-text-fill: white ;
+    -fx-font-family: "Calibri" ;
+}
+.combo-box .combo-box-popup .list-cell:hover {
+    -fx-text-fill: yellow ;
+    -fx-background-color: green ;
+}
+
+.text-field, .text-area, .combo-box {
+    -fx-border-color: -color-border;
+    -fx-text-fill: -color-text-textfield;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: -color-textfield-background;
+    -fx-border-insets: 1;
+
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
     -fx-border-color: -color-border-selected;
     -fx-effect: dropshadow(gaussian, -color-border-selected, 10, 0, 0, 0);
+
+}
+
+.spinner:focused {
+    -fx-border-color: inherit;
+    -fx-background-color: -color-textfield-background;
+
 }
 
 .text-area .scroll-pane, .text-area .scroll-pane .content {
-    -fx-background-color: -color-background;
+    -fx-background-color: -color-textfield-background;
     -fx-background-radius: 0;
 }
 
@@ -211,6 +262,10 @@
     -fx-pref-width: 1;
 }
 
+.increment-arrow, .decrement-arrow {
+    -fx-background-color: -color-text-main;
+}
+
 .scroll-bar .increment-button, .scroll-bar .increment-arrow {
     visibility: hidden;
     -fx-pref-height: 1;
@@ -218,11 +273,11 @@
 }
 
 .scroll-bar:vertical {
-    -fx-pref-width: 8;
+    -fx-pref-width: 7;
 }
 
 .scroll-bar:horizontal {
-    -fx-pref-height: 8;
+    -fx-pref-height: 7;
 }
 
 .scroll-bar:horizontal .track,
@@ -247,27 +302,25 @@
 
 .scroll-bar:vertical .thumb {
     -fx-background-color: -color-scrollbar-foreground;
-    -fx-background-insets: 0 2 0 2;
+    -fx-background-insets: 0 1;
     -fx-background-radius: 0;
 }
 
 .scroll-bar {
-    -fx-background-color: -color-scrollbar-background;
-    -fx-border-color: -color-scrollbar-background;
     -fx-background-radius: 0;
     -fx-block-increment: 10;
+    -fx-background-insets: 0;
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+    -fx-border-width: 1px;
 }
 
 .scroll-bar:hover {
     -fx-background-color: -color-scrollbar-background-hover;
-    -fx-border-color: -color-scrollbar-background-hover;
-
 }
 
 .scroll-bar:pressed {
     -fx-background-color: -color-scrollbar-background-pressed;
-    -fx-border-color: -color-scrollbar-background-pressed;
-
 }
 
 .scroll-bar:horizontal .thumb:hover,
@@ -296,14 +349,14 @@
     -fx-pref-height: 10;
     -fx-background-radius: 0;
     -fx-effect: innershadow(gaussian, -color-border, 4, 0, 0, 1);
-    -fx-background-color: -color-transparent;
+    -fx-background-color: -color-textfield-background;
     -fx-border-color: -color-border;
     -fx-border-radius: 0;
 }
 
 .progress-bar > .bar {
     -fx-background-insets: 0;
-    -fx-background-color: -color-pBar;
+    -fx-background-color: linear-gradient(-color-pBartop, -color-pBarbottom);
     -fx-border-color: -color-pBar-border;
     -fx-border-radius: 0;
     -fx-border-width: 1;
@@ -311,7 +364,7 @@
 }
 
 .split-pane > .split-pane-divider {
-    -fx-background-color: -color-border-selected;
+    -fx-background-color: -color-textfield-background;
     -fx-border-color: -color-border;
     -fx-pref-width: 3;
 }
