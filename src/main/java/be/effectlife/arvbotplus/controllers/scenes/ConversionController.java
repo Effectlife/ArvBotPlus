@@ -1,40 +1,20 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
-import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
-import be.effectlife.arvbotplus.loading.*;
-import be.effectlife.arvbotplus.saves.SaveManager;
-import be.effectlife.arvbotplus.saves.models.Save;
-import be.effectlife.arvbotplus.saves.models.Skill;
+import be.effectlife.arvbotplus.loading.MessageKey;
+import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.services.ConversionResult;
 import be.effectlife.arvbotplus.services.ConversionService;
 import be.effectlife.arvbotplus.services.conversions.data.CType;
-import be.effectlife.arvbotplus.twirk.TwirkSystem;
-import be.effectlife.arvbotplus.utilities.JFXExtensions;
-import be.effectlife.arvbotplus.utilities.SimplePopup;
-import be.effectlife.arvbotplus.utilities.SkillType;
-import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.Node;
-import javafx.scene.Parent;
 import javafx.scene.control.*;
-import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
-import javafx.scene.text.Text;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.IOException;
+import java.text.DecimalFormatSymbols;
 import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
@@ -45,15 +25,12 @@ import static be.effectlife.arvbotplus.Main.twirkSystem;
 public class ConversionController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(ConversionController.class);
     ConversionService conversionService;
-    private HashMap<String, List<CType>> dropdowns;
+    private final HashMap<String, List<CType>> dropdowns;
 
     {
         dropdowns = CType.getAllAvailableTypes();
         conversionService = new ConversionService();
     }
-
-    @FXML
-    private GridPane base;
 
     @FXML
     private ComboBox<String> comboCategory;
@@ -74,15 +51,15 @@ public class ConversionController implements IController {
     private Button btnSend;
 
     @FXML
-    void btnSend_Clicked(ActionEvent event) {
+    void btnSend_Clicked() {
         try {
             float sourceVal = StringUtils.isBlank(tfSource.getText()) ? 0 : Float.parseFloat(tfSource.getText());
             Map<String, String> params = new HashMap<>();
             params.put("sender", twirkSystem.getConnectedChannel());
             params.put("sourcevalue", (((int) (sourceVal * 100f)) / 100f) + "");
-            params.put("sourcetype", comboSourceType.getValue().getUnit());
+            params.put("sourcetype", comboSourceType.getValue().getDisplayName());
             params.put("targetvalue", tfTarget.getText());
-            params.put("targettype", comboTargetType.getValue().getUnit());
+            params.put("targettype", comboTargetType.getValue().getDisplayName());
             twirkSystem.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
         } catch (NumberFormatException nfe) {
             LOG.error("Could not convert: " + nfe.getMessage());
@@ -90,12 +67,12 @@ public class ConversionController implements IController {
     }
 
     @FXML
-    void tfSource_Confirmed(ActionEvent event) {
+    void tfSource_Confirmed() {
         updateCalculation();
     }
 
     @FXML
-    void cbTypeChanged(ActionEvent event) {
+    void cbTypeChanged() {
         updateCalculation();
     }
 
@@ -107,7 +84,7 @@ public class ConversionController implements IController {
         updateTypeComboBoxes();
         UnaryOperator<TextFormatter.Change> filter = change -> {
             String text = change.getText();
-            if (text.matches("[0-9,.]*")) {
+            if (text.matches("[0-9" + new DecimalFormatSymbols(Locale.getDefault()).getDecimalSeparator() + "-]*")) {
                 return change;
             }
             return null;
@@ -122,7 +99,7 @@ public class ConversionController implements IController {
     }
 
     public void checkTwirk() {
-        if (twirkSystem == null || !twirkSystem.isLoaded()) {
+        if (twirkSystem == null || twirkSystem.isNotLoaded()) {
             btnSend.setDisable(true);
             btnSend.setTooltip(new Tooltip("Twitch bot is not loaded."));
         } else {
@@ -132,7 +109,7 @@ public class ConversionController implements IController {
     }
 
 
-    public void comboboxCategory_Changed(ActionEvent event) {
+    public void comboboxCategory_Changed() {
         updateTypeComboBoxes();
         updateCalculation();
     }

@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<GridPane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
+          fx:controller="be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController">
+    <columnConstraints>
+        <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308"/>
+    </columnConstraints>
+    <rowConstraints>
+        <RowConstraints minHeight="10.0" vgrow="SOMETIMES"/>
+    </rowConstraints>
+    <GridPane hgap="4.0" minHeight="-Infinity" minWidth="-Infinity" styleClass="container-pane" vgap="4.0">
+        <columnConstraints>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" maxWidth="75.0" minWidth="75.0" prefWidth="75.0"/>
+            <ColumnConstraints hgrow="SOMETIMES"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="100.0"/>
+        </columnConstraints>
+        <rowConstraints>
+            <RowConstraints percentHeight="50.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" percentHeight="50.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+        </rowConstraints>
+        <padding>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
+        </padding>
+        <TextArea fx:id="textAreaQuestion" editable="false" maxHeight="100.0" maxWidth="1.7976931348623157E308" minHeight="10.0" minWidth="200.0" prefHeight="10.0" prefWidth="300.0" styleClass="white-text"
+                  text="This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question This is the question "
+                  wrapText="true" GridPane.columnIndex="2" GridPane.rowSpan="2"/>
+        <Text fx:id="textUsername" strokeType="OUTSIDE" strokeWidth="0.0" text="UserNameOfTheSender" textAlignment="CENTER" wrappingWidth="150.0" GridPane.columnSpan="2">
+            <styleClass>
+                <String fx:value="white-text"/>
+                <String fx:value="smaller-text"/>
+            </styleClass>
+        </Text>
+        <Text fx:id="textTimestamp" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="11:30 AM" textAlignment="CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+        <Button fx:id="buttonRead" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onAnswered" text="Answered" GridPane.columnIndex="3"/>
+        <Button fx:id="buttonRemove" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#onRemove" text="Remove" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+        <Text fx:id="textQuestionCount" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="# 999" GridPane.rowIndex="1"/>
+    </GridPane>
+</GridPane>

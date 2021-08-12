@@ -13,7 +13,9 @@ public enum Scenes {
     W_QUICKPOLL("widgets/w_quickPoll"),
     W_SKILL("widgets/w_skill"),
     W_DICERESULT("widgets/w_diceResult"),
-    W_ENEMY("widgets/w_enemy");
+    W_ENEMY("widgets/w_enemy"),
+    S_QUESTIONS("s_questions", "Questions", 600),
+    W_QUESTION("widgets/w_question");
 
     private final String title;
     private final String file;

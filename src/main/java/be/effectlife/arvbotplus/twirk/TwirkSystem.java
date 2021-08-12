@@ -1,36 +1,32 @@
 package be.effectlife.arvbotplus.twirk;
 
 import be.effectlife.arvbotplus.controllers.scenes.ConversionController;
+import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
-import be.effectlife.arvbotplus.twirk.commands.ABPCommand;
-import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
-import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
+import be.effectlife.arvbotplus.twirk.commands.*;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
 import com.gikk.twirk.events.TwirkListener;
+import javafx.application.Platform;
+import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.net.SocketException;
-import java.util.Collections;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
-
-import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
-import javafx.application.Platform;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class TwirkSystem {
     private static final Logger LOG = LoggerFactory.getLogger(TwirkSystem.class);
     private Twirk twirk;
     private boolean disable;
 
-    public void initializeSystem(Properties properties, boolean disable) throws IOException, InterruptedException {
+    public void initializeSystem(Properties properties, Stage callingStage, boolean disable) throws IOException, InterruptedException {
         this.disable = disable;
         if (this.disable) {
             LOG.debug("Disabled twirk system");
@@ -45,25 +41,42 @@ public class TwirkSystem {
         twirk.addIrcListener(new VoteCommand(twirk, disable));
         twirk.addIrcListener(new ChangeVoteCommand(twirk, disable));
         twirk.addIrcListener(new ABPCommand(twirk, disable));
+        twirk.addIrcListener(new QuestionCommand(twirk, disable));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
-
-        try {
-            boolean connection = twirk.connect();
+        new Thread(() -> {
+            Platform.runLater(() -> {
+                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                controller.disableTwirkMenus(true);
+            });
+            boolean connection = false;
+            for (int i = 0; i < 3; i++) {
+                LOG.info("Trying to connect; " + (i + 1) + "/3");
+                try {
+                    connection = twirk.connect();
+                } catch (IOException | InterruptedException e) {
+                    LOG.error("Exception: " + e.getMessage());
+                }
+                if (connection) break; //try to connect 3 times
+            }
             if (!connection) {
                 Platform.runLater(() -> {
                     SimplePopup.showPopupWarn("Connection to twitch failed. Please check your configuration and try again.");
-                    System.exit(1);
+                    callingStage.hide();
                 });
             }
             Map<String, String> params = new HashMap<>();
             params.put("patternabp", MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP));
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_STARTUP, params));
-        } catch (SocketException e) {
-            Platform.runLater(() -> SimplePopup.showPopupError("Could not connect to twitch, please try again. If this happens more than 3 times in sequence, please report this as an issue. "));
-            LOG.error("Socket exception: ", e);
-        }
+            Platform.runLater(callingStage::show);
+            Platform.runLater(() -> {
+                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                controller.disableTwirkMenus(false);
+            });
+
+        }).start();
     }
+
 
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {
         return new TwirkListener() {
@@ -89,22 +102,25 @@ public class TwirkSystem {
         }
     }
 
-    public void disconnect() {
+    public void disconnect(boolean exit) {
         if (twirk != null && (!this.disable || this.twirk.isConnected())) {
-            twirk.disconnect();
-            twirk = null;
+            new Thread(() -> {
+                twirk.disconnect();
+                if (exit) Platform.exit();
+                twirk = null;
+                ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
+            }).start();
         }
-        ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
     }
 
     public String getConnectedChannel() {
         if (!this.disable || (this.twirk != null && this.twirk.isConnected())) {
             return this.twirk.getNick();
         }
-        return "Not Connected";
+        return MessageProperties.getString(MessageKey.TWIRK_CONNECTION_NOTCONNECTED);
     }
 
-    public boolean isLoaded() {
-        return twirk != null && twirk.isConnected();
+    public boolean isNotLoaded() {
+        return twirk == null || !twirk.isConnected();
     }
 }

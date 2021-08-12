@@ -12,7 +12,6 @@ import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import be.effectlife.arvbotplus.utilities.SkillType;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -20,16 +19,12 @@ import javafx.scene.control.Menu;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,13 +35,10 @@ import static be.effectlife.arvbotplus.Main.twirkSystem;
 
 
 public class InventoryController implements IController {
-    private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
 
     private List<SkillWidgetController> skillWidgetControllerList;
 
     //region FXML Definitions
-    @FXML
-    private GridPane base;
 
     @FXML
     private Pane paneName;
@@ -103,6 +95,9 @@ public class InventoryController implements IController {
     private MenuItem menuConversion;
 
     @FXML
+    private MenuItem menuQuestions;
+
+    @FXML
     private Menu menuHelp;
 
     @FXML
@@ -135,19 +130,19 @@ public class InventoryController implements IController {
         skillWidgetControllerList = new ArrayList<>();
         tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                tfName_Clicked(null);
+                tfName_Clicked();
             }
         }));
     }
 
     @FXML
-    void btnAdd_Clicked(ActionEvent event) {
+    void btnAdd_Clicked() {
         createWidget(skillWidgetControllerList.size());
         reloadView();
     }
 
     @FXML
-    void btnClose_Clicked(ActionEvent event) {
+    void btnClose_Clicked() {
         Stage invStage = Main.getStage(Stages.INVENTORY);
         invStage.fireEvent(new WindowEvent(
                 invStage,
@@ -156,37 +151,50 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnPolls_Clicked(ActionEvent event) {
+    void btnPolls_Clicked() {
         final Stage pollStage = StageBuilder.getStage(Stages.POLL);
-        new Thread(() -> {
-            twirkSystem = new TwirkSystem();
-            try {
-                twirkSystem.initializeSystem(properties, false);
-                ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
-                Platform.runLater(pollStage::show);
-            } catch (IOException | InterruptedException e) {
-                e.printStackTrace();
-            }
-        }).start();
+        startupTwirkSystem(pollStage);
     }
 
     @FXML
-    void btnDice_Clicked(ActionEvent event) {
+    public void btnQuestions_Clicked() {
+        Stage questionStage = StageBuilder.getStage(Stages.QUESTIONS);
+        startupTwirkSystem(questionStage);
+    }
+
+    private void startupTwirkSystem(Stage twirkStage) {
+        if (twirkSystem == null || twirkSystem.isNotLoaded()) {
+            new Thread(() -> {
+                twirkSystem = new TwirkSystem();
+                try {
+                    twirkSystem.initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.enabled", false).toString()));
+                    ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
+                } catch (IOException | InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }).start();
+        } else {
+            twirkStage.show();
+        }
+    }
+
+    @FXML
+    void btnDice_Clicked() {
         StageBuilder.getStage(Stages.DICE).show();
     }
 
     @FXML
-    void btnBattle_Clicked(ActionEvent event) {
+    void btnBattle_Clicked() {
         StageBuilder.getStage(Stages.BATTLE).show();
     }
 
     @FXML
-    void btnConversion_Clicked(ActionEvent event) {
+    void btnConversion_Clicked() {
         StageBuilder.getStage(Stages.CONVERSION).show();
     }
 
     @FXML
-    void btnHelp_Clicked(ActionEvent event) {
+    void btnHelp_Clicked() {
         Platform.runLater(() -> SimplePopup.showPopupInfo("About ArvBot Plus", "This is ArvBot Plus, a twitchbot and Gamebook manager created by me, Effectlife, mainly for fun, and to help Arvan Eleron to have some redundancy in his twitchbots. \n" +
                 "This application contains 4 independant tools.\n" +
                 "\t1. Inventory: This is the main screen. This window is used to manage all stats concerning playing gamebooks. On the left, there is a list of fully customizable skills and stats. Each skill/stat can have its own name, and can have any value between " + Integer.MIN_VALUE + " and " + Integer.MAX_VALUE + ".\n" +
@@ -200,7 +208,7 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnRemove_Clicked(ActionEvent event) {
+    void btnRemove_Clicked() {
         if (skillWidgetControllerList.size() == 0) return;
         SkillWidgetController controllerToRemove = skillWidgetControllerList.get(skillWidgetControllerList.size() - 1);
         for (Node child : vboxSkillOptions.getChildren()) {
@@ -281,17 +289,17 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnSave_Clicked(ActionEvent event) {
+    void btnSave_Clicked() {
         SaveManager.saveGame();
     }
 
     @FXML
-    void btnLoad_Clicked(ActionEvent event) {
+    void btnLoad_Clicked() {
         SaveManager.loadGame();
     }
 
     @FXML
-    void paneName_Clicked(MouseEvent event) {
+    void paneName_Clicked() {
         if (JFXExtensions.isDoubleClick()) {
             textName.setDisable(true);
             textName.setVisible(false);
@@ -303,7 +311,7 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void tfName_Clicked(ActionEvent event) {
+    void tfName_Clicked() {
         textName.setDisable(false);
         textName.setVisible(true);
         tfName.setDisable(true);
@@ -362,5 +370,11 @@ public class InventoryController implements IController {
 
     public void setProperties(Properties properties) {
         this.properties = properties;
+    }
+
+
+    public void disableTwirkMenus(boolean disable) {
+        menuPolls.setDisable(disable);
+        menuQuestions.setDisable(disable);
     }
 }

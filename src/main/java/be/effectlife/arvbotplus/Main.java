@@ -90,20 +90,17 @@ public class Main extends Application {
             AESceneLoader.getInstance().getController(Scenes.S_POLL).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_POLL.getMinWidth());
         });
-        stageMap.put(Stages.POLL, pollStage);
         Stage inventoryStage = buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, CloseHandlers.SHUTDOWN);
         inventoryStage.setOnShowing((e) -> {
             AESceneLoader.getInstance().getController(Scenes.S_INVENTORY).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_INVENTORY.getMinWidth());
         });
-        stageMap.put(Stages.INVENTORY, inventoryStage);
         SaveManager.setInventoryStage(inventoryStage);
         Stage diceStage = buildStage(Stages.DICE, Scenes.S_DICE, CloseHandlers.HIDE_ON_CLOSE);
         diceStage.setOnShowing((e) -> {
             AESceneLoader.getInstance().getController(Scenes.S_DICE).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_DICE.getMinWidth());
         });
-        stageMap.put(Stages.DICE, diceStage);
         diceStage.widthProperty().addListener((observable, oldValue, newValue) -> {
             DiceController diceController = (DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE);
             diceController.reloadWidth((double) newValue * .8);
@@ -113,22 +110,28 @@ public class Main extends Application {
             AESceneLoader.getInstance().getController(Scenes.S_BATTLE).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_BATTLE.getMinWidth());
         });
-        stageMap.put(Stages.BATTLE, battleStage);
         Stage conversionStage = buildStage(Stages.CONVERSION, Scenes.S_CONV, CloseHandlers.HIDE_ON_CLOSE);
         conversionStage.setOnShowing((e) -> {
             AESceneLoader.getInstance().getController(Scenes.S_CONV).onShow();
             ((Stage) e.getSource()).setMinWidth(Scenes.S_CONV.getMinWidth());
+        });
+        Stage questionStage = buildStage(Stages.QUESTIONS, Scenes.S_QUESTIONS, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
+        questionStage.setOnShowing((e) -> {
+            AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS).onShow();
+            ((Stage) e.getSource()).setMinWidth(Scenes.S_QUESTIONS.getMinWidth());
         });
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 
     private Stage buildStage(Stages stage, Scenes scene, EventHandler<WindowEvent> closeHandler) {
         preparedStageCount++;
-        return stageBuilder.setStageIdentifier(stage)
+        Stage newStage = stageBuilder.setStageIdentifier(stage)
                 .setSceneIdentifier(scene)
                 .setTitle(scene.getTitle())
                 .setOnCloseHandler(closeHandler)
                 .build();
+        stageMap.put(stage, newStage);
+        return newStage;
     }
 
     public static Stage getStage(Stages stage) {

@@ -21,6 +21,30 @@
     -color-bottombutton-pressed: #0d60b5; /*Color of the buttons (bottom gradient color)*/
     -color-button-border-pressed: #2e4dbc; /*Color of the buttons border*/
     
+    -color-false-topbutton: #d22b2b; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton: #9a0707; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border: #802020; /*Color of the buttons border*/
+
+    -color-false-topbutton-hover: #f53939; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton-hover: #b72121; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border-hover: #802020; /*Color of the buttons border*/
+
+    -color-false-topbutton-pressed: #ec2929; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton-pressed: #b50d0d; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border-pressed: #bc2e2e; /*Color of the buttons border*/
+        
+    -color-true-topbutton: #44d22b; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton: #229a07; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border: #2e8020; /*Color of the buttons border*/
+
+    -color-true-topbutton-hover: #46f539; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton-hover: #38b721; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border-hover: #328020; /*Color of the buttons border*/
+
+    -color-true-topbutton-pressed: #4dec29; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton-pressed: #31b50d; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border-pressed: #59bc2e; /*Color of the buttons border*/
+    
     -color-text-main: -color-f; /*The main color for text on buttons, menus, etc...*/
     -color-text-textfield: -color-d; /*The color of text in editable areas*/
 
@@ -159,6 +183,31 @@
     -fx-border-color: -color-button-border;
     -fx-border-insets: 0px 0px -1px 0px;
     -fx-text-fill: -color-text-main;
+}
+
+.button-color-false{
+    -fx-background-color: linear-gradient(-color-false-topbutton, -color-false-bottombutton);
+    -fx-border-color: -color-false-button-border;
+}
+.button-color-true{
+    -fx-background-color: linear-gradient(-color-true-topbutton, -color-true-bottombutton);
+    -fx-border-color: -color-true-button-border;
+}
+.button-color-false:hover{
+    -fx-background-color: linear-gradient(-color-false-topbutton-hover, -color-false-bottombutton-hover) !important;
+    -fx-border-color: -color-false-button-border-hover !important;
+}
+.button-color-true:hover{
+    -fx-background-color: linear-gradient(-color-true-topbutton-hover, -color-true-bottombutton-hover) !important;
+    -fx-border-color: -color-true-button-border-hover !important;
+}
+.button-color-false:pressed{
+    -fx-background-color: linear-gradient(-color-false-topbutton-pressed, -color-false-bottombutton-pressed) !important;
+    -fx-border-color: -color-false-button-border-pressed !important;
+}
+.button-color-true:pressed{
+    -fx-background-color: linear-gradient(-color-true-topbutton-pressed, -color-true-bottombutton-pressed) !important;
+    -fx-border-color: -color-true-button-border-pressed !important;
 }
 
 /*for date picker arrow button*/

@@ -22,7 +22,7 @@ public abstract class CloseHandlers {
         switch (result) {
             case YES:
                 if (Main.twirkSystem != null)
-                    Main.twirkSystem.disconnect();
+                    Main.twirkSystem.disconnect(true);
                 Platform.exit();
                 System.exit(0);
                 break;
@@ -34,12 +34,12 @@ public abstract class CloseHandlers {
         }
     };
 
-    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> {
-        ((Stage) t.getSource()).hide();
-    };
+    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> ((Stage) t.getSource()).hide();
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
         ((Stage) t.getSource()).hide();
-        Main.twirkSystem.disconnect();
+        if (!Main.getStage(Stages.POLL).isShowing() && !Main.getStage(Stages.QUESTIONS).isShowing()) {
+            Main.twirkSystem.disconnect(false);
+        }
     };
 
     public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {

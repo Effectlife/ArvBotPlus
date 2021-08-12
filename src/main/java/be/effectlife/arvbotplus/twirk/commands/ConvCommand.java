@@ -95,9 +95,9 @@ public class ConvCommand extends CommandExampleBase {
                 return;
             }
             params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
-            params.put("sourcetype", sourceUnitType.getUnit().toLowerCase());
+            params.put("sourcetype", sourceUnitType.getDisplayName());
             params.put("targetvalue", (((int) (convert.getTargetValue() * 100f)) / 100f) + "");
-            params.put("targettype", targetUnitType.getUnit().toLowerCase());
+            params.put("targettype", targetUnitType.getDisplayName());
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
         } catch (NumberFormatException e) {
             params.put("value", split[1]);

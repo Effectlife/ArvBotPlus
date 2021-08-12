@@ -7,6 +7,7 @@ import java.util.List;
 public abstract class CType {
     private float conversionToBase;
     private String unit;
+    private String displayName;
 
     public float getConversionToBase() {
         return conversionToBase;
@@ -14,6 +15,14 @@ public abstract class CType {
 
     public String getUnit() {
         return unit;
+    }
+
+    public String getDisplayName() {
+        return displayName;
+    }
+
+    protected void setDisplayName(String displayName) {
+        this.displayName = displayName;
     }
 
     protected void setUnit(String unit) {

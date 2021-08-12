@@ -122,12 +122,12 @@ public class QuickPollWidgetController implements IController {
         if (votes1 == 0) {
             pBar1.setProgress(0);
         } else {
-            pBar1.setProgress((double) totalVotes / votes1);
+            pBar1.setProgress((double) votes1 / Math.max(votes1, votes2));
         }
         if (votes2 == 0) {
             pBar2.setProgress(0);
         } else {
-            pBar2.setProgress((double) totalVotes / votes2);
+            pBar2.setProgress((double) votes2 / Math.max(votes1, votes2));
         }
     }
 
