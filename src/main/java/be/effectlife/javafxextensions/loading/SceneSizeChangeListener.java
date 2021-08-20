@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

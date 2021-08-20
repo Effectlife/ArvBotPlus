@@ -1,9 +1,9 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
-import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.Save;
 import be.effectlife.arvbotplus.saves.models.Skill;
@@ -11,6 +11,7 @@ import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import be.effectlife.arvbotplus.utilities.SkillType;
+import be.effectlife.javafxextensions.loading.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -168,7 +169,7 @@ public class InventoryController implements IController {
                 twirkSystem = new TwirkSystem();
                 try {
                     twirkSystem.initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.enabled", false).toString()));
-                    ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
+                    ((ConversionController) SceneLoader.getInstance().getController(ArvBotScenes.S_CONV)).checkTwirk();
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
                 }
@@ -254,7 +255,7 @@ public class InventoryController implements IController {
 
 
     private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
-        SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
+        SceneContainer sceneContainer = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_SKILL, "_" + id);
         SkillWidgetController skillWidgetController = (SkillWidgetController) sceneContainer.getController();
         skillWidgetControllerList.add(skillWidgetController);
         Parent root = sceneContainer.getScene().getRoot();
@@ -336,7 +337,7 @@ public class InventoryController implements IController {
     @Override
     public void reloadView() {
         vboxSkillOptions.getChildren().clear();
-        skillWidgetControllerList.forEach(skillWidgetController -> vboxSkillOptions.getChildren().add(AESceneLoader.getInstance().getScene(Scenes.W_SKILL, "_" + skillWidgetController.getId()).getRoot()));
+        skillWidgetControllerList.forEach(skillWidgetController -> vboxSkillOptions.getChildren().add(SceneLoader.getInstance().getScene(ArvBotScenes.W_SKILL, "_" + skillWidgetController.getId()).getRoot()));
     }
 
 

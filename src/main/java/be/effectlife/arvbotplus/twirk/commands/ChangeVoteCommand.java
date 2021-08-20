@@ -1,11 +1,12 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.Scenes;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -21,11 +22,11 @@ public class ChangeVoteCommand extends CommandExampleBase {
     private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CHANGEVOTE);
     private final Twirk twirk;
-    private static final AESceneLoader sceneloader;
+    private static final SceneLoader sceneloader;
     private final boolean disable;
 
     static {
-        sceneloader = AESceneLoader.getInstance();
+        sceneloader = SceneLoader.getInstance();
     }
 
     public ChangeVoteCommand(Twirk twirk, boolean disable) {
@@ -61,7 +62,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_HELP, params));
             return;
         }
-        PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
+        PollController pollController = (PollController) sceneloader.getController(ArvBotScenes.S_POLL);
         //try to parse the command
 
         switch (pollController.getPollType()) {
@@ -81,7 +82,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
     }
 
     private void handleStandardPollCommand(String[] split, String sender) {
-        PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
+        PollController pollController = (PollController) sceneloader.getController(ArvBotScenes.S_POLL);
         Map<String, String> params = new HashMap<>();
         params.put("sender", sender);
         try {
@@ -114,7 +115,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
     }
 
     private void handleQuickPollCommand(String[] split, String sender) {
-        QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
+        QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(ArvBotScenes.W_QUICKPOLL);
         Map<String, String> params = new HashMap<>();
         params.put("votevalue", split[1]);
         params.put("sender", sender);

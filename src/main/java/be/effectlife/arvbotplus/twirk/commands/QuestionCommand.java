@@ -1,10 +1,11 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.scenes.QuestionsController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.Scenes;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -15,7 +16,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
-import java.util.Collections;
 import java.util.HashMap;
 
 public class QuestionCommand extends CommandExampleBase {
@@ -56,7 +56,7 @@ public class QuestionCommand extends CommandExampleBase {
     }
 
     private void generateQuestionWidget(String displayName, String content, LocalTime timestamp) {
-        QuestionsController questionsController = (QuestionsController) AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS);
+        QuestionsController questionsController = (QuestionsController) SceneLoader.getInstance().getController(ArvBotScenes.S_QUESTIONS);
         questionsController.addQuestion(displayName, content, timestamp);
     }
 

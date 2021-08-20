@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -23,10 +23,10 @@ public class StageBuilder {
     private static final Map<Stages, Stage> stageMap;
     private static final ClassLoader classLoader = StageBuilder.class.getClassLoader();
     private static final Logger LOG = LoggerFactory.getLogger(StageBuilder.class);
-    private static AESceneLoader aeSceneLoader;
+    private static SceneLoader sceneLoader;
 
     static {
-        aeSceneLoader = AESceneLoader.getInstance();
+        sceneLoader = SceneLoader.getInstance();
         stageMap = new HashMap<>();
 
     }
@@ -55,7 +55,7 @@ public class StageBuilder {
     public Stage build() {
         LOG.info("Building Stage " + this.stageIdentifier);
         Stage stage = getStage(this.stageIdentifier);
-        Scene scene = aeSceneLoader.getScene(this.sceneIdentifier);
+        Scene scene = sceneLoader.getScene(this.sceneIdentifier);
 
         if (scene == null) {
             LOG.error("Scene could not be found");
@@ -73,7 +73,7 @@ public class StageBuilder {
         stage.setTitle(this.title);
         stage.setScene(scene);
         stage.setOnCloseRequest(this.onCloseHandler);
-        stage.setOnShowing((event -> AESceneLoader.getInstance().getController(sceneIdentifier).onShow()));
+        stage.setOnShowing((event -> SceneLoader.getInstance().getController(sceneIdentifier).onShow()));
         return stage;
 
     }

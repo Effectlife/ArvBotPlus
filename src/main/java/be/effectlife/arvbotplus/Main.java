@@ -2,7 +2,7 @@ package be.effectlife.arvbotplus;
 
 import be.effectlife.arvbotplus.controllers.scenes.DiceController;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
-import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.javafxextensions.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import javafx.application.Application;
@@ -30,7 +30,7 @@ public class Main extends Application {
 
         prepareStages();
         Properties properties = loadProperties();
-        InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+        InventoryController controller = (InventoryController) SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY);
         controller.setProperties(properties);
         controller.initializeSkillWidgets();
         stageMap.get(Stages.INVENTORY).show();
@@ -85,40 +85,40 @@ public class Main extends Application {
     }
 
     private void prepareStages() {
-        Stage pollStage = buildStage(Stages.POLL, Scenes.S_POLL, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
+        Stage pollStage = buildStage(Stages.POLL, ArvBotScenes.S_POLL, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
         pollStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_POLL).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_POLL.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_POLL).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_POLL.getMinWidth());
         });
-        Stage inventoryStage = buildStage(Stages.INVENTORY, Scenes.S_INVENTORY, CloseHandlers.SHUTDOWN);
+        Stage inventoryStage = buildStage(Stages.INVENTORY, ArvBotScenes.S_INVENTORY, CloseHandlers.SHUTDOWN);
         inventoryStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_INVENTORY).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_INVENTORY.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_INVENTORY.getMinWidth());
         });
         SaveManager.setInventoryStage(inventoryStage);
-        Stage diceStage = buildStage(Stages.DICE, Scenes.S_DICE, CloseHandlers.HIDE_ON_CLOSE);
+        Stage diceStage = buildStage(Stages.DICE, ArvBotScenes.S_DICE, CloseHandlers.HIDE_ON_CLOSE);
         diceStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_DICE).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_DICE.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_DICE).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_DICE.getMinWidth());
         });
         diceStage.widthProperty().addListener((observable, oldValue, newValue) -> {
-            DiceController diceController = (DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE);
+            DiceController diceController = (DiceController) SceneLoader.getInstance().getController(ArvBotScenes.S_DICE);
             diceController.reloadWidth((double) newValue * .8);
         });
-        Stage battleStage = buildStage(Stages.BATTLE, Scenes.S_BATTLE, CloseHandlers.HIDE_ON_CLOSE);
+        Stage battleStage = buildStage(Stages.BATTLE, ArvBotScenes.S_BATTLE, CloseHandlers.HIDE_ON_CLOSE);
         battleStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_BATTLE).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_BATTLE.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_BATTLE).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_BATTLE.getMinWidth());
         });
-        Stage conversionStage = buildStage(Stages.CONVERSION, Scenes.S_CONV, CloseHandlers.HIDE_ON_CLOSE);
+        Stage conversionStage = buildStage(Stages.CONVERSION, ArvBotScenes.S_CONV, CloseHandlers.HIDE_ON_CLOSE);
         conversionStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_CONV).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_CONV.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_CONV).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_CONV.getMinWidth());
         });
-        Stage questionStage = buildStage(Stages.QUESTIONS, Scenes.S_QUESTIONS, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
+        Stage questionStage = buildStage(Stages.QUESTIONS, ArvBotScenes.S_QUESTIONS, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
         questionStage.setOnShowing((e) -> {
-            AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS).onShow();
-            ((Stage) e.getSource()).setMinWidth(Scenes.S_QUESTIONS.getMinWidth());
+            SceneLoader.getInstance().getController(ArvBotScenes.S_QUESTIONS).onShow();
+            ((Stage) e.getSource()).setMinWidth(ArvBotScenes.S_QUESTIONS.getMinWidth());
         });
         LOG.info("Prepared {} stages", preparedStageCount);
     }

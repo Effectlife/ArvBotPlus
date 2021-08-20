@@ -6,18 +6,20 @@ import java.text.DecimalFormat;
 import java.text.ParsePosition;
 
 public class Formatters {
-    public static TextFormatter NumbersOnly = new TextFormatter<>(c -> {
-        if (c.getControlNewText().isEmpty()) {
-            return c;
-        }
+    public static TextFormatter<?> NumbersOnly() {
+        return new TextFormatter<>(c -> {
+            if (c.getControlNewText().isEmpty()) {
+                return c;
+            }
 
-        ParsePosition parsePosition = new ParsePosition(0);
-        Object object = new DecimalFormat("#.0").parse(c.getControlNewText(), parsePosition);
+            ParsePosition parsePosition = new ParsePosition(0);
+            Object object = new DecimalFormat("#.0").parse(c.getControlNewText(), parsePosition);
 
-        if (object == null || parsePosition.getIndex() < c.getControlNewText().length()) {
-            return null;
-        } else {
-            return c;
-        }
-    });
+            if (object == null || parsePosition.getIndex() < c.getControlNewText().length()) {
+                return null;
+            } else {
+                return c;
+            }
+        });
+    }
 }

@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -10,7 +10,6 @@ import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;

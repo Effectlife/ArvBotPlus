@@ -1,12 +1,13 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.Scenes;
 import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.PollType;
 import javafx.event.ActionEvent;
@@ -60,7 +61,7 @@ public class QuickPollWidgetController implements IController {
         btnQPLastCall.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_LASTCALL));
         totalVotes = votes1 = votes2 = 0;
         if (pollController == null) {
-            pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
+            pollController = (PollController) SceneLoader.getInstance().getController(ArvBotScenes.S_POLL);
         }
     }
 

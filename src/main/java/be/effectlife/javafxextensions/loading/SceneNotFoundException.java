@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 import java.io.IOException;
 

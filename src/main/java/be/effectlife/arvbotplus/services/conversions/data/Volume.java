@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.services.conversions.data;
 
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
 
 import java.util.Arrays;
 import java.util.List;

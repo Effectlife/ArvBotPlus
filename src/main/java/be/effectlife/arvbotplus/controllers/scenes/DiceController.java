@@ -1,8 +1,9 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.DiceResultController;
-import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.javafxextensions.loading.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -11,7 +12,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -94,7 +94,7 @@ public class DiceController implements IController {
         for (int i = diceResultControllers.size() - limit; i < diceResultControllers.size(); i++) {
             try {
                 diceResultControllers.get(i).reloadView();
-                vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
+                vboxHistory.getChildren().add(0, SceneLoader.getInstance().getScene(ArvBotScenes.W_DICERESULT, "_" + i).getRoot());
             } catch (IndexOutOfBoundsException ignored) {
             }
         }
@@ -131,7 +131,7 @@ public class DiceController implements IController {
         }
         result += modifier;
         //Add new Result
-        SceneContainer diceResult = AESceneLoader.getInstance().getSceneContainer(Scenes.W_DICERESULT, "_" + counter);
+        SceneContainer diceResult = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_DICERESULT, "_" + counter);
         counter++;
 
         DiceResultController diceResultController = (DiceResultController) diceResult.getController();

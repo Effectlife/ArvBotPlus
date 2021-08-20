@@ -1,13 +1,11 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
-import be.effectlife.arvbotplus.Main;
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
-import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
-import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.SceneContainer;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.SceneContainer;
+import be.effectlife.javafxextensions.loading.Scenes;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
@@ -19,7 +17,6 @@ import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class QuestionsController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(QuestionsController.class);
@@ -47,7 +44,7 @@ public class QuestionsController implements IController {
     @Override
     public void reloadView() {
         vboxQuestions.getChildren().clear();
-        questionsList.forEach(enemyController -> vboxQuestions.getChildren().add(AESceneLoader.getInstance().getScene(Scenes.W_QUESTION, "_" + enemyController.getId()).getRoot()));
+        questionsList.forEach(enemyController -> vboxQuestions.getChildren().add(SceneLoader.getInstance().getScene(ArvBotScenes.W_QUESTION, "_" + enemyController.getId()).getRoot()));
         textQuestionCounter.setText("Questions: " + questionsList.size());
     }
 
@@ -58,7 +55,7 @@ public class QuestionsController implements IController {
     }
 
     private void createWidget(int id, String displayName, String content, LocalTime timestamp) {
-        SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUESTION, "_" + id);
+        SceneContainer sceneContainer = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_QUESTION, "_" + id);
         QuestionWidgetController questionWidgetController = (QuestionWidgetController) sceneContainer.getController();
         questionsList.add(questionWidgetController);
         vboxQuestions.getChildren().add(sceneContainer.getScene().getRoot());

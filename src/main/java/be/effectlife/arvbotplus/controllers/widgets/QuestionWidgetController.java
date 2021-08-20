@@ -1,9 +1,10 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.QuestionsController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.Scenes;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -70,7 +71,7 @@ public class QuestionWidgetController implements IController {
 
     @FXML
     void onRemove(ActionEvent event) {
-        ((QuestionsController) AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS)).remove(id);
+        ((QuestionsController) SceneLoader.getInstance().getController(ArvBotScenes.S_QUESTIONS)).remove(id);
     }
 
     public int getId() {

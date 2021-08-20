@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 public enum MessageKey {
     SCENE_BATTLE_BUTTON_ADD("scene.battle.button.add"),

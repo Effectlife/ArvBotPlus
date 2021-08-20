@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import javafx.fxml.FXMLLoader;
@@ -11,17 +11,21 @@ import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AESceneLoader {
-    private static final Map<String, SceneContainer> scenes = new HashMap<>();
-    private static final Logger LOG = LoggerFactory.getLogger(AESceneLoader.class);
+public class SceneLoader {
+    private final Map<String, SceneContainer> scenes;
+    private static final Logger LOG = LoggerFactory.getLogger(SceneLoader.class);
 
-    private static AESceneLoader instance;
+    private static SceneLoader instance;
 
-    public static AESceneLoader getInstance() {
+    public static SceneLoader getInstance() {
         if (instance == null) {
-            instance = new AESceneLoader();
+            instance = new SceneLoader();
         }
         return instance;
+    }
+
+    private SceneLoader(){
+        scenes = new HashMap<>();
     }
 
     public Scene getScene(Scenes scene) {
@@ -30,7 +34,7 @@ public class AESceneLoader {
 
     public Scene getScene(Scenes scene, String suffix) {
         if (scenes.containsKey(scene.toString() + suffix)) {
-            return scenes.get(scene.toString() + suffix).getScene();
+            return scenes.get(scene + suffix).getScene();
         }
         try {
             return loadScene(scene.toString(), suffix).getScene();
@@ -76,7 +80,7 @@ public class AESceneLoader {
     private SceneContainer loadScene(String sceneName, String addon) throws SceneNotFoundException {
         String fileName = sceneName;
         if (!fileName.endsWith(".fxml")) fileName += ".fxml"; //Adds .fxml extension if it is not present
-        URL url = AESceneLoader.class.getClassLoader().getResource("scenes/" + fileName);
+        URL url = SceneLoader.class.getClassLoader().getResource("scenes/" + fileName);
 //        URL url = AESceneLoader.class.getClassLoader().getResource("Scenes/" + fileName);
 
         if (url == null) {
@@ -87,7 +91,7 @@ public class AESceneLoader {
         SceneContainer container = null;
         try {
             Scene s = new Scene(loader.load());
-            s.getStylesheets().add(AESceneLoader.class.getResource("/css/bootstrap3-dark.css").toExternalForm());
+            s.getStylesheets().add(SceneLoader.class.getResource("/css/bootstrap3-dark.css").toExternalForm());
             container = new SceneContainer(s, loader.getController());
             scenes.put(sceneName + addon, container);
         } catch (IOException e) {

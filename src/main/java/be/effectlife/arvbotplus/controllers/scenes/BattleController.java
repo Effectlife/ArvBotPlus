@@ -1,8 +1,9 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.EnemyController;
-import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.javafxextensions.loading.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -35,16 +36,20 @@ public class BattleController implements IController {
     @FXML
     private VBox vboxEnemies;
 
-    private List<EnemyController> enemyControllerList;
+    private final List<EnemyController> enemyControllerList;
+
+    public BattleController() {
+        enemyControllerList = new ArrayList<>();
+    }
 
     @FXML
-    void btnAdd_Clicked(ActionEvent event) {
+    void btnAddClick(ActionEvent event) {
         createWidget(enemyControllerList.size());
         reloadView();
     }
 
     @FXML
-    void btnRemove_Clicked(ActionEvent event) {
+    void btnRemoveClick(ActionEvent event) {
         if (enemyControllerList.size() <= 1) return; // never remove the first option
         EnemyController controllerToRemove = enemyControllerList.get(enemyControllerList.size() - 1);
         for (Node child : vboxEnemies.getChildren()) {
@@ -58,7 +63,7 @@ public class BattleController implements IController {
     }
 
     @FXML
-    void btnClear_Clicked(ActionEvent event) {
+    void btnClearClick(ActionEvent event) {
         enemyControllerList.forEach(EnemyController::clear);
     }
 
@@ -69,9 +74,7 @@ public class BattleController implements IController {
         btnRemove.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_BUTTON_REMOVE));
         textVal1.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_1));
         textVal2.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_2));
-
-        enemyControllerList = new ArrayList<>();
-        btnAdd_Clicked(null);
+        btnAddClick(null);
     }
 
     @Override
@@ -82,12 +85,12 @@ public class BattleController implements IController {
     @Override
     public void reloadView() {
         vboxEnemies.getChildren().clear();
-        enemyControllerList.forEach(enemyController -> vboxEnemies.getChildren().add(AESceneLoader.getInstance().getScene(Scenes.W_ENEMY, "_" + enemyController.getId()).getRoot()));
+        enemyControllerList.forEach(enemyController -> vboxEnemies.getChildren().add(SceneLoader.getInstance().getScene(ArvBotScenes.W_ENEMY, "_" + enemyController.getId()).getRoot()));
 
     }
 
     private void createWidget(int id) {
-        SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_ENEMY, "_" + id);
+        SceneContainer sceneContainer = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_ENEMY, "_" + id);
         EnemyController enemyController = (EnemyController) sceneContainer.getController();
         enemyControllerList.add(enemyController);
         vboxEnemies.getChildren().add(sceneContainer.getScene().getRoot());

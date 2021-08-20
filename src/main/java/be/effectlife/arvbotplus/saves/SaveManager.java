@@ -1,10 +1,9 @@
 package be.effectlife.arvbotplus.saves;
 
-import be.effectlife.arvbotplus.controllers.IController;
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
-import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.Scenes;
 import be.effectlife.arvbotplus.saves.models.Save;
 import be.effectlife.arvbotplus.saves.models.Skill;
 import com.google.gson.Gson;
@@ -13,7 +12,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.*;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -34,7 +32,7 @@ public abstract class SaveManager {
         if (file != null) {
             //File has been chosen
             //Compile all information about the inventory
-            InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+            InventoryController controller = (InventoryController) SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY);
             String name = controller.getName();
             String itemsArtifacts = controller.getItemsArtifacts();
             String cluesNotes = controller.getCluesNotes();
@@ -67,7 +65,7 @@ public abstract class SaveManager {
             //Compile all information about the inventory
             try {
                 Save save = new Gson().fromJson(new FileReader(file), Save.class);
-                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                InventoryController controller = (InventoryController) SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY);
                 controller.hardReset();
                 controller.load(save);
             } catch (FileNotFoundException e) {

@@ -1,8 +1,8 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
 import be.effectlife.arvbotplus.services.ConversionResult;
 import be.effectlife.arvbotplus.services.ConversionService;
 import be.effectlife.arvbotplus.services.conversions.data.CType;

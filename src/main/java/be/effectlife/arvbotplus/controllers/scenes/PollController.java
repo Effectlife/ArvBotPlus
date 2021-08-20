@@ -1,10 +1,11 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
-import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.javafxextensions.loading.*;
 import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.Formatters;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
@@ -15,7 +16,6 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.GridPane;
@@ -183,13 +183,13 @@ public class PollController implements IController {
 
     @Override
     public void doInit() {
-        SceneContainer quickPollContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUICKPOLL);
+        SceneContainer quickPollContainer = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_QUICKPOLL);
         Region quickPollRegion = (Region) quickPollContainer.getScene().getRoot();
         setDefaultSize(quickPollRegion);
         gpBase.add(quickPollRegion, 0, 1, 2, 1);
         this.quickPollWidget = (QuickPollWidgetController) quickPollContainer.getController();
         options = 8;
-        tfOptions.setTextFormatter(Formatters.NumbersOnly);
+        tfOptions.setTextFormatter(Formatters.NumbersOnly());
         tfOptions.focusedProperty().addListener((obs, oldVal, newVal) -> {
                     if (!newVal) PollController.this.tfOptions_Action(null);
                 }
@@ -212,7 +212,7 @@ public class PollController implements IController {
         pollWidgetControllerList.clear();
         vboxPollOptions.getChildren().clear();
         for (int i = 0; i < options; i++) {
-            SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_POLL, "_" + i);
+            SceneContainer sceneContainer = SceneLoader.getInstance().getSceneContainer(ArvBotScenes.W_POLL, "_" + i);
             vboxPollOptions.getChildren().add(sceneContainer.getScene().getRoot());
             setDefaultSize((Region) sceneContainer.getScene().getRoot());
             pollWidgetControllerList.add((PollWidgetController) sceneContainer.getController());

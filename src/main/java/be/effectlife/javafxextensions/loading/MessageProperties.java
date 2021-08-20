@@ -1,11 +1,10 @@
-package be.effectlife.arvbotplus.loading;
+package be.effectlife.javafxextensions.loading;
 
 import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.twirk.commands.ABPCommand;
 import be.effectlife.arvbotplus.twirk.commands.ChangeVoteCommand;
 import be.effectlife.arvbotplus.twirk.commands.ConvCommand;
 import be.effectlife.arvbotplus.twirk.commands.VoteCommand;
-import com.gikk.twirk.commands.CommandExampleBase;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

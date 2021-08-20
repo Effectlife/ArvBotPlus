@@ -1,11 +1,12 @@
 package be.effectlife.arvbotplus.twirk;
 
+import be.effectlife.arvbotplus.ArvBotScenes;
 import be.effectlife.arvbotplus.controllers.scenes.ConversionController;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
-import be.effectlife.arvbotplus.loading.AESceneLoader;
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
-import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.javafxextensions.loading.SceneLoader;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.Scenes;
 import be.effectlife.arvbotplus.twirk.commands.*;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import com.gikk.twirk.Twirk;
@@ -46,7 +47,7 @@ public class TwirkSystem {
         Thread.sleep(500L);
         new Thread(() -> {
             Platform.runLater(() -> {
-                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                InventoryController controller = (InventoryController) SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY);
                 controller.disableTwirkMenus(true);
             });
             boolean connection = false;
@@ -70,7 +71,7 @@ public class TwirkSystem {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_STARTUP, params));
             Platform.runLater(callingStage::show);
             Platform.runLater(() -> {
-                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                InventoryController controller = (InventoryController) SceneLoader.getInstance().getController(ArvBotScenes.S_INVENTORY);
                 controller.disableTwirkMenus(false);
             });
 
@@ -108,7 +109,7 @@ public class TwirkSystem {
                 twirk.disconnect();
                 if (exit) Platform.exit();
                 twirk = null;
-                ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
+                ((ConversionController) SceneLoader.getInstance().getController(ArvBotScenes.S_CONV)).checkTwirk();
             }).start();
         }
     }

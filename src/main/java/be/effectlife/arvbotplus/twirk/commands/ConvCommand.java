@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.loading.MessageKey;
-import be.effectlife.arvbotplus.loading.MessageProperties;
+import be.effectlife.javafxextensions.loading.MessageKey;
+import be.effectlife.javafxextensions.loading.MessageProperties;
 import be.effectlife.arvbotplus.services.ConversionResult;
 import be.effectlife.arvbotplus.services.ConversionService;
 import com.gikk.twirk.Twirk;
