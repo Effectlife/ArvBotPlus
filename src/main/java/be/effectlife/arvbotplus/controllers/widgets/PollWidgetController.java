@@ -141,4 +141,8 @@ public class PollWidgetController implements IController {
     public boolean isCleared() {
         return spinnerVotes.getValue() == 0 && pBarVotes.getProgress() == 0;
     }
+
+    public void setOptionText(String s) {
+        tfOption.setText(s);
+    }
 }

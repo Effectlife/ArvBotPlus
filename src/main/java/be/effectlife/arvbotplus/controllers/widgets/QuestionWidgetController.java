@@ -82,10 +82,27 @@ public class QuestionWidgetController implements IController {
         this.id = id;
     }
 
-    public void setData(String displayName, String content, LocalTime timestamp) {
+    public void setData(String displayName, String content, String timestamp, boolean answered) {
         textUsername.setText(displayName);
         textAreaQuestion.setText(content);
-        textTimestamp.setText(timestamp.format(DateTimeFormatter.ofPattern("h:mma")));
+        textTimestamp.setText(timestamp);
+        isAnswered = answered;
         onAnswered(null);
+    }
+
+    public String getUsername() {
+        return textUsername.getText();
+    }
+
+    public String getTimestamp() {
+        return textTimestamp.getText();
+    }
+
+    public String getQuestion() {
+        return textAreaQuestion.getText();
+    }
+
+    public boolean isAnswered() {
+        return isAnswered;
     }
 }

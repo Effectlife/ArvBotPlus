@@ -1,13 +1,13 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
-import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
-import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuestionWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.SceneContainer;
 import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.saves.SaveManager;
+import be.effectlife.arvbotplus.saves.models.QuestionSave;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.VBox;
@@ -15,10 +15,7 @@ import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class QuestionsController implements IController {
@@ -32,6 +29,17 @@ public class QuestionsController implements IController {
 
     private List<QuestionWidgetController> questionsList;
     private int questionCounter = 0;
+
+    @FXML
+    void btnLoad_Clicked(ActionEvent event) {
+        SaveManager.loadQuestions();
+    }
+
+    @FXML
+    void btnSave_Clicked(ActionEvent event) {
+        SaveManager.saveQuestions();
+    }
+
 
     @Override
     public void doInit() {
@@ -51,19 +59,23 @@ public class QuestionsController implements IController {
         textQuestionCounter.setText("Questions: " + questionsList.size());
     }
 
-    public void addQuestion(String displayName, String content, LocalTime timestamp) {
+    public void addQuestion(String displayName, String content, String timestamp) {
+        addQuestion(displayName, content, timestamp, true);
+    }
+
+    public void addQuestion(String displayName, String content, String timestamp, boolean answered) {
         questionCounter++;
-        createWidget(questionCounter, displayName, content, timestamp);
+        createWidget(questionCounter, displayName, content, timestamp, answered);
         reloadView();
     }
 
-    private void createWidget(int id, String displayName, String content, LocalTime timestamp) {
+    private void createWidget(int id, String displayName, String content, String timestamp, boolean answered) {
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUESTION, "_" + id);
         QuestionWidgetController questionWidgetController = (QuestionWidgetController) sceneContainer.getController();
         questionsList.add(questionWidgetController);
         vboxQuestions.getChildren().add(sceneContainer.getScene().getRoot());
         sceneContainer.getScene().getRoot().setUserData(id);
-        questionWidgetController.setData(displayName, content, timestamp);
+        questionWidgetController.setData(displayName, content, timestamp, answered);
         questionWidgetController.setId(id);
         questionWidgetController.reloadView();
     }
@@ -80,5 +92,17 @@ public class QuestionsController implements IController {
             }
         });
         reloadView();
+    }
+
+    public List<QuestionWidgetController> getQuestions() {
+        return questionsList;
+    }
+
+    public void load(QuestionSave questionSave) {
+        questionsList.stream().map(QuestionWidgetController::getId).collect(Collectors.toList()).forEach(this::remove);
+        questionCounter = 0;
+        questionSave.getQuestions().forEach((questionSaveItem -> {
+            addQuestion(questionSaveItem.getUsername(), questionSaveItem.getQuestion(), questionSaveItem.getTimestamp(), questionSaveItem.isAnswered());
+        }));
     }
 }

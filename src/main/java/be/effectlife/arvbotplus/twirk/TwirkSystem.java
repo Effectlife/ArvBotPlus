@@ -30,6 +30,11 @@ public class TwirkSystem {
         this.disable = disable;
         if (this.disable) {
             LOG.debug("Disabled twirk system");
+            Platform.runLater(callingStage::show);
+            Platform.runLater(() -> {
+                InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
+                controller.disableTwirkMenus(false);
+            });
             return;
         }
         String channel = properties.getProperty("twitch.channel");

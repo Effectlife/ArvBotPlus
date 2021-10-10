@@ -2,7 +2,7 @@ package be.effectlife.arvbotplus.saves.models;
 
 import java.util.List;
 
-public class Save {
+public class GameSave {
     private String name;
     private String itemsArtifacts;
     private String cluesNotes;
@@ -40,10 +40,10 @@ public class Save {
         this.skills = skills;
     }
 
-    public Save() {
+    public GameSave() {
     }
 
-    public Save(String name, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
+    public GameSave(String name, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
         this.name = name;
         this.itemsArtifacts = itemsArtifacts;
         this.cluesNotes = cluesNotes;

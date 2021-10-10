@@ -13,81 +13,88 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Text?>
 
-<GridPane fx:id="gpBase" hgap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-          fx:controller="be.effectlife.arvbotplus.controllers.scenes.PollController">
+<GridPane fx:id="gpBase" hgap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.PollController">
     <columnConstraints>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308"/>
-        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity"/>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="1.7976931348623157E308" />
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" maxWidth="-Infinity" minWidth="-Infinity" />
     </columnConstraints>
     <rowConstraints>
-        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES"/>
-        <RowConstraints minHeight="-Infinity"/>
-        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES"/>
-        <RowConstraints vgrow="SOMETIMES"/>
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        <RowConstraints minHeight="-Infinity" />
+        <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+        <RowConstraints vgrow="SOMETIMES" />
     </rowConstraints>
     <padding>
-        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0"/>
+        <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
     </padding>
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" minWidth="-Infinity" vbarPolicy="ALWAYS" GridPane.columnSpan="2147483647" GridPane.rowIndex="3">
         <opaqueInsets>
-            <Insets/>
+            <Insets />
         </opaqueInsets>
-        <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="1.0"/>
+        <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="1.0" />
     </ScrollPane>
-    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="container-pane" GridPane.rowIndex="2"/>
+    <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="container-pane" GridPane.rowIndex="2" />
     <GridPane styleClass="container-pane" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
         <columnConstraints>
-            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0"/>
+            <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <HBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity">
-            <Text fx:id="textConnectedTo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Connected to: "/>
-            <Pane prefHeight="0.0" prefWidth="3.0"/>
+            <Text fx:id="textConnectedTo" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Connected to: " />
+            <Pane prefHeight="0.0" prefWidth="3.0" />
             <Text fx:id="textConnection" strokeType="OUTSIDE" strokeWidth="0.0" text="placeholder">
                 <styleClass>
-                    <String fx:value="white-text"/>
-                    <String fx:value="italics"/>
-                    <String fx:value="text-bold"/>
+                    <String fx:value="white-text" />
+                    <String fx:value="italics" />
+                    <String fx:value="text-bold" />
                 </styleClass>
             </Text>
         </HBox>
     </GridPane>
     <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="2">
         <columnConstraints>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="70.0" prefWidth="70.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="30.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="30.0"/>
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0"/>
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="70.0" prefWidth="70.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="30.0" />
+            <ColumnConstraints hgrow="SOMETIMES" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="60.0" />
         </columnConstraints>
         <rowConstraints>
-            <RowConstraints minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES"/>
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+            <RowConstraints minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+         <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
         <padding>
-            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
+            <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
         </padding>
-        <Button fx:id="btnClearAll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnClearAll_Clicked"
-                prefHeight="26.0" text="Clear All" textAlignment="CENTER" GridPane.rowIndex="1">
+        <Button fx:id="btnClearAll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnClearAll_Clicked" prefHeight="26.0" text="Clear All" textAlignment="CENTER" GridPane.rowIndex="1">
             <padding>
-                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0"/>
+                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
-        <TextField fx:id="taQuestion" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="10.0" prefHeight="27.0" promptText="What should we do/say?" GridPane.columnSpan="3"/>
-        <TextField fx:id="tfOptions" onAction="#tfOptions_Action" prefHeight="27.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-        <Text fx:id="textOptions" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Options" textAlignment="CENTER" wrappingWidth="60.0" GridPane.columnIndex="3"/>
-        <Button fx:id="btnOpenClosePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false"
-                onAction="#btnOpenClosePoll_Clicked" prefHeight="26.0" text="Open Poll" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <TextField fx:id="taQuestion" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="10.0" prefHeight="27.0" promptText="What should we do/say?" GridPane.columnSpan="3" />
+        <TextField fx:id="tfOptions" onAction="#tfOptions_Action" prefHeight="27.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <Text fx:id="textOptions" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Options" textAlignment="CENTER" wrappingWidth="60.0" GridPane.columnIndex="3" />
+        <Button fx:id="btnOpenClosePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpenClosePoll_Clicked" prefHeight="26.0" text="Open Poll" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <padding>
-                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0"/>
+                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
-        <Button fx:id="btnLastCall" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLastCall_Clicked"
-                prefHeight="26.0" text="Last Call" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Button fx:id="btnLastCall" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLastCall_Clicked" prefHeight="26.0" text="Last Call" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <padding>
-                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0"/>
+                <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
+      <Button fx:id="btnSavePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSavePoll_Clicked" prefHeight="26.0" text="Save" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <padding>
+            <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+         </padding>
+      </Button>
+      <Button fx:id="btnLoadPoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLoadPoll_Clicked" prefHeight="26.0" text="Load" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+         <padding>
+            <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
+         </padding>
+      </Button>
     </GridPane>
 </GridPane>

@@ -15,7 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.time.LocalTime;
-import java.util.Collections;
+import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class QuestionCommand extends CommandExampleBase {
@@ -51,11 +51,11 @@ public class QuestionCommand extends CommandExampleBase {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUESTION_HELP, options));
             return;
         }
-        Platform.runLater(() -> generateQuestionWidget(sender.getDisplayName(), contentFiltered, LocalTime.now()));
+        Platform.runLater(() -> generateQuestionWidget(sender.getDisplayName(), contentFiltered, LocalTime.now().format(DateTimeFormatter.ofPattern("h:mma"))));
         channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUESTION_CONFIRMATION, options));
     }
 
-    private void generateQuestionWidget(String displayName, String content, LocalTime timestamp) {
+    private void generateQuestionWidget(String displayName, String content, String timestamp) {
         QuestionsController questionsController = (QuestionsController) AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS);
         questionsController.addQuestion(displayName, content, timestamp);
     }

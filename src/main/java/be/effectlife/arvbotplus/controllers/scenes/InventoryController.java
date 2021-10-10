@@ -5,7 +5,7 @@ import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
-import be.effectlife.arvbotplus.saves.models.Save;
+import be.effectlife.arvbotplus.saves.models.GameSave;
 import be.effectlife.arvbotplus.saves.models.Skill;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
@@ -167,7 +167,7 @@ public class InventoryController implements IController {
             new Thread(() -> {
                 twirkSystem = new TwirkSystem();
                 try {
-                    twirkSystem.initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.enabled", false).toString()));
+                    twirkSystem.initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
                     ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
                 } catch (IOException | InterruptedException e) {
                     e.printStackTrace();
@@ -356,11 +356,11 @@ public class InventoryController implements IController {
         return skillWidgetControllerList;
     }
 
-    public void load(Save save) {
-        textName.setText(save.getName());
-        taItemsArtifacts.setText(save.getItemsArtifacts());
-        taCluesNotes.setText(save.getCluesNotes());
-        List<Skill> skills = save.getSkills();
+    public void load(GameSave gameSave) {
+        textName.setText(gameSave.getName());
+        taItemsArtifacts.setText(gameSave.getItemsArtifacts());
+        taCluesNotes.setText(gameSave.getCluesNotes());
+        List<Skill> skills = gameSave.getSkills();
         for (int i = 0, skillsSize = skills.size(); i < skillsSize; i++) {
             Skill skill = skills.get(i);
             createWidget(i, skill.getName(), skill.getValue(), skill.getMaxValue(), skill.getSkillType(), skill.isUsesColor());

@@ -4,7 +4,7 @@ import org.apache.commons.lang3.StringUtils;
 
 public enum Scenes {
 
-    S_POLL("s_poll", "Polls", 350),
+    S_POLL("s_poll", "Polls", 450),
     S_INVENTORY("s_inventory", "Inventory", 510),
     S_DICE("s_dice", "Dice Roller", 250),
     S_CONV("s_conv", "Conversions", 200),
