@@ -139,6 +139,8 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) {
+        LOG.info("-------------------");
+        LOG.info("Starting ArvBotPlus");
         launch(args);
     }
 }
