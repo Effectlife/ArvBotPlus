@@ -9,9 +9,9 @@ public class PollSave {
     private static final Logger LOG = LoggerFactory.getLogger(PollSave.class);
     int optionCount;
     String question;
-    List<String> options;
+    List<PollOption> options;
 
-    public PollSave(int optionCount, String question, List<String> options) {
+    public PollSave(int optionCount, String question, List<PollOption> options) {
         this.optionCount = optionCount;
         this.question = question;
         this.options = options;
@@ -33,11 +33,11 @@ public class PollSave {
         this.question = question;
     }
 
-    public List<String> getOptions() {
+    public List<PollOption> getOptions() {
         return options;
     }
 
-    public void setOptions(List<String> options) {
+    public void setOptions(List<PollOption> options) {
         this.options = options;
     }
 }

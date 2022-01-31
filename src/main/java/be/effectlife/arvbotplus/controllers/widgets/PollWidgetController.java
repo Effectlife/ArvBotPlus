@@ -18,6 +18,7 @@ import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 public class PollWidgetController implements IController {
@@ -112,7 +113,7 @@ public class PollWidgetController implements IController {
 
     public void setOptionId(int optionId) {
         this.optionId = optionId;
-        textId.setText(optionId+1+"");
+        textId.setText(optionId + 1 + "");
     }
 
     public Set<String> getVoters() {
@@ -144,5 +145,14 @@ public class PollWidgetController implements IController {
 
     public void setOptionText(String s) {
         tfOption.setText(s);
+    }
+
+    public void setVoters(List<String> voters) {
+        this.voters.clear();
+        this.voters.addAll(voters);
+    }
+
+    public void setVotes(int votes) {
+        spinnerVotes.getValueFactory().setValue(votes);
     }
 }

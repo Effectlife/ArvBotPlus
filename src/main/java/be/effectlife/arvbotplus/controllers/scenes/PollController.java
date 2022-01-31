@@ -6,6 +6,7 @@ import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
+import be.effectlife.arvbotplus.saves.models.PollOption;
 import be.effectlife.arvbotplus.saves.models.PollSave;
 import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.Formatters;
@@ -375,10 +376,11 @@ public class PollController implements IController {
         return taQuestion.getText().trim();
     }
 
-    public List<String> getOptions() {
-        List<String> options = new ArrayList<>();
+    public List<PollOption> getOptions() {
+        List<PollOption> options = new ArrayList<>();
         for (int i = 0; i < getOptionCount(); i++) {
-            options.add(pollWidgetControllerList.get(i).getOptionText());
+            PollWidgetController optionController = pollWidgetControllerList.get(i);
+            options.add(new PollOption(optionController.getOptionText(), optionController.getVotes(), new ArrayList<>(optionController.getVoters())));
         }
         return options;
     }
@@ -389,7 +391,11 @@ public class PollController implements IController {
         tfOptions.setText(pollSave.getOptionCount() + "");
         tfOptions_Action(null);
         for (int i = 0; i < pollSave.getOptions().size(); i++) {
-            pollWidgetControllerList.get(i).setOptionText(pollSave.getOptions().get(i));
+            PollOption pollOption = pollSave.getOptions().get(i);
+            PollWidgetController optionController = pollWidgetControllerList.get(i);
+            optionController.setOptionText(pollOption.getOptionText());
+            optionController.setVoters(pollOption.getVoters());
+            optionController.setVotes(pollOption.getVotes());
         }
         taQuestion.setText(pollSave.getQuestion());
     }
