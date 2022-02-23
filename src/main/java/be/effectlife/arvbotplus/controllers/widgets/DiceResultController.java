@@ -2,7 +2,6 @@ package be.effectlife.arvbotplus.controllers.widgets;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.utilities.ColorEnum;
-import be.effectlife.arvbotplus.utilities.ColorHelper;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Worker;
@@ -10,13 +9,14 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.scene.web.WebView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.Set;
+
+import static be.effectlife.arvbotplus.utilities.ColorHelper.retrieveColor;
 
 public class DiceResultController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(DiceResultController.class);
@@ -51,10 +51,10 @@ public class DiceResultController implements IController {
 
     public String loadStyle() {
         try {
-            String crit = retrieveColor(ColorEnum.CRIT).toString().replace("0x", "#");
-            String success = retrieveColor(ColorEnum.SUCCESS).toString().replace("0x", "#");
-            String background = retrieveColor(ColorEnum.BACKGROUND).toString().replace("0x", "#");
-            String text = retrieveColor(ColorEnum.TEXT).toString().replace("0x", "#");
+            String crit = retrieveColor(ColorEnum.CRIT);
+            String success = retrieveColor(ColorEnum.SUCCESS);
+            String background = retrieveColor(ColorEnum.BACKGROUND);
+            String text = retrieveColor(ColorEnum.TEXT);
             return String.format("<!DOCTYPE html><head><style>*{background-color:%s;text-align:center;font-family: Helvetica, Arial, Sans-Serif;}p{color:%s;}.color-crit{color:%s;}.color-success{color:%s;}</style></head>", background, text, crit, success);
         } catch (NullPointerException ignored) {
         }
@@ -82,7 +82,6 @@ public class DiceResultController implements IController {
                 if (newState == Worker.State.SUCCEEDED) {
                     double height = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px", ""));
                     double height2 = Double.parseDouble(webView.getEngine().executeScript("window.getComputedStyle(document.body, null).getPropertyValue('height')").toString().replace("px", "")); //Sometimes the height is retrieved way too high
-//((HTMLDivElementImpl) webView.getEngine().getDocument().getElementById("mydiv")).getClientHeight();
                     Platform.runLater(() -> webView.setPrefHeight(Math.min(height, height2) + 18));
                 }
             });
@@ -94,20 +93,6 @@ public class DiceResultController implements IController {
 
     public void setTextTemplate(String textTemplate) {
         this.textTemplate.setText(textTemplate);
-    }
-
-    private Color retrieveColor(ColorEnum color) {
-        switch (color) {
-            case CRIT:
-                return ColorHelper.getColorForName("crit");
-            case SUCCESS:
-                return ColorHelper.getColorForName("success");
-            case BACKGROUND:
-                return ColorHelper.getColorForName("background");
-            case TEXT:
-                return ColorHelper.getColorForName("text-main");
-        }
-        return Color.PURPLE;
     }
 
     public void reloadWidth(double newValue) {

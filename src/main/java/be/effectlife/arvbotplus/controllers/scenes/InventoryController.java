@@ -8,9 +8,7 @@ import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.GameSave;
 import be.effectlife.arvbotplus.saves.models.Skill;
 import be.effectlife.arvbotplus.twirk.TwirkSystem;
-import be.effectlife.arvbotplus.utilities.JFXExtensions;
-import be.effectlife.arvbotplus.utilities.SimplePopup;
-import be.effectlife.arvbotplus.utilities.SkillType;
+import be.effectlife.arvbotplus.utilities.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -25,6 +23,8 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -35,8 +35,9 @@ import static be.effectlife.arvbotplus.Main.twirkSystem;
 
 
 public class InventoryController implements IController {
-
+    private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
     private List<SkillWidgetController> skillWidgetControllerList;
+    private List<SkillWidgetController> removedControllerList;
 
     //region FXML Definitions
 
@@ -104,6 +105,7 @@ public class InventoryController implements IController {
     private MenuItem menuAbout;
 
     private Properties properties;
+    private String highlight;
     //endregion
 
 
@@ -126,13 +128,14 @@ public class InventoryController implements IController {
         tfName.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_PLACEHOLDER));
         textClues.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_CLUESANDNOTES));
         textItems.setText(MessageProperties.getString(MessageKey.SCENE_INVENTORY_TEXT_ITEMSANDARTIFACTS));
-
         skillWidgetControllerList = new ArrayList<>();
+        removedControllerList = new ArrayList<>();
         tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
                 tfName_Clicked();
             }
         }));
+        highlight = ColorHelper.retrieveColor(ColorEnum.HIGHLIGHT);
     }
 
     @FXML
@@ -213,7 +216,8 @@ public class InventoryController implements IController {
         SkillWidgetController controllerToRemove = skillWidgetControllerList.get(skillWidgetControllerList.size() - 1);
         for (Node child : vboxSkillOptions.getChildren()) {
             if (Integer.parseInt(child.getUserData().toString()) == controllerToRemove.getId()) {
-                vboxSkillOptions.getChildren().remove(child);
+                vboxSkillOptions.getChildren().clear();
+                removedControllerList.add(controllerToRemove);
                 skillWidgetControllerList.remove(controllerToRemove);
                 break;
             }
@@ -254,11 +258,14 @@ public class InventoryController implements IController {
 
 
     private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
+        if(!removedControllerList.isEmpty()){
+            SkillWidgetController remove = removedControllerList.remove(0);
+            id = remove.getId();
+        }
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
         SkillWidgetController skillWidgetController = (SkillWidgetController) sceneContainer.getController();
         skillWidgetControllerList.add(skillWidgetController);
         Parent root = sceneContainer.getScene().getRoot();
-        vboxSkillOptions.getChildren().add(root);
         root.setUserData(id);
         root.toFront();
         skillWidgetController.setId(id);
@@ -286,6 +293,7 @@ public class InventoryController implements IController {
             skillWidgetController.setUseColors(useColors);
         }
         skillWidgetController.reloadView();
+        reloadView();
     }
 
     @FXML
@@ -336,7 +344,7 @@ public class InventoryController implements IController {
     @Override
     public void reloadView() {
         vboxSkillOptions.getChildren().clear();
-        skillWidgetControllerList.forEach(skillWidgetController -> vboxSkillOptions.getChildren().add(AESceneLoader.getInstance().getScene(Scenes.W_SKILL, "_" + skillWidgetController.getId()).getRoot()));
+        skillWidgetControllerList.forEach(skillWidgetController -> addWithDragging(vboxSkillOptions, AESceneLoader.getInstance().getScene(Scenes.W_SKILL, "_" + skillWidgetController.getId()).getRoot()));
     }
 
 
@@ -376,5 +384,42 @@ public class InventoryController implements IController {
     public void disableTwirkMenus(boolean disable) {
         menuPolls.setDisable(disable);
         menuQuestions.setDisable(disable);
+    }
+
+    private void addWithDragging(final VBox root, final Parent node) {
+        node.setOnDragDetected(event -> {
+            node.startFullDrag();
+        });
+
+        // next two handlers just an idea how to show the drop target visually:
+        node.setOnMouseDragEntered(event -> {
+            node.getChildrenUnmodifiable().forEach((child) -> child.setMouseTransparent(true));
+            node.setStyle("-fx-border-color: " + highlight + "; -fx-border-width: 0 0 2 0;");
+        });
+        node.setOnMouseDragExited(event -> {
+            node.getChildrenUnmodifiable().forEach((child) -> child.setMouseTransparent(false));
+            node.setStyle("");
+        });
+
+        node.setOnMouseDragReleased(event -> {
+            node.setStyle("");
+            int indexOfDraggingNode = root.getChildren().indexOf(event.getGestureSource());
+            int indexOfDropTarget = root.getChildren().indexOf(node);
+            if(indexOfDropTarget<indexOfDraggingNode)indexOfDropTarget++;
+            rotateNodes(root, indexOfDraggingNode, indexOfDropTarget);
+            event.consume();
+        });
+        root.getChildren().add(node);
+    }
+
+    private void rotateNodes(final VBox root, final int indexOfDraggingNode,
+                             final int indexOfDropTarget) {
+        if (indexOfDraggingNode >= 0 && indexOfDropTarget >= 0) {
+            final Node node = root.getChildren().remove(indexOfDraggingNode);
+            root.getChildren().add(indexOfDropTarget, node);
+            SkillWidgetController controller = skillWidgetControllerList.remove(indexOfDraggingNode);
+            skillWidgetControllerList.add(indexOfDropTarget, controller);
+            reloadView();
+        }
     }
 }

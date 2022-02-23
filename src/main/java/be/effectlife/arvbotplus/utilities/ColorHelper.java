@@ -11,12 +11,12 @@ import java.util.stream.Collectors;
 
 public abstract class ColorHelper {
     private static List<String> list;
+
     static {
         try {
-
             List<String> doc;
             try (InputStream resource = ColorHelper.class.getResourceAsStream("/css/bootstrap3-dark.css")) {
-                 doc =
+                doc =
                         new BufferedReader(new InputStreamReader(resource,
                                 StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
             }
@@ -31,7 +31,7 @@ public abstract class ColorHelper {
         }
     }
 
-    public static Color getColorForName(String colorname) {
+    private static Color getColorForName(String colorname) {
         for (String s : list) {
             if (s.startsWith("-color-" + colorname.trim() + ":")) {
                 String data = s.substring(s.indexOf(':') + 2);
@@ -44,5 +44,27 @@ public abstract class ColorHelper {
             }
         }
         return null;
+    }
+
+    public static String retrieveColor(ColorEnum color) {
+        Color color1 = Color.PURPLE;
+        switch (color) {
+            case CRIT:
+                color1 = ColorHelper.getColorForName("crit");
+                break;
+            case SUCCESS:
+                color1 = ColorHelper.getColorForName("success");
+                break;
+            case BACKGROUND:
+                color1 = ColorHelper.getColorForName("background");
+                break;
+            case TEXT:
+                color1 = ColorHelper.getColorForName("text-main");
+                break;
+            case HIGHLIGHT:
+                color1 = ColorHelper.getColorForName("bottombutton");
+                break;
+        }
+        return color1.toString().replace("0x", "#");
     }
 }

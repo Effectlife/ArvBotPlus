@@ -11,7 +11,6 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -162,10 +161,6 @@ public class DiceController implements IController {
         // bidi-bind the values
         spinnerModifierFactory.valueProperty().bindBidirectional(modifierFormatter.valueProperty());
     }
-
-
-
-
 
 
     public void reloadWidth(double newValue) {

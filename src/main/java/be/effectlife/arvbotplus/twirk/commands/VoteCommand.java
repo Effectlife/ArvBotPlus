@@ -91,9 +91,9 @@ public class VoteCommand extends CommandExampleBase {
             PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
             VoteActionResult voteResult = pollController.castVote(option, sender);
             params.put("votevalue", pollController.getOptionText(option));
-
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
+            params.put("votevalue", split[1]);
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
 
         }
@@ -108,6 +108,7 @@ public class VoteCommand extends CommandExampleBase {
             params.put("votevalue", split[1]);
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
+            params.put("votevalue", split[1]);
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
         }
     }
