@@ -386,6 +386,7 @@ public class PollController implements IController {
     }
 
     public void load(PollSave pollSave) {
+        try{
         btnClearAll_Clicked(null);
         btnClearAll_Clicked(null);
         tfOptions.setText(pollSave.getOptionCount() + "");
@@ -398,5 +399,9 @@ public class PollController implements IController {
             optionController.setVotes(pollOption.getVotes());
         }
         taQuestion.setText(pollSave.getQuestion());
+        }catch (Exception e){
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Polls save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+            LOG.error("File cannot be loaded", e);
+        }
     }
 }

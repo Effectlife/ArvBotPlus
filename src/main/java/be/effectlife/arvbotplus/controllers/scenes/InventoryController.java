@@ -259,7 +259,7 @@ public class InventoryController implements IController {
 
     private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
         if(!removedControllerList.isEmpty()){
-            SkillWidgetController remove = removedControllerList.remove(0);
+            SkillWidgetController remove = removedControllerList.remove(removedControllerList.size()-1);
             id = remove.getId();
         }
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
@@ -365,15 +365,20 @@ public class InventoryController implements IController {
     }
 
     public void load(GameSave gameSave) {
-        textName.setText(gameSave.getName());
-        taItemsArtifacts.setText(gameSave.getItemsArtifacts());
-        taCluesNotes.setText(gameSave.getCluesNotes());
-        List<Skill> skills = gameSave.getSkills();
-        for (int i = 0, skillsSize = skills.size(); i < skillsSize; i++) {
-            Skill skill = skills.get(i);
-            createWidget(i, skill.getName(), skill.getValue(), skill.getMaxValue(), skill.getSkillType(), skill.isUsesColor());
+        try {
+            textName.setText(gameSave.getName());
+            taItemsArtifacts.setText(gameSave.getItemsArtifacts());
+            taCluesNotes.setText(gameSave.getCluesNotes());
+            List<Skill> skills = gameSave.getSkills();
+            for (int i = 0, skillsSize = skills.size(); i < skillsSize; i++) {
+                Skill skill = skills.get(i);
+                createWidget(i, skill.getName(), skill.getValue(), skill.getMaxValue(), skill.getSkillType(), skill.isUsesColor());
+            }
+            reloadView();
+        }catch (Exception e){
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Skills save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+            LOG.error("File cannot be loaded", e);
         }
-        reloadView();
     }
 
     public void setProperties(Properties properties) {

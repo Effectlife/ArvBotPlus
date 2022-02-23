@@ -7,6 +7,7 @@ import be.effectlife.arvbotplus.loading.SceneContainer;
 import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.QuestionSave;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
@@ -99,10 +100,15 @@ public class QuestionsController implements IController {
     }
 
     public void load(QuestionSave questionSave) {
+        try{
         questionsList.stream().map(QuestionWidgetController::getId).collect(Collectors.toList()).forEach(this::remove);
         questionCounter = 0;
         questionSave.getQuestions().forEach((questionSaveItem -> {
             addQuestion(questionSaveItem.getUsername(), questionSaveItem.getQuestion(), questionSaveItem.getTimestamp(), questionSaveItem.isAnswered());
         }));
+        }catch (Exception e){
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Questions save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+            LOG.error("File cannot be loaded", e);
+        }
     }
 }
