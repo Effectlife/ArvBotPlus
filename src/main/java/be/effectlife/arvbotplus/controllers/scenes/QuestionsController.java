@@ -16,7 +16,9 @@ import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class QuestionsController implements IController {
@@ -32,12 +34,12 @@ public class QuestionsController implements IController {
     private int questionCounter = 0;
 
     @FXML
-    void btnLoad_Clicked(ActionEvent event) {
+    void btnLoadClicked(ActionEvent event) {
         SaveManager.loadQuestions();
     }
 
     @FXML
-    void btnSave_Clicked(ActionEvent event) {
+    void btnSaveClicked(ActionEvent event) {
         SaveManager.saveQuestions();
     }
 
@@ -48,10 +50,6 @@ public class QuestionsController implements IController {
         reloadView();
     }
 
-    @Override
-    public void onShow() {
-
-    }
 
     @Override
     public void reloadView() {
@@ -100,14 +98,12 @@ public class QuestionsController implements IController {
     }
 
     public void load(QuestionSave questionSave) {
-        try{
-        questionsList.stream().map(QuestionWidgetController::getId).collect(Collectors.toList()).forEach(this::remove);
-        questionCounter = 0;
-        questionSave.getQuestions().forEach((questionSaveItem -> {
-            addQuestion(questionSaveItem.getUsername(), questionSaveItem.getQuestion(), questionSaveItem.getTimestamp(), questionSaveItem.isAnswered());
-        }));
-        }catch (Exception e){
-            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Questions save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+        try {
+            questionsList.stream().map(QuestionWidgetController::getId).collect(Collectors.toList()).forEach(this::remove);
+            questionCounter = 0;
+            questionSave.getQuestions().forEach((questionSaveItem -> addQuestion(questionSaveItem.getUsername(), questionSaveItem.getQuestion(), questionSaveItem.getTimestamp(), questionSaveItem.isAnswered())));
+        } catch (Exception e) {
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Questions save?\n\nException: " + e.getMessage() + "\n" + e.getStackTrace()[0]);
             LOG.error("File cannot be loaded", e);
         }
     }

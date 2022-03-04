@@ -4,12 +4,11 @@ import be.effectlife.arvbotplus.services.conversions.data.*;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
 
 public class ConversionService {
     private final List<CType> types;
 
-    {
+    public ConversionService() {
         types = new ArrayList<>(Length.getAllValues());
         types.addAll(Temperature.getAllValues());
         types.addAll(Volume.getAllValues());
@@ -27,6 +26,6 @@ public class ConversionService {
     }
 
     public CType getCTypeFromString(String type) {
-        return types.stream().filter(cType -> cType.getUnit().toUpperCase(Locale.ROOT).equals(type.toUpperCase(Locale.ROOT))).findFirst().orElse(null);
+        return types.stream().filter(cType -> cType.getUnit().equalsIgnoreCase(type)).findFirst().orElse(null);
     }
 }

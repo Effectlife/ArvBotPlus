@@ -19,8 +19,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class QuestionCommand extends CommandExampleBase {
-    private static final Logger LOG = LoggerFactory.getLogger(QuestionCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_QUESTION);
+    private static final Logger LOG = LoggerFactory.getLogger(QuestionCommand.class);
     private final Twirk twirk;
     private final boolean disable;
 

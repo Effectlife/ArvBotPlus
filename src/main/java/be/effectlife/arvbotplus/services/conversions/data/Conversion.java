@@ -1,13 +1,15 @@
 package be.effectlife.arvbotplus.services.conversions.data;
 
-import static be.effectlife.arvbotplus.services.conversions.data.Temperature.*;
+import static be.effectlife.arvbotplus.services.conversions.data.Temperature.C;
+import static be.effectlife.arvbotplus.services.conversions.data.Temperature.F;
 
-public abstract class Conversion {
-    public static float convertLinear(float value, float conversionSource, float conversionTarget) throws ArithmeticException {
+public interface Conversion {
+
+    static float convertLinear(float value, float conversionSource, float conversionTarget) {
         return value / conversionSource * conversionTarget;
     }
 
-    public static float convertTemp(float value, Temperature source, Temperature target) {
+    static float convertTemp(float value, Temperature source, Temperature target) {
         if (source == C) {
             if (target == F) {
                 return value * 1.8f + 32;

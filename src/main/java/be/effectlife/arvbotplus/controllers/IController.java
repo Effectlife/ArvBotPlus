@@ -6,8 +6,6 @@ public interface IController {
 
     void doInit();
 
-    void onShow();
-
     void reloadView();
 
     default void setDefaultSize(Region region) {

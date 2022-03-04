@@ -4,12 +4,12 @@ import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.services.ConversionResult;
 import be.effectlife.arvbotplus.services.ConversionService;
+import be.effectlife.arvbotplus.services.conversions.data.*;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import be.effectlife.arvbotplus.services.conversions.data.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,8 +18,8 @@ import java.util.List;
 import java.util.Map;
 
 public class ConvCommand extends CommandExampleBase {
-    private static final Logger LOG = LoggerFactory.getLogger(ConvCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CONVERSION);
+    private static final Logger LOG = LoggerFactory.getLogger(ConvCommand.class);
     private final Twirk twirk;
     private final boolean disable;
     private final ConversionService conversionService;
@@ -91,7 +91,7 @@ public class ConvCommand extends CommandExampleBase {
 
             ConversionResult convert = conversionService.convert(sourceValue, sourceUnitType, targetUnitType);
             if (convert == null) {
-                channelMessage("Cannot convert, source type " + sourceUnitType.getUnit() + "(" + sourceUnitType.getClass().getSimpleName() + ") and target type " + targetUnitType.getUnit() + "(" + targetUnitType.getClass().getSimpleName() + ") are not of the same unit type"); //TODO: Move to MessageProperties
+                channelMessage("Cannot convert, source type " + sourceUnitType.getUnit() + "(" + sourceUnitType.getClass().getSimpleName() + ") and target type " + targetUnitType.getUnit() + "(" + targetUnitType.getClass().getSimpleName() + ") are not of the same unit type");
                 return;
             }
             params.put("sourcevalue", (((int) (sourceValue * 100f)) / 100f) + "");
@@ -104,7 +104,7 @@ public class ConvCommand extends CommandExampleBase {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_NOTANUMBER, params));
         } catch (Exception e) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_GENERALERROR, params));
-            e.printStackTrace();
+            LOG.error("Error happened", e);
         }
     }
 

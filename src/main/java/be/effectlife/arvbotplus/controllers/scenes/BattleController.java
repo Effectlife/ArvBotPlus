@@ -38,13 +38,13 @@ public class BattleController implements IController {
     private List<EnemyController> enemyControllerList;
 
     @FXML
-    void btnAdd_Clicked(ActionEvent event) {
+    void btnAddClicked(ActionEvent event) {
         createWidget(enemyControllerList.size());
         reloadView();
     }
 
     @FXML
-    void btnRemove_Clicked(ActionEvent event) {
+    void btnRemoveClicked(ActionEvent event) {
         if (enemyControllerList.size() <= 1) return; // never remove the first option
         EnemyController controllerToRemove = enemyControllerList.get(enemyControllerList.size() - 1);
         for (Node child : vboxEnemies.getChildren()) {
@@ -58,7 +58,7 @@ public class BattleController implements IController {
     }
 
     @FXML
-    void btnClear_Clicked(ActionEvent event) {
+    void btnClearClicked(ActionEvent event) {
         enemyControllerList.forEach(EnemyController::clear);
     }
 
@@ -71,12 +71,7 @@ public class BattleController implements IController {
         textVal2.setText(MessageProperties.getString(MessageKey.SCENE_BATTLE_TEXT_VAL_2));
 
         enemyControllerList = new ArrayList<>();
-        btnAdd_Clicked(null);
-    }
-
-    @Override
-    public void onShow() {
-
+        btnAddClicked(null);
     }
 
     @Override

@@ -4,13 +4,21 @@ import javafx.scene.paint.Color;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class ColorHelper {
+    private static final Logger LOG = LoggerFactory.getLogger(ColorHelper.class);
     private static List<String> list;
+    private static final String COLOR_PREFIX = "-color-";
+
+    private ColorHelper() {
+    }
 
     static {
         try {
@@ -23,23 +31,23 @@ public abstract class ColorHelper {
             list = doc
                     .stream()
                     .map(String::trim)
-                    .filter(s -> s.startsWith("-color-"))
-                    .map(s -> s.substring(0, s.indexOf(";")))
+                    .filter(s -> s.startsWith(COLOR_PREFIX))
+                    .map(s -> s.substring(0, s.indexOf(';')))
                     .collect(Collectors.toList());
         } catch (IOException e) {
-            e.printStackTrace();
+            LOG.error("Error happened", e);
         }
     }
 
     private static Color getColorForName(String colorname) {
         for (String s : list) {
-            if (s.startsWith("-color-" + colorname.trim() + ":")) {
+            if (s.startsWith(COLOR_PREFIX + colorname.trim() + ":")) {
                 String data = s.substring(s.indexOf(':') + 2);
-                if (data.startsWith("-color-")) {
-                    return getColorForName(data.replace("-color-", ""));
+                if (data.startsWith(COLOR_PREFIX)) {
+                    return getColorForName(data.replace(COLOR_PREFIX, ""));
                 }
                 //Found hex data
-                String hex = data.replace("-color-", "");
+                String hex = data.replace(COLOR_PREFIX, "");
                 return Color.web(hex);
             }
         }
@@ -65,6 +73,6 @@ public abstract class ColorHelper {
                 color1 = ColorHelper.getColorForName("bottombutton");
                 break;
         }
-        return color1.toString().replace("0x", "#");
+        return color1 != null ? color1.toString().replace("0x", "#") : "#000000";
     }
 }

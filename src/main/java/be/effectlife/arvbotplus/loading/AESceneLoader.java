@@ -30,7 +30,7 @@ public class AESceneLoader {
 
     public Scene getScene(Scenes scene, String suffix) {
         if (scenes.containsKey(scene.toString() + suffix)) {
-            return scenes.get(scene.toString() + suffix).getScene();
+            return scenes.get(scene + suffix).getScene();
         }
         try {
             return loadScene(scene.toString(), suffix).getScene();
@@ -46,7 +46,7 @@ public class AESceneLoader {
 
     public IController getController(Scenes scene, String suffix) {
         if (scenes.containsKey(scene.toString() + suffix)) {
-            return scenes.get(scene.toString() + suffix).getController();
+            return scenes.get(scene + suffix).getController();
         }
         try {
             return loadScene(scene.toString(), suffix).getController();
@@ -62,7 +62,7 @@ public class AESceneLoader {
 
     public SceneContainer getSceneContainer(Scenes scene, String suffix) {
         if (scenes.containsKey(scene.toString() + suffix)) {
-            return scenes.get(scene.toString() + suffix);
+            return scenes.get(scene + suffix);
         }
         try {
             return loadScene(scene.toString(), suffix);
@@ -77,14 +77,13 @@ public class AESceneLoader {
         String fileName = sceneName;
         if (!fileName.endsWith(".fxml")) fileName += ".fxml"; //Adds .fxml extension if it is not present
         URL url = AESceneLoader.class.getClassLoader().getResource("scenes/" + fileName);
-//        URL url = AESceneLoader.class.getClassLoader().getResource("Scenes/" + fileName);
 
         if (url == null) {
             throw new SceneNotFoundException("File scenes/" + fileName + " does not exist");
         }
 
         FXMLLoader loader = new FXMLLoader(url);
-        SceneContainer container = null;
+        SceneContainer container;
         try {
             Scene s = new Scene(loader.load());
             s.getStylesheets().add(AESceneLoader.class.getResource("/css/bootstrap3-dark.css").toExternalForm());
@@ -93,7 +92,8 @@ public class AESceneLoader {
         } catch (IOException e) {
             throw new SceneNotFoundException(e);
         }
-        LOG.info("Initializing "+sceneName + addon);
+
+        LOG.info("Initializing {}{}", sceneName, addon);
         container.getController().doInit();
         return container;
     }

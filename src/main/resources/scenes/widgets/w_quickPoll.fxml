@@ -28,7 +28,7 @@
           <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Button fx:id="btnQPOpenClose" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPOpenClose_clicked" text="Open" textAlignment="CENTER" wrapText="true">
+            <Button fx:id="btnQPOpenClose" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPOpenCloseClicked" text="Open" textAlignment="CENTER" wrapText="true">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>
@@ -60,7 +60,7 @@
                   <Text fx:id="textCount2" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="99" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
                </children>
             </GridPane>
-            <Button fx:id="btnQPLastCall" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPLastCall_clicked" text="Last Call" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
+            <Button fx:id="btnQPLastCall" contentDisplay="CENTER" depthTest="DISABLE" graphicTextGap="2.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnQPLastCallClicked" text="Last Call" textAlignment="CENTER" wrapText="true" GridPane.rowIndex="1">
                <padding>
                   <Insets left="-6.0" right="-6.0" />
                </padding>

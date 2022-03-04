@@ -30,8 +30,8 @@
               <RowConstraints maxHeight="1.7976931348623157E308" vgrow="SOMETIMES" />
           </rowConstraints>
           <children>
-              <ProgressBar fx:id="pBarVotes" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onMouseClicked="#pBarVotes_Clicked" progress="0.7" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-              <Button fx:id="btnClear" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnClear_Clicked" prefHeight="25.0" text="Clear" textAlignment="CENTER" GridPane.columnSpan="2">
+              <ProgressBar fx:id="pBarVotes" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onMouseClicked="#pBarVotesClicked" progress="0.7" GridPane.columnIndex="1" GridPane.columnSpan="3" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+              <Button fx:id="btnClear" contentDisplay="CENTER" focusTraversable="false" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnClearClicked" prefHeight="25.0" text="Clear" textAlignment="CENTER" GridPane.columnSpan="2">
                <padding>
                   <Insets bottom="-10.0" left="5.0" right="5.0" top="-10.0" />
                </padding>

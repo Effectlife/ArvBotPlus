@@ -6,7 +6,10 @@ import java.text.DecimalFormat;
 import java.text.ParsePosition;
 
 public class Formatters {
-    public static TextFormatter NumbersOnly = new TextFormatter<>(c -> {
+    private Formatters() {
+    }
+
+    public static final TextFormatter NumbersOnly = new TextFormatter<>(c -> {
         if (c.getControlNewText().isEmpty()) {
             return c;
         }

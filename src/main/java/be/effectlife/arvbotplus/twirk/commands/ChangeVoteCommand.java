@@ -18,15 +18,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChangeVoteCommand extends CommandExampleBase {
-    private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CHANGEVOTE);
-    private final Twirk twirk;
+    private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     private static final AESceneLoader sceneloader;
-    private final boolean disable;
+    private static final String SENDER = "sender";
+    private static final String VOTEVALUE = "votevalue";
 
     static {
         sceneloader = AESceneLoader.getInstance();
     }
+
+    private final Twirk twirk;
+    private final boolean disable;
 
     public ChangeVoteCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND);
@@ -43,13 +46,12 @@ public class ChangeVoteCommand extends CommandExampleBase {
     }
 
     protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
-        LOG.info("Received: " + sender.getDisplayName() + ": " + message.getContent() + "");
         String content = message.getContent().trim();
         if (!content.startsWith(PATTERN)) return;
         String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
         String[] split = messagecontent.split(" ");
         Map<String, String> params = new HashMap<>();
-        params.put("sender", sender.getDisplayName());
+        params.put(SENDER, sender.getDisplayName());
         params.put("pattern", PATTERN);
         if (content.equals(PATTERN) ||
                 (split.length > 1 && split[1].equals("options")) ||
@@ -83,11 +85,11 @@ public class ChangeVoteCommand extends CommandExampleBase {
     private void handleStandardPollCommand(String[] split, String sender) {
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
         Map<String, String> params = new HashMap<>();
-        params.put("sender", sender);
+        params.put(SENDER, sender);
         try {
             int option = Integer.parseInt(split[1]) - 1;
             VoteActionResult addOptionResult = pollController.changeVote(option, sender);
-            params.put("votevalue", pollController.getOptionText(option));
+            params.put(VOTEVALUE, pollController.getOptionText(option));
             switch (addOptionResult) {
                 case ALREADY_VOTED_FOR_OPTION:
                     channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ALREADYVOTED, params));
@@ -100,6 +102,9 @@ public class ChangeVoteCommand extends CommandExampleBase {
                     return;
                 case INVALID_VOTE:
                     channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+                    break;
+                default:
+                    LOG.error("Unknown addOptionResult recieved: {}", addOptionResult);
             }
         } catch (NumberFormatException nfe) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
@@ -108,16 +113,16 @@ public class ChangeVoteCommand extends CommandExampleBase {
 
     private void handleNonePollCommand(String[] split, String sender) {
         Map<String, String> params = new HashMap<>();
-        params.put("votevalue", split[1]);
-        params.put("sender", sender);
+        params.put(VOTEVALUE, split[1]);
+        params.put(SENDER, sender);
         channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_NOPOLLACTIVE, params));
     }
 
     private void handleQuickPollCommand(String[] split, String sender) {
         QuickPollWidgetController quickPollWidgetController = (QuickPollWidgetController) sceneloader.getController(Scenes.W_QUICKPOLL);
         Map<String, String> params = new HashMap<>();
-        params.put("votevalue", split[1]);
-        params.put("sender", sender);
+        params.put(VOTEVALUE, split[1]);
+        params.put(SENDER, sender);
         try {
             int option = Integer.parseInt(split[1]);
             VoteActionResult addOptionResult = quickPollWidgetController.changeVote(option, sender);
@@ -132,7 +137,7 @@ public class ChangeVoteCommand extends CommandExampleBase {
                     channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ALREADYVOTED, params));
                     break;
                 default:
-                    LOG.error("Unknown addOptionResult recieved: " + addOptionResult);
+                    LOG.error("Unknown addOptionResult recieved: {}", addOptionResult);
                     break;
             }
         } catch (NumberFormatException nfe) {

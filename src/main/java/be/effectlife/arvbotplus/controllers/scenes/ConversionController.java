@@ -1,5 +1,6 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
@@ -19,55 +20,46 @@ import java.util.*;
 import java.util.function.UnaryOperator;
 import java.util.stream.Collectors;
 
-import static be.effectlife.arvbotplus.Main.twirkSystem;
-
-
 public class ConversionController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(ConversionController.class);
+    private final Map<String, List<CType>> dropdowns;
     ConversionService conversionService;
-    private final HashMap<String, List<CType>> dropdowns;
+    @FXML
+    private ComboBox<String> comboCategory;
+    @FXML
+    private ComboBox<CType> comboSourceType;
+    @FXML
+    private ComboBox<CType> comboTargetType;
+    @FXML
+    private TextField tfSource;
+    @FXML
+    private TextField tfTarget;
+    @FXML
+    private Button btnSend;
 
-    {
+    public ConversionController() {
         dropdowns = CType.getAllAvailableTypes();
         conversionService = new ConversionService();
     }
 
     @FXML
-    private ComboBox<String> comboCategory;
-
-    @FXML
-    private ComboBox<CType> comboSourceType;
-
-    @FXML
-    private ComboBox<CType> comboTargetType;
-
-    @FXML
-    private TextField tfSource;
-
-    @FXML
-    private TextField tfTarget;
-
-    @FXML
-    private Button btnSend;
-
-    @FXML
-    void btnSend_Clicked() {
+    void btnSendClicked() {
         try {
             float sourceVal = StringUtils.isBlank(tfSource.getText()) ? 0 : Float.parseFloat(tfSource.getText());
             Map<String, String> params = new HashMap<>();
-            params.put("sender", twirkSystem.getConnectedChannel());
+            params.put("sender", Main.getTwirkSystem().getConnectedChannel());
             params.put("sourcevalue", (((int) (sourceVal * 100f)) / 100f) + "");
             params.put("sourcetype", comboSourceType.getValue().getDisplayName());
             params.put("targetvalue", tfTarget.getText());
             params.put("targettype", comboTargetType.getValue().getDisplayName());
-            twirkSystem.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
+            Main.getTwirkSystem().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
         } catch (NumberFormatException nfe) {
-            LOG.error("Could not convert: " + nfe.getMessage());
+            LOG.error("Could not convert: {}", nfe.getMessage());
         }
     }
 
     @FXML
-    void tfSource_Confirmed() {
+    void tfSourceConfirmed() {
         updateCalculation();
     }
 
@@ -99,7 +91,7 @@ public class ConversionController implements IController {
     }
 
     public void checkTwirk() {
-        if (twirkSystem == null || twirkSystem.isNotLoaded()) {
+        if (Main.getTwirkSystem() == null || Main.getTwirkSystem().isNotLoaded()) {
             btnSend.setDisable(true);
             btnSend.setTooltip(new Tooltip("Twitch bot is not loaded."));
         } else {
@@ -109,7 +101,7 @@ public class ConversionController implements IController {
     }
 
 
-    public void comboboxCategory_Changed() {
+    public void comboboxCategoryChanged() {
         updateTypeComboBoxes();
         updateCalculation();
     }
@@ -127,8 +119,8 @@ public class ConversionController implements IController {
             }
             comboSourceType.getSelectionModel().select(0);
             comboTargetType.getSelectionModel().select(1);
-        } catch (RuntimeException ignored) {
-
+        } catch (RuntimeException e) {
+            LOG.error("Exception happened: {}", e.getMessage());
         }
     }
 
@@ -139,7 +131,7 @@ public class ConversionController implements IController {
             float sourceVal = StringUtils.isBlank(text) ? 0 : Float.parseFloat(text);
             convert = conversionService.convert(sourceVal, comboSourceType.getValue(), comboTargetType.getValue());
         } catch (NumberFormatException nfe) {
-            LOG.error("Could not convert: " + nfe.getMessage());
+            LOG.error("Could not convert: {}", nfe.getMessage());
             return;
         }
         if (convert != null) {
@@ -150,12 +142,7 @@ public class ConversionController implements IController {
     }
 
     @Override
-    public void onShow() {
-
-    }
-
-    @Override
     public void reloadView() {
-
+        //Does not have any fields to reload
     }
 }

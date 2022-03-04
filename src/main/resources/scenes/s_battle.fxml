@@ -31,17 +31,17 @@
               <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
           </rowConstraints>
           <children>
-              <Button fx:id="btnAdd" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnAdd_Clicked" prefHeight="26.0" text="Add" textAlignment="CENTER">
+              <Button fx:id="btnAdd" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnAddClicked" prefHeight="26.0" text="Add" textAlignment="CENTER">
                <padding>
                   <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                </padding>
               </Button>
-              <Button fx:id="btnRemove" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnRemove_Clicked" prefHeight="26.0" text="Remove" textAlignment="CENTER" GridPane.columnIndex="1">
+              <Button fx:id="btnRemove" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnRemoveClicked" prefHeight="26.0" text="Remove" textAlignment="CENTER" GridPane.columnIndex="1">
                   <padding>
                       <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                   </padding>
               </Button>
-              <Button fx:id="btnClear" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnClear_Clicked" prefHeight="26.0" text="Clear" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
+              <Button fx:id="btnClear" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnClearClicked" prefHeight="26.0" text="Clear" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2">
                   <padding>
                       <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
                   </padding>

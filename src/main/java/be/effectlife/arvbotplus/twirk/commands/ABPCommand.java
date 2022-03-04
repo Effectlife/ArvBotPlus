@@ -10,14 +10,13 @@ import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 public class ABPCommand extends CommandExampleBase {
+    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP);
     private static final Logger LOG = LoggerFactory.getLogger(ABPCommand.class);
-    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX)+MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP);
     private final Twirk twirk;
     private final boolean disable;
 
@@ -36,8 +35,7 @@ public class ABPCommand extends CommandExampleBase {
     }
 
     protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
-        LOG.info("Received: " + sender.getDisplayName() + ": " + message.getContent() + "");
-        Map<String,String> params = new HashMap<>();
+        Map<String, String> params = new HashMap<>();
         params.put("commands", getCommands());
         channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_ABP_HELP, params));
     }

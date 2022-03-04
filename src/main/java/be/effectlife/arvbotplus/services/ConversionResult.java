@@ -3,9 +3,12 @@ package be.effectlife.arvbotplus.services;
 import be.effectlife.arvbotplus.services.conversions.data.CType;
 
 public class ConversionResult {
-    private float sourceValue,targetValue;
-    private CType sourceType,targetType;
+    private float targetValue;
+    private float sourceValue;
+    private CType sourceType;
+    private CType targetType;
     private String errorMessage;
+
     public ConversionResult(float sourceValue, float targetValue, CType sourceType, CType targetType) {
         this.sourceValue = sourceValue;
         this.targetValue = targetValue;

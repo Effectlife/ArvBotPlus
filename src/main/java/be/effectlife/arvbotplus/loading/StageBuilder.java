@@ -8,28 +8,27 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.Map;
 
 public class StageBuilder {
-    private Stages stageIdentifier;
-    private Scenes sceneIdentifier;
-    private String title;
-    private boolean ignoreSize;
-    private EventHandler<WindowEvent> onCloseHandler;
-    private ArrayList<String> stylesheets;
-    private int minWidth;
-
     private static final Map<Stages, Stage> stageMap;
     private static final ClassLoader classLoader = StageBuilder.class.getClassLoader();
     private static final Logger LOG = LoggerFactory.getLogger(StageBuilder.class);
-    private static AESceneLoader aeSceneLoader;
+    private static final AESceneLoader aeSceneLoader;
 
     static {
         aeSceneLoader = AESceneLoader.getInstance();
-        stageMap = new HashMap<>();
+        stageMap = new EnumMap<>(Stages.class);
 
     }
+
+    private final ArrayList<String> stylesheets;
+    private Stages stageIdentifier;
+    private Scenes sceneIdentifier;
+    private String title;
+    private EventHandler<WindowEvent> onCloseHandler;
+    private int minWidth;
 
     public StageBuilder() {
         stylesheets = new ArrayList<>();
@@ -53,7 +52,7 @@ public class StageBuilder {
     }
 
     public Stage build() {
-        LOG.info("Building Stage " + this.stageIdentifier);
+        LOG.info("Building Stage {}", this.stageIdentifier);
         Stage stage = getStage(this.stageIdentifier);
         Scene scene = aeSceneLoader.getScene(this.sceneIdentifier);
 
@@ -73,7 +72,6 @@ public class StageBuilder {
         stage.setTitle(this.title);
         stage.setScene(scene);
         stage.setOnCloseRequest(this.onCloseHandler);
-        stage.setOnShowing((event -> AESceneLoader.getInstance().getController(sceneIdentifier).onShow()));
         return stage;
 
     }

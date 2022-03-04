@@ -13,17 +13,23 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
 public abstract class SaveManager {
+    private static final Logger LOG = LoggerFactory.getLogger(SaveManager.class);
+    private static final String ERROR_HAPPENED = "Error happened";
     private static Stage inventoryStage;
     private static Stage pollStage;
     private static Stage questionsStage;
-
     private static String lastFolder;
+
+    private SaveManager() {
+    }
 
     public static void saveGame() {
 
@@ -41,13 +47,11 @@ public abstract class SaveManager {
             String cluesNotes = controller.getCluesNotes();
             List<Skill> skills = controller.getSkills().stream().map(skill -> new Skill(skill.getSkillname(), skill.getType(), skill.getValue(), skill.getMaxValue(), skill.isUseColors())).collect(Collectors.toList());
 
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
                 bw.write(new GsonBuilder().setPrettyPrinting().create().toJson(new GameSave(name, itemsArtifacts, cluesNotes, skills)));
                 bw.flush();
-                bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }
@@ -71,13 +75,11 @@ public abstract class SaveManager {
                     controller.getOptions()
             );
 
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
                 bw.write(new GsonBuilder().setPrettyPrinting().create().toJson(pollSave));
                 bw.flush();
-                bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }
@@ -93,13 +95,11 @@ public abstract class SaveManager {
                     .map(question -> new QuestionSave.QuestionSaveItem(question.getUsername(), question.getTimestamp(), question.getQuestion(), question.isAnswered())).collect(Collectors.toList());
             QuestionSave questionSave = new QuestionSave(questions);
 
-            try {
-                BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+            try (BufferedWriter bw = new BufferedWriter(new FileWriter(file))) {
                 bw.write(new GsonBuilder().setPrettyPrinting().create().toJson(questionSave));
                 bw.flush();
-                bw.close();
             } catch (IOException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }
@@ -121,7 +121,7 @@ public abstract class SaveManager {
                 controller.hardReset();
                 controller.load(gameSave);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }
@@ -142,7 +142,7 @@ public abstract class SaveManager {
                 PollController controller = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
                 controller.load(pollSave);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }
@@ -162,7 +162,7 @@ public abstract class SaveManager {
                 QuestionsController controller = (QuestionsController) AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS);
                 controller.load(questionSave);
             } catch (FileNotFoundException e) {
-                e.printStackTrace();
+                LOG.error(ERROR_HAPPENED, e);
             }
             lastFolder = file.getParent();
         }

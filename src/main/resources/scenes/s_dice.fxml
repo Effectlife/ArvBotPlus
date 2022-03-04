@@ -31,7 +31,7 @@
             </padding>
         </VBox>
     </ScrollPane>
-    <Button fx:id="btnRoll" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="33.0" mnemonicParsing="false" onAction="#btnRoll_Clicked" prefHeight="33.0" text="Roll" GridPane.rowIndex="1">
+    <Button fx:id="btnRoll" maxHeight="33.0" maxWidth="1.7976931348623157E308" minHeight="33.0" mnemonicParsing="false" onAction="#btnRollClicked" prefHeight="33.0" text="Roll" GridPane.rowIndex="1">
         <GridPane.margin>
             <Insets bottom="4.0" left="4.0" right="4.0" />
         </GridPane.margin>

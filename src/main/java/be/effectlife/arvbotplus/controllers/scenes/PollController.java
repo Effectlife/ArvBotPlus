@@ -27,10 +27,13 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class PollController implements IController {
-    Logger LOG = LoggerFactory.getLogger(PollController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(PollController.class);
     private PollType pollType = PollType.NONE;
     private QuickPollWidgetController quickPollWidget;
     private int options;
@@ -72,7 +75,7 @@ public class PollController implements IController {
     private Button btnLoadPoll;
 
     @FXML
-    void btnClearAll_Clicked(ActionEvent event) {
+    void btnClearAllClicked(ActionEvent event) {
         boolean hasNotCleared = isVotesCleared();
         for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
             pollWidgetController.clear(hasNotCleared);
@@ -90,97 +93,103 @@ public class PollController implements IController {
     }
 
     @FXML
-    void btnLastCall_Clicked(ActionEvent event) {
+    void btnLastCallClicked(ActionEvent event) {
         channelMessage(MessageProperties.getString(MessageKey.TWIRK_MESSAGE_POLL_LASTCALL));
     }
 
     @FXML
-    void btnSavePoll_Clicked(ActionEvent event) {
+    void btnSavePollClicked(ActionEvent event) {
         SaveManager.savePoll();
     }
 
     @FXML
-    void btnLoadPoll_Clicked(ActionEvent event) {
+    void btnLoadPollClicked(ActionEvent event) {
         SaveManager.loadPoll();
     }
 
     @FXML
-    void btnOpenClosePoll_Clicked(ActionEvent event) {
+    void btnOpenClosePollClicked(ActionEvent event) {
         if (getPollType() == PollType.NONE || getPollType() == PollType.QP_CLEAR) {
-            quickPollWidget.clear();
-            Map<Integer, String> validOptions = new HashMap<>();
-            //Collect all id's and options that are not empty
-            for (int i = 0; i < pollWidgetControllerList.size(); i++) {
-                if (!pollWidgetControllerList.get(i).getOptionText().isEmpty()) {
-                    validOptions.put(i, pollWidgetControllerList.get(i).getOptionText());
-                }
-            }
-            if (validOptions.size() == 0) {
-                SimplePopup.showPopupWarn("You haven't entered any options.");
-                return;
-            } else if (validOptions.size() == 1) {
-                SimplePopup.showPopupWarn("You have entered only 1 option.");
-                return;
-            }
-            //reset voters when starting a new poll without clearing manually
-            for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
-                pollWidgetController.resetVotes();
-            }
-            //Preparing state
-            btnOpenClosePoll.setText(MessageProperties.getString(MessageKey.SCENE_POLLS_BUTTON_CLOSE));
-            setPollType(PollType.STANDARD);
-
-            //Combine them into a concise message and send it
-
-            String question;
-            Map<String, String> params = new HashMap<>();
-            if (taQuestion.getText().trim().isEmpty()) {
-                question = MessageProperties.getString(MessageKey.SCENE_POLLS_DEFAULTQUESTION);
-            } else {
-                question = taQuestion.getText().trim();
-            }
-
-            StringBuilder sbOptions = new StringBuilder();
-            validOptions.forEach((key, value) -> {
-                sbOptions.append(key + 1).append(":{").append(value).append("}; ");
-            });
-
-            params.put("question", question);
-            params.put("options", sbOptions.toString());
-            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_QUESTION, params));
+            handleNoneQPClearPoll();
         } else if (getPollType() == PollType.STANDARD) {
-            List<PollWidgetController> pollWidgetWithHighestVotes = getPollWidgetWithHighestVotes();
-            if (pollWidgetWithHighestVotes.size() > 1) {
-                //draw
-                Map<String, String> params = new HashMap<>();
-
-                StringBuilder optionsBuilder = new StringBuilder();
-                for (int i = 0; i < pollWidgetWithHighestVotes.size(); i++) {
-                    PollWidgetController pwc = pollWidgetWithHighestVotes.get(i);
-                    optionsBuilder.append("{").append(pwc.getOptionText()).append("}");
-                    if (i != pollWidgetWithHighestVotes.size() - 1) optionsBuilder.append(", ");
-                }
-
-                params.put("votecount", pollWidgetWithHighestVotes.size() + "");
-                params.put("options", optionsBuilder.toString());
-
-                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_DRAW, params));
-            } else {
-                Map<String, String> params = new HashMap<>();
-                params.put("votecount", pollWidgetWithHighestVotes.get(0).getVotes() + "");
-                params.put("option", (pollWidgetWithHighestVotes.get(0).getOptionId() + 1) + ": {" + pollWidgetWithHighestVotes.get(0).getOptionText() + "}");
-
-                channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_WIN, params));
-            }
-            btnOpenClosePoll.setText("Open");
-            setPollType(PollType.NONE);
+            handleStandardPoll();
         } else {
-            LOG.error("Open Close Poll clicked when polltype was " + getPollType() + ". Only NONE and STANDARD should be clickable");
+            LOG.error("Open Close Poll clicked when polltype was {}. Only NONE and STANDARD should be clickable", getPollType());
         }
     }
 
+    private void handleStandardPoll() {
+        List<PollWidgetController> pollWidgetWithHighestVotes = getPollWidgetWithHighestVotes();
+        if (pollWidgetWithHighestVotes.size() > 1) {
+            //draw
+            Map<String, String> params = new HashMap<>();
+
+            StringBuilder optionsBuilder = new StringBuilder();
+            for (int i = 0; i < pollWidgetWithHighestVotes.size(); i++) {
+                PollWidgetController pwc = pollWidgetWithHighestVotes.get(i);
+                optionsBuilder.append("{").append(pwc.getOptionText()).append("}");
+                if (i != pollWidgetWithHighestVotes.size() - 1) optionsBuilder.append(", ");
+            }
+
+            params.put("votecount", pollWidgetWithHighestVotes.size() + "");
+            params.put("options", optionsBuilder.toString());
+
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_DRAW, params));
+        } else {
+            Map<String, String> params = new HashMap<>();
+            params.put("votecount", pollWidgetWithHighestVotes.get(0).getVotes() + "");
+            params.put("option", (pollWidgetWithHighestVotes.get(0).getOptionId() + 1) + ": {" + pollWidgetWithHighestVotes.get(0).getOptionText() + "}");
+
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_WIN, params));
+        }
+        btnOpenClosePoll.setText("Open");
+        setPollType(PollType.NONE);
+    }
+
+    private void handleNoneQPClearPoll() {
+        quickPollWidget.clear();
+        Map<Integer, String> validOptions = new HashMap<>();
+        //Collect all id's and options that are not empty
+        for (int i = 0; i < pollWidgetControllerList.size(); i++) {
+            if (!pollWidgetControllerList.get(i).getOptionText().isEmpty()) {
+                validOptions.put(i, pollWidgetControllerList.get(i).getOptionText());
+            }
+        }
+        if (validOptions.size() == 0) {
+            SimplePopup.showPopupWarn("You haven't entered any options.");
+            return;
+        } else if (validOptions.size() == 1) {
+            SimplePopup.showPopupWarn("You have entered only 1 option.");
+            return;
+        }
+        //reset voters when starting a new poll without clearing manually
+        for (PollWidgetController pollWidgetController : pollWidgetControllerList) {
+            pollWidgetController.resetVotes();
+        }
+        //Preparing state
+        btnOpenClosePoll.setText(MessageProperties.getString(MessageKey.SCENE_POLLS_BUTTON_CLOSE));
+        setPollType(PollType.STANDARD);
+
+        //Combine them into a concise message and send it
+
+        String question;
+        Map<String, String> params = new HashMap<>();
+        if (taQuestion.getText().trim().isEmpty()) {
+            question = MessageProperties.getString(MessageKey.SCENE_POLLS_DEFAULTQUESTION);
+        } else {
+            question = taQuestion.getText().trim();
+        }
+
+        StringBuilder sbOptions = new StringBuilder();
+        validOptions.forEach((key, value) -> sbOptions.append(key + 1).append(":{").append(value).append("}; "));
+
+        params.put("question", question);
+        params.put("options", sbOptions.toString());
+        channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_POLL_TEMPLATE_QUESTION, params));
+    }
+
     @FXML
-    void tfOptions_Action(ActionEvent event) {
+    void tfOptionsAction(ActionEvent event) {
         LOG.info("Re-initializing options list");
         options = Integer.parseInt(tfOptions.getText());
         initializePollWidgets();
@@ -196,7 +205,7 @@ public class PollController implements IController {
         options = 8;
         tfOptions.setTextFormatter(Formatters.NumbersOnly);
         tfOptions.focusedProperty().addListener((obs, oldVal, newVal) -> {
-                    if (!newVal) PollController.this.tfOptions_Action(null);
+                    if (!newVal) PollController.this.tfOptionsAction(null);
                 }
         );
         textConnectedTo.setText(MessageProperties.getString(MessageKey.SCENE_POLLS_TEXT_CONNECTEDTO));
@@ -243,7 +252,7 @@ public class PollController implements IController {
                 break;
             default:
                 disableButtons(false, false, false, false, false, false, false);
-                LOG.error("Unknown polltype was set: " + pollType);
+                LOG.error("Unknown polltype was set: {}", pollType);
         }
         this.pollType = pollType;
     }
@@ -263,9 +272,8 @@ public class PollController implements IController {
         }
     }
 
-    @Override
     public void onShow() {
-        textConnection.setText(Main.twirkSystem.getConnectedChannel());
+        textConnection.setText(Main.getTwirkSystem().getConnectedChannel());
     }
 
     @Override
@@ -306,7 +314,7 @@ public class PollController implements IController {
 
         int votes = 0;
         List<PollWidgetController> pollWidgetWithHighestVotes = getPollWidgetWithHighestVotes();
-        if (pollWidgetWithHighestVotes.size() > 0) {
+        if (!pollWidgetWithHighestVotes.isEmpty()) {
             votes = pollWidgetWithHighestVotes.get(0).getVotes();
         }
         return votes;
@@ -353,10 +361,10 @@ public class PollController implements IController {
     }
 
     private void channelMessage(String message) {
-        if (Main.twirkSystem == null) {
+        if (Main.getTwirkSystem() == null) {
             LOG.trace(message);
         } else {
-            Main.twirkSystem.channelMessage(message);
+            Main.getTwirkSystem().channelMessage(message);
         }
     }
 
@@ -377,30 +385,30 @@ public class PollController implements IController {
     }
 
     public List<PollOption> getOptions() {
-        List<PollOption> options = new ArrayList<>();
+        List<PollOption> optionList = new ArrayList<>();
         for (int i = 0; i < getOptionCount(); i++) {
             PollWidgetController optionController = pollWidgetControllerList.get(i);
-            options.add(new PollOption(optionController.getOptionText(), optionController.getVotes(), new ArrayList<>(optionController.getVoters())));
+            optionList.add(new PollOption(optionController.getOptionText(), optionController.getVotes(), new ArrayList<>(optionController.getVoters())));
         }
-        return options;
+        return optionList;
     }
 
     public void load(PollSave pollSave) {
-        try{
-        btnClearAll_Clicked(null);
-        btnClearAll_Clicked(null);
-        tfOptions.setText(pollSave.getOptionCount() + "");
-        tfOptions_Action(null);
-        for (int i = 0; i < pollSave.getOptions().size(); i++) {
-            PollOption pollOption = pollSave.getOptions().get(i);
-            PollWidgetController optionController = pollWidgetControllerList.get(i);
-            optionController.setOptionText(pollOption.getOptionText());
-            optionController.setVoters(pollOption.getVoters());
-            optionController.setVotes(pollOption.getVotes());
-        }
-        taQuestion.setText(pollSave.getQuestion());
-        }catch (Exception e){
-            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Polls save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+        try {
+            btnClearAllClicked(null);
+            btnClearAllClicked(null);
+            tfOptions.setText(pollSave.getOptionCount() + "");
+            tfOptionsAction(null);
+            for (int i = 0; i < pollSave.getOptions().size(); i++) {
+                PollOption pollOption = pollSave.getOptions().get(i);
+                PollWidgetController optionController = pollWidgetControllerList.get(i);
+                optionController.setOptionText(pollOption.getOptionText());
+                optionController.setVoters(pollOption.getVoters());
+                optionController.setVotes(pollOption.getVotes());
+            }
+            taQuestion.setText(pollSave.getQuestion());
+        } catch (Exception e) {
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Polls save?\n\nException: " + e.getMessage() + "\n" + e.getStackTrace()[0]);
             LOG.error("File cannot be loaded", e);
         }
     }

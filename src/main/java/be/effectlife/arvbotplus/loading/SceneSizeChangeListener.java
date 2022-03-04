@@ -45,6 +45,5 @@ public class SceneSizeChangeListener implements ChangeListener<Number> {
         }
 
 
-
     }
 }

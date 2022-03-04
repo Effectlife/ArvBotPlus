@@ -50,24 +50,16 @@ public class DiceResultController implements IController {
     }
 
     public String loadStyle() {
-        try {
-            String crit = retrieveColor(ColorEnum.CRIT);
-            String success = retrieveColor(ColorEnum.SUCCESS);
-            String background = retrieveColor(ColorEnum.BACKGROUND);
-            String text = retrieveColor(ColorEnum.TEXT);
-            return String.format("<!DOCTYPE html><head><style>*{background-color:%s;text-align:center;font-family: Helvetica, Arial, Sans-Serif;}p{color:%s;}.color-crit{color:%s;}.color-success{color:%s;}</style></head>", background, text, crit, success);
-        } catch (NullPointerException ignored) {
-        }
-        return "";
-    }
-
-    @Override
-    public void onShow() {
-
+        String crit = retrieveColor(ColorEnum.CRIT);
+        String success = retrieveColor(ColorEnum.SUCCESS);
+        String background = retrieveColor(ColorEnum.BACKGROUND);
+        String text = retrieveColor(ColorEnum.TEXT);
+        return String.format("<!DOCTYPE html><head><style>*{background-color:%s;text-align:center;font-family: Helvetica, Arial, Sans-Serif;}p{color:%s;}.color-crit{color:%s;}.color-success{color:%s;}</style></head>", background, text, crit, success);
     }
 
     @Override
     public void reloadView() {
+        //Does not have any fields to reload
     }
 
     public void setTextResult(String textResult) {

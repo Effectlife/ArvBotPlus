@@ -3,7 +3,6 @@ package be.effectlife.arvbotplus.controllers.scenes;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.DiceResultController;
 import be.effectlife.arvbotplus.loading.*;
-import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Spinner;
@@ -21,8 +20,8 @@ import java.util.List;
 import java.util.Random;
 
 public class DiceController implements IController {
-    private static Logger LOG = LoggerFactory.getLogger(DiceController.class);
-    private static Random random;
+    private static final Logger LOG = LoggerFactory.getLogger(DiceController.class);
+    private static final Random random = new SecureRandom();
     @FXML
     private Text textRoll;
 
@@ -56,19 +55,18 @@ public class DiceController implements IController {
     @Override
     public void doInit() {
 
-        setupSpinner(1, Integer.MAX_VALUE, 2, spinnerDiceCount);
+        setupSpinner(1, 2, spinnerDiceCount);
 
-        setupSpinner(2, Integer.MAX_VALUE, 6, spinnerDiceValue);
+        setupSpinner(2, 6, spinnerDiceValue);
 
-        setupSpinner(Integer.MIN_VALUE, Integer.MAX_VALUE, 0, spinnerModifier);
+        setupSpinner(Integer.MIN_VALUE, 0, spinnerModifier);
 
         textD.setText(MessageProperties.getString(MessageKey.SCENE_DICE_TEXT_D));
         textRoll.setText(MessageProperties.getString(MessageKey.SCENE_DICE_TEXT_ROLL));
         btnRoll.setText(MessageProperties.getString(MessageKey.SCENE_DICE_BUTTON_ROLL));
 
-        random = new SecureRandom();
         diceResultControllers = new ArrayList<>();
-        btnRoll_Clicked(null);
+        btnRollClicked();
         reloadView();
         diceResultControllers.clear();
         counter = 0;
@@ -76,16 +74,11 @@ public class DiceController implements IController {
     }
 
     @Override
-    public void onShow() {
-
-    }
-
-    @Override
     public void reloadView() {
         try {
             Thread.sleep(50);
         } catch (InterruptedException e) {
-            e.printStackTrace();
+            LOG.error("Exception happened", e);
         }
         vboxHistory.getChildren().clear();
 
@@ -94,13 +87,14 @@ public class DiceController implements IController {
             try {
                 diceResultControllers.get(i).reloadView();
                 vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
-            } catch (IndexOutOfBoundsException ignored) {
+            } catch (IndexOutOfBoundsException e) {
+                LOG.error("Exception happened", e);
             }
         }
     }
 
 
-    public void btnRoll_Clicked(ActionEvent actionEvent) {
+    public void btnRollClicked() {
         int diceCount = spinnerDiceCount.getValue();
         int diceValue = spinnerDiceValue.getValue();
         int modifier = spinnerModifier.getValue();
@@ -138,7 +132,7 @@ public class DiceController implements IController {
         diceResultController.setTextResult("" + result);
         sb.append("<p/>");
         diceResultController.setTextCalculation(sb.toString());
-        StringBuilder sbt = new StringBuilder("");
+        StringBuilder sbt = new StringBuilder();
         sbt.append(diceCount).append("d").append(diceValue);
         if (modifier > 0) {
             sbt.append(" + ").append(modifier);
@@ -151,8 +145,8 @@ public class DiceController implements IController {
     }
 
 
-    private void setupSpinner(int minValue, int maxValue, int initialValue, Spinner<Integer> spinnerModifier) {
-        SpinnerValueFactory<Integer> spinnerModifierFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(minValue, maxValue, initialValue);
+    private void setupSpinner(int minValue, int initialValue, Spinner<Integer> spinnerModifier) {
+        SpinnerValueFactory<Integer> spinnerModifierFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(minValue, Integer.MAX_VALUE, initialValue);
         spinnerModifier.setValueFactory(spinnerModifierFactory);
         spinnerModifier.setEditable(true);
         // hook in a formatter with the same properties as the factory

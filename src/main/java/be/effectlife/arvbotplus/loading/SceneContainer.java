@@ -4,8 +4,8 @@ import be.effectlife.arvbotplus.controllers.IController;
 import javafx.scene.Scene;
 
 public class SceneContainer {
-    private IController controller;
-    private Scene scene;
+    private final IController controller;
+    private final Scene scene;
 
     public SceneContainer(Scene scene, IController controller) {
         this.controller = controller;

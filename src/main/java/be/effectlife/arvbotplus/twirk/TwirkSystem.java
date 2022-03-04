@@ -26,6 +26,24 @@ public class TwirkSystem {
     private Twirk twirk;
     private boolean disable;
 
+    private static TwirkListener getOnDisconnectListener(final Twirk twirk) {
+        return new TwirkListener() {
+            @Override
+            public void onDisconnect() {
+                try {
+                    if (!twirk.connect()) {
+                        twirk.close();
+                    }
+                } catch (IOException var2) {
+                    twirk.close();
+                } catch (InterruptedException e) {
+                    LOG.error("Exception: {}", e.getMessage());
+                    twirk.close();
+                }
+            }
+        };
+    }
+
     public void initializeSystem(Properties properties, Stage callingStage, boolean disable) throws IOException, InterruptedException {
         this.disable = disable;
         if (this.disable) {
@@ -38,7 +56,12 @@ public class TwirkSystem {
             return;
         }
         String channel = properties.getProperty("twitch.channel");
-
+        int attempts = 3;
+        try {
+            attempts = Integer.parseInt(properties.getProperty("twitch.connection.retryattempts"));
+        } catch (NumberFormatException nfe) {
+            LOG.warn("'{}' is not a number, defaulting to 3", properties.getProperty("twitch.connection.retryattempts"));
+        }
         String channelFormatted = channel.substring(0, 1).toUpperCase() + channel.substring(1);
         twirk = (new TwirkBuilder(channel, channelFormatted, "oauth:" + properties.getProperty("twitch.bot.oauthtoken"))).setVerboseMode(false).build();
         twirk.addIrcListener(getOnDisconnectListener(twirk));
@@ -49,20 +72,21 @@ public class TwirkSystem {
         twirk.addIrcListener(new QuestionCommand(twirk, disable));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
+        int finalAttempts = attempts;
         new Thread(() -> {
             Platform.runLater(() -> {
                 InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
                 controller.disableTwirkMenus(true);
             });
             boolean connection = false;
-            for (int i = 0; i < 3; i++) {
-                LOG.info("Trying to connect; " + (i + 1) + "/3");
+            for (int i = 0; i < finalAttempts; i++) {
+                LOG.info("Trying to connect; {}/{}", (i + 1), finalAttempts);
                 try {
                     connection = twirk.connect();
                 } catch (IOException | InterruptedException e) {
-                    LOG.error("Exception: " + e.getMessage());
+                    LOG.error("Exception: {}", e.getMessage());
                 }
-                if (connection) break; //try to connect 3 times
+                if (connection) break; //try to connect {attempts} times
             }
             if (!connection) {
                 Platform.runLater(() -> {
@@ -80,23 +104,6 @@ public class TwirkSystem {
             });
 
         }).start();
-    }
-
-
-    private static TwirkListener getOnDisconnectListener(final Twirk twirk) {
-        return new TwirkListener() {
-            public void onDisconnect() {
-                try {
-                    if (!twirk.connect()) {
-                        twirk.close();
-                    }
-                } catch (IOException var2) {
-                    twirk.close();
-                } catch (InterruptedException ignored) {
-                }
-
-            }
-        };
     }
 
     public void channelMessage(String message) {

@@ -9,14 +9,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextArea;
 import javafx.scene.text.Text;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 public class QuestionWidgetController implements IController {
-    private static final Logger LOG = LoggerFactory.getLogger(QuestionWidgetController.class);
     private int id;
 
     @FXML
@@ -41,17 +35,12 @@ public class QuestionWidgetController implements IController {
 
     @Override
     public void doInit() {
-
-    }
-
-    @Override
-    public void onShow() {
-
+        //Does not have anything to initialize
     }
 
     @Override
     public void reloadView() {
-
+        //Does not have any fields to reload
     }
 
     @FXML

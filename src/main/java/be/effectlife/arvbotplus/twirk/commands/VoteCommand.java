@@ -1,8 +1,6 @@
 package be.effectlife.arvbotplus.twirk.commands;
 
-import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.scenes.PollController;
-import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
@@ -20,16 +18,18 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class VoteCommand extends CommandExampleBase {
-    private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_VOTE);
-    private final Twirk twirk;
+    private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
     private static final AESceneLoader sceneloader;
-    private final boolean disable;
-    private Map<String, String> params;
-
+    private static final String SENDER = "sender";
+    private static final String VOTEVALUE = "votevalue";
     static {
         sceneloader = AESceneLoader.getInstance();
     }
+
+    private final Twirk twirk;
+    private final boolean disable;
+    private final Map<String, String> params;
 
     public VoteCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND);
@@ -52,7 +52,7 @@ public class VoteCommand extends CommandExampleBase {
         if (!content.startsWith(PATTERN)) return;
         String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
         String[] split = messagecontent.split(" ");
-        params.put("sender", sender.getDisplayName());
+        params.put(SENDER, sender.getDisplayName());
 
         if (content.equals(PATTERN) ||
                 (split.length > 1 && split[1].equals("options")) ||
@@ -65,7 +65,7 @@ public class VoteCommand extends CommandExampleBase {
         }
         PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
         //try to parse the command
-        params.put("sender", sender.getDisplayName());
+        params.put(SENDER, sender.getDisplayName());
         switch (pollController.getPollType()) {
             case NONE:
                 handleNonePollCommand();
@@ -90,10 +90,10 @@ public class VoteCommand extends CommandExampleBase {
             int option = Integer.parseInt(split[1]) - 1;//-1 to offset lists starting with 0
             PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
             VoteActionResult voteResult = pollController.castVote(option, sender);
-            params.put("votevalue", pollController.getOptionText(option));
+            params.put(VOTEVALUE, pollController.getOptionText(option));
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
-            params.put("votevalue", split[1]);
+            params.put(VOTEVALUE, split[1]);
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
 
         }
@@ -105,10 +105,10 @@ public class VoteCommand extends CommandExampleBase {
         try {
             int option = Integer.parseInt(split[1]);
             VoteActionResult voteResult = quickPollWidgetController.castVote(option, sender);
-            params.put("votevalue", split[1]);
+            params.put(VOTEVALUE, split[1]);
             handleVoteResult(voteResult);
         } catch (NumberFormatException nfe) {
-            params.put("votevalue", split[1]);
+            params.put(VOTEVALUE, split[1]);
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
         }
     }
@@ -122,7 +122,7 @@ public class VoteCommand extends CommandExampleBase {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_ALREADYVOTED, params));
         } else if (voteResult == VoteActionResult.INVALID_VOTE) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
-        } else LOG.error("Unknown voteResult recieved: " + voteResult);
+        } else LOG.error("Unknown voteResult recieved: {}", voteResult);
         reloadView();
     }
 

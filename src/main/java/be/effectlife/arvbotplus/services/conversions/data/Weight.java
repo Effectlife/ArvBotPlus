@@ -7,10 +7,10 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Weight extends CType {//weight (g, kg, lbs, pounds, oz, ounce)
-    public static Weight G = new Weight("G", "g", 0.001F);
-    public static Weight KG = new Weight("KG", "kg", 1F);
-    public static Weight POUNDS = new Weight("POUNDS", "pounds", 2.20462F);
-    public static Weight OZ = new Weight("OZ", "ounces", 35.274F);
+    public static final Weight G = new Weight("G", "g", 0.001F);
+    public static final Weight KG = new Weight("KG", "kg", 1F);
+    public static final Weight POUNDS = new Weight("POUNDS", "pounds", 2.20462F);
+    public static final Weight OZ = new Weight("OZ", "ounces", 35.274F);
 
     private Weight(String unit, String displayName, float conversionToBase) {
         this.setUnit(unit);

@@ -32,14 +32,14 @@
               <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="24.0" vgrow="SOMETIMES" />
           </rowConstraints>
           <children>
-            <Pane fx:id="paneSkillname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneSkillname_Clicked" GridPane.columnSpan="2" />
+            <Pane fx:id="paneSkillname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneSkillnameClicked" GridPane.columnSpan="2" />
             <Text fx:id="textSkillname" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="SomeSkillName" GridPane.columnSpan="2">
                <styleClass>
                   <String fx:value="white-text" />
                   <String fx:value="smaller-text" />
                </styleClass>
             </Text>
-              <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillname_Clicked" prefHeight="25.0" styleClass="smaller-text" visible="false" GridPane.columnSpan="2">
+              <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillnameClicked" prefHeight="25.0" styleClass="smaller-text" visible="false" GridPane.columnSpan="2">
                   <font>
                       <Font size="14.0" />
                   </font>
@@ -50,8 +50,8 @@
                   </GridPane.margin>
               </Spinner>
             <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-            <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMax_Switched" selected="true" GridPane.columnIndex="3" />
-            <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColor_Switched" GridPane.columnIndex="2">
+            <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMaxSwitched" selected="true" GridPane.columnIndex="3" />
+            <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColorSwitched" GridPane.columnIndex="2">
                <GridPane.margin>
                   <Insets />
                </GridPane.margin>

@@ -31,9 +31,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import static be.effectlife.arvbotplus.Main.twirkSystem;
-
-
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
     private List<SkillWidgetController> skillWidgetControllerList;
@@ -132,20 +129,20 @@ public class InventoryController implements IController {
         removedControllerList = new ArrayList<>();
         tfName.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                tfName_Clicked();
+                tfNameClicked();
             }
         }));
         highlight = ColorHelper.retrieveColor(ColorEnum.HIGHLIGHT);
     }
 
     @FXML
-    void btnAdd_Clicked() {
+    void btnAddClicked() {
         createWidget(skillWidgetControllerList.size());
         reloadView();
     }
 
     @FXML
-    void btnClose_Clicked() {
+    void btnCloseClicked() {
         Stage invStage = Main.getStage(Stages.INVENTORY);
         invStage.fireEvent(new WindowEvent(
                 invStage,
@@ -154,26 +151,27 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnPolls_Clicked() {
+    void btnPollsClicked() {
         final Stage pollStage = StageBuilder.getStage(Stages.POLL);
         startupTwirkSystem(pollStage);
     }
 
     @FXML
-    public void btnQuestions_Clicked() {
+    public void btnQuestionsClicked() {
         Stage questionStage = StageBuilder.getStage(Stages.QUESTIONS);
         startupTwirkSystem(questionStage);
     }
 
     private void startupTwirkSystem(Stage twirkStage) {
-        if (twirkSystem == null || twirkSystem.isNotLoaded()) {
+        if (Main.getTwirkSystem() == null || Main.getTwirkSystem().isNotLoaded()) {
             new Thread(() -> {
-                twirkSystem = new TwirkSystem();
+                Main.setTwirkSystem(new TwirkSystem());
                 try {
-                    twirkSystem.initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
+                    Main.getTwirkSystem().initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
                     ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
+                    ((PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL)).onShow();
                 } catch (IOException | InterruptedException e) {
-                    e.printStackTrace();
+                    LOG.error("Error happened while initializing twirksystem", e);
                 }
             }).start();
         } else {
@@ -182,22 +180,22 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnDice_Clicked() {
+    void btnDiceClicked() {
         StageBuilder.getStage(Stages.DICE).show();
     }
 
     @FXML
-    void btnBattle_Clicked() {
+    void btnBattleClicked() {
         StageBuilder.getStage(Stages.BATTLE).show();
     }
 
     @FXML
-    void btnConversion_Clicked() {
+    void btnConversionClicked() {
         StageBuilder.getStage(Stages.CONVERSION).show();
     }
 
     @FXML
-    void btnHelp_Clicked() {
+    void btnHelpClicked() {
         Platform.runLater(() -> SimplePopup.showPopupInfo("About ArvBot Plus", "This is ArvBot Plus, a twitchbot and Gamebook manager created by me, Effectlife, mainly for fun, and to help Arvan Eleron to have some redundancy in his twitchbots. \n" +
                 "This application contains 4 independant tools.\n" +
                 "\t1. Inventory: This is the main screen. This window is used to manage all stats concerning playing gamebooks. On the left, there is a list of fully customizable skills and stats. Each skill/stat can have its own name, and can have any value between " + Integer.MIN_VALUE + " and " + Integer.MAX_VALUE + ".\n" +
@@ -211,8 +209,8 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnRemove_Clicked() {
-        if (skillWidgetControllerList.size() == 0) return;
+    void btnRemoveClicked() {
+        if (skillWidgetControllerList.isEmpty()) return;
         SkillWidgetController controllerToRemove = skillWidgetControllerList.get(skillWidgetControllerList.size() - 1);
         for (Node child : vboxSkillOptions.getChildren()) {
             if (Integer.parseInt(child.getUserData().toString()) == controllerToRemove.getId()) {
@@ -258,8 +256,8 @@ public class InventoryController implements IController {
 
 
     private void createWidget(int id, String name, int value, int maxValue, SkillType skillType, boolean useColors) {
-        if(!removedControllerList.isEmpty()){
-            SkillWidgetController remove = removedControllerList.remove(removedControllerList.size()-1);
+        if (!removedControllerList.isEmpty()) {
+            SkillWidgetController remove = removedControllerList.remove(removedControllerList.size() - 1);
             id = remove.getId();
         }
         SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_SKILL, "_" + id);
@@ -297,17 +295,17 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void btnSave_Clicked() {
+    void btnSaveClicked() {
         SaveManager.saveGame();
     }
 
     @FXML
-    void btnLoad_Clicked() {
+    void btnLoadClicked() {
         SaveManager.loadGame();
     }
 
     @FXML
-    void paneName_Clicked() {
+    void paneNameClicked() {
         if (JFXExtensions.isDoubleClick()) {
             textName.setDisable(true);
             textName.setVisible(false);
@@ -319,7 +317,7 @@ public class InventoryController implements IController {
     }
 
     @FXML
-    void tfName_Clicked() {
+    void tfNameClicked() {
         textName.setDisable(false);
         textName.setVisible(true);
         tfName.setDisable(true);
@@ -334,11 +332,6 @@ public class InventoryController implements IController {
         tfName.setText("");
         taCluesNotes.setText("");
         taItemsArtifacts.setText("");
-    }
-
-    @Override
-    public void onShow() {
-
     }
 
     @Override
@@ -375,8 +368,8 @@ public class InventoryController implements IController {
                 createWidget(i, skill.getName(), skill.getValue(), skill.getMaxValue(), skill.getSkillType(), skill.isUsesColor());
             }
             reloadView();
-        }catch (Exception e){
-            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Skills save?\n\nException: "+e.getMessage() +"\n"+ e.getStackTrace()[0]);
+        } catch (Exception e) {
+            SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Skills save?\n\nException: " + e.getMessage() + "\n" + e.getStackTrace()[0]);
             LOG.error("File cannot be loaded", e);
         }
     }
@@ -392,17 +385,15 @@ public class InventoryController implements IController {
     }
 
     private void addWithDragging(final VBox root, final Parent node) {
-        node.setOnDragDetected(event -> {
-            node.startFullDrag();
-        });
+        node.setOnDragDetected(event -> node.startFullDrag());
 
         // next two handlers just an idea how to show the drop target visually:
         node.setOnMouseDragEntered(event -> {
-            node.getChildrenUnmodifiable().forEach((child) -> child.setMouseTransparent(true));
+            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(true));
             node.setStyle("-fx-border-color: " + highlight + "; -fx-border-width: 0 0 2 0;");
         });
         node.setOnMouseDragExited(event -> {
-            node.getChildrenUnmodifiable().forEach((child) -> child.setMouseTransparent(false));
+            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(false));
             node.setStyle("");
         });
 
@@ -410,7 +401,7 @@ public class InventoryController implements IController {
             node.setStyle("");
             int indexOfDraggingNode = root.getChildren().indexOf(event.getGestureSource());
             int indexOfDropTarget = root.getChildren().indexOf(node);
-            if(indexOfDropTarget<indexOfDraggingNode)indexOfDropTarget++;
+            if (indexOfDropTarget < indexOfDraggingNode) indexOfDropTarget++;
             rotateNodes(root, indexOfDraggingNode, indexOfDropTarget);
             event.consume();
         });

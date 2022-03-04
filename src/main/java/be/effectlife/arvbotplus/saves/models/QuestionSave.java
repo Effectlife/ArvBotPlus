@@ -1,12 +1,22 @@
 package be.effectlife.arvbotplus.saves.models;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class QuestionSave {
-    private static final Logger LOG = LoggerFactory.getLogger(QuestionSave.class);
+
+    List<QuestionSaveItem> questions;
+
+    public QuestionSave(List<QuestionSaveItem> questions) {
+        this.questions = questions;
+    }
+
+    public List<QuestionSaveItem> getQuestions() {
+        return questions;
+    }
+
+    public void setQuestions(List<QuestionSaveItem> questions) {
+        this.questions = questions;
+    }
 
     public static class QuestionSaveItem {
         String username;
@@ -52,19 +62,5 @@ public class QuestionSave {
         public void setAnswered(boolean answered) {
             this.answered = answered;
         }
-    }
-
-    List<QuestionSaveItem> questions;
-
-    public QuestionSave(List<QuestionSaveItem> questions) {
-        this.questions = questions;
-    }
-
-    public List<QuestionSaveItem> getQuestions() {
-        return questions;
-    }
-
-    public void setQuestions(List<QuestionSaveItem> questions) {
-        this.questions = questions;
     }
 }

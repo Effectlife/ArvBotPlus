@@ -40,8 +40,8 @@ public class PollWidgetController implements IController {
     private int optionId;
 
     @FXML
-    void pBarVotes_Clicked(MouseEvent event) {
-        if (voters.size() > 0) {
+    void pBarVotesClicked(MouseEvent event) {
+        if (!voters.isEmpty()) {
             String reduce = voters.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
             Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option " + (optionId + 1), reduce));
         }
@@ -49,7 +49,7 @@ public class PollWidgetController implements IController {
     }
 
     @FXML
-    void btnClear_Clicked(ActionEvent event) {
+    void btnClearClicked(ActionEvent event) {
         if (event != null && isCleared()) {
             tfOption.setText("");
         }
@@ -64,14 +64,9 @@ public class PollWidgetController implements IController {
         spinnerVotes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
         voters = new HashSet<>();
         btnClear.setText(MessageProperties.getString(MessageKey.WIDGET_POLLS_BUTTON_CLEAR));
-        btnClear_Clicked(null);
+        btnClearClicked(null);
         tfOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
         spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> pollController.reloadView()));
-    }
-
-    @Override
-    public void onShow() {
-
     }
 
     @Override
@@ -88,11 +83,15 @@ public class PollWidgetController implements IController {
         if (votesCleared) {
             tfOption.setText("");
         }
-        btnClear_Clicked(null);
+        btnClearClicked(null);
     }
 
     public String getOptionText() {
         return tfOption.getText();
+    }
+
+    public void setOptionText(String s) {
+        tfOption.setText(s);
     }
 
     public void disableButtons(boolean disabled) {
@@ -120,8 +119,17 @@ public class PollWidgetController implements IController {
         return voters;
     }
 
+    public void setVoters(List<String> voters) {
+        this.voters.clear();
+        this.voters.addAll(voters);
+    }
+
     public int getVotes() {
         return spinnerVotes.getValue();
+    }
+
+    public void setVotes(int votes) {
+        spinnerVotes.getValueFactory().setValue(votes);
     }
 
     public void vote(String sender) {
@@ -141,18 +149,5 @@ public class PollWidgetController implements IController {
 
     public boolean isCleared() {
         return spinnerVotes.getValue() == 0 && pBarVotes.getProgress() == 0;
-    }
-
-    public void setOptionText(String s) {
-        tfOption.setText(s);
-    }
-
-    public void setVoters(List<String> voters) {
-        this.voters.clear();
-        this.voters.addAll(voters);
-    }
-
-    public void setVotes(int votes) {
-        spinnerVotes.getValueFactory().setValue(votes);
     }
 }

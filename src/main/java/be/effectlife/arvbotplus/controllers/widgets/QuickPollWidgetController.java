@@ -23,7 +23,7 @@ import java.util.Map;
 import java.util.Set;
 
 public class QuickPollWidgetController implements IController {
-    private final Logger LOG = LoggerFactory.getLogger(QuickPollWidgetController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(QuickPollWidgetController.class);
     @FXML
     private Button btnQPOpenClose;
 
@@ -42,7 +42,8 @@ public class QuickPollWidgetController implements IController {
     @FXML
     private Text textCount2;
 
-    private int totalVotes, votes1, votes2;
+    private int votes1;
+    private int votes2;
     private Set<String> usernamesVoted1;
     private Set<String> usernamesVoted2;
 
@@ -58,18 +59,13 @@ public class QuickPollWidgetController implements IController {
         usernamesVoted2 = new HashSet<>();
         btnQPOpenClose.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_OPEN));
         btnQPLastCall.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_LASTCALL));
-        totalVotes = votes1 = votes2 = 0;
         if (pollController == null) {
             pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
         }
     }
 
-    @Override
-    public void onShow() {
-    }
-
     @FXML
-    void btnQPOpenClose_clicked(ActionEvent event) {
+    void btnQPOpenCloseClicked(ActionEvent event) {
         if (pollController.getPollType() == PollType.NONE) {
             //Starting the poll
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_QUESTION, new HashMap<>()));
@@ -96,13 +92,13 @@ public class QuickPollWidgetController implements IController {
             pollController.setPollType(PollType.NONE);
             doInit();
         } else {
-            LOG.warn("Trying to change quickpoll state, while the polltype is " + pollController.getPollType() + "... Which is strange, since the button should be disabled");
+            LOG.warn("Trying to change quickpoll state, while the polltype is {}... Which is strange, since the button should be disabled", pollController.getPollType());
         }
 
     }
 
     @FXML
-    void btnQPLastCall_clicked(ActionEvent event) {
+    void btnQPLastCallClicked(ActionEvent event) {
         channelMessage(MessageProperties.getString(MessageKey.TWIRK_MESSAGE_POLL_LASTCALL));
 
     }
@@ -119,15 +115,16 @@ public class QuickPollWidgetController implements IController {
     public void reloadView() {
         textCount1.setText("" + votes1);
         textCount2.setText("" + votes2);
-        if (votes1 == 0) {
+        int max = Math.max(votes1, votes2);
+        if (votes1 == 0 || max == 0) {
             pBar1.setProgress(0);
         } else {
-            pBar1.setProgress((double) votes1 / Math.max(votes1, votes2));
+            pBar1.setProgress((double) votes1 / max);
         }
-        if (votes2 == 0) {
+        if (votes2 == 0 || max == 0) {
             pBar2.setProgress(0);
         } else {
-            pBar2.setProgress((double) votes2 / Math.max(votes1, votes2));
+            pBar2.setProgress((double) votes2 / max);
         }
     }
 
@@ -138,14 +135,12 @@ public class QuickPollWidgetController implements IController {
                 return VoteActionResult.VOTE_ALREADY_CAST;
             }
             usernamesVoted1.add(sender);
-            totalVotes++;
             votes1++;
         } else if (option == 2) {
             if (hasUsernameVoted(sender)) {
                 return VoteActionResult.VOTE_ALREADY_CAST;
             }
             usernamesVoted2.add(sender);
-            totalVotes++;
             votes2++;
         } else {
             return VoteActionResult.INVALID_VOTE;
@@ -157,13 +152,11 @@ public class QuickPollWidgetController implements IController {
     public VoteActionResult changeVote(int option, String sender) {
         if (option == 2 && usernamesVoted1.contains(sender)) {
             votes1--;
-            totalVotes--;
             usernamesVoted1.remove(sender);
             return castVote(option, sender);
         }
         if (option == 1 && usernamesVoted2.contains(sender)) {
             votes2--;
-            totalVotes--;
             usernamesVoted2.remove(sender);
             return castVote(option, sender);
         }
@@ -181,10 +174,10 @@ public class QuickPollWidgetController implements IController {
     }
 
     private void channelMessage(String message) {
-        if (Main.twirkSystem == null) {
+        if (Main.getTwirkSystem() == null) {
             LOG.trace(message);
         } else {
-            Main.twirkSystem.channelMessage(message);
+            Main.getTwirkSystem().channelMessage(message);
         }
     }
 }

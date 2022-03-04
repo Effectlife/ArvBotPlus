@@ -7,9 +7,9 @@ import java.util.Arrays;
 import java.util.List;
 
 public final class Temperature extends CType {
-    public static Temperature K = new Temperature("K", "°K");
-    public static Temperature F = new Temperature("F", "°F");
-    public static Temperature C = new Temperature("C", "°C");
+    public static final Temperature K = new Temperature("K", "°K");
+    public static final Temperature F = new Temperature("F", "°F");
+    public static final Temperature C = new Temperature("C", "°C");
 
     private Temperature(String unit, String displayName) {
         setUnit(unit);

@@ -12,15 +12,14 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class SkillWidgetController implements IController {
-    private static final Logger LOG = LoggerFactory.getLogger(SkillWidgetController.class);
+    private static final String CSS_WARN_TEXT_CLASS = "warn-text";
+    private static final String CSS_CRIT_TEXT_CLASS = "crit-text";
     private int id;
     private SkillType skillType;
-    private double thresholdWarn, thresholdCrit;
-
+    private double thresholdWarn;
+    private double thresholdCrit;
     @FXML
     private Pane paneSkillname;
 
@@ -38,26 +37,27 @@ public class SkillWidgetController implements IController {
 
     @FXML
     private CheckBox cbHasMax;
+
     @FXML
     private CheckBox cbUseColor;
 
     @FXML
-    void cbHasMax_Switched(ActionEvent event) {
+    void cbHasMaxSwitched(ActionEvent event) {
         setType(cbHasMax.isSelected() ? SkillType.MAX : SkillType.SIMPLE);
     }
 
     @FXML
-    void cbUseColor_Switched(ActionEvent event) {
+    void cbUseColorSwitched(ActionEvent event) {
         if (cbUseColor.isSelected()) {
             reloadView();
         } else {
-            spinnerCurrentValue.getStyleClass().remove("warn-text");
-            spinnerCurrentValue.getStyleClass().remove("crit-text");
+            spinnerCurrentValue.getStyleClass().remove(CSS_WARN_TEXT_CLASS);
+            spinnerCurrentValue.getStyleClass().remove(CSS_CRIT_TEXT_CLASS);
         }
     }
 
     @FXML
-    void paneSkillname_Clicked(MouseEvent event) {
+    void paneSkillnameClicked(MouseEvent event) {
         if (JFXExtensions.isDoubleClick()) {
             textSkillname.setDisable(true);
             textSkillname.setVisible(false);
@@ -69,7 +69,7 @@ public class SkillWidgetController implements IController {
     }
 
     @FXML
-    void tfSkillname_Clicked(ActionEvent event) {
+    void tfSkillnameClicked(ActionEvent event) {
         textSkillname.setDisable(false);
         textSkillname.setVisible(true);
         tfSkillname.setDisable(true);
@@ -84,33 +84,11 @@ public class SkillWidgetController implements IController {
         spinnerMaxValue.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(Integer.MIN_VALUE, Integer.MAX_VALUE, 0));
         tfSkillname.focusedProperty().addListener(((observable, oldValue, newValue) -> {
             if (!newValue) {
-                tfSkillname_Clicked(null);
+                tfSkillnameClicked(null);
             }
         }));
         spinnerCurrentValue.valueProperty().addListener(((observable, oldValue, newValue) -> reloadView()));
         spinnerMaxValue.valueProperty().addListener(((observable, oldValue, newValue) -> reloadView()));
-    }
-
-    public void setType(SkillType skillType) {
-        this.skillType = skillType;
-        if (skillType == SkillType.MAX) {
-            spinnerMaxValue.setVisible(true);
-            cbHasMax.setSelected(true);
-            cbUseColor.setVisible(true);
-        } else {
-            spinnerCurrentValue.getStyleClass().remove("warn-text");
-            spinnerCurrentValue.getStyleClass().remove("crit-text");
-            spinnerMaxValue.setVisible(false);
-            cbHasMax.setSelected(false);
-            cbUseColor.setVisible(false);
-
-        }
-        reloadView();
-    }
-
-    @Override
-    public void onShow() {
-
     }
 
     @Override
@@ -118,18 +96,18 @@ public class SkillWidgetController implements IController {
         if (skillType == SkillType.MAX && cbUseColor.isSelected()) {
 
             if (getValue() < getMaxValue() * thresholdCrit) {
-                if (!spinnerCurrentValue.getStyleClass().contains("crit-text")) {
-                    spinnerCurrentValue.getStyleClass().remove("warn-text");
-                    spinnerCurrentValue.getStyleClass().add("crit-text");
+                if (!spinnerCurrentValue.getStyleClass().contains(CSS_CRIT_TEXT_CLASS)) {
+                    spinnerCurrentValue.getStyleClass().remove(CSS_WARN_TEXT_CLASS);
+                    spinnerCurrentValue.getStyleClass().add(CSS_CRIT_TEXT_CLASS);
                 }
             } else if (getValue() < getMaxValue() * thresholdWarn) {
-                if (!spinnerCurrentValue.getStyleClass().contains("warn-text")) {
-                    spinnerCurrentValue.getStyleClass().remove("crit-text");
-                    spinnerCurrentValue.getStyleClass().add("warn-text");
+                if (!spinnerCurrentValue.getStyleClass().contains(CSS_WARN_TEXT_CLASS)) {
+                    spinnerCurrentValue.getStyleClass().remove(CSS_CRIT_TEXT_CLASS);
+                    spinnerCurrentValue.getStyleClass().add(CSS_WARN_TEXT_CLASS);
                 }
             } else {
-                spinnerCurrentValue.getStyleClass().remove("warn-text");
-                spinnerCurrentValue.getStyleClass().remove("crit-text");
+                spinnerCurrentValue.getStyleClass().remove(CSS_WARN_TEXT_CLASS);
+                spinnerCurrentValue.getStyleClass().remove(CSS_CRIT_TEXT_CLASS);
             }
         }
     }
@@ -139,20 +117,12 @@ public class SkillWidgetController implements IController {
         this.tfSkillname.setText(name);
     }
 
-    public void setValue(int value) {
-        this.spinnerCurrentValue.getValueFactory().setValue(value);
-    }
-
-    public void setMaxValue(int value) {
-        this.spinnerMaxValue.getValueFactory().setValue(value);
+    public int getId() {
+        return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getId() {
-        return id;
     }
 
     public String getSkillname() {
@@ -163,12 +133,37 @@ public class SkillWidgetController implements IController {
         return skillType;
     }
 
+    public void setType(SkillType skillType) {
+        this.skillType = skillType;
+        if (skillType == SkillType.MAX) {
+            spinnerMaxValue.setVisible(true);
+            cbHasMax.setSelected(true);
+            cbUseColor.setVisible(true);
+        } else {
+            spinnerCurrentValue.getStyleClass().remove(CSS_WARN_TEXT_CLASS);
+            spinnerCurrentValue.getStyleClass().remove(CSS_CRIT_TEXT_CLASS);
+            spinnerMaxValue.setVisible(false);
+            cbHasMax.setSelected(false);
+            cbUseColor.setVisible(false);
+
+        }
+        reloadView();
+    }
+
     public int getValue() {
         return spinnerCurrentValue.getValue();
     }
 
+    public void setValue(int value) {
+        this.spinnerCurrentValue.getValueFactory().setValue(value);
+    }
+
     public int getMaxValue() {
         return spinnerMaxValue.getValue();
+    }
+
+    public void setMaxValue(int value) {
+        this.spinnerMaxValue.getValueFactory().setValue(value);
     }
 
     public void setThresholds(double thresholdWarn, double thresholdCrit) {

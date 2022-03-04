@@ -33,12 +33,12 @@
                 <Insets bottom="4.0" left="4.0" right="4.0" top="4.0"/>
             </padding>
             <children>
-                <ComboBox fx:id="comboCategory" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#comboboxCategory_Changed" promptText="Category" styleClass="white-text" GridPane.columnSpan="2147483647"/>
+                <ComboBox fx:id="comboCategory" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#comboboxCategoryChanged" promptText="Category" styleClass="white-text" GridPane.columnSpan="2147483647"/>
                 <ComboBox fx:id="comboSourceType" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#cbTypeChanged" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
                 <ComboBox fx:id="comboTargetType" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#cbTypeChanged" GridPane.columnIndex="4" GridPane.rowIndex="1"/>
-                <TextField fx:id="tfSource" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#tfSource_Confirmed" GridPane.rowIndex="1"/>
+                <TextField fx:id="tfSource" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onAction="#tfSourceConfirmed" GridPane.rowIndex="1"/>
                 <TextField fx:id="tfTarget" editable="false" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
-                <Button fx:id="btnSend" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnSend_Clicked" text="Send" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
+                <Button fx:id="btnSend" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnSendClicked" text="Send" GridPane.columnIndex="5" GridPane.rowIndex="1"/>
             </children>
         </GridPane>
     </children>

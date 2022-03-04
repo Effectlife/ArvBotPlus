@@ -68,30 +68,30 @@
         <padding>
             <Insets bottom="4.0" left="4.0" right="4.0" top="4.0" />
         </padding>
-        <Button fx:id="btnClearAll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnClearAll_Clicked" prefHeight="26.0" text="Clear All" textAlignment="CENTER" GridPane.rowIndex="1">
+        <Button fx:id="btnClearAll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="70.0" mnemonicParsing="false" onAction="#btnClearAllClicked" prefHeight="26.0" text="Clear All" textAlignment="CENTER" GridPane.rowIndex="1">
             <padding>
                 <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
         <TextField fx:id="taQuestion" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="10.0" prefHeight="27.0" promptText="What should we do/say?" GridPane.columnSpan="3" />
-        <TextField fx:id="tfOptions" onAction="#tfOptions_Action" prefHeight="27.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+        <TextField fx:id="tfOptions" onAction="#tfOptionsAction" prefHeight="27.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
         <Text fx:id="textOptions" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Options" textAlignment="CENTER" wrappingWidth="60.0" GridPane.columnIndex="3" />
-        <Button fx:id="btnOpenClosePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpenClosePoll_Clicked" prefHeight="26.0" text="Open Poll" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+        <Button fx:id="btnOpenClosePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnOpenClosePollClicked" prefHeight="26.0" text="Open Poll" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
             <padding>
                 <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
-        <Button fx:id="btnLastCall" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLastCall_Clicked" prefHeight="26.0" text="Last Call" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
+        <Button fx:id="btnLastCall" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLastCallClicked" prefHeight="26.0" text="Last Call" textAlignment="CENTER" GridPane.columnIndex="2" GridPane.rowIndex="1">
             <padding>
                 <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
             </padding>
         </Button>
-      <Button fx:id="btnSavePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSavePoll_Clicked" prefHeight="26.0" text="Save" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Button fx:id="btnSavePoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnSavePollClicked" prefHeight="26.0" text="Save" textAlignment="CENTER" wrapText="true" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <padding>
             <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
          </padding>
       </Button>
-      <Button fx:id="btnLoadPoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLoadPoll_Clicked" prefHeight="26.0" text="Load" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
+      <Button fx:id="btnLoadPoll" contentDisplay="CENTER" graphicTextGap="2.0" maxHeight="-Infinity" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" mnemonicParsing="false" onAction="#btnLoadPollClicked" prefHeight="26.0" text="Load" textAlignment="CENTER" wrapText="true" GridPane.columnIndex="2" GridPane.columnSpan="2" GridPane.rowIndex="2">
          <padding>
             <Insets bottom="-10.0" left="-10.0" right="-10.0" top="-10.0" />
          </padding>

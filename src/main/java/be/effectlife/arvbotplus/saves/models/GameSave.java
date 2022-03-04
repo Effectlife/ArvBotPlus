@@ -8,6 +8,16 @@ public class GameSave {
     private String cluesNotes;
     private List<Skill> skills;
 
+    public GameSave() {
+    }
+
+    public GameSave(String name, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
+        this.name = name;
+        this.itemsArtifacts = itemsArtifacts;
+        this.cluesNotes = cluesNotes;
+        this.skills = skills;
+    }
+
     public String getName() {
         return name;
     }
@@ -37,16 +47,6 @@ public class GameSave {
     }
 
     public void setSkills(List<Skill> skills) {
-        this.skills = skills;
-    }
-
-    public GameSave() {
-    }
-
-    public GameSave(String name, String itemsArtifacts, String cluesNotes, List<Skill> skills) {
-        this.name = name;
-        this.itemsArtifacts = itemsArtifacts;
-        this.cluesNotes = cluesNotes;
         this.skills = skills;
     }
 }

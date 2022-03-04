@@ -1,12 +1,8 @@
 package be.effectlife.arvbotplus.saves.models;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.util.List;
 
 public class PollSave {
-    private static final Logger LOG = LoggerFactory.getLogger(PollSave.class);
     int optionCount;
     String question;
     List<PollOption> options;

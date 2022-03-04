@@ -41,14 +41,14 @@
         </padding>
         <Pane styleClass="container-pane" GridPane.columnSpan="2"/>
         <Text fx:id="textCharName" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Character's name: "/>
-        <Pane fx:id="paneName" onMouseClicked="#paneName_Clicked" GridPane.columnIndex="1"/>
+        <Pane fx:id="paneName" onMouseClicked="#paneNameClicked" GridPane.columnIndex="1"/>
         <Text fx:id="textName" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="PLACEHOLDER" GridPane.columnIndex="1">
             <styleClass>
                 <String fx:value="white-text"/>
                 <String fx:value="text-bold"/>
             </styleClass>
         </Text>
-        <TextField fx:id="tfName" disable="true" onAction="#tfName_Clicked" text="PLACEHOLDER" visible="false" GridPane.columnIndex="1"/>
+        <TextField fx:id="tfName" disable="true" onAction="#tfNameClicked" text="PLACEHOLDER" visible="false" GridPane.columnIndex="1"/>
         <Pane prefHeight="26.0" styleClass="container-pane" GridPane.rowIndex="1"/>
         <GridPane hgap="4.0" maxHeight="26.0" prefHeight="26.0" vgap="4.0" GridPane.rowIndex="1">
             <columnConstraints>
@@ -61,8 +61,8 @@
             <padding>
                 <Insets bottom="4.0" left="2.0" right="2.0" top="2.0"/>
             </padding>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAdd_Clicked" styleClass="skill-button" text="+"/>
-            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemove_Clicked" styleClass="skill-button" text="-" GridPane.columnIndex="1"/>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnAddClicked" styleClass="skill-button" text="+"/>
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnRemoveClicked" styleClass="skill-button" text="-" GridPane.columnIndex="1"/>
         </GridPane>
         <SplitPane dividerPositions="0.7" styleClass="container-pane" GridPane.columnIndex="1" GridPane.rowIndex="1" GridPane.rowSpan="2">
             <GridPane hgap="4.0" minWidth="150.0" vgap="4.0">
@@ -114,20 +114,20 @@
     </GridPane>
     <MenuBar GridPane.columnSpan="2147483647">
         <Menu fx:id="menuFile" text="File">
-            <MenuItem fx:id="menuSave" onAction="#btnSave_Clicked" text="Save"/>
-            <MenuItem fx:id="menuLoad" onAction="#btnLoad_Clicked" text="Load"/>
+            <MenuItem fx:id="menuSave" onAction="#btnSaveClicked" text="Save"/>
+            <MenuItem fx:id="menuLoad" onAction="#btnLoadClicked" text="Load"/>
             <SeparatorMenuItem mnemonicParsing="false"/>
-            <MenuItem fx:id="menuClose" onAction="#btnClose_Clicked" text="Close"/>
+            <MenuItem fx:id="menuClose" onAction="#btnCloseClicked" text="Close"/>
         </Menu>
         <Menu fx:id="menuTools" mnemonicParsing="false" text="Tools">
-            <MenuItem fx:id="menuPolls" mnemonicParsing="false" onAction="#btnPolls_Clicked" text="Polls"/>
-            <MenuItem fx:id="menuDice" mnemonicParsing="false" onAction="#btnDice_Clicked" text="Dice Roller"/>
-            <MenuItem fx:id="menuBattle" mnemonicParsing="false" onAction="#btnBattle_Clicked" text="Battle Manager"/>
-            <MenuItem fx:id="menuQuestions" mnemonicParsing="false" onAction="#btnQuestions_Clicked" text="Questions"/>
-            <MenuItem fx:id="menuConversion" mnemonicParsing="false" onAction="#btnConversion_Clicked" text="Conversions"/>
+            <MenuItem fx:id="menuPolls" mnemonicParsing="false" onAction="#btnPollsClicked" text="Polls"/>
+            <MenuItem fx:id="menuDice" mnemonicParsing="false" onAction="#btnDiceClicked" text="Dice Roller"/>
+            <MenuItem fx:id="menuBattle" mnemonicParsing="false" onAction="#btnBattleClicked" text="Battle Manager"/>
+            <MenuItem fx:id="menuQuestions" mnemonicParsing="false" onAction="#btnQuestionsClicked" text="Questions"/>
+            <MenuItem fx:id="menuConversion" mnemonicParsing="false" onAction="#btnConversionClicked" text="Conversions"/>
         </Menu>
         <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
-            <MenuItem fx:id="menuAbout" mnemonicParsing="false" onAction="#btnHelp_Clicked" text="About"/>
+            <MenuItem fx:id="menuAbout" mnemonicParsing="false" onAction="#btnHelpClicked" text="About"/>
         </Menu>
     </MenuBar>
 </GridPane>

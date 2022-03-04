@@ -6,6 +6,8 @@ import javafx.scene.control.ButtonType;
 import java.util.Optional;
 
 public abstract class SimplePopup {
+    private SimplePopup() {
+    }
 
     private static Alert prepareAlert(Alert.AlertType alertType, String title, String header, String content) {
         Alert alert = new Alert(alertType);

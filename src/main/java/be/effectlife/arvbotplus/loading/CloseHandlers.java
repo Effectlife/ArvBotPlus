@@ -11,18 +11,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public abstract class CloseHandlers {
-    private static Logger LOG = LoggerFactory.getLogger(CloseHandlers.class);
-
-    private CloseHandlers() {
-    }
-
+    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> ((Stage) t.getSource()).hide();
+    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
+        ((Stage) t.getSource()).hide();
+        if (!Main.getStage(Stages.POLL).isShowing() && !Main.getStage(Stages.QUESTIONS).isShowing()) {
+            Main.getTwirkSystem().disconnect(false);
+        }
+    };
+    public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {
+    };
+    private static final Logger LOG = LoggerFactory.getLogger(CloseHandlers.class);
     public static final EventHandler<WindowEvent> SHUTDOWN = t -> {
 
         ConfirmationType result = SimplePopup.showPopupYesNo("Close?", "Close?", "Are you sure you want to close the application?");
         switch (result) {
             case YES:
-                if (Main.twirkSystem != null)
-                    Main.twirkSystem.disconnect(true);
+                if (Main.getTwirkSystem() != null)
+                    Main.getTwirkSystem().disconnect(true);
                 Platform.exit();
                 System.exit(0);
                 break;
@@ -30,19 +35,12 @@ public abstract class CloseHandlers {
                 t.consume();
                 break;
             default:
-                LOG.error("Illegal Confirmationtype was given: {}", result.name());
+                String name = result.name();
+                LOG.error("Illegal Confirmationtype was given: {}", name);
         }
     };
 
-    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> ((Stage) t.getSource()).hide();
-    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
-        ((Stage) t.getSource()).hide();
-        if (!Main.getStage(Stages.POLL).isShowing() && !Main.getStage(Stages.QUESTIONS).isShowing()) {
-            Main.twirkSystem.disconnect(false);
-        }
-    };
-
-    public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {
-    };
+    private CloseHandlers() {
+    }
 
 }

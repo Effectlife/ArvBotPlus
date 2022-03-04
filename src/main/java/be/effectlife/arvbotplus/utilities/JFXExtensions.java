@@ -4,9 +4,9 @@ import javafx.event.EventHandler;
 import javafx.scene.Node;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.input.MouseEvent;
 
 public class JFXExtensions {
+    private JFXExtensions(){}
     public static final EventHandler<KeyEvent> tabTraverse = event -> {
         KeyCode code = event.getCode();
 
@@ -26,6 +26,7 @@ public class JFXExtensions {
     };
     private static long lastTime;
     private static boolean isdblClicked = false;
+
     public static boolean isDoubleClick() {
         long diff;
         long currentTime = System.currentTimeMillis();

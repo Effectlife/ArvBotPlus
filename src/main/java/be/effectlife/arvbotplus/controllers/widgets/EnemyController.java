@@ -41,21 +41,16 @@ public class EnemyController implements IController {
     }
 
     @Override
-    public void onShow() {
-
-    }
-
-    @Override
     public void reloadView() {
-
-    }
-
-    public void setId(int id) {
-        this.id = id;
+        //Does not have any fields to reload
     }
 
     public int getId() {
         return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public void clear() {
