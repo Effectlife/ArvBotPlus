@@ -1,0 +1,410 @@
+22-03-02 16:48:55 INFO  b.e.a.loading.StageBuilder:55  - Building Stage POLL
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-03-02 16:48:55 INFO  b.e.a.loading.StageBuilder:55  - Building Stage INVENTORY
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-03-02 16:48:55 INFO  b.e.a.loading.StageBuilder:55  - Building Stage DICE
+22-03-02 16:48:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: -49
+	at java.util.ArrayList.elementData(ArrayList.java:422)
+	at java.util.ArrayList.get(ArrayList.java:435)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.reloadView(DiceController.java:88)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.btnRollClicked(DiceController.java:144)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.doInit(DiceController.java:69)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.loadScene(AESceneLoader.java:97)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:36)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:28)
+	at be.effectlife.arvbotplus.loading.StageBuilder.build(StageBuilder.java:57)
+	at be.effectlife.arvbotplus.Main.buildStage(Main.java:132)
+	at be.effectlife.arvbotplus.Main.prepareStages(Main.java:111)
+	at be.effectlife.arvbotplus.Main.start(Main.java:49)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$166(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$179(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$152(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: -48
+	at java.util.ArrayList.elementData(ArrayList.java:422)
+	at java.util.ArrayList.get(ArrayList.java:435)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.reloadView(DiceController.java:88)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.btnRollClicked(DiceController.java:144)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.doInit(DiceController.java:69)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.loadScene(AESceneLoader.java:97)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:36)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:28)
+	at be.effectlife.arvbotplus.loading.StageBuilder.build(StageBuilder.java:57)
+	at be.effectlife.arvbotplus.Main.buildStage(Main.java:132)
+	at be.effectlife.arvbotplus.Main.prepareStages(Main.java:111)
+	at be.effectlife.arvbotplus.Main.start(Main.java:49)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$166(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$179(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$152(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: -47
+	at java.util.ArrayList.elementData(ArrayList.java:422)
+	at java.util.ArrayList.get(ArrayList.java:435)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.reloadView(DiceController.java:88)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.btnRollClicked(DiceController.java:144)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.doInit(DiceController.java:69)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.loadScene(AESceneLoader.java:97)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:36)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:28)
+	at be.effectlife.arvbotplus.loading.StageBuilder.build(StageBuilder.java:57)
+	at be.effectlife.arvbotplus.Main.buildStage(Main.java:132)
+	at be.effectlife.arvbotplus.Main.prepareStages(Main.java:111)
+	at be.effectlife.arvbotplus.Main.start(Main.java:49)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$166(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$179(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$152(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: -46
+	at java.util.ArrayList.elementData(ArrayList.java:422)
+	at java.util.ArrayList.get(ArrayList.java:435)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.reloadView(DiceController.java:88)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.btnRollClicked(DiceController.java:144)
+	at be.effectlife.arvbotplus.controllers.scenes.DiceController.doInit(DiceController.java:69)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.loadScene(AESceneLoader.java:97)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:36)
+	at be.effectlife.arvbotplus.loading.AESceneLoader.getScene(AESceneLoader.java:28)
+	at be.effectlife.arvbotplus.loading.StageBuilder.build(StageBuilder.java:57)
+	at be.effectlife.arvbotplus.Main.buildStage(Main.java:132)
+	at be.effectlife.arvbotplus.Main.prepareStages(Main.java:111)
+	at be.effectlife.arvbotplus.Main.start(Main.java:49)
+	at com.sun.javafx.application.LauncherImpl.lambda$launchApplication1$166(LauncherImpl.java:863)
+	at com.sun.javafx.application.PlatformImpl.lambda$runAndWait$179(PlatformImpl.java:326)
+	at com.sun.javafx.application.PlatformImpl.lambda$null$177(PlatformImpl.java:295)
+	at java.security.AccessController.doPrivileged(Native Method)
+	at com.sun.javafx.application.PlatformImpl.lambda$runLater$178(PlatformImpl.java:294)
+	at com.sun.glass.ui.InvokeLaterDispatcher$Future.run(InvokeLaterDispatcher.java:95)
+	at com.sun.glass.ui.win.WinApplication._runLoop(Native Method)
+	at com.sun.glass.ui.win.WinApplication.lambda$null$152(WinApplication.java:177)
+	at java.lang.Thread.run(Thread.java:748)
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 ERROR b.e.a.c.scenes.DiceController:91  - Exception happened
+java.lang.ArrayIndexOutOfBoundsException: null
+22-03-02 16:48:56 INFO  b.e.a.loading.StageBuilder:55  - Building Stage BATTLE
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-03-02 16:48:56 INFO  b.e.a.loading.StageBuilder:55  - Building Stage CONVERSION
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-03-02 16:48:56 INFO  b.e.a.loading.StageBuilder:55  - Building Stage QUESTIONS
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-03-02 16:48:56 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-03-02 16:48:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-03-02 17:10:55 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-03-02 17:11:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-03-02 19:17:39 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0

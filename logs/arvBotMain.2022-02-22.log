@@ -1,0 +1,326 @@
+22-02-22 21:16:46 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:16:46 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:16:46 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:16:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:16:46 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:16:47 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:16:47 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:16:47 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:16:47 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:16:47 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:16:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:17:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_1
+22-02-22 21:17:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_2
+22-02-22 21:22:55 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:22:55 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:22:56 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:22:56 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:22:56 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:22:58 DEBUG b.e.a.twirk.TwirkSystem:32  - Disabled twirk system
+22-02-22 21:30:48 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:30:48 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:30:48 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:30:49 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:30:49 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:30:49 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:30:49 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:30:49 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:30:49 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:30:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:30:51 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-22 21:30:52 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-22 21:31:31 INFO  b.e.a.t.c.ChangeVoteCommand:46  - Received: Effectlife: $changevote 2
+22-02-22 21:31:41 INFO  b.e.a.t.c.ChangeVoteCommand:46  - Received: Effectlife: $changevote sqdjf
+22-02-22 21:38:28 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:38:28 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:38:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:38:29 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:38:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:38:31 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-22 21:38:32 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-22 21:38:33 ERROR b.e.a.twirk.TwirkSystem:63  - Exception: Socket Closed
+22-02-22 21:38:33 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 2/3
+22-02-22 21:38:33 ERROR b.e.a.twirk.TwirkSystem:63  - Exception: Socket Closed
+22-02-22 21:38:33 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 3/3
+22-02-22 21:38:33 ERROR b.e.a.twirk.TwirkSystem:63  - Exception: Socket Closed
+22-02-22 21:38:37 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-22 21:38:37 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-22 21:39:58 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:39:58 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:39:58 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:39:58 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:39:58 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:39:58 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:39:58 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:39:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:39:59 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:39:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:39:59 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:39:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:39:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:39:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:40:01 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-22 21:40:01 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-22 21:40:52 INFO  b.e.a.t.c.ChangeVoteCommand:46  - Received: Effectlife: $changevote 2
+22-02-22 21:40:57 INFO  b.e.a.t.c.ChangeVoteCommand:46  - Received: Effectlife: $changevote qlksdfjg
+22-02-22 21:43:28 INFO  be.effectlife.arvbotplus.Main:142 - -------------------
+22-02-22 21:43:28 INFO  be.effectlife.arvbotplus.Main:143 - Starting ArvBotPlus
+22-02-22 21:43:28 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-22 21:43:28 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-22 21:43:28 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-22 21:43:28 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-22 21:43:28 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-22 21:43:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-22 21:43:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-22 21:43:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-22 21:43:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-22 21:43:29 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-22 21:43:29 INFO  be.effectlife.arvbotplus.Main:123 - Prepared 6 stages
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-22 21:43:29 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-22 21:43:33 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_1
+22-02-22 21:43:33 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_2
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_3
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_4
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_5
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_6
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_7
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_8
+22-02-22 21:43:34 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_9
+22-02-22 21:43:35 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_10
+22-02-22 21:43:35 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_11
+22-02-22 21:43:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_12
+22-02-22 21:43:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_13
+22-02-22 21:43:39 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_14
+22-02-22 21:43:39 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_15
+22-02-22 21:43:43 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_16
+22-02-22 21:43:45 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_17
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_18
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_19
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_20
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_21
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_22
+22-02-22 21:43:46 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_23
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_24
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_25
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_26
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_27
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_28
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_29
+22-02-22 21:43:47 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_30
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_31
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_32
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_33
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_34
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_35
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_36
+22-02-22 21:43:48 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_37
+22-02-22 21:43:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_38
+22-02-22 21:43:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_39
+22-02-22 21:43:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_40
+22-02-22 21:43:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_41
+22-02-22 21:43:49 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_42
+22-02-22 21:43:52 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_43
+22-02-22 21:43:52 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_44
+22-02-22 21:43:52 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_45
+22-02-22 21:43:52 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_46
+22-02-22 21:43:52 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_47
+22-02-22 21:43:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_48
+22-02-22 21:43:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_49
+22-02-22 21:43:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_50
+22-02-22 21:43:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_51
+22-02-22 21:43:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_52
+22-02-22 21:43:57 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_53
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_54
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_55
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_56
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_57
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_58
+22-02-22 21:43:58 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_59
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_60
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_61
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_62
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_63
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_64
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_65
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_66
+22-02-22 21:43:59 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_67
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_68
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_69
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_70
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_71
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_72
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_73
+22-02-22 21:44:00 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_74
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_75
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_76
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_77
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_78
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_79
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_80
+22-02-22 21:44:01 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_81
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_82
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_83
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_84
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_85
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_86
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_87
+22-02-22 21:44:02 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_88
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_89
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_90
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_91
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_92
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_93
+22-02-22 21:44:03 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_94
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_95
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_96
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_97
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_98
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_99
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_100
+22-02-22 21:44:04 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_101
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_102
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_103
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_104
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_105
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_106
+22-02-22 21:44:05 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_107
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_108
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_109
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_110
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_111
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_112
+22-02-22 21:44:06 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_113
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_114
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_115
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_116
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_117
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_118
+22-02-22 21:44:07 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_119
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_120
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_121
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_122
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_123
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_124
+22-02-22 21:44:08 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_125
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_126
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_127
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_128
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_129
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_130
+22-02-22 21:44:09 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_131
+22-02-22 21:44:10 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_132

@@ -1,0 +1,4 @@
+Sonar check command:
+
+mvn sonar:sonar -Dsonar.projectKey=ABP -Dsonar.host.url=http://localhost:9000 -Dsonar.login=6a85f370703223d14dfa81b97604df065fe6a9d8
+

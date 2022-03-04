@@ -1,0 +1,91 @@
+22-02-24 09:14:37 INFO  be.effectlife.arvbotplus.Main:143 - -------------------
+22-02-24 09:14:37 INFO  be.effectlife.arvbotplus.Main:144 - Starting ArvBotPlus
+22-02-24 09:14:37 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-24 09:14:37 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-24 09:14:37 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-24 09:14:37 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-24 09:14:38 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-24 09:14:38 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-24 09:14:38 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-24 09:14:38 INFO  be.effectlife.arvbotplus.Main:124 - Prepared 6 stages
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-24 09:14:38 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-24 09:14:40 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-24 09:14:41 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-24 09:17:53 INFO  be.effectlife.arvbotplus.Main:137 - -------------------
+22-02-24 09:17:53 INFO  be.effectlife.arvbotplus.Main:138 - Starting ArvBotPlus
+22-02-24 09:17:53 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-24 09:17:53 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-24 09:17:53 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-24 09:17:53 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-24 09:17:54 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-24 09:17:54 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-24 09:17:54 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-24 09:17:54 INFO  be.effectlife.arvbotplus.Main:118 - Prepared 6 stages
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-24 09:17:54 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2
+22-02-24 09:17:56 INFO  b.e.a.twirk.TwirkSystem:50  - ArvBotPlus is loading
+22-02-24 09:17:57 INFO  b.e.a.twirk.TwirkSystem:59  - Trying to connect; 1/3
+22-02-24 09:27:13 INFO  be.effectlife.arvbotplus.Main:124 - -------------------
+22-02-24 09:27:13 INFO  be.effectlife.arvbotplus.Main:125 - Starting ArvBotPlus
+22-02-24 09:27:13 INFO  b.e.a.loading.StageBuilder:56  - Building Stage POLL
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_poll
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_quickPoll
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_0
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_1
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_2
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_3
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_4
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_5
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_6
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_poll_7
+22-02-24 09:27:13 INFO  b.e.a.loading.StageBuilder:56  - Building Stage INVENTORY
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_inventory
+22-02-24 09:27:13 INFO  b.e.a.loading.StageBuilder:56  - Building Stage DICE
+22-02-24 09:27:13 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_dice
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_diceResult_0
+22-02-24 09:27:14 INFO  b.e.a.loading.StageBuilder:56  - Building Stage BATTLE
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_battle
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_enemy_0
+22-02-24 09:27:14 INFO  b.e.a.loading.StageBuilder:56  - Building Stage CONVERSION
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_conv
+22-02-24 09:27:14 INFO  b.e.a.loading.StageBuilder:56  - Building Stage QUESTIONS
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing s_questions
+22-02-24 09:27:14 INFO  be.effectlife.arvbotplus.Main:105 - Prepared 6 stages
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_0
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_1
+22-02-24 09:27:14 INFO  b.e.a.loading.AESceneLoader:96  - Initializing widgets/w_skill_2

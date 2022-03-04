@@ -1,0 +1,485 @@
+* {
+    /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
+    -color-pBartop: #6DA656; /*Color of the progress bar in the polls window (top gradient color)*/
+    -color-pBarbottom: #3D861F; /*Color of the progress bar in the polls window (bottom gradient color)*/
+    -color-pBar-border: #274B15; /*Color of the progress bar border*/
+
+    -color-warn: #ff8c00; /*Warning color of the first counter in the skills/stats window (less than half of max)*/
+    -color-crit: #ff0000; /*Critical color of the first counter in the skills/stats window (less than 1/5 of max) */
+    -color-fail: #ff0000; /*Color used for crit fails in the Dice Roller*/
+    -color-success: #00bc64; /*Color used for crit successes in the Dice Roller*/
+
+    -color-topbutton: #2B99D2; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton: #07609a; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border: #204080; /*Color of the buttons border*/
+
+    -color-topbutton-hover: #39bbf5; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-hover: #2184b7; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-hover: #204b80; /*Color of the buttons border*/
+
+    -color-topbutton-pressed: #2998ec; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-pressed: #0d60b5; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-pressed: #2e4dbc; /*Color of the buttons border*/
+    
+    -color-false-topbutton: #d22b2b; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton: #9a0707; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border: #802020; /*Color of the buttons border*/
+
+    -color-false-topbutton-hover: #f53939; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton-hover: #b72121; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border-hover: #802020; /*Color of the buttons border*/
+
+    -color-false-topbutton-pressed: #ec2929; /*Color of the buttons (top gradient color)*/
+    -color-false-bottombutton-pressed: #b50d0d; /*Color of the buttons (bottom gradient color)*/
+    -color-false-button-border-pressed: #bc2e2e; /*Color of the buttons border*/
+        
+    -color-true-topbutton: #44d22b; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton: #229a07; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border: #2e8020; /*Color of the buttons border*/
+
+    -color-true-topbutton-hover: #46f539; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton-hover: #38b721; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border-hover: #328020; /*Color of the buttons border*/
+
+    -color-true-topbutton-pressed: #4dec29; /*Color of the buttons (top gradient color)*/
+    -color-true-bottombutton-pressed: #31b50d; /*Color of the buttons (bottom gradient color)*/
+    -color-true-button-border-pressed: #59bc2e; /*Color of the buttons border*/
+    
+    -color-text-main: -color-f; /*The main color for text on buttons, menus, etc...*/
+    -color-text-textfield: -color-d; /*The color of text in editable areas*/
+
+    -color-background: -color-25; /*The main background color*/
+    -color-textfield-background: -color-1; /*The main background color*/
+    -color-combobox-background-hover: -color-2; /*The main background color*/
+    -color-combobox-background-pressed: -color-0; /*The main background color*/
+    -color-border: -color-3e; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-border-selected: -color-a; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+
+    -color-checkmark: -color-9; /*The color of the '✓' of the checkbox*/
+    -color-checkbox-hover: -color-f; /*The color of the checkbox when hovered over*/
+    -color-checkbox-pressed: -color-6; /*The color of the checkbox when pressed*/
+
+    -color-menuitem-hover: -color-5; /*The color of the items in the toolbar menu when hovered over*/
+
+    -color-scrollbar-background: -color-5; /*The color of the background of the scrollbars*/
+    -color-scrollbar-background-hover: -color-4; /*The color of the background of the scrollbars when hovered*/
+    -color-scrollbar-background-pressed: -color-4; /*The color of the background of the scrollbars when pressed*/
+    -color-scrollbar-foreground: -color-3e; /*The color of the foreground of the scrollbars*/
+    -color-scrollbar-foreground-hover: -color-9; /*The color of the foreground of the scrollbars when hovered*/
+    -color-scrollbar-foreground-pressed: -color-8; /*The color of the foreground of the scrollbars when pressed*/
+
+    -color-border-alt: -color-0; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
+    
+    -color-transparent: transparent; /*Transparent is used in some effects in the application*/
+    /*These are basic grayscale colors*/
+    -color-f: #ffffff;
+    -color-e: #eeeeee;
+    -color-d: #dddddd;
+    -color-c: #cccccc;
+    -color-b: #bbbbbb;
+    -color-a: #aaaaaa;
+    -color-9: #999999;
+    -color-8: #888888;
+    -color-7: #777777;
+    -color-6: #666666;
+    -color-5: #555555;
+    -color-4: #444444;
+    -color-3: #333333;
+    -color-2: #222222;
+    -color-1: #111111;
+    -color-0: #000000;
+
+    -color-25: #252525;
+    -color-3e: #3e3e3e;
+}
+
+* {
+    -fx-font-family: Helvetica Arial sans-serif;
+}
+
+.background-fail {
+    -fx-background-color: -color-fail;
+}
+
+.background-success {
+    -fx-background-color: -color-success;
+}
+
+.italics {
+    -fx-font-style: italic;
+}
+
+.warn-text.text-field.text {
+    -fx-fill: -color-warn;
+}
+
+.crit-text {
+    -fx-fill: -color-crit;
+}
+
+.smaller-text {
+    -fx-font-size: 10pt !important;
+}
+
+.white-text {
+    -fx-fill: -color-text-main;
+}
+
+.text-bold {
+    -fx-font-weight: bolder !important;
+}
+
+.scroll-pane:disabled, .text-area:disabled {
+    -fx-opacity: 1;
+}
+
+.container-pane {
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+    -fx-border-width: 1px;
+}
+
+.separator-pane {
+    -fx-background-color: -color-border-alt;
+}
+
+.textBorder {
+    -fx-border-color: -color-border;
+    -fx-border-radius: 0;
+    -fx-border-width: 1px;
+}
+
+.text, .white-text {
+    -fx-font-size: 12pt;
+}
+
+.text-area .scroll-pane .viewport .content {
+    -fx-padding: 0 .25em;
+}
+
+.root {
+    -fx-background-color: -color-0;
+}
+
+.scroll-pane > *.viewport, .scroll-pane {
+    -fx-background-color: transparent;
+}
+
+.increment-arrow-button, .decrement-arrow-button {
+    -fx-padding: 0.3em 0.3em;
+}
+
+.skill-button {
+    -fx-padding: 0em;
+}
+
+
+/*bgcolor setting*/
+.color-picker, .date-picker > .arrow-button,
+.number-button, .left-arrow-button, .right-arrow-button,
+.button, .split-menu-button, .toggle-button,
+.font-menu-button, .split-menu-button > .label, .split-menu-button > .arrow-button, .increment-arrow-button, .decrement-arrow-button {
+    -fx-background-color: linear-gradient(-color-topbutton, -color-bottombutton);
+    -fx-border-color: -color-button-border;
+    -fx-border-insets: 0px 0px -1px 0px;
+    -fx-text-fill: -color-text-main;
+}
+
+.button-color-false{
+    -fx-background-color: linear-gradient(-color-false-topbutton, -color-false-bottombutton);
+    -fx-border-color: -color-false-button-border;
+}
+.button-color-true{
+    -fx-background-color: linear-gradient(-color-true-topbutton, -color-true-bottombutton);
+    -fx-border-color: -color-true-button-border;
+}
+.button-color-false:hover{
+    -fx-background-color: linear-gradient(-color-false-topbutton-hover, -color-false-bottombutton-hover) !important;
+    -fx-border-color: -color-false-button-border-hover !important;
+}
+.button-color-true:hover{
+    -fx-background-color: linear-gradient(-color-true-topbutton-hover, -color-true-bottombutton-hover) !important;
+    -fx-border-color: -color-true-button-border-hover !important;
+}
+.button-color-false:pressed{
+    -fx-background-color: linear-gradient(-color-false-topbutton-pressed, -color-false-bottombutton-pressed) !important;
+    -fx-border-color: -color-false-button-border-pressed !important;
+}
+.button-color-true:pressed{
+    -fx-background-color: linear-gradient(-color-true-topbutton-pressed, -color-true-bottombutton-pressed) !important;
+    -fx-border-color: -color-true-button-border-pressed !important;
+}
+
+/*for date picker arrow button*/
+.date-picker > .arrow-button {
+    -fx-border-radius: 0;
+}
+
+
+/*hover state*/
+.color-picker:hover,
+.date-picker:hover > .arrow-button,
+.number-button:hover, .left-arrow-button:hover, .right-arrow-button:hover,
+.button:hover, .toggle-button:hover,
+.font-menu-button:hover,
+.split-menu-button > .label:hover, .split-menu-button > .arrow-button:hover, .increment-arrow-button:hover, .decrement-arrow-button:hover {
+    -fx-background-color: linear-gradient(-color-topbutton-hover, -color-bottombutton-hover);
+    -fx-border-color: -color-button-border-hover;
+}
+
+.combo-box-base{
+    -fx-padding: -5 2;
+}
+
+.combo-box:hover, .choice-box:hover{
+    -fx-background-color: -color-combobox-background-hover;
+}
+.combo-box:pressed, .choice-box:pressed{
+    -fx-background-color: -color-combobox-background-pressed;
+}
+
+
+/*pressed selected*/
+.color-picker:pressed, .color-picker:selected,
+.number-button:pressed, .number-button:selected,
+.date-picker:pressed > .arrow-button,
+.font-menu-button:pressed, .font-menu-button:selected,
+.left-arrow-button:pressed, .left-arrow-button:selected,
+.right-arrow-button:pressed, .right-arrow-button:selected,
+.button:pressed, .button:selected, .toggle-button:pressed, .toggle-button:selected,
+.split-menu-button:pressed > .label, .split-menu-button > .arrow-button:pressed, .increment-arrow-button:pressed, .decrement-arrow-button:pressed {
+    -fx-background-color: linear-gradient(-color-topbutton-pressed, -color-bottombutton-pressed);
+    -fx-border-color: -color-button-border-pressed;
+}
+
+.warn-text .text-field, .warn-text .text-area {
+    -fx-text-fill: -color-warn;
+}
+
+.crit-text .text-field, .crit-text .text-area {
+    -fx-text-fill: -color-crit;
+}
+
+.text-input, .combo-box .list-cell, .combo-box .arrow-button{
+    -fx-padding: 0.1em 0.16em 0.16em 0.16em;
+}
+.combo-box .list-cell .text{
+    -fx-fill: -color-text-main;
+}
+
+.combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
+    -fx-background-color: black ;
+    -fx-text-fill: white ;
+    -fx-font-family: "Calibri" ;
+}
+.combo-box .combo-box-popup .list-cell:hover {
+    -fx-text-fill: yellow ;
+    -fx-background-color: green ;
+}
+
+.text-field, .text-area, .combo-box {
+    -fx-border-color: -color-border;
+    -fx-text-fill: -color-text-textfield;
+    -fx-border-radius: 0;
+    -fx-background-radius: 0;
+    -fx-background-color: -color-textfield-background;
+    -fx-border-insets: 1;
+
+}
+
+.text-field:focused, .text-area:focused, .combo-box:focused {
+    -fx-border-color: -color-border-selected;
+    -fx-effect: dropshadow(gaussian, -color-border-selected, 10, 0, 0, 0);
+
+}
+
+.spinner:focused {
+    -fx-border-color: inherit;
+    -fx-background-color: -color-textfield-background;
+
+}
+
+.text-area .scroll-pane, .text-area .scroll-pane .content {
+    -fx-background-color: -color-textfield-background;
+    -fx-background-radius: 0;
+}
+
+
+.scroll-bar .decrement-button, .scroll-bar .decrement-arrow {
+    visibility: hidden;
+    -fx-pref-height: 1;
+    -fx-pref-width: 1;
+}
+
+.increment-arrow, .decrement-arrow {
+    -fx-background-color: -color-text-main;
+}
+
+.scroll-bar .increment-button, .scroll-bar .increment-arrow {
+    visibility: hidden;
+    -fx-pref-height: 1;
+    -fx-pref-width: 1;
+}
+
+.scroll-bar:vertical {
+    -fx-pref-width: 7;
+}
+
+.scroll-bar:horizontal {
+    -fx-pref-height: 7;
+}
+
+.scroll-bar:horizontal .track,
+.scroll-bar:vertical .track {
+    -fx-background-color: -color-transparent;
+    -fx-border-color: -color-transparent;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:vertical .track-background,
+.scroll-bar:horizontal .track-background {
+    -fx-background-color: -color-transparent;
+    -fx-background-insets: 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: -color-scrollbar-foreground;
+    -fx-background-insets: 2 0 2 0;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: -color-scrollbar-foreground;
+    -fx-background-insets: 0 1;
+    -fx-background-radius: 0;
+}
+
+.scroll-bar {
+    -fx-background-radius: 0;
+    -fx-block-increment: 10;
+    -fx-background-insets: 0;
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+    -fx-border-width: 1px;
+}
+
+.scroll-bar:hover {
+    -fx-background-color: -color-scrollbar-background-hover;
+}
+
+.scroll-bar:pressed {
+    -fx-background-color: -color-scrollbar-background-pressed;
+}
+
+.scroll-bar:horizontal .thumb:hover,
+.scroll-bar:vertical .thumb:hover {
+    -fx-background-color: -color-scrollbar-foreground-hover;
+}
+
+.scroll-bar:horizontal .thumb:pressed,
+.scroll-bar:vertical .thumb:pressed {
+    -fx-background-color: -color-scrollbar-foreground-pressed;
+}
+
+.scroll-bar:vertical .increment-button, .scroll-bar:vertical .decrement-button {
+    -fx-background-color: -color-transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 5;
+}
+
+.scroll-bar:horizontal .increment-button, .scroll-bar:horizontal .decrement-button {
+    -fx-background-color: -color-transparent;
+    -fx-background-radius: 0;
+    -fx-padding: 5;
+}
+
+.progress-bar > .track {
+    -fx-pref-height: 10;
+    -fx-background-radius: 0;
+    -fx-effect: innershadow(gaussian, -color-border, 4, 0, 0, 1);
+    -fx-background-color: -color-textfield-background;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 0;
+}
+
+.progress-bar > .bar {
+    -fx-background-insets: 0;
+    -fx-background-color: linear-gradient(-color-pBartop, -color-pBarbottom);
+    -fx-border-color: -color-pBar-border;
+    -fx-border-radius: 0;
+    -fx-border-width: 1;
+    -fx-background-radius: 0;
+}
+
+.split-pane > .split-pane-divider {
+    -fx-background-color: -color-textfield-background;
+    -fx-border-color: -color-border;
+    -fx-pref-width: 3;
+}
+
+.split-pane {
+    -fx-background-color: -color-background;
+}
+
+
+.check-box > .box {
+    -fx-background-radius: 0;
+    -fx-padding: 0;
+    -fx-border-color: -color-border;
+    -fx-border-radius: 0;
+    -fx-background-color: -color-background;
+}
+
+.check-box:hover > .box {
+    -fx-background-color: -color-background;
+    -fx-effect: dropshadow(gaussian, -color-checkbox-hover, 5, 0.2, 0, 0);
+
+}
+
+.check-box:pressed > .box {
+    -fx-background-color: -color-checkbox-pressed;
+}
+
+.check-box > .box > .mark {
+    -fx-shape: "M927.936 272.992l-68.288-68.288c-12.608-12.576-32.96-12.576-45.536 0l-409.44 409.44-194.752-196.16c-12.576-12.576-32.928-12.576-45.536 0l-68.288 68.288c-12.576 12.608-12.576 32.96 0 45.536l285.568 287.488c12.576 12.576 32.96 12.576 45.536 0l500.736-500.768c12.576-12.544 12.576-32.96 0-45.536z";
+    -fx-background-insets: 0 0 0.7 0;
+}
+
+.check-box:selected > .box > .mark {
+    -fx-background-color: -color-checkmark;
+}
+
+.menu-bar {
+    -fx-background-color: -color-background;
+    -fx-border-color: -color-border;
+    -fx-border-width: 0 0 1 0;
+    -fx-padding: 0;
+}
+
+.menu {
+    -fx-padding: 1 5;
+}
+
+.menu .label {
+    -fx-text-fill: -color-text-main;
+}
+
+.menu-item {
+    -fx-background-color: -color-background;
+    -fx-padding: 3 6;
+}
+
+.menu-item:hover {
+    -fx-background-color: -color-menuitem-hover;
+}
+
+.context-menu {
+    -fx-background-color: -color-background;
+    -fx-effect: dropshadow(gaussian, -color-border, 10, 0, 0, 0);
+
+}
+
+.menu-bar > .container > .menu-button:hover, .menu-bar > .container > .menu-button:focused, .menu-bar > .container > .menu-button:showing {
+    -fx-background-color: -color-menuitem-hover;
+}

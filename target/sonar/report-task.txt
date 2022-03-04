@@ -1,0 +1,6 @@
+projectKey=ABP
+serverUrl=http://localhost:9000
+serverVersion=7.8.0.26217
+dashboardUrl=http://localhost:9000/dashboard?id=ABP
+ceTaskId=AX9LLEX0s8zcfn23eo2e
+ceTaskUrl=http://localhost:9000/api/ce/task?id=AX9LLEX0s8zcfn23eo2e
