@@ -83,7 +83,7 @@ public class DiceController implements IController {
         vboxHistory.getChildren().clear();
 
         int limit = 50;
-        for (int i = diceResultControllers.size() - limit; i < diceResultControllers.size(); i++) {
+        for (int i = Math.max(0, diceResultControllers.size() - limit); i < diceResultControllers.size(); i++) {
             try {
                 diceResultControllers.get(i).reloadView();
                 vboxHistory.getChildren().add(0, AESceneLoader.getInstance().getScene(Scenes.W_DICERESULT, "_" + i).getRoot());
