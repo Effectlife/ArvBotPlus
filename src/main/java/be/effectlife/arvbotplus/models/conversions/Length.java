@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.services.conversions.data;
+package be.effectlife.arvbotplus.models.conversions;
 
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;

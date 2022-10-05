@@ -8,7 +8,7 @@ import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.PollOption;
 import be.effectlife.arvbotplus.saves.models.PollSave;
-import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
+import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.Formatters;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.PollType;

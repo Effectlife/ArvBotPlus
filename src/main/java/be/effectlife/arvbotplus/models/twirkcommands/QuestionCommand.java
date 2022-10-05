@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.twirk.commands;
+package be.effectlife.arvbotplus.models.twirkcommands;
 
 import be.effectlife.arvbotplus.controllers.scenes.QuestionsController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;

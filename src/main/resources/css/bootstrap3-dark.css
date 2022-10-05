@@ -120,6 +120,13 @@
 .smaller-text {
     -fx-font-size: 10pt !important;
 }
+.larger-text {
+    -fx-font-size: 16pt !important;
+}
+
+.large-text {
+    -fx-font-size: 24pt !important;
+}
 
 .white-text {
     -fx-fill: -color-text-main;

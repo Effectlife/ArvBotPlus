@@ -1,10 +1,9 @@
-package be.effectlife.arvbotplus.twirk.commands;
+package be.effectlife.arvbotplus.models.twirkcommands;
 
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
-import be.effectlife.arvbotplus.services.ConversionResult;
+import be.effectlife.arvbotplus.models.conversions.*;
 import be.effectlife.arvbotplus.services.ConversionService;
-import be.effectlife.arvbotplus.services.conversions.data.*;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;

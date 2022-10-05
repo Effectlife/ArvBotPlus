@@ -7,7 +7,7 @@ import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
-import be.effectlife.arvbotplus.twirk.commands.VoteActionResult;
+import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.PollType;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;

@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.twirk.commands;
+package be.effectlife.arvbotplus.models.twirkcommands;
 
 public enum VoteActionResult {
 

@@ -1,7 +1,7 @@
-package be.effectlife.arvbotplus.services.conversions.data;
+package be.effectlife.arvbotplus.models.conversions;
 
-import static be.effectlife.arvbotplus.services.conversions.data.Temperature.C;
-import static be.effectlife.arvbotplus.services.conversions.data.Temperature.F;
+import static be.effectlife.arvbotplus.models.conversions.Temperature.C;
+import static be.effectlife.arvbotplus.models.conversions.Temperature.F;
 
 public interface Conversion {
 

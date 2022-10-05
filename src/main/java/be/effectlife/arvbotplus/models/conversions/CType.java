@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.services.conversions.data;
+package be.effectlife.arvbotplus.models.conversions;
 
 import java.util.HashMap;
 import java.util.List;

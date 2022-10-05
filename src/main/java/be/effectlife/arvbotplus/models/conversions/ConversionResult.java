@@ -1,6 +1,4 @@
-package be.effectlife.arvbotplus.services;
-
-import be.effectlife.arvbotplus.services.conversions.data.CType;
+package be.effectlife.arvbotplus.models.conversions;
 
 public class ConversionResult {
     private float targetValue;

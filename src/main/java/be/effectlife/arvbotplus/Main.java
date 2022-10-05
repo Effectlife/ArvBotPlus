@@ -4,7 +4,7 @@ import be.effectlife.arvbotplus.controllers.scenes.DiceController;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
-import be.effectlife.arvbotplus.twirk.TwirkSystem;
+import be.effectlife.arvbotplus.services.TwirkService;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -21,7 +21,7 @@ public class Main extends Application {
 
     private static final Logger LOG = LoggerFactory.getLogger(Main.class);
     private static final Map<Stages, Stage> stageMap = new EnumMap<>(Stages.class);
-    private static TwirkSystem twirkSystem;
+    private static TwirkService twirkSystem;
     private final StageBuilder stageBuilder = new StageBuilder();
     private int preparedStageCount = 0;
 
@@ -35,11 +35,11 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static TwirkSystem getTwirkSystem() {
+    public static TwirkService getTwirkSystem() {
         return twirkSystem;
     }
 
-    public static void setTwirkSystem(TwirkSystem paramTwirkSystem) {
+    public static void setTwirkSystem(TwirkService paramTwirkSystem) {
         twirkSystem = paramTwirkSystem;
     }
 

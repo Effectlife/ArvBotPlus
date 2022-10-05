@@ -1,4 +1,4 @@
-package be.effectlife.arvbotplus.twirk;
+package be.effectlife.arvbotplus.services;
 
 import be.effectlife.arvbotplus.controllers.scenes.ConversionController;
 import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
@@ -6,7 +6,7 @@ import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
-import be.effectlife.arvbotplus.twirk.commands.*;
+import be.effectlife.arvbotplus.models.twirkcommands.*;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.TwirkBuilder;
@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
-public class TwirkSystem {
-    private static final Logger LOG = LoggerFactory.getLogger(TwirkSystem.class);
+public class TwirkService {
+    private static final Logger LOG = LoggerFactory.getLogger(TwirkService.class);
     private Twirk twirk;
     private boolean disable;
 

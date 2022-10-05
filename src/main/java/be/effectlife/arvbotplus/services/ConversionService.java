@@ -1,6 +1,6 @@
 package be.effectlife.arvbotplus.services;
 
-import be.effectlife.arvbotplus.services.conversions.data.*;
+import be.effectlife.arvbotplus.models.conversions.*;
 
 import java.util.ArrayList;
 import java.util.List;

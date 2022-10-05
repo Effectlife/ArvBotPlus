@@ -7,7 +7,7 @@ import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.GameSave;
 import be.effectlife.arvbotplus.saves.models.Skill;
-import be.effectlife.arvbotplus.twirk.TwirkSystem;
+import be.effectlife.arvbotplus.services.TwirkService;
 import be.effectlife.arvbotplus.utilities.*;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -165,7 +165,7 @@ public class InventoryController implements IController {
     private void startupTwirkSystem(Stage twirkStage) {
         if (Main.getTwirkSystem() == null || Main.getTwirkSystem().isNotLoaded()) {
             new Thread(() -> {
-                Main.setTwirkSystem(new TwirkSystem());
+                Main.setTwirkSystem(new TwirkService());
                 try {
                     Main.getTwirkSystem().initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
                     ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
@@ -284,7 +284,7 @@ public class InventoryController implements IController {
 
         skillWidgetController.setThresholds(dThresholdWarn, dThresholdCrit);
         if (name != null) {
-            skillWidgetController.setName(name);
+            skillWidgetController.setName(name); 
             skillWidgetController.setValue(value);
             skillWidgetController.setMaxValue(maxValue);
             skillWidgetController.setType(skillType);
