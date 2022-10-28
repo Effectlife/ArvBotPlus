@@ -121,6 +121,10 @@
     -fx-font-size: 10pt !important;
 }
 
+.larger-text {
+    -fx-font-size: 22pt !important;
+}
+
 .white-text {
     -fx-fill: -color-text-main;
 }

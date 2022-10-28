@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.utilities.ColorEnum;
+import be.effectlife.arvbotplus.utilities.ColorType;
 import javafx.application.Platform;
 import javafx.collections.ListChangeListener;
 import javafx.concurrent.Worker;
@@ -50,10 +50,10 @@ public class DiceResultController implements IController {
     }
 
     public String loadStyle() {
-        String crit = retrieveColor(ColorEnum.CRIT);
-        String success = retrieveColor(ColorEnum.SUCCESS);
-        String background = retrieveColor(ColorEnum.BACKGROUND);
-        String text = retrieveColor(ColorEnum.TEXT);
+        String crit = retrieveColor(ColorType.CRIT);
+        String success = retrieveColor(ColorType.SUCCESS);
+        String background = retrieveColor(ColorType.BACKGROUND);
+        String text = retrieveColor(ColorType.TEXT);
         return String.format("<!DOCTYPE html><head><style>*{background-color:%s;text-align:center;font-family: Helvetica, Arial, Sans-Serif;}p{color:%s;}.color-crit{color:%s;}.color-success{color:%s;}</style></head>", background, text, crit, success);
     }
 

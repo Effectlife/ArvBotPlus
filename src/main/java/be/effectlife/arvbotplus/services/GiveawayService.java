@@ -1,6 +1,6 @@
 package be.effectlife.arvbotplus.services;
 
-public interface GivawayService {
+public interface GiveawayService {
     boolean enterName(String name);
     boolean lastCall();
     String drawWinner();

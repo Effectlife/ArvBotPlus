@@ -1,5 +1,5 @@
 package be.effectlife.arvbotplus.utilities;
 
-public enum ColorEnum {
+public enum ColorType {
     BACKGROUND, CRIT, TEXT, SUCCESS, HIGHLIGHT
 }

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Text?>
+
+<GridPane hgap="2.0" maxWidth="400.0" minHeight="100.0" minWidth="400.0" vgap="2.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.scenes.GiveawayController">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="2.0" minHeight="2.0" prefHeight="2.0" />
+      <RowConstraints minHeight="-Infinity" vgrow="SOMETIMES" />
+   </rowConstraints>
+   <children>
+      <GridPane styleClass="container-pane">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" minWidth="10.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="26.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane>
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="0.0" minWidth="0.0" prefWidth="0.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text fx:id="txtTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Giveaways" />
+                  <Text fx:id="txtTimer" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="12:34" GridPane.halignment="RIGHT" />
+               </children>
+            </GridPane>
+         </children>
+      </GridPane>
+      <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="2">
+        <columnConstraints>
+          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints valignment="CENTER" vgrow="ALWAYS" />
+          <RowConstraints vgrow="SOMETIMES" />
+          <RowConstraints vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <GridPane styleClass="container-pane" GridPane.columnSpan="2">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text fx:id="txtStatusTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Status:" />
+                  <Text fx:id="txtStatus" strokeType="OUTSIDE" strokeWidth="0.0" text="RUNNING" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="white-text" />
+                        <String fx:value="larger-text" />
+                     </styleClass>
+                  </Text>
+               </children>
+            </GridPane>
+            <GridPane styleClass="container-pane" GridPane.columnSpan="2" GridPane.rowIndex="1">
+               <columnConstraints>
+                  <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Text fx:id="txtKeywordTitle" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Keyword:" />
+                  <Text fx:id="txtKeyword" strokeType="OUTSIDE" strokeWidth="0.0" text="KEYWORD" GridPane.rowIndex="1">
+                     <styleClass>
+                        <String fx:value="white-text" />
+                        <String fx:value="larger-text" />
+                     </styleClass>
+                  </Text>
+               </children>
+            </GridPane>
+            <HBox alignment="CENTER_LEFT" styleClass="container-pane" GridPane.rowIndex="2">
+               <children>
+                  <Text fx:id="txtEntries" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Entries: ##" />
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_RIGHT" styleClass="container-pane" GridPane.columnIndex="1" GridPane.rowIndex="2">
+               <children>
+                  <Text fx:id="txtChance" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Chance: ##%" />
+               </children>
+            </HBox>
+         </children>
+         <padding>
+            <Insets bottom="2.0" top="2.0" />
+         </padding>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
+   </padding>
+</GridPane>

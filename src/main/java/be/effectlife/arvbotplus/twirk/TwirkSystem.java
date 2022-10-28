@@ -70,6 +70,7 @@ public class TwirkSystem {
         twirk.addIrcListener(new ChangeVoteCommand(twirk, disable));
         twirk.addIrcListener(new ABPCommand(twirk, disable));
         twirk.addIrcListener(new QuestionCommand(twirk, disable));
+        twirk.addIrcListener(new GiveawayListener(properties));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
         int finalAttempts = attempts;

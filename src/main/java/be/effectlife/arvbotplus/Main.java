@@ -120,6 +120,9 @@ public class Main extends Application {
         conversionStage.setOnShowing(e -> ((Stage) e.getSource()).setMinWidth(Scenes.S_CONV.getMinWidth()));
         Stage questionStage = buildStage(Stages.QUESTIONS, Scenes.S_QUESTIONS, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
         questionStage.setOnShowing(e -> ((Stage) e.getSource()).setMinWidth(Scenes.S_QUESTIONS.getMinWidth()));
+        Stage giveawayStarge = buildStage(Stages.GIVEAWAYS, Scenes.S_GIVEAWAY, CloseHandlers.HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK);
+        giveawayStarge.setOnShowing(e -> ((Stage) e.getSource()).setMinWidth(Scenes.S_GIVEAWAY.getMinWidth()));
+
         LOG.info("Prepared {} stages", preparedStageCount);
     }
 
