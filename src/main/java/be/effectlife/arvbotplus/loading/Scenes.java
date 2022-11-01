@@ -15,7 +15,8 @@ public enum Scenes {
     W_DICERESULT("widgets/w_diceResult"),
     W_ENEMY("widgets/w_enemy"),
     S_QUESTIONS("s_questions", "Questions", 600),
-    W_QUESTION("widgets/w_question");
+    W_QUESTION("widgets/w_question"),
+    S_GIVEAWAY("s_giveaways.fxml", "Giveaways", 400);
 
     private final String title;
     private final String file;

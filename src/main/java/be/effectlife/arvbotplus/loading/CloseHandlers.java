@@ -14,7 +14,11 @@ public abstract class CloseHandlers {
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> ((Stage) t.getSource()).hide();
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
         ((Stage) t.getSource()).hide();
-        if (!Main.getStage(Stages.POLL).isShowing() && !Main.getStage(Stages.QUESTIONS).isShowing()) {
+        if (!Main.getStage(Stages.POLL).isShowing() &&
+                !Main.getStage(Stages.QUESTIONS).isShowing() &&
+                !Main.getStage(Stages.GIVEAWAYS).isShowing()
+                && Main.getTwirkSystem() != null
+        ) {
             Main.getTwirkSystem().disconnect(false);
         }
     };

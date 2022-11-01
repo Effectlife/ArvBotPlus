@@ -125,6 +125,7 @@
             <MenuItem fx:id="menuBattle" mnemonicParsing="false" onAction="#btnBattleClicked" text="Battle Manager"/>
             <MenuItem fx:id="menuQuestions" mnemonicParsing="false" onAction="#btnQuestionsClicked" text="Questions"/>
             <MenuItem fx:id="menuConversion" mnemonicParsing="false" onAction="#btnConversionClicked" text="Conversions"/>
+            <MenuItem fx:id="menuGiveaways" mnemonicParsing="false" onAction="#btnGiveawaysClicked" text="Giveaways"/>
         </Menu>
         <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
             <MenuItem fx:id="menuAbout" mnemonicParsing="false" onAction="#btnHelpClicked" text="About"/>

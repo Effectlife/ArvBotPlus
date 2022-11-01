@@ -6,8 +6,8 @@ public enum Stages {
     INVENTORY,
     BATTLE,
     CONVERSION,
-    QUESTIONS;
-
+    QUESTIONS,
+    GIVEAWAYS;
     @Override
     public String toString() {
         return super.toString();

@@ -96,6 +96,9 @@ public class InventoryController implements IController {
     private MenuItem menuQuestions;
 
     @FXML
+    private MenuItem menuGiveaways;
+
+    @FXML
     private Menu menuHelp;
 
     @FXML
@@ -132,7 +135,7 @@ public class InventoryController implements IController {
                 tfNameClicked();
             }
         }));
-        highlight = ColorHelper.retrieveColor(ColorEnum.HIGHLIGHT);
+        highlight = ColorHelper.retrieveColor(ColorType.HIGHLIGHT);
     }
 
     @FXML
@@ -192,6 +195,12 @@ public class InventoryController implements IController {
     @FXML
     void btnConversionClicked() {
         StageBuilder.getStage(Stages.CONVERSION).show();
+    }
+
+    @FXML
+    void btnGiveawaysClicked() {
+        Stage giveawaysStage = StageBuilder.getStage(Stages.GIVEAWAYS);
+        startupTwirkSystem(giveawaysStage);
     }
 
     @FXML

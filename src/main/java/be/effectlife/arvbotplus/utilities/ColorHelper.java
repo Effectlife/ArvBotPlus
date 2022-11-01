@@ -54,7 +54,7 @@ public abstract class ColorHelper {
         return null;
     }
 
-    public static String retrieveColor(ColorEnum color) {
+    public static String retrieveColor(ColorType color) {
         Color color1 = Color.PURPLE;
         switch (color) {
             case CRIT:
