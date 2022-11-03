@@ -1,26 +1,26 @@
 * {
     /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
-    -color-pBartop: #6DA656; /*Color of the progress bar in the polls window (top gradient color)*/
-    -color-pBarbottom: #3D861F; /*Color of the progress bar in the polls window (bottom gradient color)*/
-    -color-pBar-border: #274B15; /*Color of the progress bar border*/
+    -color-pBartop: #982e9c; /*Color of the progress bar in the polls window (top gradient color)*/
+    -color-pBarbottom: #6e1d72; /*Color of the progress bar in the polls window (bottom gradient color)*/
+    -color-pBar-border: #832587; /*Color of the progress bar border*/
 
     -color-warn: #ff8c00; /*Warning color of the first counter in the skills/stats window (less than half of max)*/
     -color-crit: #ff0000; /*Critical color of the first counter in the skills/stats window (less than 1/5 of max) */
     -color-fail: #ff0000; /*Color used for crit fails in the Dice Roller*/
     -color-success: #00bc64; /*Color used for crit successes in the Dice Roller*/
 
-    -color-topbutton: #2B99D2; /*Color of the buttons (top gradient color)*/
-    -color-bottombutton: #07609a; /*Color of the buttons (bottom gradient color)*/
-    -color-button-border: #204080; /*Color of the buttons border*/
+    -color-topbutton: #992F9d; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton: #6d1d72; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border: #832688; /*Color of the buttons border*/
 
-    -color-topbutton-hover: #39bbf5; /*Color of the buttons (top gradient color)*/
-    -color-bottombutton-hover: #2184b7; /*Color of the buttons (bottom gradient color)*/
-    -color-button-border-hover: #204b80; /*Color of the buttons border*/
+    -color-topbutton-hover: #ad35b1; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-hover: #812386; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-hover: #982C9C; /*Color of the buttons border*/
 
-    -color-topbutton-pressed: #2998ec; /*Color of the buttons (top gradient color)*/
-    -color-bottombutton-pressed: #0d60b5; /*Color of the buttons (bottom gradient color)*/
-    -color-button-border-pressed: #2e4dbc; /*Color of the buttons border*/
-    
+    -color-topbutton-pressed: #862989; /*Color of the buttons (top gradient color)*/
+    -color-bottombutton-pressed: #5a185d; /*Color of the buttons (bottom gradient color)*/
+    -color-button-border-pressed: #702073; /*Color of the buttons border*/
+
     -color-false-topbutton: #d22b2b; /*Color of the buttons (top gradient color)*/
     -color-false-bottombutton: #9a0707; /*Color of the buttons (bottom gradient color)*/
     -color-false-button-border: #802020; /*Color of the buttons border*/
@@ -32,7 +32,7 @@
     -color-false-topbutton-pressed: #ec2929; /*Color of the buttons (top gradient color)*/
     -color-false-bottombutton-pressed: #b50d0d; /*Color of the buttons (bottom gradient color)*/
     -color-false-button-border-pressed: #bc2e2e; /*Color of the buttons border*/
-        
+
     -color-true-topbutton: #44d22b; /*Color of the buttons (top gradient color)*/
     -color-true-bottombutton: #229a07; /*Color of the buttons (bottom gradient color)*/
     -color-true-button-border: #2e8020; /*Color of the buttons border*/
@@ -44,33 +44,34 @@
     -color-true-topbutton-pressed: #4dec29; /*Color of the buttons (top gradient color)*/
     -color-true-bottombutton-pressed: #31b50d; /*Color of the buttons (bottom gradient color)*/
     -color-true-button-border-pressed: #59bc2e; /*Color of the buttons border*/
-    
-    -color-text-main: -color-f; /*The main color for text on buttons, menus, etc...*/
-    -color-text-textfield: -color-d; /*The color of text in editable areas*/
 
-    -color-background: -color-25; /*The main background color*/
-    -color-background-pane: -color-25; /*The main background color*/
-    -color-textfield-background: -color-1; /*The main background color*/
-    -color-combobox-background-hover: -color-2; /*The main background color*/
-    -color-combobox-background-pressed: -color-0; /*The main background color*/
-    -color-border: -color-3e; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
-    -color-border-selected: -color-a; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-text-main: #212121; /*The main color for text on buttons, menus, etc...*/
+    -color-text-controls: -color-f; /*The main color for text on buttons, menus, etc...*/
+    -color-text-textfield: -color-text-main; /*The color of text in editable areas*/
+
+    -color-background: #d9d9d9; /*The main background color*/
+    -color-background-pane: -color-f; /*The main background color*/
+    -color-textfield-background: #ffffff; /*The main background color*/
+    -color-combobox-background-hover: #ededed;
+    -color-combobox-background-pressed: #dedede;
+    -color-border: -color-5; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-border-selected: -color-pBar-border; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
 
     -color-checkmark: -color-9; /*The color of the '✓' of the checkbox*/
     -color-checkbox-hover: -color-f; /*The color of the checkbox when hovered over*/
     -color-checkbox-pressed: -color-6; /*The color of the checkbox when pressed*/
 
-    -color-menuitem-hover: -color-5; /*The color of the items in the toolbar menu when hovered over*/
+    -color-menuitem-hover: -color-a; /*The color of the items in the toolbar menu when hovered over*/
 
-    -color-scrollbar-background: -color-5; /*The color of the background of the scrollbars*/
-    -color-scrollbar-background-hover: -color-4; /*The color of the background of the scrollbars when hovered*/
-    -color-scrollbar-background-pressed: -color-4; /*The color of the background of the scrollbars when pressed*/
-    -color-scrollbar-foreground: -color-3e; /*The color of the foreground of the scrollbars*/
-    -color-scrollbar-foreground-hover: -color-9; /*The color of the foreground of the scrollbars when hovered*/
-    -color-scrollbar-foreground-pressed: -color-8; /*The color of the foreground of the scrollbars when pressed*/
+    -color-scrollbar-background: -color-9; /*The color of the background of the scrollbars*/
+    -color-scrollbar-background-hover: -color-9; /*The color of the background of the scrollbars when hovered*/
+    -color-scrollbar-background-pressed: -color-9; /*The color of the background of the scrollbars when pressed*/
+    -color-scrollbar-foreground: -color-7; /*The color of the foreground of the scrollbars*/
+    -color-scrollbar-foreground-hover: -color-7; /*The color of the foreground of the scrollbars when hovered*/
+    -color-scrollbar-foreground-pressed: -color-7; /*The color of the foreground of the scrollbars when pressed*/
 
-    -color-border-alt: -color-0; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
-    
+    -color-border-alt: -color-border; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
+
     -color-transparent: transparent; /*Transparent is used in some effects in the application*/
     /*These are basic grayscale colors*/
     -color-f: #ffffff;
@@ -92,6 +93,7 @@
 
     -color-25: #252525;
     -color-3e: #3e3e3e;
+    -color-7e: #7e7e7e;
 }
 
 * {
@@ -121,17 +123,6 @@
 .smaller-text {
     -fx-font-size: 10pt !important;
 }
-.larger-text {
-    -fx-font-size: 16pt !important;
-}
-
-.large-text {
-    -fx-font-size: 24pt !important;
-}
-
-.larger-text {
-    -fx-font-size: 22pt !important;
-}
 
 .white-text {
     -fx-fill: -color-text-main;
@@ -146,9 +137,16 @@
 }
 
 .container-pane {
-    -fx-background-color: -color-background;
-    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+    -fx-background-color: -color-background-pane;
+    /*-fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;*/
+    -fx-border-radius: 3px;
+    -fx-background-radius: 3px;
     -fx-border-width: 1px;
+    -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.15), 10, 0, 0, 2);
+}
+
+.gridpane-polls{
+    -fx-padding: 3px 0px 3px 0px;
 }
 
 .separator-pane {
@@ -170,7 +168,7 @@
 }
 
 .root {
-    -fx-background-color: -color-0;
+    -fx-background-color: -color-background;
 }
 
 .scroll-pane > *.viewport, .scroll-pane {
@@ -194,7 +192,8 @@
     -fx-background-color: linear-gradient(-color-topbutton, -color-bottombutton);
     -fx-border-color: -color-button-border;
     -fx-border-insets: 0px 0px -1px 0px;
-    -fx-text-fill: -color-text-main;
+    -fx-text-fill: -color-text-controls;
+    -fx-border-radius: 3px;
 }
 
 .button-color-false{
@@ -273,47 +272,50 @@
 }
 
 .text-input, .combo-box .list-cell, .combo-box .arrow-button{
-    -fx-padding: 0.1em 0.16em 0.16em 0.16em;
+    -fx-padding: 0.2em 0.2em 0.2em 0.2em;
 }
 .combo-box .list-cell .text{
     -fx-fill: -color-text-main;
 }
 
 .combo-box .combo-box-popup .list-view, .combo-box .combo-box-popup .list-cell {
-    -fx-background-color: black ;
-    -fx-text-fill: white ;
+    -fx-background-color: -color-background ;
+    -fx-text-fill: -color-text-main ;
     -fx-font-family: "Calibri" ;
 }
 .combo-box .combo-box-popup .list-cell:hover {
     -fx-text-fill: yellow ;
-    -fx-background-color: green ;
+    -fx-background-color: -color-c ;
 }
 
 .text-field, .text-area, .combo-box {
-    -fx-border-color: -color-border;
+    -fx-border-color: -color-pBar-border;
     -fx-text-fill: -color-text-textfield;
-    -fx-border-radius: 0;
-    -fx-background-radius: 0;
+    -fx-border-radius: 15px;
+    -fx-background-radius: 15px;
     -fx-background-color: -color-textfield-background;
-    -fx-border-insets: 1;
-
+    -fx-border-insets: 0;
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.25) , 15, 0, 0, 0);
 }
 
-.text-field:focused, .text-area:focused, .combo-box:focused {
+.text-field:focused, .text-area:focused, .combo-box:focused{
     -fx-border-color: -color-border-selected;
-    -fx-effect: dropshadow(gaussian, -color-border-selected, 10, 0, 0, 0);
-
+    -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.5), 15, 0.1, 0, 0);
 }
 
 .spinner:focused {
     -fx-border-color: inherit;
     -fx-background-color: -color-textfield-background;
+}
 
+.container-pane .spinner{
+    -fx-border-color: #fff;
+    -fx-padding: 0px;
 }
 
 .text-area .scroll-pane, .text-area .scroll-pane .content {
     -fx-background-color: -color-textfield-background;
-    -fx-background-radius: 0;
+    -fx-background-radius: 10px;
 }
 
 
@@ -324,7 +326,8 @@
 }
 
 .increment-arrow, .decrement-arrow {
-    -fx-background-color: -color-text-main;
+    -fx-background-color: -color-text-controls;
+
 }
 
 .scroll-bar .increment-button, .scroll-bar .increment-arrow {

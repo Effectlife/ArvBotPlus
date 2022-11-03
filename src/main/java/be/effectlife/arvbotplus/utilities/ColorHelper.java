@@ -1,6 +1,8 @@
 package be.effectlife.arvbotplus.utilities;
 
+import be.effectlife.arvbotplus.loading.AESceneLoader;
 import javafx.scene.paint.Color;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,23 +19,23 @@ public abstract class ColorHelper {
     private static List<String> list;
     private static final String COLOR_PREFIX = "-color-";
 
+    private static String cssTemplate;
+
     private ColorHelper() {
     }
 
-    static {
+    public static void init() {
         try {
-            List<String> doc;
-            try (InputStream resource = ColorHelper.class.getResourceAsStream("/css/bootstrap3-dark.css")) {
-                doc =
-                        new BufferedReader(new InputStreamReader(resource,
-                                StandardCharsets.UTF_8)).lines().collect(Collectors.toList());
+            try (InputStream resource = ColorHelper.class.getResourceAsStream(StringUtils.isBlank(cssTemplate) ? "/css/bootstrap3-dark.css" : "/css/" + cssTemplate + ".css")) {
+                list =
+                        new BufferedReader(new InputStreamReader(resource, StandardCharsets.UTF_8))
+                                .lines()
+                                .map(String::trim)
+                                .filter(s -> s.startsWith(COLOR_PREFIX))
+                                .map(s -> s.substring(0, s.indexOf(';')))
+                                .collect(Collectors.toList());
             }
-            list = doc
-                    .stream()
-                    .map(String::trim)
-                    .filter(s -> s.startsWith(COLOR_PREFIX))
-                    .map(s -> s.substring(0, s.indexOf(';')))
-                    .collect(Collectors.toList());
+
         } catch (IOException e) {
             LOG.error("Error happened", e);
         }
@@ -64,7 +66,7 @@ public abstract class ColorHelper {
                 color1 = ColorHelper.getColorForName("success");
                 break;
             case BACKGROUND:
-                color1 = ColorHelper.getColorForName("background");
+                color1 = ColorHelper.getColorForName("background-pane");
                 break;
             case TEXT:
                 color1 = ColorHelper.getColorForName("text-main");
@@ -74,5 +76,9 @@ public abstract class ColorHelper {
                 break;
         }
         return color1 != null ? color1.toString().replace("0x", "#") : "#000000";
+    }
+
+    public static void setCssTemplate(String t) {
+        cssTemplate = t;
     }
 }

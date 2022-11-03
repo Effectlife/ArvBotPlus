@@ -5,6 +5,7 @@ import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.services.TwirkService;
+import be.effectlife.arvbotplus.utilities.ColorHelper;
 import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.stage.Stage;
@@ -35,7 +36,7 @@ public class Main extends Application {
         launch(args);
     }
 
-    public static TwirkService getTwirkSystem() {
+    public static TwirkService getTwirkService() {
         return twirkSystem;
     }
 
@@ -46,8 +47,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
 
-        prepareStages();
         Properties properties = loadProperties();
+        String cssTemplate = properties.getProperty("abp.cssTemplate");
+        AESceneLoader.getInstance().setCssTemplate(cssTemplate);
+        ColorHelper.setCssTemplate(cssTemplate);
+        ColorHelper.init();
+        prepareStages();
         InventoryController controller = (InventoryController) AESceneLoader.getInstance().getController(Scenes.S_INVENTORY);
         controller.setProperties(properties);
         controller.initializeSkillWidgets();

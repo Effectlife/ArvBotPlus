@@ -31,7 +31,12 @@
         <opaqueInsets>
             <Insets />
         </opaqueInsets>
-        <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="1.0" />
+        <VBox fx:id="vboxPollOptions" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="1.0">
+         <children>
+            <fx:include source="widgets/w_poll.fxml" />
+            <fx:include source="widgets/w_poll.fxml" />
+            <fx:include source="widgets/w_poll.fxml" />
+         </children></VBox>
     </ScrollPane>
     <Pane maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" styleClass="container-pane" GridPane.rowIndex="2" />
     <GridPane styleClass="container-pane" GridPane.columnSpan="2147483647" GridPane.halignment="CENTER" GridPane.hgrow="ALWAYS" GridPane.valignment="CENTER" GridPane.vgrow="ALWAYS">
@@ -52,6 +57,9 @@
                 </styleClass>
             </Text>
         </HBox>
+      <GridPane.margin>
+         <Insets right="2.0" />
+      </GridPane.margin>
     </GridPane>
     <GridPane hgap="4.0" vgap="4.0" GridPane.rowIndex="2">
         <columnConstraints>

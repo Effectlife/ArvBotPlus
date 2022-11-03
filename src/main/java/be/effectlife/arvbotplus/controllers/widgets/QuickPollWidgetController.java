@@ -174,10 +174,10 @@ public class QuickPollWidgetController implements IController {
     }
 
     private void channelMessage(String message) {
-        if (Main.getTwirkSystem() == null) {
+        if (Main.getTwirkService() == null) {
             LOG.trace(message);
         } else {
-            Main.getTwirkSystem().channelMessage(message);
+            Main.getTwirkService().channelMessage(message);
         }
     }
 }

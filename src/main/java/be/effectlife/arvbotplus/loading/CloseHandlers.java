@@ -17,9 +17,9 @@ public abstract class CloseHandlers {
         if (!Main.getStage(Stages.POLL).isShowing() &&
                 !Main.getStage(Stages.QUESTIONS).isShowing() &&
                 !Main.getStage(Stages.GIVEAWAYS).isShowing()
-                && Main.getTwirkSystem() != null
+                && Main.getTwirkService() != null
         ) {
-            Main.getTwirkSystem().disconnect(false);
+            Main.getTwirkService().disconnect(false);
         }
     };
     public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {
@@ -30,8 +30,8 @@ public abstract class CloseHandlers {
         ConfirmationType result = SimplePopup.showPopupYesNo("Close?", "Close?", "Are you sure you want to close the application?");
         switch (result) {
             case YES:
-                if (Main.getTwirkSystem() != null)
-                    Main.getTwirkSystem().disconnect(true);
+                if (Main.getTwirkService() != null)
+                    Main.getTwirkService().disconnect(true);
                 Platform.exit();
                 System.exit(0);
                 break;

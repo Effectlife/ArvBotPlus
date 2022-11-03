@@ -1,23 +1,28 @@
 package be.effectlife.arvbotplus.controllers.scenes;
 
+import be.effectlife.arvbotplus.Main;
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.DiceResultController;
 import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.arvbotplus.models.dice.DieRoll;
+import be.effectlife.arvbotplus.services.TwirkService;
+import be.effectlife.arvbotplus.utilities.DiceUtility;
+import be.effectlife.arvbotplus.utilities.Origin;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.control.TextFormatter;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
+
+import static be.effectlife.arvbotplus.utilities.Origin.UI;
 
 public class DiceController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(DiceController.class);
@@ -48,6 +53,12 @@ public class DiceController implements IController {
 
     @FXML
     private Button btnRoll;
+
+    @FXML
+    private TextField tfCustomRoll;
+
+    @FXML
+    private CheckBox cbShowChatRolls;
 
     private int counter = 0;
     private List<DiceResultController> diceResultControllers;
@@ -95,22 +106,50 @@ public class DiceController implements IController {
 
 
     public void btnRollClicked() {
+        doRoll(UI);
+    }
+
+    public void doRoll(Origin origin) {
+        StringBuilder sb = new StringBuilder("<p>&ensp;");
+        StringBuilder sbt = new StringBuilder();
+        double result = 0;
+
+        if (StringUtils.isNotBlank(tfCustomRoll.getText())) {
+            result = doRollInternalCustom(origin, sb, sbt, result);
+        } else {
+            result = doRollInternalStandard(sb, sbt, result);
+        }
+
+        //Add new Result
+        SceneContainer diceResult = AESceneLoader.getInstance().getSceneContainer(Scenes.W_DICERESULT, "_" + counter);
+        counter++;
+
+        DiceResultController diceResultController = (DiceResultController) diceResult.getController();
+        diceResultControllers.add(diceResultController);
+        diceResultController.setTextResult("" + result);
+        sb.append("<p/>");
+        diceResultController.setTextCalculation(sb.toString());
+
+        diceResultController.setTextTemplate(sbt.toString());
+        diceResultController.loadStyle();
+        reloadView();
+    }
+
+    private double doRollInternalStandard(StringBuilder sb, StringBuilder sbt, double result) {
+        sb.append("(");
         int diceCount = spinnerDiceCount.getValue();
         int diceValue = spinnerDiceValue.getValue();
         int modifier = spinnerModifier.getValue();
-        int result = 0;
-        StringBuilder sb = new StringBuilder("<p>&ensp;(");
         for (int i = 0; i < diceCount; i++) {
             int diceRoll = random.nextInt(diceValue) + 1;
 
             if (diceRoll == diceValue) {
-                sb.append("<span class=\"color-success\">");
+                sb.append(DiceUtility.addSuccess(diceRoll));
             } else if (diceRoll == 1) {
-                sb.append("<span class=\"color-crit\">");
+                sb.append(DiceUtility.addFail());
             } else {
-                sb.append("<span>");
+                sb.append(DiceUtility.addNormal(diceRoll));
             }
-            sb.append(diceRoll).append("</span>");
             if (i != diceCount - 1) {
                 sb.append(" + ");
             } else if (modifier > 0) {
@@ -123,25 +162,34 @@ public class DiceController implements IController {
             result += diceRoll;
         }
         result += modifier;
-        //Add new Result
-        SceneContainer diceResult = AESceneLoader.getInstance().getSceneContainer(Scenes.W_DICERESULT, "_" + counter);
-        counter++;
 
-        DiceResultController diceResultController = (DiceResultController) diceResult.getController();
-        diceResultControllers.add(diceResultController);
-        diceResultController.setTextResult("" + result);
-        sb.append("<p/>");
-        diceResultController.setTextCalculation(sb.toString());
-        StringBuilder sbt = new StringBuilder();
         sbt.append(diceCount).append("d").append(diceValue);
         if (modifier > 0) {
             sbt.append(" + ").append(modifier);
         } else if (modifier < 0) {
             sbt.append(" - ").append(Math.abs(modifier));
         }
-        diceResultController.setTextTemplate(sbt.toString());
-        diceResultController.loadStyle();
-        reloadView();
+        return result;
+    }
+
+    private double doRollInternalCustom(Origin origin, StringBuilder sb, StringBuilder sbt, double result) {
+        try {
+            DieRoll dieRoll = DieRoll.parseRoll(tfCustomRoll.getText());
+            result = dieRoll.getValue();
+            sb.append("<span>").append(dieRoll.getExpressionHtml()).append("</span>");
+            sbt.append(dieRoll.getRawExpression());
+
+        } catch (RuntimeException exception) {
+            if (origin == UI) {
+                Platform.runLater(() -> SimplePopup.showPopupError("Cannot read the given part of the roll: " + exception.getMessage()));
+            } else {
+                //Chat
+                Map<String, String> params = new HashMap<>();
+                params.put("error", exception.getMessage());
+                Main.getTwirkService().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_ROLL_FAILED, params));
+            }
+        }
+        return result;
     }
 
 

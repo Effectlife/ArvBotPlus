@@ -39,7 +39,7 @@
       <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnLoadClicked" text="Load" GridPane.columnIndex="3" />
     </GridPane>
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="300.0" prefWidth="500.0" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
-        <VBox fx:id="vboxQuestions" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0" stylesheets="@../css/bootstrap3-dark.css">
+        <VBox fx:id="vboxQuestions" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0">
             <padding>
                 <Insets top="2.0" />
             </padding>

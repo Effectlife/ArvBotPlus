@@ -1,8 +1,9 @@
-package be.effectlife.arvbotplus.twirk.commands;
+package be.effectlife.arvbotplus.models.twirkcommands;
 
 import be.effectlife.arvbotplus.controllers.scenes.GiveawayController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.Scenes;
+import be.effectlife.arvbotplus.models.twirkcommands.QuestionCommand;
 import be.effectlife.arvbotplus.utilities.GiveawayStatus;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;

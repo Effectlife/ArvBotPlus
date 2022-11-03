@@ -166,11 +166,11 @@ public class InventoryController implements IController {
     }
 
     private void startupTwirkSystem(Stage twirkStage) {
-        if (Main.getTwirkSystem() == null || Main.getTwirkSystem().isNotLoaded()) {
+        if (Main.getTwirkService() == null || Main.getTwirkService().isNotLoaded()) {
             new Thread(() -> {
                 Main.setTwirkSystem(new TwirkService());
                 try {
-                    Main.getTwirkSystem().initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
+                    Main.getTwirkService().initializeSystem(properties, twirkStage, Boolean.parseBoolean(properties.getOrDefault("twitch.disabled", false).toString()));
                     ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
                     ((PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL)).onShow();
                 } catch (IOException | InterruptedException e) {

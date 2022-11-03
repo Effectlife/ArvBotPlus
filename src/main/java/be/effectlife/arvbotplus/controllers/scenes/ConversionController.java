@@ -47,12 +47,12 @@ public class ConversionController implements IController {
         try {
             float sourceVal = StringUtils.isBlank(tfSource.getText()) ? 0 : Float.parseFloat(tfSource.getText());
             Map<String, String> params = new HashMap<>();
-            params.put("sender", Main.getTwirkSystem().getConnectedChannel());
+            params.put("sender", Main.getTwirkService().getConnectedChannel());
             params.put("sourcevalue", (((int) (sourceVal * 100f)) / 100f) + "");
             params.put("sourcetype", comboSourceType.getValue().getDisplayName());
             params.put("targetvalue", tfTarget.getText());
             params.put("targettype", comboTargetType.getValue().getDisplayName());
-            Main.getTwirkSystem().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
+            Main.getTwirkService().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_RESULT, params));
         } catch (NumberFormatException nfe) {
             LOG.error("Could not convert: {}", nfe.getMessage());
         }
@@ -91,7 +91,7 @@ public class ConversionController implements IController {
     }
 
     public void checkTwirk() {
-        if (Main.getTwirkSystem() == null || Main.getTwirkSystem().isNotLoaded()) {
+        if (Main.getTwirkService() == null || Main.getTwirkService().isNotLoaded()) {
             btnSend.setDisable(true);
             btnSend.setTooltip(new Tooltip("Twitch bot is not loaded."));
         } else {

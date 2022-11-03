@@ -84,7 +84,7 @@ public class MessageProperties {
         replacements.put("patternchangevote", ChangeVoteCommand.PATTERN);
         replacements.put("patternvote", VoteCommand.PATTERN);
         replacements.put("patternconversion", ConvCommand.PATTERN);
-        replacements.put("connectedchannel", Main.getTwirkSystem().getConnectedChannel());
+        replacements.put("connectedchannel", Main.getTwirkService().getConnectedChannel());
         replacements.forEach((replaceKey, replaceValue) -> replaceAll(stringBuilder, "\\{" + replaceKey + "}", replaceValue));
         return getFixedBracketVersion(stringBuilder.toString());
     }

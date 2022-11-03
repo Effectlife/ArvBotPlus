@@ -47,6 +47,7 @@ public enum MessageKey {
     TWIRK_PATTERN_COMMAND_VOTE("twirk.pattern.command.vote"),
     TWIRK_PATTERN_COMMAND_CONVERSION("twirk.pattern.command.conversion"),
     TWIRK_PATTERN_COMMAND_QUESTION("twirk.pattern.command.question"),
+    TWIRK_PATTERN_COMMAND_ROLL("twirk.pattern.command.roll"),
     TWIRK_MESSAGE_STARTUP("twirk.message.startup"),
     TWIRK_MESSAGE_ABP_HELP("twirk.message.abp.help"),
 
@@ -78,6 +79,8 @@ public enum MessageKey {
     TWIRK_MESSAGE_CONVERSION_NOTANUMBER("twirk.message.conversion.notanumber"),
     TWIRK_MESSAGE_CONVERSION_GENERALERROR("twirk.message.conversion.generalerror"),
     TWIRK_MESSAGE_CONVERSION_OPTIONS("twirk.message.conversion.options"),
+    TWIRK_MESSAGE_DO_ROLL("twirk.message.do.roll"),
+    TWIRK_MESSAGE_ROLL_FAILED("twirk.message.roll.failed"),
     SCENE_INVENTORY_MENU_TOOLS_CONVERSION("scene.inventory.menu.tools.conversion"),
     CONVERSIONS_TYPE_WEIGHT("conversions.type.weight"),
     CONVERSIONS_TYPE_VOLUME("conversions.type.volume"),
@@ -85,6 +88,7 @@ public enum MessageKey {
     CONVERSIONS_TYPE_TEMPERATURE("conversions.type.temperature"),
     TWIRK_MESSAGE_QUESTION_CONFIRMATION("twirk.message.question.confirmation"),
     TWIRK_MESSAGE_QUESTION_HELP("twirk.message.question.help"),
+    TWIRK_MESSAGE_ROLL_HELP("twirk.message.roll.help"),
     TWIRK_CONNECTION_NOTCONNECTED("twirk.connection.notconnected");
     private final String key;
 
