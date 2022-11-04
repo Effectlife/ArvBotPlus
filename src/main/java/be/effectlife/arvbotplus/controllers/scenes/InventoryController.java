@@ -27,12 +27,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
+
     private List<SkillWidgetController> skillWidgetControllerList;
     private List<SkillWidgetController> removedControllerList;
 
@@ -76,6 +79,9 @@ public class InventoryController implements IController {
 
     @FXML
     private MenuItem menuClose;
+
+    @FXML
+    Menu menuTheme;
 
     @FXML
     private Menu menuTools;
@@ -136,6 +142,20 @@ public class InventoryController implements IController {
             }
         }));
         highlight = ColorHelper.retrieveColor(ColorType.HIGHLIGHT);
+        populateThemeMenu();
+    }
+
+    private void populateThemeMenu() {
+        try {
+            final Enumeration<URL> resources = InventoryController.class.getClassLoader().getResources("css/");
+            URL resource;
+
+            while(resources.hasMoreElements() && (resource = resources.nextElement()) !=null){
+                LOG.info(resource.toExternalForm());
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
@@ -293,7 +313,7 @@ public class InventoryController implements IController {
 
         skillWidgetController.setThresholds(dThresholdWarn, dThresholdCrit);
         if (name != null) {
-            skillWidgetController.setName(name); 
+            skillWidgetController.setName(name);
             skillWidgetController.setValue(value);
             skillWidgetController.setMaxValue(maxValue);
             skillWidgetController.setType(skillType);

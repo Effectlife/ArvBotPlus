@@ -1,13 +1,15 @@
 package be.effectlife.arvbotplus.loading;
 
 import be.effectlife.arvbotplus.controllers.IController;
-import be.effectlife.arvbotplus.controllers.scenes.InventoryController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 import java.util.HashMap;
@@ -93,8 +95,11 @@ public class AESceneLoader {
         SceneContainer container;
         try {
             Scene s = new Scene(loader.load());
-            String cssResource = AESceneLoader.class.getResource(StringUtils.isBlank(cssTemplate) ? "/css/bootstrap3-dark.css" : "/css/" + cssTemplate + ".css").toExternalForm();
-            s.getStylesheets().add(cssResource);
+            s.getStylesheets().add(
+
+                    "file:///" + new File(StringUtils.isBlank(cssTemplate) ? "css/bootstrap3-dark.css" : "css/" + cssTemplate + ".css").getAbsolutePath().replace("\\", "/")
+
+            );
             container = new SceneContainer(s, loader.getController());
             scenes.put(sceneName + addon, container);
         } catch (IOException e) {
@@ -105,5 +110,4 @@ public class AESceneLoader {
         container.getController().doInit();
         return container;
     }
-
 }
