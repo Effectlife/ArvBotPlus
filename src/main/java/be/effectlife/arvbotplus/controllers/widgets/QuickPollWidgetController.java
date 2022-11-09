@@ -62,13 +62,16 @@ public class QuickPollWidgetController implements IController {
         if (pollController == null) {
             pollController = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
         }
+        votes1 = 0;
+        votes2 = 0;
     }
 
     @FXML
-    void btnQPOpenCloseClicked(ActionEvent event) {
+    public void btnQPOpenCloseClicked(ActionEvent event) {
         if (pollController.getPollType() == PollType.NONE) {
             //Starting the poll
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_QUICKPOLL_TEMPLATE_QUESTION, new HashMap<>()));
+            doInit();
             btnQPOpenClose.setText(MessageProperties.getString(MessageKey.WIDGET_QUICKPOLL_BUTTON_CLOSE));
             pollController.setPollType(PollType.QUICK);
         } else if (pollController.getPollType() == PollType.QUICK) {

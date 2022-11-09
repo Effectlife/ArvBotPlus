@@ -5,9 +5,7 @@ import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.DiceResultController;
 import be.effectlife.arvbotplus.loading.*;
 import be.effectlife.arvbotplus.models.dice.DieRoll;
-import be.effectlife.arvbotplus.services.TwirkService;
 import be.effectlife.arvbotplus.utilities.DiceUtility;
-import be.effectlife.arvbotplus.utilities.Origin;
 import be.effectlife.arvbotplus.utilities.SimplePopup;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -22,7 +20,6 @@ import org.slf4j.LoggerFactory;
 import java.security.SecureRandom;
 import java.util.*;
 
-import static be.effectlife.arvbotplus.utilities.Origin.UI;
 
 public class DiceController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(DiceController.class);
@@ -85,6 +82,7 @@ public class DiceController implements IController {
     }
 
     @Override
+    @SuppressWarnings("squid:S2142")
     public void reloadView() {
         try {
             Thread.sleep(50);
@@ -104,42 +102,79 @@ public class DiceController implements IController {
         }
     }
 
-
+    /**
+     * Origin UI -> Definately do the display code (StringBuilder & DiceResult Widget)
+     */
     public void btnRollClicked() {
-        doRoll(UI);
+        doRoll(true, null, null);
     }
 
-    public void doRoll(Origin origin) {
+    public DieRoll doRoll(boolean showInUI, String fromChat, String sender) {
+
         StringBuilder sb = new StringBuilder("<p>&ensp;");
         StringBuilder sbt = new StringBuilder();
-        double result = 0;
-
-        if (StringUtils.isNotBlank(tfCustomRoll.getText())) {
-            result = doRollInternalCustom(origin, sb, sbt, result);
+        DieRoll result = null;
+        if (fromChat == null) {
+            if (StringUtils.isNotBlank(tfCustomRoll.getText())) {
+                result = doRollInternalCustom(sb, sbt, null, null);
+            } else {
+                result = doRollInternalStandard(sb, sbt);
+            }
         } else {
-            result = doRollInternalStandard(sb, sbt, result);
+            result = doRollInternalCustom(sb, sbt, fromChat, sender);
         }
+        if (showInUI) {
+            //Add new Result
+            showRollInUI(sb, sbt, result, sender);
+        }
+        return result;
+    }
 
-        //Add new Result
+    private void showRollInUI(StringBuilder sb, StringBuilder sbt, DieRoll result, String sender) {
+        if (result == null) {
+            LOG.error("Trying to show a null result for: " + sbt.toString());
+            return;
+        }
         SceneContainer diceResult = AESceneLoader.getInstance().getSceneContainer(Scenes.W_DICERESULT, "_" + counter);
         counter++;
 
         DiceResultController diceResultController = (DiceResultController) diceResult.getController();
         diceResultControllers.add(diceResultController);
-        diceResultController.setTextResult("" + result);
+        diceResultController.setTextResult("" + result.getValue());
         sb.append("<p/>");
         diceResultController.setTextCalculation(sb.toString());
 
         diceResultController.setTextTemplate(sbt.toString());
+        diceResultController.setSender(sender);
         diceResultController.loadStyle();
         reloadView();
     }
 
-    private double doRollInternalStandard(StringBuilder sb, StringBuilder sbt, double result) {
+    public void doRollChat(String contentFiltered, String sender) {
+        Map<String, String> params = new HashMap<>();
+        try {
+            DieRoll dieRoll = doRoll(cbShowChatRolls.isSelected(), contentFiltered, sender);
+
+            params.put("roll", String.valueOf(dieRoll.getValue()));
+            params.put("expression", dieRoll.getExpression());
+            params.put("sender", sender);
+            Main.getTwirkService().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_DO_ROLL, params));
+        } catch (IllegalArgumentException iae) {
+            if (iae.getMessage().contains("Operator is unknown for token")) {
+                params.put("error", "Unknown operator in expression. Please check if your expression is valid.");
+            } else {
+                params.put("error", iae.getMessage());
+            }
+            Main.getTwirkService().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_ROLL_FAILED, params));
+        }
+    }
+
+    private DieRoll doRollInternalStandard(StringBuilder sb, StringBuilder sbt) {
         sb.append("(");
         int diceCount = spinnerDiceCount.getValue();
         int diceValue = spinnerDiceValue.getValue();
         int modifier = spinnerModifier.getValue();
+        double result = 0;
         for (int i = 0; i < diceCount; i++) {
             int diceRoll = random.nextInt(diceValue) + 1;
 
@@ -169,29 +204,34 @@ public class DiceController implements IController {
         } else if (modifier < 0) {
             sbt.append(" - ").append(Math.abs(modifier));
         }
-        return result;
+        return DieRoll.createSimpleResult(result);
     }
 
-    private double doRollInternalCustom(Origin origin, StringBuilder sb, StringBuilder sbt, double result) {
+    private DieRoll doRollInternalCustom(StringBuilder sb, StringBuilder sbt, String fromChat, String sender) {
+        DieRoll dieRoll = null;
         try {
-            DieRoll dieRoll = DieRoll.parseRoll(tfCustomRoll.getText());
-            result = dieRoll.getValue();
+            if (fromChat == null) {
+                dieRoll = DieRoll.parseRoll(tfCustomRoll.getText());
+            } else {
+                dieRoll = DieRoll.parseRoll(fromChat);
+            }
             sb.append("<span>").append(dieRoll.getExpressionHtml()).append("</span>");
             sbt.append(dieRoll.getRawExpression());
-
         } catch (RuntimeException exception) {
-            if (origin == UI) {
+            if (fromChat == null) {
                 Platform.runLater(() -> SimplePopup.showPopupError("Cannot read the given part of the roll: " + exception.getMessage()));
             } else {
                 //Chat
                 Map<String, String> params = new HashMap<>();
                 params.put("error", exception.getMessage());
+                params.put("sender", sender);
                 Main.getTwirkService().channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_ROLL_FAILED, params));
+
             }
         }
-        return result;
-    }
 
+        return dieRoll;
+    }
 
     private void setupSpinner(int minValue, int initialValue, Spinner<Integer> spinnerModifier) {
         SpinnerValueFactory<Integer> spinnerModifierFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(minValue, Integer.MAX_VALUE, initialValue);

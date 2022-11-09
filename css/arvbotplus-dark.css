@@ -1,3 +1,4 @@
+/*Default Dark (Gray and Blue)*/
 * {
     /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
     -color-pBartop: #6DA656; /*Color of the progress bar in the polls window (top gradient color)*/
@@ -286,7 +287,7 @@
 }
 .combo-box .combo-box-popup .list-cell:hover {
     -fx-text-fill: yellow ;
-    -fx-background-color: green ;
+    -fx-background-color: -color-combobox-background-hover ;
 }
 
 .text-field, .text-area, .combo-box {

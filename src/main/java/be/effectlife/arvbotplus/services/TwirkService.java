@@ -26,6 +26,7 @@ public class TwirkService {
     private Twirk twirk;
     private boolean disable;
 
+    @SuppressWarnings("squid:S2142")
     private static TwirkListener getOnDisconnectListener(final Twirk twirk) {
         return new TwirkListener() {
             @Override
@@ -44,6 +45,7 @@ public class TwirkService {
         };
     }
 
+    @SuppressWarnings("squid:S2142")
     public void initializeSystem(Properties properties, Stage callingStage, boolean disable) throws IOException, InterruptedException {
         this.disable = disable;
         if (this.disable) {
@@ -71,6 +73,7 @@ public class TwirkService {
         twirk.addIrcListener(new ABPCommand(twirk, disable));
         twirk.addIrcListener(new QuestionCommand(twirk, disable));
         twirk.addIrcListener(new GiveawayListener(properties));
+        twirk.addIrcListener(new RollCommand(twirk, disable));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
         int finalAttempts = attempts;
@@ -121,6 +124,7 @@ public class TwirkService {
                 twirk.disconnect();
                 if (exit) Platform.exit();
                 twirk = null;
+                System.gc();
                 ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
             }).start();
         }

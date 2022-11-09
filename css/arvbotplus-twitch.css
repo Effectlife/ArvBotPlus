@@ -1,3 +1,4 @@
+/*Twitch (White and Purple)*/
 * {
     /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
     -color-pBartop: #982e9c; /*Color of the progress bar in the polls window (top gradient color)*/
@@ -57,7 +58,7 @@
     -color-border: -color-5; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
     -color-border-selected: -color-pBar-border; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
 
-    -color-checkmark: -color-9; /*The color of the '✓' of the checkbox*/
+    -color-checkmark: -color-5; /*The color of the '✓' of the checkbox*/
     -color-checkbox-hover: -color-f; /*The color of the checkbox when hovered over*/
     -color-checkbox-pressed: -color-6; /*The color of the checkbox when pressed*/
 
@@ -285,7 +286,7 @@
 }
 .combo-box .combo-box-popup .list-cell:hover {
     -fx-text-fill: yellow ;
-    -fx-background-color: -color-c ;
+    -fx-background-color: green ;
 }
 
 .text-field, .text-area, .combo-box {
@@ -443,7 +444,7 @@
     -fx-padding: 0;
     -fx-border-color: -color-border;
     -fx-border-radius: 0;
-    -fx-background-color: -color-background;
+    -fx-background-color: -color-background-pane;
 }
 
 .check-box:hover > .box {

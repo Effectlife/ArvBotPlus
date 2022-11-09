@@ -23,6 +23,7 @@ public class DieRoll implements DieBase {
     private String rawExpression;
     private String rolledExpression;
     private String rolledExpressionHtml;
+    Double cachedResult;
 
     public static DieRoll parseRoll(String roll) {
         // (?<=(\()).*(?=(\))) -- Selects Roll without the brackets
@@ -80,6 +81,7 @@ public class DieRoll implements DieBase {
                 diceRoll.add(subRoll);
             } else {
                 LOG.warn("HUH? What's this: " + s);
+                throw new IllegalArgumentException("Unknown token ("+s+") found in expression. This expression cannot be evaluated. ("+ diceRoll.rawExpression+")");
             }
         }
         return diceRoll;
@@ -92,6 +94,12 @@ public class DieRoll implements DieBase {
         else if (firstChar == '*') operator = MULTIPLY;
         else if (firstChar == '/') operator = DIVIDE;
         return operator;
+    }
+
+    public static DieRoll createSimpleResult(double result) {
+        DieRoll dieRoll = new DieRoll();
+        dieRoll.cachedResult = result;
+        return dieRoll;
     }
 
     private void add(DieBase item) {
@@ -119,7 +127,10 @@ public class DieRoll implements DieBase {
 
     @Override
     public double getValue() {
-        return ((int) ((new ExpressionBuilder(getExpression()).build().evaluate()) * 100)) / 100.0; // Multiply by 100, cast to int, divide by 100.0 to round result to two digits
+        if (cachedResult == null) {
+            cachedResult = ((int) ((new ExpressionBuilder(getExpression()).build().evaluate()) * 100)) / 100.0;
+        }
+        return cachedResult; // Multiply by 100, cast to int, divide by 100.0 to round result to two digits
     }
 
     public void setOperator(Operator operator) {

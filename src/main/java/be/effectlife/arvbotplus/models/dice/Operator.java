@@ -1,7 +1,7 @@
 package be.effectlife.arvbotplus.models.dice;
 
 public enum Operator {
-    ADD("+"), SUBTRACT("-"), MULTIPLY("*"), DIVIDE("/"), INVALID("!");
+    ADD(" + "), SUBTRACT(" - "), MULTIPLY(" * "), DIVIDE(" / "), INVALID("!");
 
     private final String sign;
 

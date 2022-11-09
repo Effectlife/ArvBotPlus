@@ -26,12 +26,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Enumeration;
-import java.util.List;
-import java.util.Properties;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
@@ -146,15 +146,16 @@ public class InventoryController implements IController {
     }
 
     private void populateThemeMenu() {
-        try {
-            final Enumeration<URL> resources = InventoryController.class.getClassLoader().getResources("css/");
-            URL resource;
-
-            while(resources.hasMoreElements() && (resource = resources.nextElement()) !=null){
-                LOG.info(resource.toExternalForm());
+        File cssFolder = new File("css");
+        for (File file : Arrays.stream(Objects.requireNonNull(cssFolder.listFiles())).filter(file -> file.getName().startsWith("arvbotplus-")).collect(Collectors.toList())) {
+            try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+                String displayName = br.readLine().replace("/*", "").replace("*/", "").trim();
+                MenuItem themeItem = new MenuItem(displayName);
+                themeItem.setOnAction((a) -> AESceneLoader.getInstance().refreshCSS(file.getName().replace("arvbotplus-", "").replace(".css", "")));
+                menuTheme.getItems().add(themeItem);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
             }
-        } catch (IOException e) {
-            throw new RuntimeException(e);
         }
     }
 
@@ -185,6 +186,7 @@ public class InventoryController implements IController {
         startupTwirkSystem(questionStage);
     }
 
+    @SuppressWarnings("squid:S2142")
     private void startupTwirkSystem(Stage twirkStage) {
         if (Main.getTwirkService() == null || Main.getTwirkService().isNotLoaded()) {
             new Thread(() -> {
@@ -204,7 +206,8 @@ public class InventoryController implements IController {
 
     @FXML
     void btnDiceClicked() {
-        StageBuilder.getStage(Stages.DICE).show();
+        Stage diceStage = StageBuilder.getStage(Stages.DICE);
+        startupTwirkSystem(diceStage);
     }
 
     @FXML

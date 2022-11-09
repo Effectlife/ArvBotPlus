@@ -1,12 +1,10 @@
 package be.effectlife.arvbotplus.models.twirkcommands;
 
 import be.effectlife.arvbotplus.controllers.scenes.DiceController;
-import be.effectlife.arvbotplus.controllers.scenes.QuestionsController;
 import be.effectlife.arvbotplus.loading.AESceneLoader;
 import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
-import be.effectlife.arvbotplus.utilities.Origin;
 import com.gikk.twirk.Twirk;
 import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
@@ -16,8 +14,6 @@ import javafx.application.Platform;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class RollCommand extends CommandExampleBase {
@@ -55,12 +51,11 @@ public class RollCommand extends CommandExampleBase {
         }
 
         //Execute the roll
-        ((DiceController)AESceneLoader.getInstance().getController(Scenes.S_DICE)).doRoll(Origin.CHAT);
+        Platform.runLater(() -> {
+            ((DiceController) AESceneLoader.getInstance().getController(Scenes.S_DICE)).doRollChat(contentFiltered, sender.getDisplayName());
+        });
 
-        channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_DO_ROLL, options));
     }
-
-
 
 
     private void channelMessage(String message) {

@@ -1,16 +1,16 @@
 package be.effectlife.arvbotplus.loading;
 
 import be.effectlife.arvbotplus.controllers.IController;
+import be.effectlife.arvbotplus.utilities.ColorHelper;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.Map;
@@ -97,7 +97,7 @@ public class AESceneLoader {
             Scene s = new Scene(loader.load());
             s.getStylesheets().add(
 
-                    "file:///" + new File(StringUtils.isBlank(cssTemplate) ? "css/bootstrap3-dark.css" : "css/" + cssTemplate + ".css").getAbsolutePath().replace("\\", "/")
+                    new File(StringUtils.isBlank(cssTemplate) ? "css/arvbotplus-dark.css" : "css/arvbotplus-" + cssTemplate + ".css").toURI().toURL().toString()
 
             );
             container = new SceneContainer(s, loader.getController());
@@ -109,5 +109,21 @@ public class AESceneLoader {
         LOG.info("Initializing {}{}", sceneName, addon);
         container.getController().doInit();
         return container;
+    }
+
+    public void refreshCSS(String replace) {
+        setCssTemplate(replace);
+        ColorHelper.setCssTemplate(replace);
+        ColorHelper.init();
+        scenes.values().stream().forEach((sceneContainer -> {
+            sceneContainer.getScene().getStylesheets().clear();
+            try {
+                sceneContainer.getScene().getStylesheets().add(
+                        new File(StringUtils.isBlank(cssTemplate) ? "css/arvbotplus-dark.css" : "css/arvbotplus-" + cssTemplate + ".css").toURI().toURL().toString()
+                );
+            } catch (MalformedURLException e) {
+                throw new RuntimeException(e);
+            }
+        }));
     }
 }

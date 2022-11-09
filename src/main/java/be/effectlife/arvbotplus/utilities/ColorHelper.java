@@ -5,8 +5,9 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.*;
-import java.nio.charset.StandardCharsets;
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -22,18 +23,17 @@ public abstract class ColorHelper {
 
 
     public static void init() {
-        String cssFileName = StringUtils.isBlank(cssTemplate) ? "css/bootstrap3-dark.css" : "css/" + cssTemplate + ".css";
-        try {
-            list = new BufferedReader(new FileReader(cssFileName))
-                    .lines()
-                    .map(String::trim)
-                    .filter(s -> s.startsWith(COLOR_PREFIX))
-                    .map(s -> s.substring(0, s.indexOf(';')))
-                    .collect(Collectors.toList());
-        } catch (FileNotFoundException e) {
+        String cssFileName = StringUtils.isBlank(cssTemplate) ? "css/arvbotplus-dark.css" : "css/arvbotplus-" + cssTemplate + ".css";
+        try (BufferedReader br = new BufferedReader(new FileReader(cssFileName))) {
+            list =
+                    br.lines()
+                            .map(String::trim)
+                            .filter(s -> s.startsWith(COLOR_PREFIX))
+                            .map(s -> s.substring(0, s.indexOf(';')))
+                            .collect(Collectors.toList());
+        } catch (IOException e) {
             LOG.error("Couldn't load css file at " + cssFileName);
         }
-
     }
 
     private static Color getColorForName(String colorname) {

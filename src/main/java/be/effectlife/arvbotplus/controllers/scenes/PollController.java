@@ -5,10 +5,10 @@ import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.controllers.widgets.PollWidgetController;
 import be.effectlife.arvbotplus.controllers.widgets.QuickPollWidgetController;
 import be.effectlife.arvbotplus.loading.*;
+import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.PollOption;
 import be.effectlife.arvbotplus.saves.models.PollSave;
-import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.Formatters;
 import be.effectlife.arvbotplus.utilities.JFXExtensions;
 import be.effectlife.arvbotplus.utilities.PollType;
@@ -108,7 +108,7 @@ public class PollController implements IController {
     }
 
     @FXML
-    void btnOpenClosePollClicked(ActionEvent event) {
+    public void btnOpenClosePollClicked(ActionEvent event) {
         if (getPollType() == PollType.NONE || getPollType() == PollType.QP_CLEAR) {
             handleNoneQPClearPoll();
         } else if (getPollType() == PollType.STANDARD) {

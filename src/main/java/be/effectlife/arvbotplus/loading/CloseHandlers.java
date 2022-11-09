@@ -12,16 +12,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class CloseHandlers {
     public static final EventHandler<WindowEvent> HIDE_ON_CLOSE = t -> ((Stage) t.getSource()).hide();
-    public static final EventHandler<WindowEvent> HIDE_ON_CLOSE_AND_DISCONNECT_TWIRK = t -> {
-        ((Stage) t.getSource()).hide();
-        if (!Main.getStage(Stages.POLL).isShowing() &&
-                !Main.getStage(Stages.QUESTIONS).isShowing() &&
-                !Main.getStage(Stages.GIVEAWAYS).isShowing()
-                && Main.getTwirkService() != null
-        ) {
-            Main.getTwirkService().disconnect(false);
-        }
-    };
+
     public static final EventHandler<WindowEvent> IGNORE_CLOSING = t -> {
     };
     private static final Logger LOG = LoggerFactory.getLogger(CloseHandlers.class);

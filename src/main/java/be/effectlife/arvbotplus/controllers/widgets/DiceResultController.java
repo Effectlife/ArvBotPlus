@@ -91,4 +91,14 @@ public class DiceResultController implements IController {
         vbox.setPrefWidth(newValue);
         webView.setPrefWidth(newValue);
     }
+
+    public void setSender(String sender) {
+        if (sender == null) return;
+
+        Text senderText = new Text(sender);
+        senderText.getStyleClass().add("white-text");
+        senderText.getStyleClass().add("lg");
+
+        vbox.getChildren().add(0, senderText);
+    }
 }
