@@ -1,6 +1,5 @@
 package be.effectlife.arvbotplus.utilities;
 
-import be.effectlife.arvbotplus.models.dice.DieRoll;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
