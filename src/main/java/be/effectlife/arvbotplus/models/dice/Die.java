@@ -1,6 +1,10 @@
 package be.effectlife.arvbotplus.models.dice;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class Die implements DieBase {
+    private static final Logger LOG = LoggerFactory.getLogger(Die.class);
     private Operator operator;
     private int dieCount;
     private int dieSize;
@@ -46,14 +50,11 @@ public class Die implements DieBase {
 
     @Override
     public String toString() {
-        return "Die{" +
-                "operator=" + operator +
-                ", dieCount=" + dieCount +
-                ", dieSize=" + dieSize +
-                '}';
+        return operator.toString() + dieCount + "d" + dieSize;
     }
 
     public double getValue() {
-        throw new RuntimeException("Should not get value of a raw die. This should already have been converted to a modifier");
+        LOG.warn("Should not get value of a raw die ({}). This should already have been converted to a modifier", this);
+        return 0;
     }
 }

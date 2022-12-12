@@ -1,10 +1,7 @@
 package be.effectlife.arvbotplus.loading;
 
 import be.effectlife.arvbotplus.Main;
-import be.effectlife.arvbotplus.models.twirkcommands.ABPCommand;
-import be.effectlife.arvbotplus.models.twirkcommands.ChangeVoteCommand;
-import be.effectlife.arvbotplus.models.twirkcommands.ConvCommand;
-import be.effectlife.arvbotplus.models.twirkcommands.VoteCommand;
+import be.effectlife.arvbotplus.models.twirkcommands.*;
 import be.effectlife.arvbotplus.utilities.BasicUtilities;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -180,6 +177,8 @@ public class MessageProperties {
         replacements.put("patternchangevote", ChangeVoteCommand.PATTERN);
         replacements.put("patternvote", VoteCommand.PATTERN);
         replacements.put("patternconversion", ConvCommand.PATTERN);
+        replacements.put("patternquestion", QuestionCommand.PATTERN);
+        replacements.put("patternroll", RollCommand.PATTERN);
         replacements.put("connectedchannel", Main.getTwirkService().getConnectedChannel());
         replacements.forEach((replaceKey, replaceValue) -> replaceAll(stringBuilder, "\\{" + replaceKey + "}", replaceValue));
         return getFixedBracketVersion(stringBuilder.toString());

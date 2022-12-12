@@ -132,7 +132,7 @@ public class DiceController implements IController {
 
     private void showRollInUI(StringBuilder sb, StringBuilder sbt, DieRoll result, String sender) {
         if (result == null) {
-            LOG.error("Trying to show a null result for: " + sbt.toString());
+            LOG.error("Trying to show a null result for: {}", sbt);
             return;
         }
         SceneContainer diceResult = AESceneLoader.getInstance().getSceneContainer(Scenes.W_DICERESULT, "_" + counter);

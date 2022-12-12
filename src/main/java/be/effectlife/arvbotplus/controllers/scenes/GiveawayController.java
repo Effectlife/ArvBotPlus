@@ -2,8 +2,10 @@ package be.effectlife.arvbotplus.controllers.scenes;
 
 import be.effectlife.arvbotplus.controllers.IController;
 import be.effectlife.arvbotplus.utilities.GiveawayStatus;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +17,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class GiveawayController implements IController {
-    private final static Logger LOG = LoggerFactory.getLogger(GiveawayController.class);
+    private static final Logger LOG = LoggerFactory.getLogger(GiveawayController.class);
     @FXML
     private Text txtTitle;
 
@@ -53,7 +55,8 @@ public class GiveawayController implements IController {
 
     @Override
     public void doInit() {
-        LOG.info("doInit");
+        LOG.info("Clearing/(Re)Initializing Giveways");
+        entries.clear();
         giveawayStatus = GiveawayStatus.NOT_RUNNING;
         txtStatus.setText(GiveawayStatus.NOT_RUNNING.toString());
         txtStatusTitle.setText("Status:");
@@ -68,46 +71,36 @@ public class GiveawayController implements IController {
 
     @Override
     public void reloadView() {
-        LOG.info("Reloading");
         txtStatus.setText(giveawayStatus.toString());
         txtEntries.setText("Entries: " + entries.size());
-        txtChance.setText(String.format("Chance: %02d%%", entries.size() == 0 ? 0 : (100 / entries.size())));
+        txtChance.setText(String.format("Chance: %02d%%", entries.isEmpty() ? 0 : (100 / entries.size())));
         txtKeyword.setText(keyword.toUpperCase());
     }
 
-    public void clear() {
-        LOG.info("Clearing information");
-        entries.clear();
-        doInit();
-    }
-
     public void setClearSetKeywordAndStart(String content) {
-        LOG.info("Clearing, setting and starting");
         if (giveawayStatus == GiveawayStatus.RUNNING || giveawayStatus == GiveawayStatus.LAST_CALL) {
-            LOG.info("Status = " + giveawayStatus + "; No need to reset");
+            LOG.info("Status = {}; No need to clear", giveawayStatus);
             return; // Is already running, no need to reset
         }
-        clear();
         String temp = content.replace("[GIVEAWAY] The giveaway has started! Please type ", "");
         temp = temp.substring(0, temp.indexOf(' '));
-        LOG.info("Setting keyword to " + keyword);
         keyword = temp.trim();
+        LOG.info("Clearing, setting Keyword to {} and starting giveaway", keyword);
+        doInit();
         giveawayStatus = GiveawayStatus.RUNNING;
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
-                Platform.runLater(() -> {
-                    LOG.info("TimerTask " + timeElapsedInSeconds);
-                    txtTimer.setText(LocalTime.ofSecondOfDay(timeElapsedInSeconds++).toString());
-                });
+                Platform.runLater(() -> txtTimer.setText(LocalTime.ofSecondOfDay(timeElapsedInSeconds++).toString()));
             }
         }, 1000L, 1000L);
         reloadView();
     }
 
     public void registerEntry(String displayName) {
-        LOG.info("Registering entry for " + displayName);
-        entries.add(displayName);
+        boolean addSuccess = entries.add(displayName);
+        if (addSuccess) LOG.info("Registering entry for {}", displayName);
+        else LOG.info("{} was already registered for the giveaway", displayName);
         reloadView();
     }
 
@@ -128,6 +121,14 @@ public class GiveawayController implements IController {
         doInit();
         final String trim = content.replace("[Giveaway] ", "").trim();
         txtStatusTitle.setText("Winner!");
-        txtStatus.setText(trim.substring(0, trim.indexOf(",")));
+        txtStatus.setText(trim.substring(0, trim.indexOf(',')));
+    }
+
+    @FXML
+    void txtEntriesClicked(MouseEvent event) {
+        if (!entries.isEmpty()) {
+            String reduce = entries.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
+            Platform.runLater(() -> SimplePopup.showPopupInfo("Entries for the Giveaway", reduce));
+        }
     }
 }

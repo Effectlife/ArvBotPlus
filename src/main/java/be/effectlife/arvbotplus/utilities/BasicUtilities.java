@@ -12,6 +12,9 @@ import static java.lang.String.format;
 public class BasicUtilities {
     private static final Logger LOG = LoggerFactory.getLogger(BasicUtilities.class);
 
+    private BasicUtilities() {
+    }
+
     public static Properties loadProperties(String propFileName, String defaults) throws IOException {
         Properties properties = new Properties();
         InputStream inputStream = null;

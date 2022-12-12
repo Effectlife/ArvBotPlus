@@ -9,6 +9,7 @@ public enum Operator {
         this.sign = sign;
     }
 
+    @Override
     public String toString() {
         return sign;
     }

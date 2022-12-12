@@ -90,7 +90,7 @@
             </GridPane>
             <HBox alignment="CENTER_LEFT" styleClass="container-pane" GridPane.rowIndex="2">
                <children>
-                  <Text fx:id="txtEntries" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Entries: ##" />
+                  <Text fx:id="txtEntries" onMouseClicked="#txtEntriesClicked" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Entries: ##" />
                </children>
             </HBox>
             <HBox alignment="CENTER_RIGHT" styleClass="container-pane" GridPane.columnIndex="1" GridPane.rowIndex="2">

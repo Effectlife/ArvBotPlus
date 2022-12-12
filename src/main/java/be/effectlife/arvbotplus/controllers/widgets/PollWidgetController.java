@@ -45,7 +45,6 @@ public class PollWidgetController implements IController {
             String reduce = voters.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
             Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option " + (optionId + 1), reduce));
         }
-
     }
 
     @FXML

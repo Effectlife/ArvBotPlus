@@ -1,10 +1,6 @@
 package be.effectlife.arvbotplus.models.dice;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class Mod implements DieBase {
-    private static final Logger LOG = LoggerFactory.getLogger(Mod.class);
     private Operator operator;
     private int value;
 

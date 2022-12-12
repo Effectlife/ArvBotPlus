@@ -5,8 +5,6 @@ import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.models.conversions.*;
 import be.effectlife.arvbotplus.services.ConversionService;
 import com.gikk.twirk.Twirk;
-import com.gikk.twirk.commands.CommandExampleBase;
-import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
@@ -16,17 +14,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class ConvCommand extends CommandExampleBase {
-    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CONVERSION);
+public class ConvCommand extends BaseCommand {
     private static final Logger LOG = LoggerFactory.getLogger(ConvCommand.class);
-    private final Twirk twirk;
-    private final boolean disable;
     private final ConversionService conversionService;
+    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CONVERSION);
 
     public ConvCommand(Twirk twirk, boolean disable) {
-        super(CommandType.CONTENT_COMMAND);
-        this.twirk = twirk;
-        this.disable = disable;
+        super(CommandType.CONTENT_COMMAND, twirk, disable);
         conversionService = new ConversionService();
     }
 
@@ -34,15 +28,9 @@ public class ConvCommand extends CommandExampleBase {
         return PATTERN;
     }
 
-    protected USER_TYPE getMinUserPrevilidge() {
-        return USER_TYPE.DEFAULT;
-    }
-
-    protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
-        String content = message.getContent().trim();
-        if (!content.startsWith(PATTERN)) return;
-        String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
-        String[] split = messagecontent.split(" ");
+    protected void handleCommand(String content, TwitchUser sender, TwitchMessage message) {
+        String messageContent = content.replaceAll("( +)", " ").trim().toLowerCase();
+        String[] split = messageContent.split(" ");
         Map<String, String> params = new HashMap<>();
         params.put("sender", sender.getDisplayName());
         params.put("pattern", PATTERN);

@@ -33,6 +33,8 @@ import java.io.IOException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static java.lang.String.format;
+
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
 
@@ -151,10 +153,10 @@ public class InventoryController implements IController {
             try (BufferedReader br = new BufferedReader(new FileReader(file))) {
                 String displayName = br.readLine().replace("/*", "").replace("*/", "").trim();
                 MenuItem themeItem = new MenuItem(displayName);
-                themeItem.setOnAction((a) -> AESceneLoader.getInstance().refreshCSS(file.getName().replace("arvbotplus-", "").replace(".css", "")));
+                themeItem.setOnAction(a -> AESceneLoader.getInstance().refreshCSS(file.getName().replace("arvbotplus-", "").replace(".css", "")));
                 menuTheme.getItems().add(themeItem);
             } catch (IOException e) {
-                throw new RuntimeException(e);
+                Platform.runLater(() -> SimplePopup.showPopupError(format("Could not populate theme's in the theme menu, error message: %s", e.getMessage())));
             }
         }
     }
@@ -266,11 +268,11 @@ public class InventoryController implements IController {
         String keyTemplate = "inv.skill.default.%d.%s";
 
         while (true) {
-            String name = properties.getProperty(String.format(keyTemplate, counter, "name"));
-            String valueString = properties.getProperty(String.format(keyTemplate, counter, "value"));
-            String maxValueString = properties.getProperty(String.format(keyTemplate, counter, "maxValue"));
-            boolean hasMaxValue = Boolean.parseBoolean(properties.getProperty(String.format(keyTemplate, counter, "hasmaxvalue")));
-            boolean usesColor = Boolean.parseBoolean(properties.getProperty(String.format(keyTemplate, counter, "usescolor")));
+            String name = properties.getProperty(format(keyTemplate, counter, "name"));
+            String valueString = properties.getProperty(format(keyTemplate, counter, "value"));
+            String maxValueString = properties.getProperty(format(keyTemplate, counter, "maxValue"));
+            boolean hasMaxValue = Boolean.parseBoolean(properties.getProperty(format(keyTemplate, counter, "hasmaxvalue")));
+            boolean usesColor = Boolean.parseBoolean(properties.getProperty(format(keyTemplate, counter, "usescolor")));
             if (name == null) {
                 break;
             }

@@ -122,7 +122,7 @@ public class AESceneLoader {
                         new File(StringUtils.isBlank(cssTemplate) ? "css/arvbotplus-dark.css" : "css/arvbotplus-" + cssTemplate + ".css").toURI().toURL().toString()
                 );
             } catch (MalformedURLException e) {
-                throw new RuntimeException(e);
+                LOG.error("Could not refresh css for scene " + sceneContainer.getController().getClass(), e);
             }
         }));
     }

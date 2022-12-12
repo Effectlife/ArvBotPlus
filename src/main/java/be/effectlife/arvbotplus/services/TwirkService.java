@@ -124,7 +124,6 @@ public class TwirkService {
                 twirk.disconnect();
                 if (exit) Platform.exit();
                 twirk = null;
-                System.gc();
                 ((ConversionController) AESceneLoader.getInstance().getController(Scenes.S_CONV)).checkTwirk();
             }).start();
         }

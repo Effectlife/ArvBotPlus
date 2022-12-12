@@ -7,8 +7,6 @@ import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import com.gikk.twirk.Twirk;
-import com.gikk.twirk.commands.CommandExampleBase;
-import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
 import org.slf4j.Logger;
@@ -17,39 +15,24 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChangeVoteCommand extends CommandExampleBase {
-    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CHANGEVOTE);
+public class ChangeVoteCommand extends BaseCommand {
     private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     private static final AESceneLoader sceneloader;
     private static final String SENDER = "sender";
     private static final String VOTEVALUE = "votevalue";
+    public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CHANGEVOTE);
 
     static {
         sceneloader = AESceneLoader.getInstance();
     }
 
-    private final Twirk twirk;
-    private final boolean disable;
-
     public ChangeVoteCommand(Twirk twirk, boolean disable) {
-        super(CommandType.CONTENT_COMMAND);
-        this.twirk = twirk;
-        this.disable = disable;
+        super(CommandType.CONTENT_COMMAND, twirk, disable);
     }
 
-    protected String getCommandWords() {
-        return PATTERN;
-    }
-
-    protected USER_TYPE getMinUserPrevilidge() {
-        return USER_TYPE.DEFAULT;
-    }
-
-    protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
-        String content = message.getContent().trim();
-        if (!content.startsWith(PATTERN)) return;
-        String messagecontent = content.replaceAll("( +)", " ").trim().toLowerCase();
-        String[] split = messagecontent.split(" ");
+    protected void handleCommand(String content, TwitchUser sender, TwitchMessage message) {
+        String messageContent = content.replaceAll("( +)", " ").trim().toLowerCase();
+        String[] split = messageContent.split(" ");
         Map<String, String> params = new HashMap<>();
         params.put(SENDER, sender.getDisplayName());
         params.put("pattern", PATTERN);
@@ -151,5 +134,9 @@ public class ChangeVoteCommand extends CommandExampleBase {
         } else {
             twirk.channelMessage(message);
         }
+    }
+
+    public String getCommandWords() {
+        return PATTERN;
     }
 }

@@ -32,7 +32,7 @@ public abstract class ColorHelper {
                             .map(s -> s.substring(0, s.indexOf(';')))
                             .collect(Collectors.toList());
         } catch (IOException e) {
-            LOG.error("Couldn't load css file at " + cssFileName);
+            LOG.error("Couldn't load css file at {}", cssFileName);
         }
     }
 

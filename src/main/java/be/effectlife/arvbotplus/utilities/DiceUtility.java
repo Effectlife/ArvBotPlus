@@ -1,15 +1,12 @@
 package be.effectlife.arvbotplus.utilities;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 public class DiceUtility {
-    private static final Logger LOG = LoggerFactory.getLogger(DiceUtility.class);
+    private DiceUtility() {
+    }
 
     public static String addSuccess(int diceRoll) {
         return "<span class=\"color-success\">" + diceRoll + "</span>";
     }
-
+    @SuppressWarnings("squid:S3400")
     public static String addFail() {
         return "<span class=\"color-crit\">1</span>";
     }
