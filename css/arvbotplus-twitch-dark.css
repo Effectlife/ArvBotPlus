@@ -1,4 +1,4 @@
-/*Twitch (White and Purple)*/
+/*Twitch (Gray and Purple)*/
 * {
     /*    All colors are set using hexadecimal RGB colors. Search on google for 'color picker' to find your own preferred colors    */
     -color-pBartop: #982e9c; /*Color of the progress bar in the polls window (top gradient color)*/
@@ -46,32 +46,32 @@
     -color-true-bottombutton-pressed: #31b50d; /*Color of the buttons (bottom gradient color)*/
     -color-true-button-border-pressed: #59bc2e; /*Color of the buttons border*/
 
-    -color-text-main: #212121; /*The main color for text on buttons, menus, etc...*/
+    -color-text-main: -color-f; /*The main color for text on buttons, menus, etc...*/
     -color-text-controls: -color-f; /*The main color for text on buttons, menus, etc...*/
-    -color-text-textfield: -color-text-main; /*The color of text in editable areas*/
+    -color-text-textfield: -color-d; /*The color of text in editable areas*/
 
-    -color-background: #d9d9d9; /*The main background color*/
-    -color-background-pane: -color-f; /*The main background color*/
-    -color-textfield-background: #ffffff; /*The main background color*/
-    -color-combobox-background-hover: #ededed;
-    -color-combobox-background-pressed: #dedede;
-    -color-border: -color-5; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
-    -color-border-selected: -color-pBar-border; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-background: -color-25; /*The main background color*/
+    -color-background-pane: -color-25; /*The main background color*/
+    -color-textfield-background: -color-1; /*The main background color*/
+    -color-combobox-background-hover: -color-2; /*The main background color*/
+    -color-combobox-background-pressed: -color-0; /*The main background color*/
+    -color-border: -color-3e; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
+    -color-border-selected: -color-a; /*The main color for borders around elements and the line between the toolbar and the inventory window*/
 
-    -color-checkmark: -color-5; /*The color of the '✓' of the checkbox*/
+    -color-checkmark: -color-9; /*The color of the '✓' of the checkbox*/
     -color-checkbox-hover: -color-f; /*The color of the checkbox when hovered over*/
     -color-checkbox-pressed: -color-6; /*The color of the checkbox when pressed*/
 
-    -color-menuitem-hover: -color-a; /*The color of the items in the toolbar menu when hovered over*/
+    -color-menuitem-hover: -color-5; /*The color of the items in the toolbar menu when hovered over*/
 
-    -color-scrollbar-background: -color-9; /*The color of the background of the scrollbars*/
-    -color-scrollbar-background-hover: -color-9; /*The color of the background of the scrollbars when hovered*/
-    -color-scrollbar-background-pressed: -color-9; /*The color of the background of the scrollbars when pressed*/
-    -color-scrollbar-foreground: -color-7; /*The color of the foreground of the scrollbars*/
-    -color-scrollbar-foreground-hover: -color-7; /*The color of the foreground of the scrollbars when hovered*/
-    -color-scrollbar-foreground-pressed: -color-7; /*The color of the foreground of the scrollbars when pressed*/
+    -color-scrollbar-background: -color-5; /*The color of the background of the scrollbars*/
+    -color-scrollbar-background-hover: -color-4; /*The color of the background of the scrollbars when hovered*/
+    -color-scrollbar-background-pressed: -color-4; /*The color of the background of the scrollbars when pressed*/
+    -color-scrollbar-foreground: -color-3e; /*The color of the foreground of the scrollbars*/
+    -color-scrollbar-foreground-hover: -color-9; /*The color of the foreground of the scrollbars when hovered*/
+    -color-scrollbar-foreground-pressed: -color-8; /*The color of the foreground of the scrollbars when pressed*/
 
-    -color-border-alt: -color-border; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
+    -color-border-alt: -color-0; /*The alternate border color (used together with normal border color to create the slight 3d effect of panels)*/
 
     -color-transparent: transparent; /*Transparent is used in some effects in the application*/
     /*These are basic grayscale colors*/
@@ -138,6 +138,9 @@
 }
 
 .container-pane {
+
+    -fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;
+
     -fx-background-color: -color-background-pane;
     /*-fx-border-color: -color-border -color-border-alt -color-border-alt -color-border;*/
     -fx-border-radius: 3px;
@@ -304,14 +307,13 @@
     -fx-effect: innershadow(three-pass-box, rgba(0,0,0,0.5), 15, 0.1, 0, 0);
 }
 
-.spinner:focused {
-    -fx-border-color: inherit;
-    -fx-background-color: -color-textfield-background;
+.spinner:focused, .spinner {
+    -fx-border-color: -color-background;
+    -fx-background-color: -color-background;
 }
 
 .container-pane .spinner{
-    -fx-background-color: -color-textfield-background;
-    -fx-border-color: #fff;
+    -fx-border-color: -color-textfield-background;
     -fx-padding: 0px;
     -fx-border-width: 0px;
 }

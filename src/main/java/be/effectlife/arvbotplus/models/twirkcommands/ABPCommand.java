@@ -27,6 +27,7 @@ public class ABPCommand extends BaseCommand {
         return PATTERN;
     }
 
+    @Override
     protected void performCommand(String command, TwitchUser sender, TwitchMessage message) {
         Map<String, String> params = new HashMap<>();
         params.put("commands", getCommands());
@@ -35,7 +36,7 @@ public class ABPCommand extends BaseCommand {
 
     @Override
     void handleCommand(String content, TwitchUser sender, TwitchMessage message) {
-
+        //Unused
     }
 
     private String getCommands() {

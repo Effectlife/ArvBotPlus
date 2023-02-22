@@ -9,10 +9,13 @@ import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.utilities.PollType;
+import be.effectlife.arvbotplus.utilities.SimplePopup;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ProgressBar;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.text.Text;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -181,6 +184,19 @@ public class QuickPollWidgetController implements IController {
             LOG.trace(message);
         } else {
             Main.getTwirkService().channelMessage(message);
+        }
+    }
+
+    public void pBar1VotesClicked(MouseEvent mouseEvent) {
+        if (!usernamesVoted1.isEmpty()) {
+            String reduce = usernamesVoted1.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
+            Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option 1", reduce));
+        }
+    }
+    public void pBar2VotesClicked(MouseEvent mouseEvent) {
+        if (!usernamesVoted2.isEmpty()) {
+            String reduce = usernamesVoted2.stream().sorted().reduce("", (id, voter) -> id += voter + "\n");
+            Platform.runLater(() -> SimplePopup.showPopupInfo("Voters for option 2", reduce));
         }
     }
 }

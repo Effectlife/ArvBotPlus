@@ -1,15 +1,19 @@
 package be.effectlife.arvbotplus.controllers.widgets;
 
 import be.effectlife.arvbotplus.controllers.IController;
+import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXML;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.control.TextFormatter;
 import javafx.scene.layout.GridPane;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class EnemyController implements IController {
-
     private int id;
     @FXML
     private GridPane gpBase;
@@ -38,6 +42,16 @@ public class EnemyController implements IController {
         spinnerModifier.getEditor().setTextFormatter(modifierFormatter);
         // bidi-bind the values
         spinnerModifierFactory.valueProperty().bindBidirectional(modifierFormatter.valueProperty());
+
+        spinnerModifier.getEditor().focusedProperty().addListener((arg0, oldPropertyValue, newPropertyValue) -> {
+            Platform.runLater(() -> {
+                if (spinnerModifier.isFocused() && !spinnerModifier.getEditor().getText().isEmpty()) {
+                    spinnerModifier.getEditor().selectAll();
+                }
+            });
+        });
+
+
     }
 
     @Override
