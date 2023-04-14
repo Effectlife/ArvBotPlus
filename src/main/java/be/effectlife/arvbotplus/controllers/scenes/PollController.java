@@ -9,13 +9,11 @@ import be.effectlife.arvbotplus.models.twirkcommands.VoteActionResult;
 import be.effectlife.arvbotplus.saves.SaveManager;
 import be.effectlife.arvbotplus.saves.models.PollOption;
 import be.effectlife.arvbotplus.saves.models.PollSave;
-import be.effectlife.arvbotplus.utilities.Formatters;
-import be.effectlife.arvbotplus.utilities.JFXExtensions;
-import be.effectlife.arvbotplus.utilities.PollType;
-import be.effectlife.arvbotplus.utilities.SimplePopup;
+import be.effectlife.arvbotplus.utilities.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyEvent;
@@ -38,6 +36,7 @@ public class PollController implements IController {
     private QuickPollWidgetController quickPollWidget;
     private int options;
     private List<PollWidgetController> pollWidgetControllerList;
+    private String highlight;
 
     @FXML
     private GridPane gpBase;
@@ -197,6 +196,7 @@ public class PollController implements IController {
 
     @Override
     public void doInit() {
+        highlight = ColorHelper.retrieveColor(ColorType.HIGHLIGHT);
         SceneContainer quickPollContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_QUICKPOLL);
         Region quickPollRegion = (Region) quickPollContainer.getScene().getRoot();
         setDefaultSize(quickPollRegion);
@@ -227,7 +227,7 @@ public class PollController implements IController {
         vboxPollOptions.getChildren().clear();
         for (int i = 0; i < options; i++) {
             SceneContainer sceneContainer = AESceneLoader.getInstance().getSceneContainer(Scenes.W_POLL, "_" + i);
-            vboxPollOptions.getChildren().add(sceneContainer.getScene().getRoot());
+            addWithDragging(vboxPollOptions, sceneContainer.getScene().getRoot());
             setDefaultSize((Region) sceneContainer.getScene().getRoot());
             pollWidgetControllerList.add((PollWidgetController) sceneContainer.getController());
             ((PollWidgetController) sceneContainer.getController()).setOptionId(i);
@@ -393,6 +393,17 @@ public class PollController implements IController {
         return optionList;
     }
 
+    public void load(List<String> inputList){
+        btnClearAllClicked(null);
+        btnClearAllClicked(null);
+        tfOptions.setText(inputList.size()+"");
+        tfOptionsAction(null);
+        for (int i = 0; i < inputList.size(); i++) {
+            PollWidgetController optionController = pollWidgetControllerList.get(i);
+            optionController.setOptionText(inputList.get(i));
+        }
+    }
+
     public void load(PollSave pollSave) {
         try {
             btnClearAllClicked(null);
@@ -410,6 +421,64 @@ public class PollController implements IController {
         } catch (Exception e) {
             SimplePopup.showPopupError("File cannot be loaded, are you sure it is a Polls save?\n\nException: " + e.getMessage() + "\n" + e.getStackTrace()[0]);
             LOG.error("File cannot be loaded", e);
+        }
+    }
+
+
+    private void addWithDragging(final VBox root, final Parent node) {
+        node.setOnDragDetected(event -> node.startFullDrag());
+
+        // next two handlers just an idea how to show the drop target visually:
+        node.setOnMouseDragEntered(event -> {
+            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(true));
+            node.setStyle("-fx-border-color: " + highlight + "; -fx-border-width: 0 0 2 0;");
+        });
+        node.setOnMouseDragExited(event -> {
+            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(false));
+            node.setStyle("");
+        });
+
+        node.setOnMouseDragReleased(event -> {
+            node.setStyle("");
+            int indexOfDraggingNode = root.getChildren().indexOf(event.getGestureSource());
+            int indexOfDropTarget = root.getChildren().indexOf(node);
+            if (indexOfDropTarget < indexOfDraggingNode) indexOfDropTarget++;
+            rotateNodes(indexOfDraggingNode, indexOfDropTarget);
+            event.consume();
+        });
+        root.getChildren().add(node);
+    }
+
+    private void rotateNodes(final int indexOfDraggingNode,
+                             final int indexOfDropTarget) {
+        if (indexOfDraggingNode >= 0 && indexOfDropTarget >= 0) {
+            PollWidgetController tempController = new PollWidgetController();
+            PollWidgetController draggingController = pollWidgetControllerList.get(indexOfDraggingNode);
+            tempController.copyData(draggingController);
+
+            if (indexOfDraggingNode > indexOfDropTarget) {
+                //Dragging up
+                //Save Dragging node into temp, move others each down 1 until target is moved, then copy temp into target
+                LOG.info("Dragging up: " + indexOfDraggingNode);
+                LOG.info("Target up:   " + indexOfDropTarget);
+                for (int i = indexOfDraggingNode - 1; i >= indexOfDropTarget; i--) {
+                    LOG.info("Looping " + i);
+                    pollWidgetControllerList.get(i + 1).copyData(pollWidgetControllerList.get(i));
+                }
+                pollWidgetControllerList.get(indexOfDropTarget).copyData(tempController);
+
+            } else if (indexOfDraggingNode < indexOfDropTarget) {
+                //Dragging down
+                LOG.info("Dragging dn: " + indexOfDraggingNode);
+                LOG.info("Target dn:   " + indexOfDropTarget);
+                for (int i = indexOfDraggingNode; i < indexOfDropTarget; i++) {
+                    LOG.info("Looping " + i);
+                    pollWidgetControllerList.get(i).copyData(pollWidgetControllerList.get(i + 1));
+                }
+                pollWidgetControllerList.get(indexOfDropTarget).copyData(tempController);
+            }
+
+            reloadView();
         }
     }
 }

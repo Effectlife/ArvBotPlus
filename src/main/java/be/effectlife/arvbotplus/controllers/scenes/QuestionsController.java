@@ -37,6 +37,10 @@ public class QuestionsController implements IController {
     void btnLoadClicked(ActionEvent event) {
         SaveManager.loadQuestions();
     }
+    @FXML
+    void btnCopyClicked(ActionEvent event) {
+        SaveManager.loadPoll(questionsList.stream().filter(QuestionWidgetController::isAnswered).map(q->q.getUsername() + ": "+q.getQuestion()).collect(Collectors.toList()));
+    }
 
     @FXML
     void btnSaveClicked(ActionEvent event) {

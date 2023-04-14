@@ -27,6 +27,7 @@
             <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="50.0" />
          <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="-Infinity" prefWidth="50.0" />
+         <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
         </columnConstraints>
         <rowConstraints>
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,6 +38,7 @@
         <Text fx:id="textQuestionCounter" strokeType="OUTSIDE" strokeWidth="0.0" styleClass="white-text" text="Questions:" />
       <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnSaveClicked" text="Save" GridPane.columnIndex="2" />
       <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnLoadClicked" text="Load" GridPane.columnIndex="3" />
+      <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#btnCopyClicked" text="Copy Answered" GridPane.columnIndex="4" />
     </GridPane>
     <ScrollPane fitToWidth="true" hbarPolicy="NEVER" prefHeight="300.0" prefWidth="500.0" vbarPolicy="ALWAYS" GridPane.rowIndex="2">
         <VBox fx:id="vboxQuestions" alignment="TOP_CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" spacing="2.0">

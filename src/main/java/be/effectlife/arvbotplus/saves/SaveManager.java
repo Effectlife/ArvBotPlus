@@ -190,4 +190,9 @@ public abstract class SaveManager {
     public static void setQuestionsStage(Stage questionsStage) {
         SaveManager.questionsStage = questionsStage;
     }
+
+    public static void loadPoll(List<String> inputList) {
+        PollController controller = (PollController) AESceneLoader.getInstance().getController(Scenes.S_POLL);
+        controller.load(inputList);
+    }
 }

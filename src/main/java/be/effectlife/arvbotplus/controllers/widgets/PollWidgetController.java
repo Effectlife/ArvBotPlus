@@ -149,4 +149,20 @@ public class PollWidgetController implements IController {
     public boolean isCleared() {
         return spinnerVotes.getValue() == 0 && pBarVotes.getProgress() == 0;
     }
+
+    public void copyData(PollWidgetController that) {
+        this.voters = that.getVoters();
+
+        if (this.tfOption == null) this.tfOption = new TextField();
+        this.tfOption.setText(that.tfOption.getText());
+
+        if (this.pBarVotes == null) this.pBarVotes = new ProgressBar(that.pBarVotes.getProgress());
+        else this.pBarVotes.setProgress(that.pBarVotes.getProgress());
+
+        if (this.spinnerVotes == null) {
+            this.spinnerVotes = new Spinner<>();
+            this.spinnerVotes.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(0, Integer.MAX_VALUE));
+        }
+        this.spinnerVotes.getValueFactory().setValue(that.spinnerVotes.getValue());
+    }
 }
