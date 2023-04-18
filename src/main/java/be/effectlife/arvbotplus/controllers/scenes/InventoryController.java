@@ -37,7 +37,10 @@ import static java.lang.String.format;
 
 public class InventoryController implements IController {
     private static final Logger LOG = LoggerFactory.getLogger(InventoryController.class);
-
+    private static String hoverSide = "";
+    private static String previousHoverSide = "";
+    private static final String BOTTOM = "paneHoverBottom";
+    private static final String TOP = "paneHoverTop";
     private List<SkillWidgetController> skillWidgetControllerList;
     private List<SkillWidgetController> removedControllerList;
 
@@ -418,23 +421,48 @@ public class InventoryController implements IController {
         menuQuestions.setDisable(disable);
     }
 
+
     private void addWithDragging(final VBox root, final Parent node) {
         node.setOnDragDetected(event -> node.startFullDrag());
+        node.setOnMouseDragOver(event -> {
+            String id = ((Node) event.getTarget()).getId();
+            if (id.equals(BOTTOM)) hoverSide = BOTTOM;
+            else if (id.equals(TOP)) hoverSide = TOP;
 
+            if (!previousHoverSide.equals(hoverSide)) {
+                previousHoverSide = hoverSide;
+                if (hoverSide.equals(TOP)) {
+                    node.setStyle("-fx-border-color: " + highlight + " transparent transparent transparent; -fx-border-width: 1 0 1 0;");
+                } else if (hoverSide.equals(BOTTOM)) {
+                    node.setStyle("-fx-border-color: transparent transparent" + highlight + " transparent; -fx-border-width: 1 0 1 0;");
+                }
+            }
+
+        });
         // next two handlers just an idea how to show the drop target visually:
         node.setOnMouseDragEntered(event -> {
-            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(true));
-            node.setStyle("-fx-border-color: " + highlight + "; -fx-border-width: 0 0 2 0;");
+            //stackPane is the stackPane, obviously
+            node.getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("stackPane")).findFirst().flatMap(stackPane -> ((Parent) stackPane).getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("gpHover")).findFirst()).ifPresent((hoverNode -> {    //Running through the children of the stackpane, and only selecting the gpHover one. Needs to be enabled here
+                hoverNode.setDisable(false);
+                hoverNode.setVisible(true);
+            }));
+
         });
         node.setOnMouseDragExited(event -> {
-            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(false));
-            node.setStyle("");
+            node.getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("stackPane")).findFirst().flatMap(stackPane -> ((Parent) stackPane).getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("gpHover")).findFirst()).ifPresent((hoverNode -> {    //Running through the children of the stackpane, and only selecting the gpHover one. Needs to be enabled here
+                hoverNode.setDisable(true);
+                hoverNode.setVisible(false);
+            }));
+            node.setStyle("-fx-border-color: transparent; -fx-border-width: 1 0 1 0;");
         });
 
         node.setOnMouseDragReleased(event -> {
             node.setStyle("");
             int indexOfDraggingNode = root.getChildren().indexOf(event.getGestureSource());
             int indexOfDropTarget = root.getChildren().indexOf(node);
+            if (hoverSide.equals(TOP)) {
+                indexOfDropTarget--;
+            }
             if (indexOfDropTarget < indexOfDraggingNode) indexOfDropTarget++;
             rotateNodes(root, indexOfDraggingNode, indexOfDropTarget);
             event.consume();

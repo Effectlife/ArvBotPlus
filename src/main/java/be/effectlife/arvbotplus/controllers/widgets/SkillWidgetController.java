@@ -10,6 +10,7 @@ import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 
@@ -40,6 +41,16 @@ public class SkillWidgetController implements IController {
 
     @FXML
     private CheckBox cbUseColor;
+    @FXML
+    private GridPane gpHover;
+    @FXML
+    private GridPane gpBase;
+
+    @FXML
+    private Pane paneHoverTop;
+
+    @FXML
+    private Pane paneHoverBottom;
 
     @FXML
     void cbHasMaxSwitched(ActionEvent event) {
@@ -89,6 +100,8 @@ public class SkillWidgetController implements IController {
         }));
         spinnerCurrentValue.valueProperty().addListener(((observable, oldValue, newValue) -> reloadView()));
         spinnerMaxValue.valueProperty().addListener(((observable, oldValue, newValue) -> reloadView()));
+        gpBase.setStyle("-fx-border-color: transparent; -fx-border-width: 1 0 1 0;");
+
     }
 
     @Override

@@ -9,10 +9,11 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<GridPane xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController">
+<GridPane fx:id="gpBase" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="be.effectlife.arvbotplus.controllers.widgets.SkillWidgetController">
    <columnConstraints>
       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
    </columnConstraints>
@@ -20,46 +21,63 @@
       <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
    </rowConstraints>
    <children>
-      <GridPane hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="container-pane" vgap="4.0">
-          <columnConstraints>
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0" />
-              <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="22.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="20.0" />
-            <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
-          </columnConstraints>
-          <rowConstraints>
-              <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
-              <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="24.0" vgrow="SOMETIMES" />
-          </rowConstraints>
-          <children>
-            <Pane fx:id="paneSkillname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneSkillnameClicked" GridPane.columnSpan="2" />
-            <Text fx:id="textSkillname" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="SomeSkillName" GridPane.columnSpan="2">
-               <styleClass>
-                  <String fx:value="white-text" />
-                  <String fx:value="smaller-text" />
-               </styleClass>
-            </Text>
-              <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillnameClicked" prefHeight="25.0" styleClass="smaller-text" visible="false" GridPane.columnSpan="2">
-                  <font>
-                      <Font size="14.0" />
-                  </font>
-              </TextField>
-              <Spinner fx:id="spinnerCurrentValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="26.0" GridPane.rowIndex="1">
-                  <GridPane.margin>
-                      <Insets />
-                  </GridPane.margin>
-              </Spinner>
-            <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
-            <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMaxSwitched" selected="true" GridPane.columnIndex="3" />
-            <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColorSwitched" GridPane.columnIndex="2">
-               <GridPane.margin>
-                  <Insets />
-               </GridPane.margin>
-            </CheckBox>
-          </children>
-          <padding>
-              <Insets bottom="4.0" left="4.0" right="4.0" />
-          </padding>
-      </GridPane>
+      <StackPane fx:id="stackPane">
+         <children>
+            <GridPane fx:id="gpSkill" hgap="4.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="container-pane" vgap="4.0">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="65.0" />
+                    <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="-Infinity" prefWidth="22.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="20.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="1.7976931348623157E308" minWidth="10.0" prefWidth="15.0" />
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints maxHeight="-Infinity" minHeight="-Infinity" prefHeight="20.0" vgrow="SOMETIMES" />
+                    <RowConstraints maxHeight="1.7976931348623157E308" minHeight="-Infinity" prefHeight="24.0" vgrow="SOMETIMES" />
+                </rowConstraints>
+                <children>
+                  <Pane fx:id="paneSkillname" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#paneSkillnameClicked" GridPane.columnSpan="2" />
+                  <Text fx:id="textSkillname" mouseTransparent="true" strokeType="OUTSIDE" strokeWidth="0.0" text="SomeSkillName" GridPane.columnSpan="2">
+                     <styleClass>
+                        <String fx:value="white-text" />
+                        <String fx:value="smaller-text" />
+                     </styleClass>
+                  </Text>
+                    <TextField fx:id="tfSkillname" disable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" onAction="#tfSkillnameClicked" prefHeight="25.0" styleClass="smaller-text" visible="false" GridPane.columnSpan="2">
+                        <font>
+                            <Font size="14.0" />
+                        </font>
+                    </TextField>
+                    <Spinner fx:id="spinnerCurrentValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="26.0" GridPane.rowIndex="1">
+                        <GridPane.margin>
+                            <Insets />
+                        </GridPane.margin>
+                    </Spinner>
+                  <Spinner fx:id="spinnerMaxValue" editable="true" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" prefHeight="26.0" GridPane.columnIndex="1" GridPane.columnSpan="2147483647" GridPane.rowIndex="1" />
+                  <CheckBox fx:id="cbHasMax" mnemonicParsing="false" onAction="#cbHasMaxSwitched" selected="true" GridPane.columnIndex="3" />
+                  <CheckBox fx:id="cbUseColor" mnemonicParsing="false" onAction="#cbUseColorSwitched" GridPane.columnIndex="2">
+                     <GridPane.margin>
+                        <Insets />
+                     </GridPane.margin>
+                  </CheckBox>
+                </children>
+                <padding>
+                    <Insets bottom="4.0" left="4.0" right="4.0" />
+                </padding>
+            </GridPane>
+            <GridPane fx:id="gpHover" disable="true" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="55.0" prefWidth="144.0" visible="false">
+              <columnConstraints>
+                <ColumnConstraints />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Pane fx:id="paneHoverTop" prefHeight="200.0" prefWidth="200.0" />
+                  <Pane fx:id="paneHoverBottom" prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+         </children>
+      </StackPane>
    </children>
 </GridPane>

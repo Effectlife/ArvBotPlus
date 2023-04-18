@@ -13,6 +13,7 @@ import be.effectlife.arvbotplus.utilities.*;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -37,7 +38,10 @@ public class PollController implements IController {
     private int options;
     private List<PollWidgetController> pollWidgetControllerList;
     private String highlight;
-
+    private static String hoverSide = "";
+    private static String previousHoverSide = "";
+    private static final String BOTTOM = "paneHoverBottom";
+    private static final String TOP = "paneHoverTop";
     @FXML
     private GridPane gpBase;
 
@@ -393,10 +397,10 @@ public class PollController implements IController {
         return optionList;
     }
 
-    public void load(List<String> inputList){
+    public void load(List<String> inputList) {
         btnClearAllClicked(null);
         btnClearAllClicked(null);
-        tfOptions.setText(inputList.size()+"");
+        tfOptions.setText(inputList.size() + "");
         tfOptionsAction(null);
         for (int i = 0; i < inputList.size(); i++) {
             PollWidgetController optionController = pollWidgetControllerList.get(i);
@@ -427,21 +431,45 @@ public class PollController implements IController {
 
     private void addWithDragging(final VBox root, final Parent node) {
         node.setOnDragDetected(event -> node.startFullDrag());
+        node.setOnMouseDragOver(event -> {
+            String id = ((Node) event.getTarget()).getId();
+            if (id.equals(BOTTOM)) hoverSide = BOTTOM;
+            else if (id.equals(TOP)) hoverSide = TOP;
 
+            if (!previousHoverSide.equals(hoverSide)) {
+                previousHoverSide = hoverSide;
+                if (hoverSide.equals(TOP)) {
+                    node.setStyle("-fx-border-color: " + highlight + " transparent transparent transparent; -fx-border-width: 1 0 1 0;");
+                } else if (hoverSide.equals(BOTTOM)) {
+                    node.setStyle("-fx-border-color: transparent transparent" + highlight + " transparent; -fx-border-width: 1 0 1 0;");
+                }
+            }
+
+        });
         // next two handlers just an idea how to show the drop target visually:
         node.setOnMouseDragEntered(event -> {
-            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(true));
-            node.setStyle("-fx-border-color: " + highlight + "; -fx-border-width: 0 0 2 0;");
+            //stackPane is the stackPane, obviously
+            node.getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("stackPane")).findFirst().flatMap(stackPane -> ((Parent) stackPane).getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("gpHover")).findFirst()).ifPresent((hoverNode -> {    //Running through the children of the stackpane, and only selecting the gpHover one. Needs to be enabled here
+                hoverNode.setDisable(false);
+                hoverNode.setVisible(true);
+            }));
+
         });
         node.setOnMouseDragExited(event -> {
-            node.getChildrenUnmodifiable().forEach(child -> child.setMouseTransparent(false));
-            node.setStyle("");
+            node.getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("stackPane")).findFirst().flatMap(stackPane -> ((Parent) stackPane).getChildrenUnmodifiable().stream().filter(node1 -> node1.getId().equals("gpHover")).findFirst()).ifPresent((hoverNode -> {    //Running through the children of the stackpane, and only selecting the gpHover one. Needs to be enabled here
+                hoverNode.setDisable(true);
+                hoverNode.setVisible(false);
+            }));
+            node.setStyle("-fx-border-color: transparent; -fx-border-width: 1 0 1 0;");
         });
 
         node.setOnMouseDragReleased(event -> {
             node.setStyle("");
             int indexOfDraggingNode = root.getChildren().indexOf(event.getGestureSource());
             int indexOfDropTarget = root.getChildren().indexOf(node);
+            if (hoverSide.equals(TOP)) {
+                indexOfDropTarget--;
+            }
             if (indexOfDropTarget < indexOfDraggingNode) indexOfDropTarget++;
             rotateNodes(indexOfDraggingNode, indexOfDropTarget);
             event.consume();
@@ -458,21 +486,17 @@ public class PollController implements IController {
 
             if (indexOfDraggingNode > indexOfDropTarget) {
                 //Dragging up
+                LOG.info("Rotating up, " + indexOfDraggingNode + "->" + indexOfDropTarget);
                 //Save Dragging node into temp, move others each down 1 until target is moved, then copy temp into target
-                LOG.info("Dragging up: " + indexOfDraggingNode);
-                LOG.info("Target up:   " + indexOfDropTarget);
                 for (int i = indexOfDraggingNode - 1; i >= indexOfDropTarget; i--) {
-                    LOG.info("Looping " + i);
                     pollWidgetControllerList.get(i + 1).copyData(pollWidgetControllerList.get(i));
                 }
                 pollWidgetControllerList.get(indexOfDropTarget).copyData(tempController);
 
             } else if (indexOfDraggingNode < indexOfDropTarget) {
                 //Dragging down
-                LOG.info("Dragging dn: " + indexOfDraggingNode);
-                LOG.info("Target dn:   " + indexOfDropTarget);
+                LOG.info("Rotating down, " + indexOfDraggingNode + "->" + indexOfDropTarget);
                 for (int i = indexOfDraggingNode; i < indexOfDropTarget; i++) {
-                    LOG.info("Looping " + i);
                     pollWidgetControllerList.get(i).copyData(pollWidgetControllerList.get(i + 1));
                 }
                 pollWidgetControllerList.get(indexOfDropTarget).copyData(tempController);

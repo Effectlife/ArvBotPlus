@@ -14,6 +14,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import org.apache.commons.lang3.StringUtils;
 
@@ -38,7 +40,16 @@ public class PollWidgetController implements IController {
     private PollController pollController;
     private Set<String> voters;
     private int optionId;
+    @FXML
+    private GridPane gpHover;
+    @FXML
+    private GridPane gpBase;
 
+    @FXML
+    private Pane paneHoverTop;
+
+    @FXML
+    private Pane paneHoverBottom;
     @FXML
     void pBarVotesClicked(MouseEvent event) {
         if (!voters.isEmpty()) {
@@ -66,6 +77,8 @@ public class PollWidgetController implements IController {
         btnClearClicked(null);
         tfOption.addEventFilter(KeyEvent.KEY_PRESSED, JFXExtensions.tabTraverse);
         spinnerVotes.valueProperty().addListener(((observable, oldValue, newValue) -> pollController.reloadView()));
+        gpBase.setStyle("-fx-border-color: transparent; -fx-border-width: 1 0 1 0;");
+
     }
 
     @Override
