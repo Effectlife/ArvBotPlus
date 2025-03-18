@@ -5,10 +5,12 @@ import com.gikk.twirk.commands.CommandExampleBase;
 import com.gikk.twirk.enums.USER_TYPE;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
+import org.slf4j.Logger;
 
 public abstract class BaseCommand extends CommandExampleBase {
     protected final Twirk twirk;
     protected final boolean disable;
+    protected Logger LOG;
 
     protected BaseCommand(CommandType type, Twirk twirk, boolean disable) {
         super(type);
@@ -34,4 +36,12 @@ public abstract class BaseCommand extends CommandExampleBase {
     }
 
     abstract void handleCommand(String content, TwitchUser sender, TwitchMessage message);
+
+    void channelMessage(String message) {
+        if (this.disable) {
+            LOG.trace("{{}} -- {}", this.getClass().getName(), message);
+        } else {
+            twirk.channelMessage(message);
+        }
+    }
 }

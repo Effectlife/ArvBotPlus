@@ -74,6 +74,9 @@ public class TwirkService {
         twirk.addIrcListener(new QuestionCommand(twirk, disable));
         twirk.addIrcListener(new GiveawayListener(properties));
         twirk.addIrcListener(new RollCommand(twirk, disable));
+        NominateCommand nominateCommand = new NominateCommand(twirk, disable);
+        twirk.addIrcListener(nominateCommand);
+        twirk.addIrcListener(new NominateShortCommand(twirk, disable, nominateCommand));
         LOG.info("ArvBotPlus is loading");
         Thread.sleep(500L);
         int finalAttempts = attempts;

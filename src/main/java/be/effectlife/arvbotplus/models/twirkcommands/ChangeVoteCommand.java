@@ -16,7 +16,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ChangeVoteCommand extends BaseCommand {
-    private static final Logger LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     private static final AESceneLoader sceneloader;
     private static final String SENDER = "sender";
     private static final String VOTEVALUE = "votevalue";
@@ -28,6 +27,7 @@ public class ChangeVoteCommand extends BaseCommand {
 
     public ChangeVoteCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND, twirk, disable);
+        LOG = LoggerFactory.getLogger(ChangeVoteCommand.class);
     }
 
     protected void handleCommand(String content, TwitchUser sender, TwitchMessage message) {
@@ -66,32 +66,58 @@ public class ChangeVoteCommand extends BaseCommand {
     }
 
     private void handleStandardPollCommand(String[] split, String sender) {
-        PollController pollController = (PollController) sceneloader.getController(Scenes.S_POLL);
-        Map<String, String> params = new HashMap<>();
-        params.put(SENDER, sender);
+        PollController pollController = (PollController)sceneloader.getController(Scenes.S_POLL);
+        Map<String, String> params = new HashMap();
+        params.put("sender", sender);
+
         try {
-            int option = Integer.parseInt(split[1]) - 1;
-            VoteActionResult addOptionResult = pollController.changeVote(option, sender);
-            params.put(VOTEVALUE, pollController.getOptionText(option));
+            int oldOption = Integer.parseInt(split[1]) - 1;
+            int newOption = -1;
+            if (split.length > 2) {
+                newOption = Integer.parseInt(split[2]) - 1;
+            }
+
+            if (newOption == -1) {
+                newOption = oldOption;
+            }
+
+            VoteActionResult addOptionResult = pollController.changeVote(oldOption, newOption, sender);
+            params.put("votevalue", pollController.getOptionText(newOption));
             switch (addOptionResult) {
                 case ALREADY_VOTED_FOR_OPTION:
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ALREADYVOTED, params));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ALREADYVOTED, params));
                     return;
                 case SUCCESSFULLY_VOTED_OR_CHANGED:
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ADDEDVOTE, params));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_ADDEDVOTE, params));
+                    return;
+                case IMPROPER_CHANGE_MULTIVOTE:
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_IMPROPER, params));
                     return;
                 case NOT_YET_VOTED:
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_NOTYETVOTED, params));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_NOTYETVOTED, params));
                     return;
                 case INVALID_VOTE:
-                    channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+                    break;
+                case INVALID_VOTE_NEW:
+                    params.put("votevalue", String.valueOf(newOption + 1));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+                    break;
+                case INVALID_VOTE_OLD:
+                    params.put("votevalue", String.valueOf(oldOption + 1));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+                    break;
+                case NOT_VOTED_FOR:
+                    params.put("oldVote", pollController.getOptionText(oldOption));
+                    this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_NOTYETVOTED_MULTIVOTE, params));
                     break;
                 default:
                     LOG.error("Unknown addOptionResult recieved: {}", addOptionResult);
             }
-        } catch (NumberFormatException nfe) {
-            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
+        } catch (NumberFormatException var8) {
+            this.channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
         }
+
     }
 
     private void handleNonePollCommand(String[] split, String sender) {
@@ -125,14 +151,6 @@ public class ChangeVoteCommand extends BaseCommand {
             }
         } catch (NumberFormatException nfe) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CHANGEVOTE_INVALIDVOTE, params));
-        }
-    }
-
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
         }
     }
 

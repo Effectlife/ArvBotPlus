@@ -13,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ABPCommand extends BaseCommand {
-    private static final Logger LOG = LoggerFactory.getLogger(ABPCommand.class);
 
 
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ABP);
@@ -21,6 +20,7 @@ public class ABPCommand extends BaseCommand {
 
     public ABPCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND, twirk, disable);
+        LOG = LoggerFactory.getLogger(ABPCommand.class);
     }
 
     protected String getCommandWords() {
@@ -44,13 +44,5 @@ public class ABPCommand extends BaseCommand {
         StringBuilder stringBuilder = new StringBuilder();
         allSiblings.forEach(s -> stringBuilder.append(MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX)).append(MessageProperties.getString(s)).append("; "));
         return stringBuilder.toString();
-    }
-
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
-        }
     }
 }

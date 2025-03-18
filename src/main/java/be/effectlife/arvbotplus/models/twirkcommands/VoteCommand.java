@@ -7,13 +7,15 @@ import be.effectlife.arvbotplus.loading.MessageKey;
 import be.effectlife.arvbotplus.loading.MessageProperties;
 import be.effectlife.arvbotplus.loading.Scenes;
 import com.gikk.twirk.Twirk;
+import com.gikk.twirk.commands.CommandExampleBase.CommandType;
 import com.gikk.twirk.types.twitchMessage.TwitchMessage;
 import com.gikk.twirk.types.users.TwitchUser;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 public class VoteCommand extends BaseCommand {
     private static final Logger LOG = LoggerFactory.getLogger(VoteCommand.class);
@@ -112,19 +114,19 @@ public class VoteCommand extends BaseCommand {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_ALREADYVOTED, params));
         } else if (voteResult == VoteActionResult.INVALID_VOTE) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_VOTE_INVALIDVOTE, params));
-        } else LOG.error("Unknown voteResult recieved: {}", voteResult);
+        } else if (voteResult == VoteActionResult.ALREADY_VOTED_FOR_OPTION) {
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_MULTIVOTE_ALREADYVOTED, params));
+        } else if (voteResult == VoteActionResult.MULTIVOTE_ALREADY_CAST) {
+            params.put("maxvotes", String.valueOf(((PollController) sceneloader.getController(Scenes.S_POLL)).getMultiVoteCount()));
+            channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_MULTIVOTE_ALREADY_CAST, params));
+        } else {
+            LOG.error("Unknown voteResult recieved: {}", voteResult);
+        }
+
         reloadView();
     }
 
     public void reloadView() {
         (sceneloader.getController(Scenes.S_POLL)).reloadView();
-    }
-
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
-        }
     }
 }

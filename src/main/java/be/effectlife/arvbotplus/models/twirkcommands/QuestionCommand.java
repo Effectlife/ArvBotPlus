@@ -17,11 +17,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 
 public class QuestionCommand extends BaseCommand {
-    private static final Logger LOG = LoggerFactory.getLogger(QuestionCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_QUESTION);
 
     public QuestionCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND, twirk, disable);
+        LOG = LoggerFactory.getLogger(QuestionCommand.class);
     }
 
     protected String getCommandWords() {
@@ -46,14 +46,5 @@ public class QuestionCommand extends BaseCommand {
     private void generateQuestionWidget(String displayName, String content, String timestamp) {
         QuestionsController questionsController = (QuestionsController) AESceneLoader.getInstance().getController(Scenes.S_QUESTIONS);
         questionsController.addQuestion(displayName, content, timestamp);
-    }
-
-
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
-        }
     }
 }

@@ -5,6 +5,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import static java.lang.String.format;
@@ -41,5 +43,11 @@ public class BasicUtilities {
             bw.write(content);
             bw.flush();
         }
+    }
+
+    public static <K, V> Map<K,V> singletonMap(K key, V value){
+        HashMap<K, V> map = new HashMap<>();
+        map.put(key, value);
+        return map;
     }
 }

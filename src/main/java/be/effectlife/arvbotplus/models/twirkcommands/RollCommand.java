@@ -15,12 +15,11 @@ import org.slf4j.LoggerFactory;
 import java.util.HashMap;
 
 public class RollCommand extends BaseCommand {
-    private static final Logger LOG = LoggerFactory.getLogger(RollCommand.class);
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_ROLL);
-
 
     public RollCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND, twirk, disable);
+        LOG = LoggerFactory.getLogger(RollCommand.class);
     }
 
     protected String getCommandWords() {
@@ -44,11 +43,5 @@ public class RollCommand extends BaseCommand {
     }
 
 
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
-        }
-    }
+
 }

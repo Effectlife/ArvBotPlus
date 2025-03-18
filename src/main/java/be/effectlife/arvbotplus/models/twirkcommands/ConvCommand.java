@@ -15,13 +15,13 @@ import java.util.List;
 import java.util.Map;
 
 public class ConvCommand extends BaseCommand {
-    private static final Logger LOG = LoggerFactory.getLogger(ConvCommand.class);
     private final ConversionService conversionService;
     public static final String PATTERN = MessageProperties.getString(MessageKey.TWIRK_PATTERN_PREFIX) + MessageProperties.getString(MessageKey.TWIRK_PATTERN_COMMAND_CONVERSION);
 
     public ConvCommand(Twirk twirk, boolean disable) {
         super(CommandType.CONTENT_COMMAND, twirk, disable);
         conversionService = new ConversionService();
+        LOG = LoggerFactory.getLogger(ConvCommand.class);
     }
 
     protected String getCommandWords() {
@@ -92,14 +92,6 @@ public class ConvCommand extends BaseCommand {
         } catch (Exception e) {
             channelMessage(MessageProperties.generateString(MessageKey.TWIRK_MESSAGE_CONVERSION_GENERALERROR, params));
             LOG.error("Error happened", e);
-        }
-    }
-
-    private void channelMessage(String message) {
-        if (this.disable) {
-            LOG.trace(message);
-        } else {
-            twirk.channelMessage(message);
         }
     }
 
